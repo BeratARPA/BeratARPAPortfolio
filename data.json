@@ -1,0 +1,344 @@
+{
+  "personal": {
+    "name": "Berat ARPA",
+    "title": {
+      "tr": "Full Stack Developer",
+      "en": "Full Stack Developer"
+    },
+    "description": {
+      "tr": "Yazılım tasarımcısı ve geliştiricisi olarak, güçlü programlama bilgim ve yüksek niteliklerimle projelere değer katıyorum. Analitik düşünme yeteneğim ve pratik zekâm sayesinde, karmaşık problemleri etkin şekilde çözebiliyorum. İnisiyatif kullanarak takım çalışmalarında ve projelerde aktif rol alıyor, sonuç odaklı ilerliyorum.",
+      "en": "As a software designer and developer, I bring value to projects with my strong programming knowledge and high qualifications. Thanks to my analytical thinking skills and practical intelligence, I can effectively solve complex problems. I take initiative, actively contribute to team efforts and projects, and work in a result-oriented manner."
+    },
+    "image": "Resources/Images/BeratARPA.png",
+    "cv": {
+      "tr": "Resources/BeratARPAResume.pdf",
+      "en": "Resources/BeratARPAResume.pdf"
+    }
+  },
+  "skills": [
+    {
+      "name": "HTML/CSS",
+      "level": 30,
+      "icon": "fab fa-html5",
+      "category": "frontend"
+    },
+    {
+      "name": "MySQL",
+      "level": 50,
+      "icon": "fas fa-database",
+      "category": "database"
+    },
+    {
+      "name": "MSSQL",
+      "level": 55,
+      "icon": "fas fa-database",
+      "category": "database"
+    },
+    {
+      "name": "MongoDB",
+      "level": 50,
+      "icon": "fas fa-leaf",
+      "category": "database"
+    },
+    {
+      "name": "PostgreSQL",
+      "level": 45,
+      "icon": "fas fa-database",
+      "category": "database"
+    },
+    {
+      "name": "SQL",
+      "level": 65,
+      "icon": "fas fa-database",
+      "category": "database"
+    },
+    {
+      "name": "JavaScript",
+      "level": 20,
+      "icon": "fab fa-js-square",
+      "category": "backend"
+    },
+    {
+      "name": "C#",
+      "level": 90,
+      "icon": "fas fa-code",
+      "category": "backend"
+    },
+    {
+      "name": "Flutter/Dart",
+      "level": 65,
+      "icon": "fas fa-mobile-alt",
+      "category": "backend"
+    },
+    {
+      "name": "WPF",
+      "level": 80,
+      "icon": "fas fa-desktop",
+      "category": "backend"
+    },
+    {
+      "name": "WinForms",
+      "level": 90,
+      "icon": "fas fa-window-maximize",
+      "category": "backend"
+    },
+    {
+      "name": "ASP.NET Core",
+      "level": 90,
+      "icon": "fas fa-plug",
+      "category": "backend"
+    },
+    {
+      "name": "Web API",
+      "level": 75,
+      "icon": "fas fa-cloud",
+      "category": "backend"
+    },
+    {
+      "name": "Entity Framework",
+      "level": 85,
+      "icon": "fas fa-database",
+      "category": "backend"
+    },
+    {
+      "name": "LINQ",
+      "level": 80,
+      "icon": "fas fa-stream",
+      "category": "backend"
+    },
+    {
+      "name": "SignalR",
+      "level": 70,
+      "icon": "fas fa-bolt",
+      "category": "backend"
+    },
+    {
+      "name": "Swagger",
+      "level": 85,
+      "icon": "fas fa-book",
+      "category": "tools"
+    },
+    {
+      "name": "Git",
+      "level": 75,
+      "icon": "fab fa-git-alt",
+      "category": "tools"
+    },
+    {
+      "name": "Postman",
+      "level": 80,
+      "icon": "fas fa-envelope-open-text",
+      "category": "tools"
+    },
+    {
+      "name": "BitBucket",
+      "level": 60,
+      "icon": "fab fa-bitbucket",
+      "category": "tools"
+    },
+    {
+      "name": "RabbitMQ",
+      "level": 60,
+      "icon": "fas fa-exchange-alt",
+      "category": "tools"
+    },
+    {
+      "name": "Firebase",
+      "level": 75,
+      "icon": "fas fa-fire",
+      "category": "tools"
+    },
+    {
+      "name": "Prometheus",
+      "level": 70,
+      "icon": "fas fa-chart-line",
+      "category": "tools"
+    },
+    {
+      "name": "Grafana",
+      "level": 70,
+      "icon": "fas fa-chart-pie",
+      "category": "tools"
+    }
+  ],
+  "experience": [
+    {
+      "title": { "tr": "Full Stack Developer", "en": "Full Stack Developer" },
+      "company": "LiwaSoft",
+      "period": "06/2024 - 06/2025",
+      "description": {
+        "tr": "Projelerde görev dağılımı yaparak ekip koordinasyonu ve yönetimi sağlamak. UI/UX standartlarına uygun mobil arayüzler ve uygulama va yazılım geliştirmek. Yemek platformlarının (Yemek Sepeti, Getir vb.) için kullanılmak merkezi API entegrasyonlarını geliştirdim.",
+        "en": "Managing team coordination and management by distributing tasks in projects. Developing mobile interfaces and applications in accordance with UI/UX standards. I developed central API integrations for food platforms (Yemek Sepeti, Getir, etc.)."
+      }
+    },
+    {
+      "title": { "tr": "Back End Developer", "en": "Back End Developer" },
+      "company": "Innovative Software Company",
+      "period": "03/2022 - 01/2023",
+      "description": {
+        "tr": "Çevrimiçi yemek sipariş platformlarını entegre etmek, API bağlantıları kurmak için Yemek, Migros Yemek) ile entegrasyonu geliştirerek müşterilerin sipariş süreçlerini desteklemek. Gerçek zamanlı sipariş akışı, durum takibi ve bildirim sistemlerini geliştirip uygulama aktardım.",
+        "en": "Integrating online food ordering platforms, establishing API connections to support customers' ordering processes by developing integration with Yemek, Migros Yemek). I developed and implemented real-time order flow, status tracking and notification systems."
+      }
+    },
+    {
+      "title": { "tr": "Back End Developer", "en": "Back End Developer" },
+      "company": "TZ Yazılım",
+      "period": "10/2021 - 03/2022",
+      "description": {
+        "tr": "Çevrimiçi sipariş platformlarıyla entegre çalışan sistemler geliştirdim. Restoran Otomasyon Sistemleri (masa, müşteri, paket servis vb.) geliştirdim ve kurdum. QR Menü Yönetim Sistemi tasarladım ve uygulamaya aktardım. Ödeme Kayıtları ve Cihazlar (ÖKC) ile sistem entegrasyonu yaptım.",
+        "en": "I developed systems that work integrated with online ordering platforms. I developed and installed Restaurant Automation Systems (table, customer, package service, etc.). I designed and implemented QR Menu Management System. I made system integration with Payment Records and Devices (POS)."
+      }
+    },
+    {
+      "title": { "tr": "Stajyer", "en": "Intern" },
+      "company": "Aniventi İnovasyon Bilişim ve Teknoloji A.Ş.",
+      "period": "09/2020 - 06/2021",
+      "description": {
+        "tr": "Yazılım geliştirme süreçlerine destek sağladım ve projelere teknik katkı verdim.",
+        "en": "I provided support to software development processes and made technical contributions to projects."
+      }
+    }
+  ],
+  "education": [
+    {
+      "degree": {
+        "tr": "Web Tasarımı ve Kodlama",
+        "en": "Web Design and Coding"
+      },
+      "school": "Anadolu Üniversitesi",
+      "period": "2023 - 2025",
+      "type": "associate",
+      "location": "Ankara, Türkiye",
+      "description": {
+        "tr": "Web teknolojileri, kullanıcı arayüzü tasarımı ve modern web geliştirme teknikleri üzerine eğitim aldım.",
+        "en": "I received training on web technologies, user interface design and modern web development techniques."
+      }
+    },
+    {
+      "degree": {
+        "tr": "Bilgisayar Programcılığı",
+        "en": "Computer Programming"
+      },
+      "school": "Giresun Üniversitesi",
+      "period": "2023 - 2025",
+      "type": "associate",
+      "location": "Giresun, Türkiye",
+      "description": {
+        "tr": "Programlama dilleri, algoritma geliştirme ve yazılım mühendisliği prensipleri üzerine kapsamlı eğitim aldım.",
+        "en": "I received comprehensive training on programming languages, algorithm development and software engineering principles."
+      }
+    },
+    {
+      "degree": {
+        "tr": "Veritabanı Programcılığı",
+        "en": "Database Programming"
+      },
+      "school": "Şehir Büyükşehir Danış Tunalığıl MTA Lisesi",
+      "period": "2017 - 2021",
+      "type": "high_school",
+      "location": "İstanbul, Türkiye",
+      "description": {
+        "tr": "Veritabanı yönetim sistemleri, SQL programlama ve veri analizi konularında temel eğitim aldım.",
+        "en": "I received basic training in database management systems, SQL programming and data analysis."
+      }
+    }
+  ],
+  "certificates": [
+    {
+      "name": {
+        "tr": "C# İle Sıfırdan Barkodlu Satış Programı Yapım",
+        "en": "Building Barcode Sales Program from Scratch with C#"
+      },
+      "issuer": "Udemy",
+      "year": "2022",
+      "skills": ["C#", "Windows Forms", "Database", "Barcode Systems"]
+    },
+    {
+      "name": {
+        "tr": "Uygulama Geliştirerek C# Öğrenin: A'dan Z'ye Eğitim Seti",
+        "en": "Application Developer C# Learner: A to Z Training Set"
+      },
+      "issuer": "Udemy",
+      "year": "2022",
+      "skills": ["C#", ".NET Framework", "Object Oriented Programming"]
+    },
+    {
+      "name": {
+        "tr": "Kurumsal Mimarlık İçin SQL Server Veri Tabanı Tasarımı",
+        "en": "SQL Server Database Design for Enterprise Architecture"
+      },
+      "issuer": "Udemy",
+      "year": "2021",
+      "skills": ["SQL Server", "Database Design", "Enterprise Architecture"]
+    },
+    {
+      "name": {
+        "tr": "C# İle OOP Temelleri: Adım Adım Kapsamlı Mimaril",
+        "en": "OOP Fundamentals with C#: Step by Step Comprehensive Architecture"
+      },
+      "issuer": "Udemy",
+      "year": "2022",
+      "skills": ["C#", "Object Oriented Programming", "Software Architecture"]
+    },
+    {
+      "name": {
+        "tr": "C# Form İle Görsel ve Nesne Tabanlı Programlama",
+        "en": "Visual and Object Oriented Programming with C# Forms"
+      },
+      "issuer": "Udemy",
+      "year": "2022",
+      "skills": ["C#", "Windows Forms", "GUI Development"]
+    },
+    {
+      "name": {
+        "tr": "C# İle Algoritma ve Programlama",
+        "en": "Algorithm and Programming with C#"
+      },
+      "issuer": "Udemy",
+      "year": "2022",
+      "skills": ["C#", "Algorithms", "Data Structures", "Problem Solving"]
+    },
+    {
+      "name": {
+        "tr": "İşyeri Güvenliği ve Sağlığı",
+        "en": "Occupational Health and Safety"
+      },
+      "issuer": "Türkiye Cumhuriyeti Millî Eğitim Bakanlığı",
+      "year": "2017",
+      "skills": ["Workplace Safety", "Health Regulations", "Risk Management"]
+    }
+  ],
+  "contact": {
+    "phone": "+90 (507) 678 89 18",
+    "email": "beratarpa@hotmail.com",
+    "website": "beratarpa.com",
+    "location": "Pursaklar, Ankara, Türkiye"
+  },
+  "social": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/BeratARPA",
+      "icon": "fab fa-github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/berat-arpa",
+      "icon": "fab fa-linkedin"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@BeratARPA1",
+      "icon": "fab fa-youtube"
+    },
+    {
+      "name": "Udemy",
+      "url": "https://www.udemy.com/user/berat-arpa",
+      "icon": "fas fa-graduation-cap"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/beratarpa",
+      "icon": "fab fa-instagram"
+    }
+  ]
+}
