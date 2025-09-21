@@ -334,11 +334,6 @@
       "name": "Udemy",
       "url": "https://www.udemy.com/user/berat-arpa",
       "icon": "fas fa-graduation-cap"
-    },
-    {
-      "name": "Instagram",
-      "url": "https://www.instagram.com/beratarpa",
-      "icon": "fab fa-instagram"
-    }
+    }    
   ]
 }
