@@ -162,6 +162,15 @@
     }
   ],
   "experience": [
+     {
+      "title": { "tr": "Back End Developer", "en": "Back End Developer" },
+      "company": "EasyHR",
+      "period": "10/2025 - Present",
+      "description": {
+        "tr": "Mevcut EasyHR projesi kapsamında İnsan Kaynakları süreçlerine dair alan bilgisi edindim. ASP.NET MVC 5 ve Razor teknolojilerini kullanarak projenin geliştirilmesi ve iyileştirilmesinde aktif rol aldım.",
+        "en": "Gained domain knowledge regarding Human Resources processes within the scope of the existing EasyHR project. I played an active role in the development and optimization of the project using ASP.NET MVC 5 and Razor technologies."
+      }
+    },
     {
       "title": { "tr": "Full Stack Developer", "en": "Full Stack Developer" },
       "company": "LiwaSoft",
