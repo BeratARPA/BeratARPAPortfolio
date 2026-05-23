@@ -1,1109 +1,2529 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <title>Berat ARPA — Full Stack Developer</title>
+    <meta
       name="description"
-      content="Berat ARPA - Yazılım Geliştirici, C#, .NET, API, Web ve Mobil Uygulama Geliştirme Uzmanı"
+      content="Berat ARPA — Full Stack Developer. C#, .NET, ASP.NET Core, Web API ve modern teknolojilerle ölçeklenebilir çözümler üretiyorum."
     />
     <meta
       name="keywords"
-      content="Berat ARPA, yazılım, C#, .NET, API, web geliştirme, mobil geliştirme, SQL, Firebase, MongoDB, MSSQL, MySQL, JavaScript, HTML, CSS, Visual Basic, RabbitMQ, SignalR, Bitbucket"
+      content="Berat ARPA, Full Stack Developer, C#, .NET, ASP.NET Core, Web API, Entity Framework, SQL, MSSQL, JavaScript, Flutter, yazılım geliştirici, Ankara"
     />
     <meta name="author" content="Berat ARPA" />
+    <link rel="canonical" href="https://beratarpa.com/" />
+    <link rel="alternate" hreflang="tr" href="https://beratarpa.com/?lang=tr" />
+    <link rel="alternate" hreflang="en" href="https://beratarpa.com/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://beratarpa.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://beratarpa.com/" />
+    <meta property="og:title" content="Berat ARPA — Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="C#, .NET ve modern teknolojilerle ölçeklenebilir çözümler üreten Full Stack Developer."
+    />
+    <meta property="og:image" content="https://beratarpa.com/Resources/Images/BeratARPA.webp" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Berat ARPA — Full Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="C#, .NET ve modern teknolojilerle ölçeklenebilir çözümler üreten Full Stack Developer."
+    />
+    <meta name="twitter:image" content="https://beratarpa.com/Resources/Images/BeratARPA.webp" />
 
     <link rel="icon" href="Resources/favicon.ico" type="image/x-icon" />
-    <title>Berat ARPA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+            },
+            colors: {
+              ink: {
+                950: "#07070a",
+                900: "#0a0a0f",
+                800: "#101018",
+                700: "#16161f",
+                600: "#1f1f2b",
+              },
+              accent: {
+                50: "#eef4ff",
+                400: "#7c93ff",
+                500: "#5b73f5",
+                600: "#4f5dd9",
+                700: "#3f47b3",
+              },
+            },
+            animation: {
+              "gradient-x": "gradient-x 8s ease infinite",
+              float: "float 6s ease-in-out infinite",
+              "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+              marquee: "marquee 30s linear infinite",
+              "blink-caret": "blink-caret 0.75s step-end infinite",
+            },
+            keyframes: {
+              "gradient-x": {
+                "0%, 100%": { "background-position": "0% 50%" },
+                "50%": { "background-position": "100% 50%" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              "glow-pulse": {
+                "0%, 100%": { opacity: "0.5" },
+                "50%": { opacity: "1" },
+              },
+              marquee: {
+                "0%": { transform: "translateX(0%)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+              "blink-caret": {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
     <style>
-     .gradient-bg {
-    background: linear-gradient(to bottom right, #0f2027, #203a43, #667eea, #764ba2, #2c5364);
-    position: relative;
-    overflow: hidden;
-  }
+      :root {
+        --cursor-x: 50%;
+        --cursor-y: 50%;
+      }
 
-  .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0;
-    animation: twinkle 4s infinite ease-in-out;
-    z-index: 1;
-  }
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
 
-  @keyframes twinkle {
-    0%, 100% {
-      opacity: 0.1;
-      transform: translateY(0px);
-    }
-    50% {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-  }
-     
-      .card-hover {
-        transition: all 0.3s ease;
+      html,
+      body {
+        background-color: #0a0a0f;
+        color: #f5f5f7;
       }
-      .card-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+      html.light,
+      html.light body {
+        background-color: #fafafa;
+        color: #0a0a0f;
       }
-      .typing-animation {
-        border-right: 2px solid;
-        animation: typing 3s steps(30, end),
-          blink-caret 0.5s step-end infinite alternate;
+
+      body {
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        font-feature-settings: "ss01", "cv11";
+        overflow-x: hidden;
       }
-      @keyframes typing {
-        from {
-          width: 0;
+
+      ::selection {
+        background: #5b73f5;
+        color: #fff;
+      }
+
+      /* Noise grain texture */
+      .grain::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0.06;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        mix-blend-mode: overlay;
+      }
+
+      html.light .grain::before {
+        opacity: 0.04;
+        mix-blend-mode: multiply;
+      }
+
+      /* Background mesh gradient */
+      .bg-mesh {
+        background:
+          radial-gradient(ellipse 80% 50% at 20% 0%, rgba(91, 115, 245, 0.18), transparent 50%),
+          radial-gradient(ellipse 60% 40% at 80% 10%, rgba(168, 85, 247, 0.15), transparent 50%),
+          radial-gradient(ellipse 70% 60% at 50% 100%, rgba(59, 130, 246, 0.12), transparent 50%);
+      }
+
+      html.light .bg-mesh {
+        background:
+          radial-gradient(ellipse 80% 50% at 20% 0%, rgba(91, 115, 245, 0.1), transparent 50%),
+          radial-gradient(ellipse 60% 40% at 80% 10%, rgba(168, 85, 247, 0.08), transparent 50%),
+          radial-gradient(ellipse 70% 60% at 50% 100%, rgba(59, 130, 246, 0.06), transparent 50%);
+      }
+
+      /* Spotlight follows cursor (per-element, local coords) */
+      .spotlight {
+        position: relative;
+      }
+      .spotlight::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          280px circle at var(--mx, 50%) var(--my, 50%),
+          rgba(91, 115, 245, 0.18),
+          transparent 50%
+        );
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border-radius: inherit;
+      }
+      .spotlight:hover::after {
+        opacity: 1;
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #fff 0%, #c7d2fe 40%, #a78bfa 70%, #5b73f5 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 200%;
+        animation: gradient-x 8s ease infinite;
+      }
+
+      html.light .gradient-text {
+        background: linear-gradient(135deg, #0a0a0f 0%, #3f47b3 40%, #7c3aed 70%, #5b73f5 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Glow effect */
+      .glow {
+        box-shadow:
+          0 0 40px -10px rgba(91, 115, 245, 0.5),
+          0 0 80px -20px rgba(168, 85, 247, 0.3);
+      }
+
+      /* Glass cards */
+      .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      html.light .glass {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .glass-strong {
+        background: rgba(10, 10, 15, 0.6);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      html.light .glass-strong {
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      /* Card hover */
+      .card {
+        transition:
+          transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(91, 115, 245, 0.35);
+        box-shadow:
+          0 20px 60px -20px rgba(91, 115, 245, 0.3),
+          0 0 1px rgba(91, 115, 245, 0.5);
+      }
+
+      html.light .card:hover {
+        box-shadow:
+          0 20px 60px -20px rgba(91, 115, 245, 0.25),
+          0 0 1px rgba(91, 115, 245, 0.4);
+      }
+
+      /* Scroll progress */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #5b73f5, #a78bfa, #ec4899);
+        z-index: 200;
+        transform-origin: left;
+        transform: scaleX(0);
+      }
+
+      /* Custom cursor — instant follow, no lerp */
+      @media (min-width: 1024px) and (hover: hover) {
+        body {
+          cursor: none;
         }
-        to {
-          width: 100%;
+        a,
+        button,
+        input,
+        textarea,
+        [role="button"] {
+          cursor: none;
+        }
+        .cursor-dot {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 8px;
+          height: 8px;
+          margin: -4px 0 0 -4px;
+          background: #fff;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9999;
+          will-change: transform;
+          mix-blend-mode: difference;
+          transition: width 0.2s, height 0.2s, margin 0.2s;
+        }
+        .cursor-ring {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 32px;
+          height: 32px;
+          margin: -16px 0 0 -16px;
+          border: 1.5px solid rgba(91, 115, 245, 0.7);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9998;
+          will-change: transform;
+          transition: width 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+            height 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+            margin 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.2s, background 0.2s;
+        }
+        .cursor-ring.active {
+          width: 56px;
+          height: 56px;
+          margin: -28px 0 0 -28px;
+          border-color: rgba(168, 85, 247, 0.9);
+          background: rgba(91, 115, 245, 0.1);
+        }
+        .cursor-dot.active {
+          width: 4px;
+          height: 4px;
+          margin: -2px 0 0 -2px;
         }
       }
-      @keyframes blink-caret {
+
+      /* Section reveal initial state */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      .reveal-x-l {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      .reveal-x-r {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+
+      /* Skill bar */
+      .skill-bar-fill {
+        background: linear-gradient(90deg, #5b73f5 0%, #a78bfa 60%, #ec4899 100%);
+        width: 0%;
+        transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* Marquee */
+      .marquee-track {
+        display: flex;
+        width: max-content;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(91, 115, 245, 0.5);
+      }
+      html.light ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* Floating orbs */
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        pointer-events: none;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      /* Stars */
+      .star {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        pointer-events: none;
+        will-change: opacity, transform;
+        animation: twinkle var(--dur, 4s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+      }
+      .star.bright {
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.9),
+          0 0 12px rgba(167, 139, 250, 0.4);
+      }
+      @keyframes twinkle {
+        0%, 100% {
+          opacity: var(--min-op, 0.15);
+          transform: scale(0.85);
+        }
         50% {
-          border-color: transparent;
+          opacity: var(--max-op, 0.9);
+          transform: scale(1.15);
         }
       }
-      .scroll-smooth {
-        scroll-behavior: smooth;
+      html.light .star {
+        display: none !important;
       }
-      .dark {
-        color-scheme: dark;
+
+      /* Shooting star */
+      .shooting-star {
+        position: absolute;
+        width: var(--len, 320px);
+        height: var(--thickness, 1.5px);
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          rgba(167, 139, 250, 0) 20%,
+          rgba(167, 139, 250, 0.35) 55%,
+          rgba(220, 200, 255, 0.85) 88%,
+          rgba(255, 255, 255, 1) 100%
+        );
+        border-radius: 999px;
+        opacity: 0;
+        pointer-events: none;
+        transform-origin: right center;
+        animation: shoot var(--dur, 1.6s) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
       }
-      .skill-bar {
-        animation: fillBar 2s ease-in-out;
+      .shooting-star::after {
+        content: "";
+        position: absolute;
+        right: calc(var(--head-size, 6px) / -2);
+        top: 50%;
+        width: var(--head-size, 6px);
+        height: var(--head-size, 6px);
+        background: #fff;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        box-shadow:
+          0 0 calc(var(--head-size, 6px) * 1.5) 2px rgba(255, 255, 255, 1),
+          0 0 calc(var(--head-size, 6px) * 3.5) calc(var(--head-size, 6px) * 0.6) rgba(167, 139, 250, 0.9),
+          0 0 calc(var(--head-size, 6px) * 6) calc(var(--head-size, 6px) * 1.2) rgba(91, 115, 245, 0.4);
       }
-      @keyframes fillBar {
+      @keyframes shoot {
         0% {
-          width: 0%;
+          opacity: 0;
+          transform: rotate(var(--angle, 0deg)) translateX(0);
+        }
+        10% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
         }
         100% {
-          width: var(--skill-width);
+          opacity: 0;
+          transform: rotate(var(--angle, 0deg))
+            translateX(var(--distance, -700px));
         }
       }
+      html.light .shooting-star {
+        display: none !important;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .star,
+        .shooting-star,
+        .orb {
+          animation: none !important;
+        }
+      }
+
+      /* ===== PRINT (Ctrl+P → clean CV) ===== */
+      @media print {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+          box-shadow: none !important;
+        }
+        html,
+        body {
+          background: white !important;
+          color: #111 !important;
+          cursor: auto !important;
+        }
+        body {
+          font-size: 11pt;
+        }
+        nav,
+        #mobileMenuBtn,
+        #mobileMenu,
+        .cursor-dot,
+        .cursor-ring,
+        .scroll-progress,
+        #starsLayer,
+        .orb,
+        .shooting-star,
+        .star,
+        #contact-form,
+        #socialLinks,
+        .scroll-top,
+        #toast,
+        #github-activity,
+        .marquee-track,
+        section.py-12.border-y {
+          display: none !important;
+        }
+        .grain::before {
+          display: none !important;
+        }
+        .bg-mesh,
+        .glass,
+        .glass-strong,
+        [class*="bg-ink"],
+        [class*="bg-white\\/"] {
+          background: white !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          border-color: #d4d4d8 !important;
+        }
+        .text-white,
+        [class*="text-white\\/"] {
+          color: #111 !important;
+        }
+        .text-accent-400,
+        [class*="text-accent-"] {
+          color: #3f47b3 !important;
+        }
+        .gradient-text {
+          background: none !important;
+          -webkit-text-fill-color: #111 !important;
+          color: #111 !important;
+        }
+        section {
+          padding: 0.8rem 0 !important;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        #home {
+          min-height: auto !important;
+          padding: 1rem 0 !important;
+        }
+        #home .grid {
+          grid-template-columns: 1fr !important;
+        }
+        h1 {
+          font-size: 28pt !important;
+        }
+        h2 {
+          font-size: 18pt !important;
+          break-after: avoid;
+          margin-bottom: 0.5rem !important;
+        }
+        h3 {
+          font-size: 13pt !important;
+        }
+        .skill-bar-fill {
+          background: #555 !important;
+        }
+        .card,
+        .card:hover {
+          transform: none !important;
+          break-inside: avoid;
+        }
+        a[href^="http"]:after,
+        a[href^="mailto"]:after {
+          content: " (" attr(href) ")";
+          font-size: 0.75em;
+          color: #666;
+          word-break: break-all;
+        }
+        img#profileImage {
+          max-width: 120px !important;
+          height: auto !important;
+        }
+        #statsRow {
+          display: flex !important;
+          gap: 1rem !important;
+        }
+      }
+
+      /* ===== TOAST (stacks above floating WA button) ===== */
+      #toast {
+        position: fixed;
+        bottom: 6rem;
+        right: 1.5rem;
+        z-index: 1000;
+        transform: translateY(20px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.4s;
+      }
+      #toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* Floating WA button — hide on print */
+      @media print {
+        #floatingWA {
+          display: none !important;
+        }
+      }
+
+      /* View Transitions API — smooth theme/lang switch */
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 0.5s;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      ::view-transition-old(root) {
+        animation-name: vtFadeOut;
+        z-index: 1;
+      }
+      ::view-transition-new(root) {
+        animation-name: vtFadeIn;
+        z-index: 2;
+      }
+      @keyframes vtFadeOut {
+        from {
+          opacity: 1;
+          filter: blur(0);
+        }
+        to {
+          opacity: 0;
+          filter: blur(8px);
+        }
+      }
+      @keyframes vtFadeIn {
+        from {
+          opacity: 0;
+          filter: blur(8px);
+          transform: scale(1.01);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: scale(1);
+        }
+      }
+
+      /* Typing caret */
+      .caret {
+        display: inline-block;
+        width: 3px;
+        background: currentColor;
+        margin-left: 4px;
+        animation: blink-caret 0.75s step-end infinite;
+      }
+
+      /* Magnetic button container */
+      .magnetic {
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* Timeline connector */
+      .timeline-line {
+        background: linear-gradient(180deg, transparent 0%, rgba(91, 115, 245, 0.4) 10%, rgba(168, 85, 247, 0.4) 90%, transparent 100%);
+      }
+
+      /* Section title underline */
+      .section-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #a78bfa;
+      }
+
+      .section-eyebrow::before {
+        content: "";
+        width: 24px;
+        height: 1px;
+        background: #a78bfa;
+      }
+
+      /* Stat counter */
+      .stat-num {
+        background: linear-gradient(180deg, #fff 0%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      html.light .stat-num {
+        background: linear-gradient(180deg, #0a0a0f 0%, #5b73f5 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Filter chip */
+      .chip {
+        position: relative;
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: all 0.3s;
+      }
+      .chip:hover {
+        color: #fff;
+        border-color: rgba(91, 115, 245, 0.4);
+      }
+      .chip.active {
+        background: linear-gradient(135deg, #5b73f5, #a78bfa);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 8px 24px -8px rgba(91, 115, 245, 0.6);
+      }
+      html.light .chip {
+        color: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.03);
+        border-color: rgba(0, 0, 0, 0.06);
+      }
+      html.light .chip:hover {
+        color: #0a0a0f;
+      }
+
+      /* Tag pill */
+      .tag {
+        display: inline-block;
+        padding: 4px 10px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        font-family: "JetBrains Mono", monospace;
+        color: #c7d2fe;
+        background: rgba(91, 115, 245, 0.1);
+        border: 1px solid rgba(91, 115, 245, 0.2);
+        border-radius: 6px;
+      }
+      html.light .tag {
+        color: #3f47b3;
+        background: rgba(91, 115, 245, 0.08);
+        border-color: rgba(91, 115, 245, 0.15);
+      }
+
+      /* ====== LIGHT MODE OVERRIDES ====== */
+      html.light .text-white {
+        color: #0a0a0f !important;
+      }
+      html.light .text-white\/80 {
+        color: rgba(10, 10, 15, 0.85) !important;
+      }
+      html.light .text-white\/70 {
+        color: rgba(10, 10, 15, 0.75) !important;
+      }
+      html.light .text-white\/60 {
+        color: rgba(10, 10, 15, 0.65) !important;
+      }
+      html.light .text-white\/50 {
+        color: rgba(10, 10, 15, 0.55) !important;
+      }
+      html.light .text-white\/40 {
+        color: rgba(10, 10, 15, 0.5) !important;
+      }
+      html.light .text-white\/30 {
+        color: rgba(10, 10, 15, 0.4) !important;
+      }
+      html.light .text-white\/20 {
+        color: rgba(10, 10, 15, 0.3) !important;
+      }
+      html.light .bg-white\/5 {
+        background-color: rgba(0, 0, 0, 0.03) !important;
+      }
+      html.light .bg-white\/10 {
+        background-color: rgba(0, 0, 0, 0.06) !important;
+      }
+      html.light .border-white\/5,
+      html.light .border-white\/6,
+      html.light .border-white\/10 {
+        border-color: rgba(0, 0, 0, 0.08) !important;
+      }
+      html.light .bg-ink-900 {
+        background-color: #fafafa !important;
+      }
+      html.light input,
+      html.light textarea {
+        color: #0a0a0f !important;
+      }
+      html.light .scroll-progress {
+        opacity: 0.8;
+      }
+      html.light #starsLayer .star,
+      html.light #starsLayer > div {
+        background: #0a0a0f !important;
+        box-shadow: none !important;
+      }
+      html.light .cursor-dot {
+        background: #5b73f5 !important;
+        mix-blend-mode: normal !important;
+      }
+      html.light footer p {
+        color: rgba(10, 10, 15, 0.5);
+      }
+
+      /* Lenis */
+      html.lenis {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto;
+      }
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      .lenis.lenis-scrolling iframe {
+        pointer-events: none;
+      }
+
     </style>
+
+    <!-- Cloudflare Web Analytics — free, no cookies, no banner needed
+         Setup steps:
+         1. Sign up at dash.cloudflare.com (free account)
+         2. Go to: Analytics & Logs → Web Analytics → Add a site
+         3. Enter "beratarpa.com" — choose "Standalone" (since site is on GitHub Pages)
+         4. Copy the token Cloudflare gives you
+         5. Replace YOUR_CF_TOKEN below with that token
+    -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "57522e2d8d3b4383936a50db53eb5a7b"}'
+    ></script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Berat ARPA",
+        "jobTitle": "Full Stack Developer",
+        "url": "https://beratarpa.com",
+        "image": "https://beratarpa.com/Resources/Images/BeratARPA.webp",
+        "email": "beratarpa@hotmail.com",
+        "telephone": "+90 507 678 89 18",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ankara",
+          "addressCountry": "TR"
+        },
+        "sameAs": [
+          "https://github.com/BeratARPA",
+          "https://linkedin.com/in/berat-arpa",
+          "https://www.youtube.com/@BeratARPA1"
+        ]
+      }
+    </script>
   </head>
-  <body
-    class="font-sans transition-colors duration-300 scroll-smooth"
-    id="body"
-  >
+
+  <body class="grain bg-ink-900 dark:bg-ink-900 text-white dark:text-white">
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="glass-strong rounded-2xl px-5 py-4 flex items-center gap-3 max-w-sm">
+      <span id="toastEmoji" class="text-2xl">🎉</span>
+      <span id="toastMsg" class="text-sm font-medium">Hello</span>
+    </div>
+
+    <!-- Floating WhatsApp button -->
+    <a
+      id="floatingWA"
+      href="https://wa.me/905076788918?text=Merhaba%20Berat%2C%20sitenden%20ula%C5%9F%C4%B1yorum."
+      target="_blank"
+      rel="noopener"
+      class="group fixed bottom-6 right-6 z-40 flex items-center gap-3"
+      aria-label="WhatsApp"
+    >
+      <!-- Tooltip -->
+      <span
+        class="hidden md:block px-4 py-2 rounded-full glass-strong text-sm font-medium text-white opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap"
+        data-tr="Anında mesaj at"
+        data-en="Send instant message"
+        >Anında mesaj at</span
+      >
+      <!-- Button -->
+      <span class="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg shadow-green-500/40 group-hover:scale-110 group-hover:shadow-green-500/60 transition-all">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+        <!-- Pulse ring -->
+        <span class="absolute inset-0 rounded-full bg-[#25D366] opacity-50 animate-ping"></span>
+      </span>
+    </a>
+
+    <!-- Custom cursor -->
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
     <!-- Navigation -->
     <nav
-      class="fixed top-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 shadow-sm transition-all duration-300"
+      class="hidden md:block fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500"
       id="navbar"
     >
-      <div class="container mx-auto px-6 py-4">
-        <div class="flex justify-between items-center">
-          <div class="text-2xl font-bold text-gray-800 dark:text-white">
-            <span
-              class="gradient-text bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-              >Berat ARPA</span
-            >
-          </div>
-          <div class="hidden md:flex space-x-8">
-            <a
-              href="#home"
-              class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              data-tr="Ana Sayfa"
-              data-en="Home"
-              >Ana Sayfa</a
-            >           
-            <a
-              href="#skills"
-              class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              data-tr="Yetenekler"
-              data-en="Skills"
-              >Yetenekler</a
-            >
-            <a
-              href="#experience"
-              class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              data-tr="Deneyim"
-              data-en="Experience"
-              >Deneyim</a
-            >
-            <a
-              href="#projects"
-              class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              data-tr="Projeler"
-              data-en="Projects"
-              >Projeler</a
-            >
-            <a
-              href="#contact"
-              class="nav-link text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              data-tr="İletişim"
-              data-en="Contact"
-              >İletişim</a
-            >
-          </div>
-          <div class="flex items-center space-x-4">
-            <!-- Language Toggle -->
-            <button
-              id="langToggle"
-              class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            >
-              <span id="langText">EN</span>
-            </button>
-            <!-- Theme Toggle -->
-            </button>
-            <!-- <button
-              id="themeToggle"
-              class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            >
-              <i class="fas fa-moon dark:hidden"></i>
-              <i class="fas fa-sun hidden dark:inline"></i>
-            </button>-->
-            <!-- Mobile Menu Button -->
-            <button
-              id="mobileMenuBtn"
-              class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300"
-            >
-              <i class="fas fa-bars"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
-          <a
-            href="#home"
-            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            data-tr="Ana Sayfa"
-            data-en="Home"
-            >Ana Sayfa</a
-          >
-          <a
-            href="#skills"
-            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            data-tr="Yetenekler"
-            data-en="Skills"
-            >Yetenekler</a
-          >
-          <a
-            href="#experience"
-            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            data-tr="Deneyim"
-            data-en="Experience"
-            >Deneyim</a
-          >
-          <a
-            href="#projects"
-            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            data-tr="Projeler"
-            data-en="Projects"
-            >Projeler</a
-          >
-          <a
-            href="#contact"
-            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-            data-tr="İletişim"
-            data-en="Contact"
-            >İletişim</a
-          >
-        </div>
+      <div
+        class="glass-strong rounded-full px-3 py-2 flex items-center gap-1 shadow-2xl"
+      >
+        <a
+          href="#home"
+          class="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white transition-colors nav-link"
+          data-tr="Ana Sayfa"
+          data-en="Home"
+          >Ana Sayfa</a
+        >
+        <a
+          href="#skills"
+          class="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white transition-colors nav-link"
+          data-tr="Yetenekler"
+          data-en="Skills"
+          >Yetenekler</a
+        >
+        <a
+          href="#experience"
+          class="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white transition-colors nav-link"
+          data-tr="Deneyim"
+          data-en="Experience"
+          >Deneyim</a
+        >
+        <a
+          href="#projects"
+          class="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white transition-colors nav-link"
+          data-tr="Projeler"
+          data-en="Projects"
+          >Projeler</a
+        >
+        <a
+          href="#contact"
+          class="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white transition-colors nav-link"
+          data-tr="İletişim"
+          data-en="Contact"
+          >İletişim</a
+        >
+        <div class="w-px h-5 bg-white/10 mx-1"></div>
+        <button
+          id="langToggle"
+          class="px-3 py-2 rounded-full text-xs font-semibold text-white/80 hover:text-white hover:bg-white/5 transition-all"
+          aria-label="Language toggle"
+        >
+          <span id="langText">EN</span>
+        </button>
+        <button
+          id="themeToggle"
+          class="w-9 h-9 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/5 transition-all"
+          aria-label="Theme toggle"
+        >
+          <i class="fas fa-moon text-sm dark-icon"></i>
+          <i class="fas fa-sun text-sm light-icon hidden"></i>
+        </button>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center gradient-bg">
-      <div class="container mx-auto px-6 text-center text-white">
-        <div class="max-w-4xl mx-auto">
-          <img
-            id="profileImage"
-            src="Resources/Images/BeratARPA.png"
-            alt="Berat ARPA"
-            class="w-48 h-48 rounded-full mx-auto mb-8 border-4 border-white shadow-2xl object-cover"
-          />
-          <h1 class="text-5xl md:text-7xl font-bold mb-4">
-            <span data-tr="Berat ARPA" data-en="Berat ARPA">Berat ARPA</span>
-          </h1>
-          <div class="text-xl md:text-2xl mb-8 h-8">
-            <span
-              id="typingText"
-              class="typing-animation overflow-hidden whitespace-nowrap inline-block"
-              data-tr="Full Stack Developer"
-              data-en="Full Stack Developer"
-              >Full Stack Developer</span
-            >
-          </div>
-          <p
-            class="text-lg md:text-xl mb-12 max-w-2xl mx-auto opacity-90"
-            id="heroDescription"
-            data-tr="Modern teknolojilerle yenilikçi çözümler üreten tutkulu yazılım geliştirici"
-            data-en="Passionate software developer creating innovative solutions with modern technologies"
+    <!-- Mobile menu button -->
+    <button
+      id="mobileMenuBtn"
+      class="md:hidden fixed top-6 right-6 z-[60] w-11 h-11 rounded-full glass-strong flex items-center justify-center text-white"
+      aria-label="Menu"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile menu overlay -->
+    <div
+      id="mobileMenu"
+      class="md:hidden fixed inset-0 z-[55] hidden opacity-0 transition-opacity duration-500"
+    >
+      <div class="absolute inset-0 bg-ink-900/95 backdrop-blur-xl"></div>
+      <div class="relative h-full flex flex-col items-center justify-center gap-8">
+        <a href="#home" class="mobile-link text-4xl font-bold gradient-text" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a>
+        <a href="#skills" class="mobile-link text-4xl font-bold gradient-text" data-tr="Yetenekler" data-en="Skills">Yetenekler</a>
+        <a href="#experience" class="mobile-link text-4xl font-bold gradient-text" data-tr="Deneyim" data-en="Experience">Deneyim</a>
+        <a href="#projects" class="mobile-link text-4xl font-bold gradient-text" data-tr="Projeler" data-en="Projects">Projeler</a>
+        <a href="#contact" class="mobile-link text-4xl font-bold gradient-text" data-tr="İletişim" data-en="Contact">İletişim</a>
+        <div class="flex gap-4 mt-8">
+          <button
+            id="langToggleMobile"
+            class="px-5 py-2 rounded-full text-sm font-semibold glass"
           >
-            Modern teknolojilerle yenilikçi çözümler üreten tutkulu yazılım
-            geliştirici
-          </p>
-          <div class="space-x-4">
-            <a
-              href="#contact"
-              class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors inline-block"
-              data-tr="İletişime Geç"
-              data-en="Get In Touch"
-              >İletişime Geç</a
+            <span class="mobile-lang-text">EN</span>
+          </button>
+          <button
+            id="themeToggleMobile"
+            class="w-10 h-10 rounded-full glass flex items-center justify-center"
+          >
+            <i class="fas fa-moon text-sm mobile-dark-icon"></i>
+            <i class="fas fa-sun text-sm mobile-light-icon hidden"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section
+      id="home"
+      class="relative min-h-screen flex items-center justify-center overflow-hidden bg-mesh pt-28 pb-20 md:pt-32 md:pb-24"
+    >
+      <!-- Background orbs -->
+      <div class="orb w-[500px] h-[500px] bg-accent-500/40 top-[10%] -left-32" style="animation-delay: 0s"></div>
+      <div class="orb w-[400px] h-[400px] bg-purple-500/40 bottom-[10%] -right-20" style="animation-delay: 2s"></div>
+      <div class="orb w-[300px] h-[300px] bg-pink-500/30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-delay: 4s"></div>
+
+      <!-- Stars layer -->
+      <div id="starsLayer" class="absolute inset-0 pointer-events-none"></div>
+
+      <div class="relative container mx-auto px-6 max-w-6xl">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          <!-- Left: text content -->
+          <div class="lg:col-span-7 text-center lg:text-left">
+            <div
+              class="section-eyebrow mb-6 justify-center lg:justify-start hero-reveal"
+              data-tr="Yazılım Geliştirici · Ankara"
+              data-en="Software Engineer · Ankara"
             >
-            <a
-              href="#"
-              id="downloadCV"
-              class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-block"
-              data-tr="CV İndir"
-              data-en="Download CV"
-              >CV İndir</a
+              Yazılım Geliştirici · Ankara
+            </div>
+
+            <h1
+              class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] mb-6 hero-reveal"
             >
+              <span class="block">Berat</span>
+              <span class="block gradient-text">ARPA</span>
+            </h1>
+
+            <div
+              class="text-xl md:text-2xl text-white/70 dark:text-white/70 mb-4 font-light hero-reveal h-9"
+            >
+              <span id="typingText" class="inline-block"></span><span class="caret h-7 align-middle"></span>
+            </div>
+
+            <p
+              id="heroDescription"
+              class="text-base md:text-lg text-white/50 dark:text-white/50 max-w-xl mb-10 leading-relaxed mx-auto lg:mx-0 hero-reveal"
+            ></p>
+
+            <div class="flex flex-wrap gap-4 justify-center lg:justify-start hero-reveal">
+              <a
+                href="#contact"
+                class="magnetic group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-accent-500 to-purple-500 text-white font-semibold text-sm shadow-lg shadow-accent-500/30 hover:shadow-accent-500/50 transition-shadow"
+                data-tr="İletişime Geç"
+                data-en="Get In Touch"
+              >
+                <span data-tr="İletişime Geç" data-en="Get In Touch">İletişime Geç</span>
+                <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+              </a>
+              <a
+                href="#"
+                id="downloadCV"
+                class="magnetic group inline-flex items-center gap-2 px-7 py-3.5 rounded-full glass text-white font-semibold text-sm hover:border-white/20 transition-colors"
+              >
+                <i class="fas fa-download text-xs"></i>
+                <span data-tr="CV İndir" data-en="Download CV">CV İndir</span>
+              </a>
+            </div>
+
+            <!-- Stats -->
+            <div
+              class="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-16 max-w-2xl mx-auto lg:mx-0 hero-reveal"
+              id="statsRow"
+            ></div>
           </div>
+
+          <!-- Right: photo -->
+          <div class="lg:col-span-5 flex justify-center lg:justify-end hero-reveal">
+            <div class="relative">
+              <div class="absolute inset-0 -m-6 bg-gradient-to-tr from-accent-500/30 via-purple-500/30 to-pink-500/30 rounded-full blur-3xl animate-glow-pulse"></div>
+              <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-white/10 glow">
+                <img
+                  id="profileImage"
+                  src="Resources/Images/BeratARPA.webp"
+                  alt="Berat ARPA"
+                  class="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <!-- Floating badge with live clock + online status -->
+              <div class="absolute -bottom-2 -right-2 glass-strong rounded-full px-4 py-2 flex items-center gap-2 text-sm whitespace-nowrap">
+                <span id="liveStatusDot" class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                <span class="font-medium">
+                  <span id="liveStatusLabel" data-tr="Çalışmaya açık" data-en="Available for work">Çalışmaya açık</span>
+                  <span class="text-white/40 mx-1">·</span>
+                  <span class="font-mono text-xs" id="liveClock">--:--</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECH MARQUEE -->
+    <section class="py-12 border-y border-white/5 dark:border-white/5 overflow-hidden">
+      <div class="marquee-track animate-marquee" id="marqueeTrack"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-32 relative">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="reveal">
+          <div class="section-eyebrow mb-6" data-tr="Hakkımda" data-en="About">Hakkımda</div>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-12 max-w-3xl">
+            <span data-tr="Karmaşık problemleri" data-en="Turning complex problems">Karmaşık problemleri</span>
+            <span class="gradient-text" data-tr="zarif kod mimarisine" data-en="into elegant code">zarif kod mimarisine</span>
+            <span data-tr="dönüştürüyorum." data-en="architecture.">dönüştürüyorum.</span>
+          </h2>
+          <div id="aboutText" class="text-lg md:text-xl text-white/60 dark:text-white/60 leading-relaxed max-w-3xl"></div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
-    <section
-      id="skills"
-      class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors"
-    >
-      <div class="container mx-auto px-6">
-        <h2
-          class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16"
-          data-tr="Yeteneklerim"
-          data-en="Skills"
-        >
-          Yeteneklerim
-        </h2>
+    <!-- GITHUB ACTIVITY -->
+    <section id="github-activity" class="py-20 relative">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="text-center mb-12 reveal">
+          <div class="section-eyebrow mb-4 justify-center" data-tr="Canlı GitHub" data-en="Live GitHub">Canlı GitHub</div>
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+            <span data-tr="Sürekli" data-en="Constantly">Sürekli</span>
+            <span class="gradient-text" data-tr="kodluyorum" data-en="coding">kodluyorum</span>
+          </h2>
+        </div>
+        <div class="glass-strong rounded-3xl p-6 md:p-10 reveal">
+          <img
+            src="https://ghchart.rshah.org/5b73f5/BeratARPA"
+            alt="Berat ARPA — GitHub Contribution Heatmap"
+            class="w-full h-auto"
+            loading="lazy"
+          />
+          <p class="text-center text-xs font-mono text-white/40 mt-4">
+            <span data-tr="Son 365 günün aktivite haritası" data-en="Last 365 days of activity">Son 365 günün aktivite haritası</span>
+            · <a href="https://github.com/BeratARPA" target="_blank" rel="noopener" class="text-accent-400 hover:text-accent-300">@BeratARPA</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-32 relative">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-16 reveal">
+          <div class="section-eyebrow mb-4 justify-center" data-tr="Yeteneklerim" data-en="Skills">Yeteneklerim</div>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tight">
+            <span data-tr="Cephane" data-en="My">Cephane</span>
+            <span class="gradient-text" data-tr="hanem" data-en="Arsenal">hanem</span>
+          </h2>
+        </div>
+
+        <!-- Filter chips -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12 reveal" id="skillFilters">
+          <button class="chip active" data-filter="all" data-tr="Tümü" data-en="All">Tümü</button>
+          <button class="chip" data-filter="backend" data-tr="Arka Uç" data-en="Backend">Arka Uç</button>
+          <button class="chip" data-filter="frontend" data-tr="Ön Uç" data-en="Frontend">Ön Uç</button>
+          <button class="chip" data-filter="database" data-tr="Veritabanı" data-en="Database">Veritabanı</button>
+          <button class="chip" data-filter="tools" data-tr="Araçlar" data-en="Tools">Araçlar</button>
+        </div>
+
         <div
           id="skillsContainer"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <!-- Skills will be loaded here -->
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="py-32 relative">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="text-center mb-20 reveal">
+          <div class="section-eyebrow mb-4 justify-center" data-tr="Deneyim" data-en="Experience">Deneyim</div>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tight">
+            <span data-tr="Yol" data-en="The">Yol</span>
+            <span class="gradient-text" data-tr="haritam" data-en="Journey">haritam</span>
+          </h2>
+        </div>
+
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="timeline-line absolute left-4 md:left-6 top-0 bottom-0 w-px"></div>
+          <div id="experienceContainer" class="space-y-8"></div>
         </div>
       </div>
     </section>
 
-    <!-- Experience Section -->
-    <section
-      id="experience"
-      class="py-20 bg-white dark:bg-gray-900 transition-colors"
-    >
-      <div class="container mx-auto px-6">
-        <h2
-          class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16"
-          data-tr="İş Deneyimim"
-          data-en="Work Experience"
-        >
-          İş Deneyimim
-        </h2>
-        <div id="experienceContainer" class="max-w-4xl mx-auto">
-          <!-- Experience will be loaded here -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Education Section -->
-    <section
-      id="education"
-      class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors"
-    >
-      <div class="container mx-auto px-6">
-        <h2
-          class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16"
-          data-tr="Eğitim"
-          data-en="Education"
-        >
-          Eğitim
-        </h2>
-        <div id="educationContainer" class="max-w-4xl mx-auto">
-          <!-- Education will be loaded here -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section
-      id="certificates"
-      class="py-20 bg-white dark:bg-gray-900 transition-colors"
-    >
-      <div class="container mx-auto px-6">
-        <h2
-          class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16"
-          data-tr="Sertifikalar"
-          data-en="Certificates"
-        >
-          Sertifikalar
-        </h2>
-        <div
-          id="certificatesContainer"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <!-- Certificates will be loaded here -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section
-      id="projects"
-      class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors"
-    >
-      <div class="container mx-auto px-6">
-        <h2
-          class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16"
-          data-tr="Projelerim"
-          data-en="Projects"
-        >
-          Projelerim
-        </h2>
-        <div
-          id="projectsContainer"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <!-- Projects will be loaded here -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section
-      id="contact"
-      class="py-20 bg-white dark:bg-gray-900 transition-colors"
-    >
-      <div class="container mx-auto px-6">
-        <h2
-          class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-16"
-          data-tr="İletişim"
-          data-en="Contact"
-        >
-          İletişim
-        </h2>
-        <div class="max-w-4xl mx-auto">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Contact Info -->
-            <div>
-              <h3
-                class="text-2xl font-semibold text-gray-800 dark:text-white mb-6"
-                data-tr="İletişim Bilgileri"
-                data-en="Contact Information"
-              >
-                İletişim Bilgileri
-              </h3>
-              <div id="contactInfo" class="space-y-4">
-                <!-- Contact info will be loaded here -->
-              </div>
-              <div class="mt-8">
-                <h4
-                  class="text-xl font-semibold text-gray-800 dark:text-white mb-4"
-                  data-tr="Sosyal Medya"
-                  data-en="Social Media"
-                >
-                  Sosyal Medya
-                </h4>
-                <div id="socialLinks" class="flex space-x-4">
-                  <!-- Social links will be loaded here -->
-                </div>
-              </div>
-            </div>
-
-            <!-- Contact Form -->
-             <form id="contact-form" class="space-y-6">
-            <div>
-              <h3
-                class="text-2xl font-semibold text-gray-800 dark:text-white mb-6"
-                data-tr="Mesaj Gönder"
-                data-en="Send Message"
-              >
-                Mesaj Gönder
-              </h3>
-              <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-                <div class="space-y-6">
-                  <div>
-                    <label
-                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                      data-tr="İsim"
-                      data-en="Name"
-                      >İsim</label
-                    >
-                    <input
-                    required
-            type="text"
-            id="name"
-            name="name"
-                      class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                      data-tr="E-posta"
-                      data-en="Email"
-                      >E-posta</label
-                    >
-                    <input
-                     required
-            type="email"
-            id="email"
-            name="email"
-                      class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                      data-tr="Mesaj"
-                      data-en="Message"
-                      >Mesaj</label
-                    >
-                    <textarea
-                     name="message"
-            rows="4"
-            required
-                      class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                    data-tr="Mesaj Gönder"
-                    data-en="Send Message"
-                  >
-                    Mesaj Gönder
-                  </button>
-                </div>
-              </div>
-            </div>
-            </form>
+    <!-- EDUCATION + CERTIFICATES -->
+    <section id="education" class="py-32 relative">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="grid lg:grid-cols-2 gap-12">
+          <!-- Education -->
+          <div>
+            <div class="section-eyebrow mb-4 reveal" data-tr="Eğitim" data-en="Education">Eğitim</div>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-10 reveal">
+              <span data-tr="Akademik" data-en="Academic">Akademik</span>
+              <span class="gradient-text" data-tr="geçmiş" data-en="Background">geçmiş</span>
+            </h2>
+            <div id="educationContainer" class="space-y-4"></div>
+          </div>
+          <!-- Certificates -->
+          <div>
+            <div class="section-eyebrow mb-4 reveal" data-tr="Sertifikalar" data-en="Certificates">Sertifikalar</div>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-10 reveal">
+              <span data-tr="Sürekli" data-en="Continuous">Sürekli</span>
+              <span class="gradient-text" data-tr="öğrenme" data-en="Learning">öğrenme</span>
+            </h2>
+            <div id="certificatesContainer" class="space-y-3"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-      <div class="container mx-auto px-6 text-center">
-        <p>
-          &copy; 2024 Berat ARPA.
-          <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved."
-            >Tüm hakları saklıdır.</span
+    <!-- PROJECTS -->
+    <section id="projects" class="py-32 relative">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 reveal">
+          <div>
+            <div class="section-eyebrow mb-4" data-tr="Çalışmalar" data-en="Work">Çalışmalar</div>
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tight">
+              <span data-tr="Seçili" data-en="Featured">Seçili</span>
+              <span class="gradient-text" data-tr="projeler" data-en="Projects">projeler</span>
+            </h2>
+          </div>
+          <a
+            href="https://github.com/BeratARPA"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
           >
+            <span data-tr="GitHub'da tümünü gör" data-en="View all on GitHub">GitHub'da tümünü gör</span>
+            <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+
+        <div
+          id="projectsContainer"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          <!-- Skeleton loader -->
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-32 relative">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-16 reveal">
+          <div class="section-eyebrow mb-4 justify-center" data-tr="İletişim" data-en="Contact">İletişim</div>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            <span data-tr="Birlikte" data-en="Let's build">Birlikte</span>
+            <span class="gradient-text" data-tr="bir şeyler üretelim." data-en="something great.">bir şeyler üretelim.</span>
+          </h2>
+          <p
+            class="text-lg text-white/50 max-w-2xl mx-auto"
+            data-tr="Yeni bir projeniz mi var? Bir fikir mi paylaşmak istiyorsunuz? Mesaj atın, en kısa sürede dönüş yapayım."
+            data-en="Have a new project in mind? Want to share an idea? Drop a message — I'll get back to you shortly."
+          >
+            Yeni bir projeniz mi var? Bir fikir mi paylaşmak istiyorsunuz? Mesaj atın, en kısa sürede dönüş yapayım.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-8">
+          <!-- Contact Info -->
+          <div class="lg:col-span-2 space-y-3 reveal-x-l" id="contactInfo"></div>
+
+          <!-- Contact Form -->
+          <form id="contact-form" class="lg:col-span-3 glass-strong rounded-3xl p-8 reveal-x-r space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label
+                  for="name"
+                  class="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2"
+                  data-tr="İsim"
+                  data-en="Name"
+                  >İsim</label
+                >
+                <input
+                  required
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent-500 focus:bg-white/10 transition-all"
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2"
+                  data-tr="E-posta"
+                  data-en="Email"
+                  >E-posta</label
+                >
+                <input
+                  required
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent-500 focus:bg-white/10 transition-all"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="message"
+                class="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2"
+                data-tr="Mesaj"
+                data-en="Message"
+                >Mesaj</label
+              >
+              <textarea
+                required
+                id="message"
+                name="message"
+                rows="5"
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-accent-500 focus:bg-white/10 transition-all resize-none"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              id="submitBtn"
+              class="magnetic group w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-accent-500 to-purple-500 text-white font-semibold text-sm shadow-lg shadow-accent-500/30 hover:shadow-accent-500/50 transition-all disabled:opacity-60 disabled:cursor-wait"
+            >
+              <span id="submitText" data-tr="Mesajı Gönder" data-en="Send Message">Mesajı Gönder</span>
+              <i class="fas fa-paper-plane text-xs group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+            </button>
+            <div id="formFeedback" class="text-sm text-center min-h-[20px]"></div>
+          </form>
+        </div>
+
+        <!-- Social -->
+        <div class="flex justify-center gap-3 mt-16 reveal" id="socialLinks"></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-8">
+      <div
+        class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40"
+      >
+        <p>
+          &copy; <span id="footerYear"></span> Berat ARPA.
+          <span data-tr="Tüm hakları saklıdır." data-en="All rights reserved.">Tüm hakları saklıdır.</span>
+        </p>
+        <p class="font-mono text-xs">
+          <span data-tr="Sevgiyle inşa edildi" data-en="Crafted with care">Sevgiyle inşa edildi</span>
+          <i class="fas fa-heart text-pink-400 mx-1"></i>
         </p>
       </div>
     </footer>
 
-    <!-- EmailJS CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Scripts: Lenis + GSAP + EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <script>
-      // Global variables
-      let currentLang = "tr";
-      let isDark = false;
-      let portfolioData;
+      "use strict";
 
-      // Initialize portfolio data with default values
-      portfolioData = {};
+      /* ============================================================
+       * STATE
+       * ============================================================ */
+      const state = {
+        lang: localStorage.getItem("language") || "tr",
+        theme: localStorage.getItem("theme") || "dark",
+        data: null,
+        skillFilter: "all",
+        projectsCache: null,
+      };
 
-      // Initialize
-      document.addEventListener("DOMContentLoaded", async function () {
+      /* ============================================================
+       * BOOT
+       * ============================================================ */
+      document.addEventListener("DOMContentLoaded", async () => {
+        applyTheme(state.theme, true);
+        applyLang(state.lang, true);
+
         await loadData();
-        initializeTheme();
-        initializeEventListeners();
-        renderContent();
-        startAnimations();
+
+        renderAll();
+        bindEvents();
+        initStars();
+        initLenis();
+        initCursor();
+        initSpotlight();
+        initScrollProgress();
+        initAnimations();
+        initEmailJS();
+        initKonami();
+        initConsoleEgg();
+
+        document.getElementById("footerYear").textContent =
+          new Date().getFullYear();
+
+        startLiveClock();
       });
 
-      // Load data (replace with actual JSON loading)
+      /* ============================================================
+       * LIVE CLOCK + ONLINE STATUS (Ankara timezone)
+       * ============================================================ */
+      function startLiveClock() {
+        const clockEl = document.getElementById("liveClock");
+        const dotEl = document.getElementById("liveStatusDot");
+        const labelEl = document.getElementById("liveStatusLabel");
+        if (!clockEl) return;
+
+        function tick() {
+          const now = new Date();
+          const tz = "Europe/Istanbul";
+          const hh = new Intl.DateTimeFormat("tr-TR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: tz,
+          }).format(now);
+          clockEl.textContent = hh;
+
+          // Online window: 09:00 – 23:00 Ankara time
+          const hour = parseInt(
+            new Intl.DateTimeFormat("en-GB", {
+              hour: "2-digit",
+              hour12: false,
+              timeZone: tz,
+            }).format(now),
+            10
+          );
+          const isOnline = hour >= 9 && hour < 23;
+
+          if (dotEl) {
+            dotEl.classList.toggle("bg-green-400", isOnline);
+            dotEl.classList.toggle("bg-yellow-400", !isOnline);
+          }
+          if (labelEl) {
+            const onlineTxt =
+              state.lang === "tr" ? "Çalışmaya açık" : "Available for work";
+            const offlineTxt =
+              state.lang === "tr" ? "Şu an dışarıda" : "Currently away";
+            const newLabel = isOnline ? onlineTxt : offlineTxt;
+            if (labelEl.textContent !== newLabel) labelEl.textContent = newLabel;
+          }
+        }
+        tick();
+        setInterval(tick, 30 * 1000); // every 30s
+      }
+
+      /* ============================================================
+       * DATA
+       * ============================================================ */
       async function loadData() {
         try {
-          // Try to load from data.json file
-          const response = await fetch("data.json");
-          if (response.ok) {
-            const jsonData = await response.json();
-            Object.assign(portfolioData, jsonData);
-            console.log("Data loaded from data.json");
-          } else {
-            console.log("data.json not found, using embedded data");
-          }
-        } catch (error) {
-          console.log("Error loading data.json, using embedded data:", error);
+          const res = await fetch("data.json");
+          if (!res.ok) throw new Error("data.json fetch failed");
+          state.data = await res.json();
+        } catch (err) {
+          console.error("Data load error:", err);
         }
       }
 
-      // Initialize theme
-      function initializeTheme() {
-        const savedTheme = localStorage.getItem("theme");
-        const savedLang = localStorage.getItem("language") || "tr";
-
-        // Set theme
-        if (
-          savedTheme === "dark" ||
-          (!savedTheme &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          isDark = true;
-          document.documentElement.classList.add("dark");
-          document.body.classList.add("dark");
-        } else {
-          isDark = false;
-          document.documentElement.classList.remove("dark");
-          document.body.classList.remove("dark");
-        }
-
-        // Set language
-        currentLang = savedLang;
-        updateLanguageButton();
-      }
-
-      // Initialize event listeners
-      function initializeEventListeners() {
-        // Theme toggle
-       /* document
-          .getElementById("themeToggle")
-          .addEventListener("click", toggleTheme);*/
-
-        // Language toggle
-        document
-          .getElementById("langToggle")
-          .addEventListener("click", toggleLanguage);
-
-        // Mobile menu
-        document
-          .getElementById("mobileMenuBtn")
-          .addEventListener("click", toggleMobileMenu);
-
-        // CV download
-        document
-          .getElementById("downloadCV")
-          .addEventListener("click", downloadCV);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute("href"));
-            if (target) {
-              target.scrollIntoView({ behavior: "smooth" });
-            }
-          });
-        });
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll("#mobileMenu a").forEach((link) => {
-          link.addEventListener("click", () => {
-            document.getElementById("mobileMenu").classList.add("hidden");
-          });
-        });
-      }
-
-      // Toggle theme
-      function toggleTheme() {
-        isDark = !isDark;
-
-        if (isDark) {
-          document.documentElement.classList.add("dark");
-          document.body.classList.add("dark");
-          localStorage.setItem("theme", "dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-          document.body.classList.remove("dark");
-          localStorage.setItem("theme", "light");
-        }
-      }
-
-      // Toggle language
-      function toggleLanguage() {
-        currentLang = currentLang === "tr" ? "en" : "tr";
-        localStorage.setItem("language", currentLang);
-        updateLanguageButton();
-        updateTexts();
-      }
-
-      // Update language button
-      function updateLanguageButton() {
-        document.getElementById("langText").textContent =
-          currentLang === "tr" ? "EN" : "TR";
-      }
-
-      // Toggle mobile menu
-      function toggleMobileMenu() {
-        document.getElementById("mobileMenu").classList.toggle("hidden");
-      }
-
-      // Update texts based on current language
-      function updateTexts() {
-        // Update navigation and static texts
-        document.querySelectorAll("[data-tr][data-en]").forEach((element) => {
-          const text =
-            currentLang === "tr"
-              ? element.getAttribute("data-tr")
-              : element.getAttribute("data-en");
-          element.textContent = text;
-        });
-
-        // Update typing text
-        const typingElement = document.getElementById("typingText");
-        typingElement.textContent = portfolioData.personal.title[currentLang];
-
-        // Update hero description
-        document.getElementById("heroDescription").textContent =
-          portfolioData.personal.description[currentLang];
-
-        // Re-render all content with new language
-        renderContent();
-      }
-
-      // Render all content
-      function renderContent() {
-        renderPersonalInfo();
+      /* ============================================================
+       * RENDER
+       * ============================================================ */
+      function renderAll() {
+        if (!state.data) return;
+        renderHero();
+        renderStats();
+        renderMarquee();
+        renderAbout();
         renderSkills();
         renderExperience();
         renderEducation();
         renderCertificates();
         renderProjects();
         renderContact();
+        renderSocial();
+        updateStaticTexts();
       }
 
-      // Render personal info
-      function renderPersonalInfo() {
-        const { personal } = portfolioData;
-
+      function renderHero() {
+        const { personal } = state.data;
         document.getElementById("profileImage").src = personal.image;
-        document.getElementById("typingText").textContent =
-          personal.title[currentLang];
         document.getElementById("heroDescription").textContent =
-          personal.description[currentLang];
+          personal.description[state.lang];
+        startTyping(personal.title[state.lang]);
       }
 
-      // Render skills
+      function renderStats() {
+        const stats = state.data.personal.stats || [];
+        document.getElementById("statsRow").innerHTML = stats
+          .map(
+            (s) => `
+            <div>
+              <div class="stat-num text-3xl md:text-4xl font-bold" data-counter="${s.value}">${s.value}</div>
+              <div class="text-xs uppercase tracking-widest text-white/40 mt-1 font-mono">${s.label[state.lang]}</div>
+            </div>`
+          )
+          .join("");
+      }
+
+      function renderMarquee() {
+        const techs = state.data.skills.map((s) => s.name);
+        const items = techs
+          .map(
+            (t) =>
+              `<span class="inline-flex items-center gap-3 mx-8 text-2xl md:text-3xl font-bold text-white/20 hover:text-white/60 transition-colors whitespace-nowrap">
+                ${t}
+                <i class="fas fa-circle text-[6px] text-accent-500"></i>
+              </span>`
+          )
+          .join("");
+        document.getElementById("marqueeTrack").innerHTML = items + items;
+      }
+
+      function renderAbout() {
+        const el = document.getElementById("aboutText");
+        el.textContent = state.data.personal.description[state.lang];
+      }
+
       function renderSkills() {
-        const container = document.getElementById("skillsContainer");
-        container.innerHTML = portfolioData.skills
+        const skills = state.data.skills.filter(
+          (s) => state.skillFilter === "all" || s.category === state.skillFilter
+        );
+        const html = skills
           .map(
-            (skill) => `
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg card-hover">
-                    <div class="flex items-center mb-4">
-                        <i class="${skill.icon} text-2xl text-blue-600 mr-3"></i>
-                        <h3 class="text-xl font-semibold text-gray-800 dark:text-white">${skill.name}</h3>
-                    </div>
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                        <div class="skill-bar bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-1000" 
-                             style="--skill-width: ${skill.level}%; width: ${skill.level}%"></div>
-                    </div>
-                    <span class="text-sm text-gray-600 dark:text-gray-400 mt-2 block">${skill.level}%</span>
+            (s) => `
+            <div class="card glass rounded-2xl p-5 group spotlight" data-category="${s.category}">
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-500/20 to-purple-500/20 border border-white/5 flex items-center justify-center text-accent-400 group-hover:scale-110 transition-transform">
+                  <i class="${s.icon} text-lg"></i>
                 </div>
-            `
+                <span class="text-xs font-mono text-white/40">${s.level}%</span>
+              </div>
+              <h3 class="font-semibold text-white mb-3">${s.name}</h3>
+              <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                <div class="skill-bar-fill h-full rounded-full" data-level="${s.level}"></div>
+              </div>
+            </div>`
           )
           .join("");
+        document.getElementById("skillsContainer").innerHTML = html;
+        animateSkillBars();
       }
 
-      // Render experience
+      function animateSkillBars() {
+        document.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+          requestAnimationFrame(() => {
+            bar.style.width = bar.dataset.level + "%";
+          });
+        });
+      }
+
       function renderExperience() {
-        const container = document.getElementById("experienceContainer");
-        container.innerHTML = portfolioData.experience
-          .map(
-            (exp) => `
-                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg card-hover mb-6">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">${exp.title[currentLang]}</h3>
-                            <p class="text-lg text-blue-600 dark:text-blue-400">${exp.company}</p>
-                        </div>
-                        <span class="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full mt-2 md:mt-0">${exp.period}</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300">${exp.description[currentLang]}</p>
+        const html = state.data.experience
+          .map((e) => {
+            const period =
+              typeof e.period === "string" ? e.period : e.period[state.lang];
+            return `
+            <div class="relative pl-12 md:pl-16 timeline-item">
+              <!-- Dot -->
+              <div class="absolute left-4 md:left-6 top-6 -translate-x-1/2 w-3 h-3 rounded-full bg-accent-500 ring-4 ring-accent-500/20"></div>
+              <!-- Card -->
+              <div class="card glass rounded-2xl p-6 md:p-8">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                  <span class="text-xs font-mono uppercase tracking-widest text-accent-400">${period}</span>
+                  ${
+                    e.location
+                      ? `<span class="text-xs font-mono text-white/40">· ${e.location}</span>`
+                      : ""
+                  }
                 </div>
-            `
-          )
-          .join("");
-      }
-
-      // Render education
-      function renderEducation() {
-        const container = document.getElementById("educationContainer");
-        container.innerHTML = portfolioData.education
-          .map(
-            (edu) => `
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg card-hover mb-6">
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">${edu.degree[currentLang]}</h3>
-                            <p class="text-lg text-blue-600 dark:text-blue-400">${edu.school}</p>
-                        </div>
-                        <span class="text-sm text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full mt-2 md:mt-0">${edu.period}</span>
-                    </div>
-                </div>
-            `
-          )
-          .join("");
-      }
-
-      // Render certificates
-      function renderCertificates() {
-        const container = document.getElementById("certificatesContainer");
-        container.innerHTML = portfolioData.certificates
-          .map(
-            (cert) => `
-                <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg card-hover">
-                    <div class="text-center">
-                        <i class="fas fa-certificate text-3xl text-yellow-500 mb-4"></i>
-                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">${
-                          cert.name[currentLang]
-                        }</h3>
-                        <p class="text-blue-600 dark:text-blue-400 mb-2">${
-                          cert.issuer
-                        }</p>
-                        <span class="text-sm text-gray-600 dark:text-gray-400 block mb-3">${
-                          cert.year
-                        }</span>
-                        ${
-                          cert.skills
-                            ? `
-                            <div class="flex flex-wrap justify-center gap-1">
-                                ${cert.skills
-                                  .map(
-                                    (skill) => `
-                                    <span class="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full">${skill}</span>
-                                `
-                                  )
-                                  .join("")}
-                            </div>
-                        `
-                            : ""
-                        }
-                    </div>
-                </div>
-            `
-          )
-          .join("");
-      }
-
-      // Render projects
-      async function renderProjects() {
-        const container = document.getElementById("projectsContainer");
-
-        try {
-          const projects = await fetchGitHubProjects();
-
-          // Yıldız sayısına göre sırala ve ilk 9 projeyi al
-          const topStarred = projects
-            .filter((project) => !project.fork)
-            .sort((a, b) => b.stargazers_count - a.stargazers_count)
-            .slice(0, 9);
-
-          container.innerHTML = topStarred
-            .map(
-              (project) => `
-          <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg card-hover">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-xl font-semibold text-gray-800 dark:text-white">
-                ${project.name}
-              </h3>
-              <div class="flex space-x-2">
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-1">${
+                  e.title[state.lang]
+                }</h3>
+                <p class="text-accent-400 mb-3 font-medium">${e.company}</p>
+                <p class="text-white/60 text-sm leading-relaxed mb-4">${
+                  e.description[state.lang]
+                }</p>
                 ${
-                  project.language
-                    ? `<span class="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full">${project.language}</span>`
+                  e.tags
+                    ? `<div class="flex flex-wrap gap-2">${e.tags
+                        .map((t) => `<span class="tag">${t}</span>`)
+                        .join("")}</div>`
                     : ""
                 }
-                <span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full flex items-center">
-                  <i class="fas fa-star mr-1"></i> ${project.stargazers_count}
-                </span>
               </div>
-            </div>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-              ${project.description || "Açıklama bulunamadı"}
-            </p>
-            <div class="flex space-x-3">
-              <a href="${
-                project.html_url
-              }" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 flex items-center">
-                <i class="fab fa-github mr-1"></i>
-                <span data-tr="projects.view" data-en="View Code">
-                  ${currentLang === "tr" ? "Kodu Gör" : "View Code"}
-                </span>
-              </a>
-            </div>
-          </div>
-        `
+            </div>`;
+          })
+          .join("");
+        document.getElementById("experienceContainer").innerHTML = html;
+      }
+
+      function renderEducation() {
+        const html = state.data.education
+          .map(
+            (e) => `
+            <div class="card glass rounded-2xl p-5">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-accent-500/10 border border-accent-500/20 flex items-center justify-center text-accent-400 shrink-0">
+                  <i class="fas fa-graduation-cap text-sm"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+                    <h3 class="text-base font-semibold text-white">${e.degree[state.lang]}</h3>
+                    <span class="text-xs font-mono text-white/40">${e.period}</span>
+                  </div>
+                  <p class="text-accent-400 text-sm mb-1">${e.school}</p>
+                  <p class="text-white/50 text-xs">${e.location || ""}</p>
+                </div>
+              </div>
+            </div>`
+          )
+          .join("");
+        document.getElementById("educationContainer").innerHTML = html;
+      }
+
+      function renderCertificates() {
+        const html = state.data.certificates
+          .map(
+            (c) => `
+            <div class="card glass rounded-2xl p-5 group">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 shrink-0">
+                  <i class="fas fa-certificate text-sm"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+                    <h3 class="text-sm font-semibold text-white leading-snug">${c.name[state.lang]}</h3>
+                    <span class="text-xs font-mono text-white/40 shrink-0">${c.year}</span>
+                  </div>
+                  <p class="text-accent-400 text-xs">${c.issuer}</p>
+                </div>
+              </div>
+            </div>`
+          )
+          .join("");
+        document.getElementById("certificatesContainer").innerHTML = html;
+      }
+
+      async function renderProjects() {
+        const container = document.getElementById("projectsContainer");
+        try {
+          const projects = await fetchGitHubProjects();
+          const top = projects
+            .filter((p) => !p.fork)
+            .sort((a, b) => b.stargazers_count - a.stargazers_count || new Date(b.pushed_at) - new Date(a.pushed_at))
+            .slice(0, 9);
+
+          if (top.length === 0) {
+            container.innerHTML = `<p class="col-span-full text-center text-white/40">${
+              state.lang === "tr" ? "Proje bulunamadı." : "No projects found."
+            }</p>`;
+            return;
+          }
+
+          container.innerHTML = top
+            .map(
+              (p) => `
+            <a href="${p.html_url}" target="_blank" rel="noopener"
+               class="card glass rounded-2xl p-6 group spotlight block">
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-accent-500/20 to-purple-500/20 border border-white/5 flex items-center justify-center text-accent-400">
+                  <i class="fab fa-github text-lg"></i>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-mono text-white/40">
+                  <i class="fas fa-star text-yellow-400/80"></i>
+                  ${p.stargazers_count}
+                </div>
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2 truncate group-hover:text-accent-400 transition-colors">${p.name}</h3>
+              <p class="text-sm text-white/50 line-clamp-2 mb-4 min-h-[2.5rem]">
+                ${p.description || (state.lang === "tr" ? "Açıklama bulunmuyor." : "No description.")}
+              </p>
+              <div class="flex items-center justify-between">
+                ${
+                  p.language
+                    ? `<span class="tag">${p.language}</span>`
+                    : "<span></span>"
+                }
+                <i class="fas fa-arrow-up-right-from-square text-xs text-white/30 group-hover:text-accent-400 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"></i>
+              </div>
+            </a>`
             )
             .join("");
-        } catch (error) {
-          console.error("Projeler yüklenirken hata oluştu:", error);
-          container.innerHTML = `<p class="text-red-500">GitHub projeleri yüklenemedi.</p>`;
+        } catch (err) {
+          console.error("Projects load error:", err);
+          container.innerHTML = `<p class="col-span-full text-center text-white/40">${
+            state.lang === "tr"
+              ? "Projeler yüklenemedi. GitHub'da görüntüleyin."
+              : "Couldn't load projects. View on GitHub."
+          }</p>`;
         }
       }
 
       async function fetchGitHubProjects() {
-        const username = "BeratARPA";
-        const response = await fetch(
-          `https://api.github.com/users/${username}/repos?per_page=100`
+        const CACHE_KEY = "gh_projects_v1";
+        const TTL = 60 * 60 * 1000; // 1h
+        try {
+          const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || "null");
+          if (cached && Date.now() - cached.ts < TTL) {
+            return cached.data;
+          }
+        } catch (e) {}
+
+        const res = await fetch(
+          "https://api.github.com/users/BeratARPA/repos?per_page=100&sort=updated"
         );
-        const data = await response.json();
+        if (!res.ok) throw new Error("GitHub API: " + res.status);
+        const data = await res.json();
+        try {
+          localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({ ts: Date.now(), data })
+          );
+        } catch (e) {}
         return Array.isArray(data) ? data : [];
       }
 
-      // Render contact info
       function renderContact() {
-        const { contact, social } = portfolioData;
-
-        // Contact info
-        const contactContainer = document.getElementById("contactInfo");
-        contactContainer.innerHTML = `
-                <div class="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-phone text-blue-600"></i>
-                    <span>${contact.phone}</span>
-                </div>
-                <div class="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-envelope text-blue-600"></i>
-                    <span>${contact.email}</span>
-                </div>
-                <div class="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-globe text-blue-600"></i>
-                    <span>${contact.website}</span>
-                </div>
-                <div class="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-map-marker-alt text-blue-600"></i>
-                    <span>${contact.location}</span>
-                </div>
+        const { contact } = state.data;
+        const loc =
+          typeof contact.location === "string"
+            ? contact.location
+            : contact.location[state.lang];
+        const items = [
+          {
+            icon: "fa-phone",
+            label: state.lang === "tr" ? "Telefon" : "Phone",
+            value: contact.phone,
+            href: `tel:${contact.phone.replace(/\s/g, "")}`,
+          },
+          {
+            icon: "fa-envelope",
+            label: "Email",
+            value: contact.email,
+            href: `mailto:${contact.email}`,
+          },
+          {
+            icon: "fa-globe",
+            label: state.lang === "tr" ? "Site" : "Website",
+            value: contact.website,
+            href: `https://${contact.website}`,
+          },
+          {
+            icon: "fa-map-marker-alt",
+            label: state.lang === "tr" ? "Konum" : "Location",
+            value: loc,
+            href: null,
+          },
+        ];
+        document.getElementById("contactInfo").innerHTML = items
+          .map((i) => {
+            const isGreen = i.accent === "green";
+            const tone = isGreen
+              ? "bg-green-500/10 border-green-500/20 text-green-400"
+              : "bg-accent-500/10 border-accent-500/20 text-accent-400";
+            const iconClass = i.iconClass || "fas";
+            return `
+            ${
+              i.href
+                ? `<a href="${i.href}" target="_blank" rel="noopener" class="card glass rounded-2xl p-5 flex items-center gap-4 group">`
+                : `<div class="card glass rounded-2xl p-5 flex items-center gap-4">`
+            }
+              <div class="w-11 h-11 rounded-xl ${tone} border flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i class="${iconClass} ${i.icon}"></i>
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-white/40 mb-0.5">${i.label}</div>
+                <div class="text-white font-medium truncate">${i.value}</div>
+              </div>
+              ${i.href ? `</a>` : `</div>`}
             `;
-
-        // Social links
-        const socialContainer = document.getElementById("socialLinks");
-        socialContainer.innerHTML = social
-          .map(
-            (link) => `
-                <a href="${link.url}" target="_blank" class="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-600 hover:text-white transition-colors">
-                    <i class="${link.icon}"></i>
-                </a>
-            `
-          )
+          })
           .join("");
       }
 
-      // Download CV function
-      function downloadCV() {
-        const cvFile = portfolioData.personal.cv[currentLang];
-        const link = document.createElement("a");
-        link.href = cvFile;
-        link.download = `Berat_ARPA_CV_${currentLang.toUpperCase()}.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      function renderSocial() {
+        const html = state.data.social
+          .map(
+            (s) => `
+            <a href="${s.url}" target="_blank" rel="noopener"
+               class="magnetic w-12 h-12 rounded-full glass flex items-center justify-center text-white/60 hover:text-white hover:border-accent-500/40 transition-colors"
+               aria-label="${s.name}">
+              <i class="${s.icon}"></i>
+            </a>`
+          )
+          .join("");
+        document.getElementById("socialLinks").innerHTML = html;
       }
 
-      // Add loading animation
-      window.addEventListener("load", function () {
-        document.body.classList.add("loaded");
-      });
-
-      // Typing animation
-      function typeWriter(element, text, speed = 100) {
-        let i = 0;
-        element.innerHTML = "";
-        element.style.width = "0";
-
-        function type() {
-          if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-          } else {
-            element.style.width = "auto";
-          }
-        }
-
-        type();
-      }
-
-      // Intersection Observer for animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
-        });
-      }, observerOptions);
-
-      // Observe elements for animation
-      document.addEventListener("DOMContentLoaded", function () {
-        const animatedElements = document.querySelectorAll(".card-hover");
-        animatedElements.forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(20px)";
-          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-          observer.observe(el);
-        });
-      });
-
-      // Add animation starter function
-      function startAnimations() {
-        // Start typing animation for hero section
-        setTimeout(() => {
-          const typingElement = document.getElementById("typingText");
-          const text = portfolioData.personal.title[currentLang];
-          typeWriter(typingElement, text, 150);
-        }, 1000);
-      }
-
-      // Show/hide scroll to top button
-      window.addEventListener("scroll", function () {
-        // Handle navbar background
-        const navbar = document.getElementById("navbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("bg-white/95", "dark:bg-gray-900/95");
-          navbar.classList.remove("bg-white/90", "dark:bg-gray-900/90");
-        } else {
-          navbar.classList.add("bg-white/90", "dark:bg-gray-900/90");
-          navbar.classList.remove("bg-white/95", "dark:bg-gray-900/95");
-        }
-
-        // Handle scroll to top button
-        if (window.scrollY > 300) {
-          if (!document.querySelector(".scroll-top")) {
-            const scrollTop = document.createElement("button");
-            scrollTop.className =
-              "scroll-top fixed bottom-8 right-8 w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 z-40";
-            scrollTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-            scrollTop.onclick = scrollToTop;
-            document.body.appendChild(scrollTop);
-          }
-        } else {
-          const existingButton = document.querySelector(".scroll-top");
-          if (existingButton) {
-            existingButton.remove();
-          }
-        }
-      });
-
-      // Smooth scroll to top
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
+      /* ============================================================
+       * STATIC TEXT UPDATE
+       * ============================================================ */
+      function updateStaticTexts() {
+        document.querySelectorAll("[data-tr][data-en]").forEach((el) => {
+          const txt = el.getAttribute("data-" + state.lang);
+          if (txt) el.textContent = txt;
         });
       }
 
-      // Add custom CSS for loading animation
-      const loadingStyles = `
-            <style>
-                body:not(.loaded) #home {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                
-                body.loaded #home {
-                    opacity: 1;
-                    transform: translateY(0);
-                    transition: opacity 1s ease, transform 1s ease;
-                }
-                
-                .skill-bar {
-                    animation-delay: 0.5s;
-                    animation-fill-mode: both;
-                }
-                
-                @media (max-width: 768px) {
-                    .typing-animation {
-                        font-size: 1.25rem;
-                    }
-                    
-                    .container {
-                        padding-left: 1rem;
-                        padding-right: 1rem;
-                    }
-                }
-                
-                /* Custom scrollbar */
-                ::-webkit-scrollbar {
-                    width: 8px;
-                }
-                
-                ::-webkit-scrollbar-track {
-                    background: #f1f1f1;
-                }
-                
-                .dark ::-webkit-scrollbar-track {
-                    background: #374151;
-                }
-                
-                ::-webkit-scrollbar-thumb {
-                    background: #888;
-                    border-radius: 4px;
-                }
-                
-                ::-webkit-scrollbar-thumb:hover {
-                    background: #555;
-                }
-                
-                .dark ::-webkit-scrollbar-thumb {
-                    background: #6b7280;
-                }
-                
-                .dark ::-webkit-scrollbar-thumb:hover {
-                    background: #9ca3af;
-                }
-            </style>
-        `;
+      /* ============================================================
+       * LANG / THEME
+       * ============================================================ */
+      function applyLang(lang, silent) {
+        state.lang = lang;
+        document.documentElement.lang = lang;
+        localStorage.setItem("language", lang);
+        const btn = document.getElementById("langText");
+        if (btn) btn.textContent = lang === "tr" ? "EN" : "TR";
+        const btnMobile = document.querySelector(".mobile-lang-text");
+        if (btnMobile) btnMobile.textContent = lang === "tr" ? "EN" : "TR";
+        if (!silent) renderAll();
+      }
 
-      document.head.insertAdjacentHTML("beforeend", loadingStyles);
-
-       (function () {
-    emailjs.init({
-      publicKey: "Fo7vBbMCWdic4Sge_",
-    });
-  })();
-
-  window.onload = function () {
-    document
-      .getElementById("contact-form")
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        emailjs.sendForm("service_yw336er", "template_ugvsp1h", this).then(
-          () => {
-            this.reset(); // formu temizle
-            alert("Mesaj başarıyla gönderildi.");
-          },
-          (error) => {
-            console.error("Mesaj gönderilemedi:", error);
-            alert("Gönderim sırasında hata oluştu.");
-          }
+      function toggleLang() {
+        withViewTransition(() =>
+          applyLang(state.lang === "tr" ? "en" : "tr")
         );
-      });
-  };
+      }
 
-   document.addEventListener("DOMContentLoaded", () => {
-    const section = document.getElementById("home");
-    const starCount = window.innerWidth < 768 ? 150 : 500;
+      function applyTheme(theme, silent) {
+        state.theme = theme;
+        const html = document.documentElement;
+        if (theme === "light") {
+          html.classList.remove("dark");
+          html.classList.add("light");
+        } else {
+          html.classList.remove("light");
+          html.classList.add("dark");
+        }
+        localStorage.setItem("theme", theme);
 
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement("div");
-      star.classList.add("star");
+        document.querySelectorAll(".dark-icon, .mobile-dark-icon").forEach((i) =>
+          i.classList.toggle("hidden", theme === "light")
+        );
+        document.querySelectorAll(".light-icon, .mobile-light-icon").forEach((i) =>
+          i.classList.toggle("hidden", theme === "dark")
+        );
 
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      const size = Math.random() * 2 + 0.5;
-      const duration = Math.random() * 5 + 3;
-      const delay = Math.random() * 5;
+        // Update meta theme color
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = theme === "light" ? "#fafafa" : "#0a0a0f";
+      }
 
-      star.style.left = `${x}px`;
-      star.style.top = `${y}px`;
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-      star.style.animationDuration = `${duration}s`;
-      star.style.animationDelay = `${delay}s`;
+      function toggleTheme() {
+        withViewTransition(() =>
+          applyTheme(state.theme === "dark" ? "light" : "dark")
+        );
+      }
 
-      section.appendChild(star);
-    }
-  });
+      /* View Transitions API wrapper — graceful fallback for older browsers */
+      function withViewTransition(fn) {
+        if (
+          !document.startViewTransition ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          fn();
+          return;
+        }
+        document.startViewTransition(fn);
+      }
+
+      /* ============================================================
+       * STARS + SHOOTING STARS
+       * ============================================================ */
+      function initStars() {
+        const layer = document.getElementById("starsLayer");
+        if (!layer) return;
+        layer.innerHTML = "";
+        const isMobile = window.innerWidth < 768;
+        const count = isMobile ? 70 : 180;
+        const h = layer.offsetHeight || window.innerHeight;
+        const w = layer.offsetWidth || window.innerWidth;
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < count; i++) {
+          const star = document.createElement("div");
+          const size = Math.random() * 2 + 0.4;
+          const isBright = Math.random() > 0.85;
+          if (isBright) star.classList.add("star", "bright");
+          else star.classList.add("star");
+          const minOp = Math.random() * 0.2 + 0.1;
+          const maxOp = isBright
+            ? Math.random() * 0.2 + 0.8
+            : Math.random() * 0.3 + 0.5;
+          star.style.cssText = `
+            left:${Math.random() * w}px;
+            top:${Math.random() * h}px;
+            width:${size}px;
+            height:${size}px;
+            --min-op:${minOp};
+            --max-op:${maxOp};
+            --dur:${(Math.random() * 4 + 3).toFixed(2)}s;
+            --delay:${(Math.random() * 6).toFixed(2)}s;
+          `;
+          frag.appendChild(star);
+        }
+        layer.appendChild(frag);
+        startShootingStars(layer);
+      }
+
+      let shootingStarTimer;
+      function startShootingStars(layer) {
+        clearTimeout(shootingStarTimer);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        function spawn() {
+          const w = layer.offsetWidth || window.innerWidth;
+          const h = layer.offsetHeight || window.innerHeight;
+          const star = document.createElement("div");
+          star.className = "shooting-star";
+
+          // Random direction in any 360° angle — space has no up/down
+          const angleDeg = Math.random() * 360;
+          const angleRad = (angleDeg * Math.PI) / 180;
+
+          // Size variation — most are tiny, occasionally a big bright one
+          const sizeFactor = Math.pow(Math.random(), 1.8); // strong bias to smaller
+          const len = 60 + sizeFactor * 320; // 60 → 380 px
+          const thickness = 0.6 + sizeFactor * 1.6; // 0.6 → 2.2 px
+          const headSize = 2 + sizeFactor * 5; // 2 → 7 px
+
+          // Travel distance along the meteor's own axis (positive = forward)
+          const distance =
+            500 + sizeFactor * 600 + Math.random() * 250; // ~500 → 1350 px
+
+          // Start position — biased opposite of travel direction
+          // so the meteor enters from one edge and exits the other
+          const dxSign = Math.cos(angleRad);
+          const dySign = Math.sin(angleRad);
+          const startX =
+            dxSign > 0
+              ? Math.random() * (w * 0.4)
+              : w * 0.6 + Math.random() * (w * 0.4);
+          const startY =
+            dySign > 0
+              ? Math.random() * (h * 0.4)
+              : h * 0.6 + Math.random() * (h * 0.4);
+
+          // Duration — smaller go faster, bigger linger a bit
+          const dur = (1.4 + sizeFactor * 1.0 + Math.random() * 0.4).toFixed(2);
+
+          star.style.cssText = `
+            left:${startX}px;
+            top:${startY}px;
+            --angle:${angleDeg}deg;
+            --distance:${distance}px;
+            --len:${len}px;
+            --thickness:${thickness}px;
+            --head-size:${headSize}px;
+            --dur:${dur}s;
+          `;
+          layer.appendChild(star);
+          setTimeout(() => star.remove(), parseFloat(dur) * 1000 + 200);
+
+          // Next spawn: 5s - 12s (sparse, calm cosmic feel)
+          shootingStarTimer = setTimeout(
+            spawn,
+            Math.random() * 7000 + 5000
+          );
+        }
+
+        // First one after a short delay so the page settles
+        shootingStarTimer = setTimeout(spawn, 1500);
+      }
+
+      /* ============================================================
+       * LENIS SMOOTH SCROLL
+       * ============================================================ */
+      let lenis;
+      function initLenis() {
+        if (typeof Lenis === "undefined") return;
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Sync with ScrollTrigger
+        if (typeof ScrollTrigger !== "undefined") {
+          lenis.on("scroll", ScrollTrigger.update);
+          gsap.ticker.add((time) => lenis.raf(time * 1000));
+          gsap.ticker.lagSmoothing(0);
+        }
+
+        // Anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const targetId = a.getAttribute("href");
+            if (targetId.length > 1) {
+              e.preventDefault();
+              const target = document.querySelector(targetId);
+              if (target) lenis.scrollTo(target, { offset: -80 });
+            }
+          });
+        });
+      }
+
+      /* ============================================================
+       * CUSTOM CURSOR — instant follow, rAF-throttled, GPU transform
+       * ============================================================ */
+      function initCursor() {
+        if (window.matchMedia("(hover: none)").matches) return;
+        if (window.innerWidth < 1024) return;
+
+        const dot = document.getElementById("cursorDot");
+        const ring = document.getElementById("cursorRing");
+        if (!dot || !ring) return;
+
+        let mx = window.innerWidth / 2;
+        let my = window.innerHeight / 2;
+        let pending = false;
+
+        document.addEventListener(
+          "mousemove",
+          (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            if (!pending) {
+              pending = true;
+              requestAnimationFrame(() => {
+                const tr = `translate3d(${mx}px, ${my}px, 0)`;
+                dot.style.transform = tr;
+                ring.style.transform = tr;
+                pending = false;
+              });
+            }
+          },
+          { passive: true }
+        );
+
+        const interactiveSel =
+          "a, button, [role='button'], input, textarea, .card";
+        document.addEventListener("mouseover", (e) => {
+          if (e.target.closest(interactiveSel)) {
+            ring.classList.add("active");
+            dot.classList.add("active");
+          }
+        });
+        document.addEventListener("mouseout", (e) => {
+          if (e.target.closest(interactiveSel)) {
+            ring.classList.remove("active");
+            dot.classList.remove("active");
+          }
+        });
+      }
+
+      /* ============================================================
+       * SPOTLIGHT: per-element local cursor coords (no global repaint)
+       * ============================================================ */
+      function initSpotlight() {
+        if (window.matchMedia("(hover: none)").matches) return;
+        document.querySelectorAll(".spotlight").forEach((el) => {
+          let rect = null;
+          let pending = false;
+          let lx = 0,
+            ly = 0;
+
+          el.addEventListener(
+            "mouseenter",
+            () => {
+              rect = el.getBoundingClientRect();
+            },
+            { passive: true }
+          );
+          el.addEventListener(
+            "mousemove",
+            (e) => {
+              if (!rect) rect = el.getBoundingClientRect();
+              lx = e.clientX - rect.left;
+              ly = e.clientY - rect.top;
+              if (!pending) {
+                pending = true;
+                requestAnimationFrame(() => {
+                  el.style.setProperty("--mx", lx + "px");
+                  el.style.setProperty("--my", ly + "px");
+                  pending = false;
+                });
+              }
+            },
+            { passive: true }
+          );
+        });
+      }
+
+      /* ============================================================
+       * SCROLL PROGRESS
+       * ============================================================ */
+      function initScrollProgress() {
+        const bar = document.getElementById("scrollProgress");
+        let pending = false;
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (pending) return;
+            pending = true;
+            requestAnimationFrame(() => {
+              const total = document.body.scrollHeight - window.innerHeight;
+              const p = total > 0 ? window.scrollY / total : 0;
+              bar.style.transform = `scaleX(${p})`;
+              pending = false;
+            });
+          },
+          { passive: true }
+        );
+      }
+
+      /* ============================================================
+       * GSAP ANIMATIONS
+       * ============================================================ */
+      function initAnimations() {
+        if (typeof gsap === "undefined") return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero reveal staggered
+        gsap.from(".hero-reveal", {
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.12,
+          delay: 0.2,
+        });
+
+        // Section reveals
+        gsap.utils.toArray(".reveal").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 40, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+        gsap.utils.toArray(".reveal-x-l").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { x: -40, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+            }
+          );
+        });
+        gsap.utils.toArray(".reveal-x-r").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { x: 40, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+            }
+          );
+        });
+
+        // Timeline items stagger
+        gsap.utils.toArray(".timeline-item").forEach((el, i) => {
+          gsap.fromTo(
+            el,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+
+        // Hero parallax
+        gsap.to(".orb", {
+          y: -100,
+          scrollTrigger: {
+            trigger: "#home",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        // Stats counter
+        document.querySelectorAll("[data-counter]").forEach((el) => {
+          const raw = el.dataset.counter;
+          const num = parseInt(raw);
+          if (isNaN(num)) return;
+          const suffix = raw.replace(num, "");
+          const obj = { v: 0 };
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 90%",
+            once: true,
+            onEnter: () => {
+              gsap.to(obj, {
+                v: num,
+                duration: 2,
+                ease: "power2.out",
+                onUpdate: () => {
+                  el.textContent = Math.round(obj.v) + suffix;
+                },
+              });
+            },
+          });
+        });
+      }
+
+      /* ============================================================
+       * EVENTS
+       * ============================================================ */
+      function bindEvents() {
+        // Lang
+        document.getElementById("langToggle").addEventListener("click", toggleLang);
+        const langMobile = document.getElementById("langToggleMobile");
+        if (langMobile) langMobile.addEventListener("click", toggleLang);
+
+        // Theme
+        document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+        const themeMobile = document.getElementById("themeToggleMobile");
+        if (themeMobile) themeMobile.addEventListener("click", toggleTheme);
+
+        // Mobile menu
+        const menuBtn = document.getElementById("mobileMenuBtn");
+        const menu = document.getElementById("mobileMenu");
+        menuBtn.addEventListener("click", () => {
+          const open = !menu.classList.contains("hidden");
+          if (open) {
+            menu.style.opacity = "0";
+            setTimeout(() => menu.classList.add("hidden"), 400);
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          } else {
+            menu.classList.remove("hidden");
+            requestAnimationFrame(() => (menu.style.opacity = "1"));
+            menuBtn.innerHTML = '<i class="fas fa-xmark"></i>';
+          }
+        });
+        document.querySelectorAll(".mobile-link").forEach((l) =>
+          l.addEventListener("click", () => {
+            menu.style.opacity = "0";
+            setTimeout(() => menu.classList.add("hidden"), 400);
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          })
+        );
+
+        // CV download
+        document.getElementById("downloadCV").addEventListener("click", (e) => {
+          e.preventDefault();
+          const file = state.data.personal.cv[state.lang];
+          const a = document.createElement("a");
+          a.href = file;
+          a.download = `Berat_ARPA_CV_${state.lang.toUpperCase()}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+
+        // Skill filters
+        document.getElementById("skillFilters").addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-filter]");
+          if (!btn) return;
+          document
+            .querySelectorAll("#skillFilters .chip")
+            .forEach((c) => c.classList.remove("active"));
+          btn.classList.add("active");
+          state.skillFilter = btn.dataset.filter;
+          renderSkills();
+        });
+
+        // Magnetic buttons (rAF-throttled)
+        if (!window.matchMedia("(hover: none)").matches) {
+          document.querySelectorAll(".magnetic").forEach((el) => {
+            let rect = null;
+            let pending = false;
+            let tx = 0,
+              ty = 0;
+
+            el.addEventListener(
+              "mouseenter",
+              () => {
+                rect = el.getBoundingClientRect();
+              },
+              { passive: true }
+            );
+            el.addEventListener(
+              "mousemove",
+              (e) => {
+                if (!rect) rect = el.getBoundingClientRect();
+                tx = (e.clientX - rect.left - rect.width / 2) * 0.15;
+                ty = (e.clientY - rect.top - rect.height / 2) * 0.25;
+                if (!pending) {
+                  pending = true;
+                  requestAnimationFrame(() => {
+                    el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+                    pending = false;
+                  });
+                }
+              },
+              { passive: true }
+            );
+            el.addEventListener("mouseleave", () => {
+              el.style.transform = "";
+              rect = null;
+            });
+          });
+        }
+      }
+
+      /* ============================================================
+       * TYPING
+       * ============================================================ */
+      let typingTimeout;
+      function startTyping(text) {
+        clearTimeout(typingTimeout);
+        const el = document.getElementById("typingText");
+        if (!el) return;
+        el.textContent = "";
+        let i = 0;
+        function step() {
+          if (i <= text.length) {
+            el.textContent = text.slice(0, i);
+            i++;
+            typingTimeout = setTimeout(step, 90);
+          }
+        }
+        step();
+      }
+
+      /* ============================================================
+       * TOAST NOTIFICATION
+       * ============================================================ */
+      let toastTimer;
+      function showToast(msg, emoji = "🎉") {
+        const t = document.getElementById("toast");
+        if (!t) return;
+        document.getElementById("toastMsg").textContent = msg;
+        document.getElementById("toastEmoji").textContent = emoji;
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 4500);
+      }
+
+      /* ============================================================
+       * EASTER EGG — Konami code
+       * ============================================================ */
+      function initKonami() {
+        const seq = [
+          "arrowup",
+          "arrowup",
+          "arrowdown",
+          "arrowdown",
+          "arrowleft",
+          "arrowright",
+          "arrowleft",
+          "arrowright",
+          "b",
+          "a",
+        ];
+        let idx = 0;
+        window.addEventListener("keydown", (e) => {
+          const k = e.key.toLowerCase();
+          if (k === seq[idx]) {
+            idx++;
+            if (idx === seq.length) {
+              idx = 0;
+              triggerSecretMode();
+            }
+          } else {
+            idx = k === seq[0] ? 1 : 0;
+          }
+        });
+      }
+
+      function triggerSecretMode() {
+        // Meteor burst — 12 fast meteors from all directions
+        const layer = document.getElementById("starsLayer");
+        if (layer) {
+          const w = layer.offsetWidth || window.innerWidth;
+          const h = layer.offsetHeight || window.innerHeight;
+          for (let i = 0; i < 12; i++) {
+            setTimeout(() => {
+              const star = document.createElement("div");
+              star.className = "shooting-star";
+              const angle = (i * 30) + Math.random() * 20;
+              const dist = 800 + Math.random() * 400;
+              const startX = Math.random() * w;
+              const startY = Math.random() * h * 0.5;
+              const dur = 0.8 + Math.random() * 0.4;
+              star.style.cssText = `
+                left:${startX}px;
+                top:${startY}px;
+                --angle:${angle}deg;
+                --distance:${dist}px;
+                --len:${250 + Math.random() * 150}px;
+                --thickness:2px;
+                --head-size:7px;
+                --dur:${dur}s;
+              `;
+              layer.appendChild(star);
+              setTimeout(() => star.remove(), dur * 1000 + 200);
+            }, i * 80);
+          }
+        }
+
+        const msg =
+          state.lang === "tr"
+            ? "Konami Master! Sen de eski okul developer'sın 🥷"
+            : "Konami Master unlocked! Old-school dev detected 🥷";
+        showToast(msg, "🎮");
+      }
+
+      /* ============================================================
+       * CONSOLE EASTER EGG (devs only)
+       * ============================================================ */
+      function initConsoleEgg() {
+        try {
+          const big = "color:#5b73f5;font-size:24px;font-weight:bold;";
+          const sub = "color:#a78bfa;font-size:13px;";
+          const mono = "color:#0aff8a;font-family:monospace;font-size:12px;";
+          console.log("%c👋 Hey, developer!", big);
+          console.log(
+            "%cLiked the site? Let's build something together.",
+            sub
+          );
+          console.log(
+            "%c→ beratarpa@hotmail.com\n→ github.com/BeratARPA\n→ Try the Konami code 😉",
+            mono
+          );
+        } catch (e) {}
+      }
+
+      /* ============================================================
+       * EMAILJS
+       * ============================================================ */
+      function initEmailJS() {
+        if (typeof emailjs === "undefined") return;
+        emailjs.init({ publicKey: "Fo7vBbMCWdic4Sge_" });
+        const form = document.getElementById("contact-form");
+        const btn = document.getElementById("submitBtn");
+        const btnText = document.getElementById("submitText");
+        const feedback = document.getElementById("formFeedback");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          btn.disabled = true;
+          const originalText = btnText.textContent;
+          btnText.textContent =
+            state.lang === "tr" ? "Gönderiliyor..." : "Sending...";
+          feedback.textContent = "";
+          feedback.className = "text-sm text-center min-h-[20px]";
+
+          emailjs.sendForm("service_yw336er", "template_ugvsp1h", form).then(
+            () => {
+              form.reset();
+              feedback.textContent =
+                state.lang === "tr"
+                  ? "Mesajınız başarıyla iletildi. Teşekkürler!"
+                  : "Your message has been sent successfully. Thanks!";
+              feedback.classList.add("text-green-400");
+              btn.disabled = false;
+              btnText.textContent = originalText;
+            },
+            (err) => {
+              console.error("EmailJS error:", err);
+              feedback.textContent =
+                state.lang === "tr"
+                  ? "Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin."
+                  : "An error occurred. Please try again.";
+              feedback.classList.add("text-red-400");
+              btn.disabled = false;
+              btnText.textContent = originalText;
+            }
+          );
+        });
+      }
     </script>
   </body>
 </html>

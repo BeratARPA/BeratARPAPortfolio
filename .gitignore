@@ -1,0 +1,12 @@
+# Local tooling / IDE
+.claude/
+.vs/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
