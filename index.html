@@ -1162,6 +1162,9 @@
             src="https://ghchart.rshah.org/5b73f5/BeratARPA"
             alt="Berat ARPA — GitHub Contribution Heatmap"
             class="w-full h-auto"
+            style="aspect-ratio: 53/8;"
+            width="718"
+            height="108"
             loading="lazy"
           />
           <p class="text-center text-xs font-mono text-white/40 mt-4">
@@ -1268,9 +1271,15 @@
 
         <div
           id="projectsContainer"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 min-h-[720px]"
         >
-          <!-- Skeleton loader -->
+          <!-- Skeleton loaders match real render count (9) to prevent CLS -->
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
+          <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
           <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
           <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
           <div class="glass rounded-2xl p-6 h-56 animate-pulse"></div>
@@ -1298,7 +1307,7 @@
 
         <div class="grid lg:grid-cols-5 gap-8">
           <!-- Contact Info -->
-          <div class="lg:col-span-2 space-y-3 reveal-x-l" id="contactInfo"></div>
+          <div class="lg:col-span-2 space-y-3 reveal-x-l min-h-[360px]" id="contactInfo"></div>
 
           <!-- Contact Form -->
           <form id="contact-form" class="lg:col-span-3 glass-strong rounded-3xl p-8 reveal-x-r space-y-5">
