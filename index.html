@@ -679,6 +679,9 @@
       /* Magnetic button container */
       .magnetic {
         transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
       }
 
       /* Timeline connector */
@@ -1031,9 +1034,9 @@
       class="relative min-h-screen flex items-center justify-center overflow-hidden bg-mesh pt-28 pb-20 md:pt-32 md:pb-24"
     >
       <!-- Background orbs -->
-      <div class="orb w-[500px] h-[500px] bg-accent-500/40 top-[10%] -left-32" style="animation-delay: 0s"></div>
-      <div class="orb w-[400px] h-[400px] bg-purple-500/40 bottom-[10%] -right-20" style="animation-delay: 2s"></div>
-      <div class="orb w-[300px] h-[300px] bg-pink-500/30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-delay: 4s"></div>
+      <div class="orb w-[500px] h-[500px] bg-accent-500/40 top-[10vh] -left-32" style="animation-delay: 0s"></div>
+      <div class="orb w-[400px] h-[400px] bg-purple-500/40 bottom-[10vh] -right-20" style="animation-delay: 2s"></div>
+      <div class="orb w-[300px] h-[300px] bg-pink-500/30 top-[50vh] left-1/2 -translate-x-1/2 -translate-y-1/2" style="animation-delay: 4s"></div>
 
       <!-- Stars layer -->
       <div id="starsLayer" class="absolute inset-0 pointer-events-none"></div>
