@@ -1108,11 +1108,11 @@
                   loading="eager"
                 />
               </div>
-              <!-- Floating badge with live clock + online status -->
+              <!-- Floating badge with live clock + online status (JS-driven, no data-* override) -->
               <div class="absolute -bottom-2 -right-2 glass-strong rounded-full px-4 py-2 flex items-center gap-2 text-sm whitespace-nowrap">
                 <span id="liveStatusDot" class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 <span class="font-medium">
-                  <span id="liveStatusLabel" data-tr="Çalışmaya açık" data-en="Available for work">Çalışmaya açık</span>
+                  <span id="liveStatusLabel">Çalışmaya açık</span>
                   <span class="text-white/40 mx-1">·</span>
                   <span class="font-mono text-xs" id="liveClock">--:--</span>
                 </span>
@@ -1432,49 +1432,50 @@
       /* ============================================================
        * LIVE CLOCK + ONLINE STATUS (Ankara timezone)
        * ============================================================ */
-      function startLiveClock() {
+      let liveClockTimer;
+      function tickLiveClock() {
         const clockEl = document.getElementById("liveClock");
         const dotEl = document.getElementById("liveStatusDot");
         const labelEl = document.getElementById("liveStatusLabel");
         if (!clockEl) return;
 
-        function tick() {
-          const now = new Date();
-          const tz = "Europe/Istanbul";
-          const hh = new Intl.DateTimeFormat("tr-TR", {
+        const now = new Date();
+        const tz = "Europe/Istanbul";
+        const hh = new Intl.DateTimeFormat("tr-TR", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+          timeZone: tz,
+        }).format(now);
+        clockEl.textContent = hh;
+
+        // Online window: 09:00 – 23:00 Ankara time
+        const hour = parseInt(
+          new Intl.DateTimeFormat("en-GB", {
             hour: "2-digit",
-            minute: "2-digit",
             hour12: false,
             timeZone: tz,
-          }).format(now);
-          clockEl.textContent = hh;
+          }).format(now),
+          10
+        );
+        const isOnline = hour >= 9 && hour < 23;
 
-          // Online window: 09:00 – 23:00 Ankara time
-          const hour = parseInt(
-            new Intl.DateTimeFormat("en-GB", {
-              hour: "2-digit",
-              hour12: false,
-              timeZone: tz,
-            }).format(now),
-            10
-          );
-          const isOnline = hour >= 9 && hour < 23;
-
-          if (dotEl) {
-            dotEl.classList.toggle("bg-green-400", isOnline);
-            dotEl.classList.toggle("bg-yellow-400", !isOnline);
-          }
-          if (labelEl) {
-            const onlineTxt =
-              state.lang === "tr" ? "Çalışmaya açık" : "Available for work";
-            const offlineTxt =
-              state.lang === "tr" ? "Şu an dışarıda" : "Currently away";
-            const newLabel = isOnline ? onlineTxt : offlineTxt;
-            if (labelEl.textContent !== newLabel) labelEl.textContent = newLabel;
-          }
+        if (dotEl) {
+          dotEl.classList.toggle("bg-green-400", isOnline);
+          dotEl.classList.toggle("bg-yellow-400", !isOnline);
         }
-        tick();
-        setInterval(tick, 30 * 1000); // every 30s
+        if (labelEl) {
+          const onlineTxt =
+            state.lang === "tr" ? "Çalışmaya açık" : "Available for work";
+          const offlineTxt =
+            state.lang === "tr" ? "Şu an dışarıda" : "Currently away";
+          labelEl.textContent = isOnline ? onlineTxt : offlineTxt;
+        }
+      }
+      function startLiveClock() {
+        tickLiveClock();
+        clearInterval(liveClockTimer);
+        liveClockTimer = setInterval(tickLiveClock, 30 * 1000);
       }
 
       /* ============================================================
@@ -1841,7 +1842,11 @@
         if (btn) btn.textContent = lang === "tr" ? "EN" : "TR";
         const btnMobile = document.querySelector(".mobile-lang-text");
         if (btnMobile) btnMobile.textContent = lang === "tr" ? "EN" : "TR";
-        if (!silent) renderAll();
+        if (!silent) {
+          renderAll();
+          // Re-sync live clock label since it's JS-driven, not data-*
+          if (typeof tickLiveClock === "function") tickLiveClock();
+        }
       }
 
       function toggleLang() {
