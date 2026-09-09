@@ -942,7 +942,12 @@
             var k = el.dataset.sd;
             if (k === "up")         el.style.transform = "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
             else if (k === "left")  el.style.transform = "translate3d(" + ((1 - p) * -60 * AMP).toFixed(1) + "px,0,0)";
-            else if (k === "right") el.style.transform = "translate3d(" + ((1 - p) * 60 * AMP).toFixed(1) + "px,0,0)";
+            else if (k === "right") {
+              /* saginda yer yoksa soldan gelsin: saga tasma sayfayi yana kaydirir,
+                 sola tasma kaydirma alani yaratmaz */
+              var dx = r.width > window.innerWidth * 0.72 ? -60 : 60;
+              el.style.transform = "translate3d(" + ((1 - p) * dx * AMP).toFixed(1) + "px,0,0)";
+            }
             else if (k === "scale") el.style.transform = "scale(" + (1 - (1 - p) * 0.1 * AMP).toFixed(3) + ")";
             else if (k === "line")  { el.style.transform = "scaleX(" + p.toFixed(3) + ")"; el.style.opacity = 1; continue; }
             else if (k === "clip")  el.style.clipPath = "inset(" + ((1 - p) * 100).toFixed(1) + "% 0 0 0)";
@@ -1165,7 +1170,7 @@
             for (var i = 0; i < kids.length; i++) {
               var q = ease(clamp((p - 0.12) / 0.74 * (kids.length + 1.4) - i, 0, 1));
               kids[i].style.opacity = (0.05 + q * 0.95).toFixed(3);
-              kids[i].style.transform = "translate3d(" + ((1 - q) * dx * AMP).toFixed(1) + "px,0,0)";
+              kids[i].style.transform = "translate3d(" + (-(1 - q) * dx * AMP).toFixed(1) + "px,0,0)";
             }
           });
         }
