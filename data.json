@@ -488,7 +488,11 @@
       "en": "Berat ARPA, software developer"
     },
     "imageW": 1420,
-    "imageH": 1420
+    "imageH": 1420,
+    "description": {
+      "tr": "İşletmeler için web, mobil ve masaüstü uygulama geliştiriyorum; sistem ve cihaz entegrasyonu kuruyorum. {startYear}'den bu yana {companies} şirkette çalıştım.",
+      "en": "I build web, mobile and desktop applications for businesses and connect systems and devices. Working in software since {startYear}, across {companies} companies."
+    }
   },
   "services": [
     {
