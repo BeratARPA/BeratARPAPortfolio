@@ -97,12 +97,6 @@
       .tg { font-family:var(--mono); font-size:10px; letter-spacing:.06em; background:none; border:1px solid var(--rule);
             color:var(--ink-2); padding:5px 8px; cursor:pointer; flex:none; white-space:nowrap; transition:border-color .2s,color .2s; }
       .tg:hover { border-color:var(--hot); color:var(--hot); }
-      .run { font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
-             color:var(--ink-3); margin-left:16px; white-space:nowrap; opacity:0;
-             transition:opacity .4s var(--ez); overflow:hidden; text-overflow:ellipsis; max-width:34vw; }
-      .run.on { opacity:1; }
-
-      /* kısa ekranlar (yatay telefon, küçük dizüstü) */
       @media (max-height:620px) and (min-width:761px) {
         .viz-cap, .sc-cap { height:clamp(48px,9vh,72px); }
         .viz-cap .t, .sc-cap .t { font-size:clamp(1.05rem,2vw,1.5rem); }
@@ -111,7 +105,6 @@
         .tl-stage { width:min(940px, 86vw, calc((100svh - 130px) * 900 / 420)); }
       }
 
-      @media (max-width:760px) { .run { font-size:9px; margin-left:10px; max-width:46vw; } }
 
       .rail { position:fixed; inset:0 0 auto 0; height:2px; background:var(--hot); transform:scaleX(0); transform-origin:0 50%; z-index:95; will-change:transform; }
 
@@ -554,7 +547,6 @@
     <header class="bar" id="bar">
       <div class="bar-in">
         <a class="sig" href="#top">Berat <i>ARPA</i></a>
-        <span class="run" id="runHead"></span>
         <nav class="nav" aria-label="Bölümler">
           <a href="#hizmet" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
           <a href="#isler" data-tr="Projeler" data-en="Projects">Projeler</a>
@@ -1333,7 +1325,7 @@
           assemble("#edu .row", ":scope > *", 22);
           updateList("#contactLines .cl2", 26);
           updateFlow(); updateTally(); updateStack(); updateRepos(); updateKit(); updateGlyphs(); updateCases();
-          updateNote(); updateTalk(); updateEdu(); updateJobAxis();
+          updateNote(); updateTalk(); updateEdu(); updateJobAxis(); updateNav();
           ticking = false;
         }
         function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(frame); }
@@ -1350,35 +1342,22 @@
           document.querySelectorAll("#jobs .row").forEach(function (r, i) { r.style.top = (70 + i * 13) + "px"; });
           layoutJobAxis();
         }
-        var CH = {
-          hizmet:   { tr:"Hizmetler",  en:"Services" },
-          akis:     { tr:"Akış",       en:"The flow" },
-          katmanlar:{ tr:"Katmanlar",  en:"Layers" },
-          ekran:    { tr:"Arayüz",     en:"Interface" },
-          isler:    { tr:"Projeler",   en:"Projects" },
-          araclar:  { tr:"Araçlarım",  en:"My tools" },
-          surec:    { tr:"Süreç",      en:"Process" },
-          yol:      { tr:"Deneyim",    en:"Experience" },
-          guven:    { tr:"Rakamlar",   en:"Numbers" },
-          iletisim: { tr:"İletişim",   en:"Contact" },
-          teknik:   { tr:"Yetkinlik",  en:"Capabilities" }
-        };
-
-        if ("IntersectionObserver" in window) {
-          var nav = document.querySelectorAll(".nav a");
-          var so = new IntersectionObserver(function (es) {
-            es.forEach(function (e) {
-              if (!e.isIntersecting) return;
-              nav.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id); });
-              var rh = document.getElementById("runHead");
-              if (rh) {
-                var c = CH[e.target.id];
-                rh.textContent = c ? (c[S.lang] || c.tr) : "";
-                rh.classList.toggle("on", !!c);
-              }
-            });
-          }, { rootMargin: "-45% 0px -50% 0px" });
-          document.querySelectorAll("main section[id]").forEach(function (s) { so.observe(s); });
+        /* menude aktif bolum: ayri bir gozlemci yerine zaten her karede donen dongu */
+        var navLinks = [].slice.call(document.querySelectorAll(".nav a"));
+        /* yalniz menude karsiligi olan bolumler; aradaki sahnelerde vurgu
+           gecilen son menu bolumunde kalir, menu hic sonmez */
+        var navSecs = navLinks.map(function (a) {
+          var h = a.getAttribute("href") || "";
+          return h.charAt(0) === "#" ? document.getElementById(h.slice(1)) : null;
+        });
+        function updateNav() {
+          var mid = window.innerHeight * 0.5, best = -1, bestTop = -Infinity;
+          for (var i = 0; i < navSecs.length; i++) {
+            if (!navSecs[i]) continue;
+            var top = navSecs[i].getBoundingClientRect().top;
+            if (top <= mid && top > bestTop) { bestTop = top; best = i; }
+          }
+          for (var k = 0; k < navLinks.length; k++) navLinks[k].classList.toggle("on", k === best);
         }
 
         /* ══ render ══ */
