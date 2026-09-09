@@ -932,6 +932,12 @@
         /* ══ genel kaydırma motoru ══ */
         var SD = [];
         function collectSD() { SD = [].slice.call(document.querySelectorAll("[data-sd]")); }
+        /* yatay giris mesafesi sayfa olugunu asmamali; yoksa oge ekran disina tasar */
+        function yatayPay(istenen) {
+          var pad = parseFloat(getComputedStyle(H).getPropertyValue("--pad")) || 20;
+          return Math.max(0, Math.min(istenen, pad - 4));
+        }
+
         function updateSD() {
           var vh = window.innerHeight;
           for (var i = 0; i < SD.length; i++) {
@@ -941,12 +947,17 @@
             var p = ease(clamp((vh * 0.96 - idx * 46 - r.top) / (vh * 0.42), 0, 1));
             var k = el.dataset.sd;
             if (k === "up")         el.style.transform = "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
-            else if (k === "left")  el.style.transform = "translate3d(" + ((1 - p) * -60 * AMP).toFixed(1) + "px,0,0)";
+            else if (k === "left")  {
+              var lx = yatayPay(60);
+              el.style.transform = lx >= 10
+                ? "translate3d(" + ((1 - p) * -lx * AMP).toFixed(1) + "px,0,0)"
+                : "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
+            }
             else if (k === "right") {
-              /* saginda yer yoksa soldan gelsin: saga tasma sayfayi yana kaydirir,
-                 sola tasma kaydirma alani yaratmaz */
-              var dx = r.width > window.innerWidth * 0.72 ? -60 : 60;
-              el.style.transform = "translate3d(" + ((1 - p) * dx * AMP).toFixed(1) + "px,0,0)";
+              var rx = yatayPay(60);
+              el.style.transform = rx >= 10
+                ? "translate3d(" + ((1 - p) * rx * AMP).toFixed(1) + "px,0,0)"
+                : "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
             }
             else if (k === "scale") el.style.transform = "scale(" + (1 - (1 - p) * 0.1 * AMP).toFixed(3) + ")";
             else if (k === "line")  { el.style.transform = "scaleX(" + p.toFixed(3) + ")"; el.style.opacity = 1; continue; }
@@ -1167,10 +1178,13 @@
             el.style.setProperty("--asm", ease(clamp(p * 2.6, 0, 1)).toFixed(3));
             el.style.setProperty("--asmo", clamp(1 - (p - 0.46) / 0.3, 0, 1).toFixed(3));
             var kids = el.querySelectorAll(partSel);
+            var ax = yatayPay(dx);
             for (var i = 0; i < kids.length; i++) {
               var q = ease(clamp((p - 0.12) / 0.74 * (kids.length + 1.4) - i, 0, 1));
               kids[i].style.opacity = (0.05 + q * 0.95).toFixed(3);
-              kids[i].style.transform = "translate3d(" + (-(1 - q) * dx * AMP).toFixed(1) + "px,0,0)";
+              kids[i].style.transform = ax >= 8
+                ? "translate3d(" + (-(1 - q) * ax * AMP).toFixed(1) + "px,0,0)"
+                : "translate3d(0," + ((1 - q) * 18 * AMP).toFixed(1) + "px,0)";
             }
           });
         }
