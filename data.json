@@ -465,12 +465,12 @@
       "tr": [
         "Yazılıma {startYear}'de stajyer olarak başladım. O günden beri masaüstü programlardan kurumsal platformlara, mobil uygulamalardan cihaz entegrasyonlarına kadar çok farklı ölçekte sistem geliştirdim; bir kısmı hâlâ her gün, gerçek işletmelerde çalışıyor.",
         "Teknik tarafı düşünmek benim işim. Sizin anlatmanız gereken tek şey ne yapmak istediğiniz; gerisini birlikte netleştiririz.",
-        "Projelere tek başıma bakıyorum. Bu yüzden aynı anda az sayıda iş alıyorum — ama aldığım işin sonuna kadar arkasındayım."
+        "Aldığım işin sahibi benim. Baştan sona tek muhatabınız olurum, işi kimseye devretmem; teslimden sonra da arkasındayım."
       ],
       "en": [
         "I started in software as an intern in {startYear}. Since then I have built systems of very different scales, from desktop software to enterprise platforms, from mobile apps to device integrations; some of them still run every day in real businesses.",
         "Thinking about the technical side is my job. All you need to describe is what you want to achieve; we work out the rest together.",
-        "I take on projects on my own. That means I work on only a few at a time, and I stand behind every one of them to the end."
+        "I own the work I take on. You have one point of contact from start to finish, I never hand it off, and I stand behind it after delivery."
       ]
     },
     "repo": "https://github.com/BeratARPA/BeratARPAPortfolio",
@@ -574,7 +574,8 @@
         "Point-of-sale and order system",
         "TZ Yazılım",
         "I brought table, delivery and customer management into one system, from order entry through the kitchen display to the end-of-day report."
-      ]
+      ],
+      "scene": "grid"
     },
     {
       "pv": "web",
@@ -593,7 +594,8 @@
         "QR menu system",
         "TZ Yazılım",
         "I built a digital menu that takes orders at the table. When the menu changes, nothing needs reprinting."
-      ]
+      ],
+      "scene": "scan"
     },
     {
       "pv": "web",
@@ -612,7 +614,8 @@
         "Ordering platform integration",
         "LiwaSoft · Innovative Software",
         "I connected three external platforms into one central service. Each had its own rules and data format; I turned them into a single shared flow. Manual entry and lost records disappeared."
-      ]
+      ],
+      "scene": "merge"
     },
     {
       "pv": "app",
@@ -640,7 +643,8 @@
         "Courier mobile app",
         "LiwaSoft",
         "A field app running on iOS and Android at once. Couriers see the order on the phone and the status reaches head office instantly. Live on both stores."
-      ]
+      ],
+      "scene": "phone"
     },
     {
       "pv": "web",
@@ -659,7 +663,8 @@
         "AI-assisted HR platform",
         "EasyHR",
         "I develop an enterprise platform that brings leave, payroll, recruitment and personnel records together in one place."
-      ]
+      ],
+      "scene": "panel"
     },
     {
       "pv": "dev",
@@ -676,7 +681,8 @@
         "Fiscal register integration",
         "TZ Yazılım",
         "I built the flow that issues the legal receipt automatically and prepares the end-of-day report. It runs inside the point-of-sale system."
-      ]
+      ],
+      "scene": "device"
     }
   ],
   "process": [
