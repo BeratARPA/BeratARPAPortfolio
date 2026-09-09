@@ -345,6 +345,17 @@
 
       .row { display:grid; grid-template-columns:clamp(140px,14vw,236px) minmax(0,1fr); gap:clamp(18px,4vw,48px); border-top:1px solid var(--rule); padding:24px 0; }
       .row:last-of-type { border-bottom:1px solid var(--rule); }
+      /* deneyim zaman ekseni: kaydirdikca cizilir, yillar sirayla yanar */
+      .jt { position:relative; display:grid; grid-template-columns:clamp(56px,6vw,96px) minmax(0,1fr); gap:clamp(12px,2vw,28px); }
+      .jt-rail { position:relative; }
+      .jt-rail::before { content:""; position:absolute; left:calc(100% - 1px); top:0; bottom:0; width:1px; background:var(--rule); }
+      .jt-fill { position:absolute; left:calc(100% - 1px); top:0; width:1px; height:0; background:var(--hot); }
+      .jt-marks { position:absolute; inset:0; }
+      .jt-mark { position:absolute; right:0; transform:translateY(-50%); display:flex; align-items:center; gap:8px;
+                 white-space:nowrap; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
+                 color:var(--ink-3); opacity:.32; transition:opacity .45s var(--ez), color .45s var(--ez); }
+      .jt-mark::after { content:""; width:9px; height:1px; background:currentColor; }
+      .jt-mark.on { opacity:1; color:var(--hot); }
       .stack .row { position:sticky; background:var(--paper); border:1px solid var(--rule); border-top:2px solid var(--ink);
                     padding:24px clamp(16px,3vw,32px); margin-bottom:14px; will-change:transform; }
       .row .when { display:flex; flex-direction:column; gap:4px; padding-top:4px; }
@@ -467,6 +478,7 @@
         .cl2 { padding:15px 0; }
         .nav { display:none; }
         .row, footer .end { grid-template-columns:1fr; gap:10px; }
+        .jt { grid-template-columns:1fr; } .jt-rail { display:none; }
         .row .when { flex-direction:row; gap:12px; padding-top:0; }
         .repo { grid-template-columns:62px 1fr; } .repo .lg { display:none; }
         .yr { width:78vw; }
@@ -715,7 +727,13 @@
               <span class="lbl" data-tr="Yetkinlik" data-en="Capabilities">Yetkinlik</span></div>
             <h2 class="h-sec" data-sd="up" data-tr="Teknik yetkinlikler ve deneyim." data-en="Technical capabilities and experience.">Teknik yetkinlikler ve deneyim.</h2>
           </div>
-          <div id="jobs" class="stack"></div>
+          <div class="jt">
+            <div class="jt-rail" aria-hidden="true">
+              <i class="jt-fill" id="jtFill"></i>
+              <div class="jt-marks" id="jtMarks"></div>
+            </div>
+            <div id="jobs" class="stack"></div>
+          </div>
           <div id="kitMount"></div>
           <div id="repos"></div>
           <div id="edu"></div>
@@ -1266,7 +1284,7 @@
           updateList("#services .srv", 40); updateList("#cases .case", 36); updateList(".step", 30);
           updateList("#contactLines .cl2", 26); updateList("#edu .row", 30);
           updateFlow(); updateTally(); updateStack(); updateRepos(); updateKit(); updateGlyphs(); updateCases();
-          updateNote(); updateTalk(); updateEdu();
+          updateNote(); updateTalk(); updateEdu(); updateJobAxis();
           ticking = false;
         }
         function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(frame); }
@@ -1281,6 +1299,7 @@
           });
           collectSD(); setupViz(); setupTools(); setupLay(); setupRoad();
           document.querySelectorAll("#jobs .row").forEach(function (r, i) { r.style.top = (70 + i * 13) + "px"; });
+          layoutJobAxis();
         }
         var CH = {
           hizmet:   { tr:"Hizmetler",  en:"Services" },
@@ -1316,7 +1335,7 @@
         /* ══ render ══ */
         function renderAll() {
           renderViz(); renderTools(); renderLayers(); renderRoad(); renderServices(); renderCases(); renderSteps();
-          if (S.data) { renderIntro(); renderNote(); renderTally(); renderJobs(); renderKit(); renderEdu(); renderContact(); }
+          if (S.data) { renderIntro(); renderNote(); renderTally(); renderJobs(); renderJobAxis(); renderKit(); renderEdu(); renderContact(); }
           renderColophon(); renderRepos(); renumber(); renderMeta(); setupAll(); onScroll();
         }
         /* {years} {companies} {repos} {stars} {packages} jetonlarını doldurur */
@@ -1500,6 +1519,48 @@
               '</p><ul class="chips"><li>' + (e.tags || []).map(esc).join("</li><li>") + "</li></ul>" + dur + "</div></article>";
           }).join("");
         }
+        /* deneyim ekseni: her isin kendi dugumu, kendi kartinin hizasinda */
+        function renderJobAxis() {
+          var marks = document.getElementById("jtMarks");
+          if (!marks) return;
+          var exp = D("experience");
+          if (!exp.length) { marks.innerHTML = ""; return; }
+          marks.innerHTML = exp.map(function (e) {
+            var per = String(t(e.period));
+            var y = (per.match(/\d{4}/) || [""])[0];
+            return '<span class="jt-mark">' + esc(y) + "</span>";
+          }).join("");
+          layoutJobAxis();
+        }
+
+        /* dugumleri kart konumlarina oturt; yerlesim degisince tekrar cagrilir */
+        function layoutJobAxis() {
+          var wrap = document.querySelector(".jt"), jobs = document.getElementById("jobs");
+          if (!wrap || !jobs) return;
+          var marks = document.querySelectorAll(".jt-mark");
+          var rows = jobs.querySelectorAll(".row");
+          var H = wrap.offsetHeight || 1;
+          for (var i = 0; i < marks.length && i < rows.length; i++) {
+            var top = rows[i].offsetTop + rows[i].offsetHeight * 0.5;
+            var pos = clamp(top / H * 100, 0, 100);
+            marks[i].style.top = pos.toFixed(2) + "%";
+            marks[i].dataset.p = pos.toFixed(2);
+          }
+        }
+
+        function updateJobAxis() {
+          var wrap = document.querySelector(".jt"), fill = document.getElementById("jtFill");
+          if (!wrap || !fill) return;
+          var r = wrap.getBoundingClientRect(), vh = window.innerHeight;
+          if (r.bottom < -120 || r.top > vh + 120) return;
+          var p = clamp((vh * 0.82 - r.top) / Math.max(1, r.height * 1.12), 0, 1);
+          fill.style.height = (p * 100).toFixed(1) + "%";
+          var pct = p * 100;
+          document.querySelectorAll(".jt-mark").forEach(function (m) {
+            m.classList.toggle("on", pct >= (+m.dataset.p || 0) - 0.4);
+          });
+        }
+
         function renderKit() {
           var G = { frontend:{tr:"Arayüz",en:"Interface"}, backend:{tr:"Servis ve iş kuralları",en:"Service and logic"},
                     database:{tr:"Veri",en:"Data"}, tools:{tr:"Araç ve altyapı",en:"Tooling and infra"} };
