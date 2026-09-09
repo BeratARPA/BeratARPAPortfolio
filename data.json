@@ -5,10 +5,6 @@
       "tr": "Full Stack Developer",
       "en": "Full Stack Developer"
     },
-    "tagline": {
-      "tr": "Modern teknolojilerle ölçeklenebilir çözümler üretiyorum",
-      "en": "Building scalable solutions with modern technologies"
-    },
     "description": {
       "tr": "C# ve .NET ekosistemi başta olmak üzere geniş bir teknoloji yelpazesinde çalışan bir yazılım geliştiricisiyim. Analitik düşünme yeteneğim ve problem çözme odaklı yaklaşımımla, karmaşık iş gereksinimlerini sürdürülebilir kod mimarisine dönüştürüyorum. Takım çalışmasında inisiyatif kullanır, sonuç odaklı ilerlerim.",
       "en": "I am a software developer specializing in C# and the .NET ecosystem, working across a wide range of technologies. With strong analytical thinking and a problem-solving mindset, I translate complex business requirements into sustainable code architectures. I take initiative in team environments and consistently deliver results."
@@ -17,25 +13,7 @@
     "cv": {
       "tr": "Resources/Berat_Arpa_FullStackDeveloper_TR_CV.pdf",
       "en": "Resources/Berat_Arpa_FullStackDeveloper_EN_CV.pdf"
-    },
-    "stats": [
-      {
-        "value": "4+",
-        "label": { "tr": "Yıl Deneyim", "en": "Years Experience" }
-      },
-      {
-        "value": "20+",
-        "label": { "tr": "Tamamlanan Proje", "en": "Projects Delivered" }
-      },
-      {
-        "value": "10+",
-        "label": { "tr": "Teknoloji", "en": "Technologies" }
-      },
-      {
-        "value": "7",
-        "label": { "tr": "Sertifika", "en": "Certificates" }
-      }
-    ]
+    }
   },
   "skills": [
     {
@@ -191,7 +169,10 @@
   ],
   "experience": [
     {
-      "title": { "tr": "Back End Developer", "en": "Back End Developer" },
+      "title": {
+        "tr": "Back End Developer",
+        "en": "Back End Developer"
+      },
       "company": "EasyHR",
       "period": {
         "tr": "10/2025 - Günümüz",
@@ -199,13 +180,21 @@
       },
       "location": "İstanbul, Türkiye",
       "description": {
-        "tr": "İnsan kaynakları yönetim süreçlerine yönelik kurumsal düzeyde bir platformun geliştirilmesinde aktif rol alıyorum. ASP.NET MVC 5 ve Razor kullanarak mevcut modüllerin iyileştirilmesi, performans optimizasyonları ve yeni özelliklerin sisteme entegrasyonu üzerinde çalışıyorum.",
-        "en": "Actively contributing to the development of an enterprise-grade Human Resources management platform. Working with ASP.NET MVC 5 and Razor to enhance existing modules, optimize performance, and integrate new features into the system."
+        "tr": "Kurumsal ölçekte bir insan kaynakları platformunu geliştiriyorum. ASP.NET MVC 5 ve Razor tarafında mevcut modülleri iyileştiriyor, performansı yükseltiyor ve yeni özellikleri sisteme ekliyorum.",
+        "en": "I develop an enterprise-scale human resources platform. On the ASP.NET MVC 5 and Razor side I improve existing modules, raise performance, and add new features to the system."
       },
-      "tags": ["ASP.NET MVC 5", "Razor", "C#", "MSSQL"]
+      "tags": [
+        "ASP.NET MVC 5",
+        "Razor",
+        "C#",
+        "MSSQL"
+      ]
     },
     {
-      "title": { "tr": "Full Stack Developer", "en": "Full Stack Developer" },
+      "title": {
+        "tr": "Full Stack Developer",
+        "en": "Full Stack Developer"
+      },
       "company": "LiwaSoft",
       "period": {
         "tr": "06/2024 - 06/2025",
@@ -213,13 +202,22 @@
       },
       "location": "Ankara, Türkiye",
       "description": {
-        "tr": "Ekip içi görev dağılımı ve koordinasyonunu yöneterek projelerin zamanında teslim edilmesini sağladım. UI/UX standartlarına uygun mobil arayüzler ve çapraz platform uygulamalar geliştirdim. Yemek Sepeti ve Getir gibi platformlarla çalışan merkezi API entegrasyonlarını tasarladım ve hayata geçirdim.",
-        "en": "Led task distribution and team coordination to ensure timely project delivery. Developed UI/UX-compliant mobile interfaces and cross-platform applications. Designed and implemented centralized API integrations powering platforms such as Yemek Sepeti and Getir."
+        "tr": "Ekipteki görev dağılımını ve koordinasyonu yönettim; projeleri zamanında teslim ettik. Mobil arayüzler ve çapraz platform uygulamalar geliştirdim. Dış platformları tek merkezden bağlayan API entegrasyonlarını tasarladım ve hayata geçirdim.",
+        "en": "I managed task distribution and coordination inside the team, and we delivered projects on time. I built mobile interfaces and cross-platform applications, and designed and shipped the central API integrations that connect external platforms from one place."
       },
-      "tags": ["C#", ".NET", "Flutter", "Web API", "MSSQL"]
+      "tags": [
+        "C#",
+        ".NET",
+        "Flutter",
+        "Web API",
+        "MSSQL"
+      ]
     },
     {
-      "title": { "tr": "Back End Developer", "en": "Back End Developer" },
+      "title": {
+        "tr": "Back End Developer",
+        "en": "Back End Developer"
+      },
       "company": "Innovative Software Company",
       "period": {
         "tr": "03/2022 - 01/2023",
@@ -227,13 +225,22 @@
       },
       "location": "Ankara, Türkiye",
       "description": {
-        "tr": "Çevrimiçi yemek sipariş platformlarıyla (Yemek Sepeti, Getir Yemek, Migros Yemek) API entegrasyonları kurarak müşterilerin sipariş yönetim süreçlerini iyileştirdim. Gerçek zamanlı sipariş akışı, durum takibi ve bildirim sistemlerini tasarlayıp uygulamaya aktardım.",
-        "en": "Established API integrations with online food ordering platforms (Yemek Sepeti, Getir Yemek, Migros Yemek), streamlining customers' order management workflows. Designed and deployed real-time order flow, status tracking, and notification systems."
+        "tr": "Dış sipariş platformlarıyla API entegrasyonları kurdum ve müşterilerin sipariş yönetimini hızlandırdım. Gerçek zamanlı akışı, durum takibini ve bildirim sistemlerini tasarlayıp devreye aldım.",
+        "en": "I built API integrations with external ordering platforms and sped up how customers manage incoming orders. I designed and rolled out the real-time flow, status tracking and notification systems."
       },
-      "tags": ["C#", ".NET", "Web API", "SignalR", "MSSQL"]
+      "tags": [
+        "C#",
+        ".NET",
+        "Web API",
+        "SignalR",
+        "MSSQL"
+      ]
     },
     {
-      "title": { "tr": "Back End Developer", "en": "Back End Developer" },
+      "title": {
+        "tr": "Back End Developer",
+        "en": "Back End Developer"
+      },
       "company": "TZ Yazılım",
       "period": {
         "tr": "10/2021 - 03/2022",
@@ -241,13 +248,21 @@
       },
       "location": "Ankara, Türkiye",
       "description": {
-        "tr": "Çevrimiçi sipariş platformlarıyla entegre çalışan restoran otomasyon sistemleri (masa yönetimi, müşteri yönetimi, paket servis) geliştirdim. QR menü yönetim sistemini sıfırdan tasarlayıp hayata geçirdim. Ödeme Kaydedici Cihazlar (ÖKC) ile sistem seviyesinde entegrasyon gerçekleştirdim.",
-        "en": "Developed restaurant automation systems (table management, customer management, delivery) integrated with online ordering platforms. Designed and shipped a QR menu management system from scratch. Performed system-level integration with Payment Recording Devices (ÖKC)."
+        "tr": "Dış platformlarla entegre çalışan işletme otomasyon sistemleri geliştirdim; masa, müşteri ve teslimat yönetimini tek programda topladım. QR menü sistemini sıfırdan tasarlayıp hayata geçirdim. Ödeme Kaydedici Cihazlarla (ÖKC) sistem seviyesinde entegrasyon kurdum; yazılımla donanım arasındaki akışı doğrudan yönettim.",
+        "en": "I developed business automation systems integrated with external platforms, bringing table, customer and delivery management into one program. I designed and shipped a QR menu system from scratch. I built system-level integration with Payment Recording Devices (OKC), driving the flow between software and hardware directly."
       },
-      "tags": ["C#", "WinForms", "WPF", "MSSQL"]
+      "tags": [
+        "C#",
+        "WinForms",
+        "WPF",
+        "MSSQL"
+      ]
     },
     {
-      "title": { "tr": "Yazılım Stajyeri", "en": "Software Intern" },
+      "title": {
+        "tr": "Yazılım Stajyeri",
+        "en": "Software Intern"
+      },
       "company": "Aniventi İnovasyon Bilişim ve Teknoloji A.Ş.",
       "period": {
         "tr": "09/2020 - 06/2021",
@@ -255,10 +270,14 @@
       },
       "location": "Ankara, Türkiye",
       "description": {
-        "tr": "Yazılım geliştirme süreçlerine aktif destek sağladım, kıdemli geliştiricilerle birlikte çalışarak projelere teknik katkıda bulundum ve modern yazılım geliştirme metodolojileri konusunda saha tecrübesi kazandım.",
-        "en": "Actively supported software development processes, collaborated with senior developers to contribute technically to projects, and gained hands-on experience with modern software development methodologies."
+        "tr": "Yazılım geliştirme süreçlerine destek verdim; kıdemli geliştiricilerle birlikte çalışarak projelere teknik katkı sundum ve modern geliştirme yöntemlerini sahada öğrendim.",
+        "en": "I supported the software development process, worked alongside senior developers to contribute technically to projects, and learned modern development methods in the field."
       },
-      "tags": ["C#", ".NET", "SQL"]
+      "tags": [
+        "C#",
+        ".NET",
+        "SQL"
+      ]
     }
   ],
   "education": [
@@ -313,7 +332,12 @@
       },
       "issuer": "Udemy",
       "year": "2022",
-      "skills": ["C#", "Windows Forms", "Database", "Barcode Systems"]
+      "skills": [
+        "C#",
+        "Windows Forms",
+        "Database",
+        "Barcode Systems"
+      ]
     },
     {
       "name": {
@@ -322,7 +346,11 @@
       },
       "issuer": "Udemy",
       "year": "2022",
-      "skills": ["C#", ".NET Framework", "OOP"]
+      "skills": [
+        "C#",
+        ".NET Framework",
+        "OOP"
+      ]
     },
     {
       "name": {
@@ -331,7 +359,11 @@
       },
       "issuer": "Udemy",
       "year": "2021",
-      "skills": ["SQL Server", "Database Design", "Enterprise Architecture"]
+      "skills": [
+        "SQL Server",
+        "Database Design",
+        "Enterprise Architecture"
+      ]
     },
     {
       "name": {
@@ -340,7 +372,11 @@
       },
       "issuer": "Udemy",
       "year": "2022",
-      "skills": ["C#", "OOP", "Software Architecture"]
+      "skills": [
+        "C#",
+        "OOP",
+        "Software Architecture"
+      ]
     },
     {
       "name": {
@@ -349,7 +385,11 @@
       },
       "issuer": "Udemy",
       "year": "2022",
-      "skills": ["C#", "Windows Forms", "GUI Development"]
+      "skills": [
+        "C#",
+        "Windows Forms",
+        "GUI Development"
+      ]
     },
     {
       "name": {
@@ -358,7 +398,12 @@
       },
       "issuer": "Udemy",
       "year": "2022",
-      "skills": ["C#", "Algorithms", "Data Structures", "Problem Solving"]
+      "skills": [
+        "C#",
+        "Algorithms",
+        "Data Structures",
+        "Problem Solving"
+      ]
     },
     {
       "name": {
@@ -367,7 +412,11 @@
       },
       "issuer": "T.C. Millî Eğitim Bakanlığı",
       "year": "2017",
-      "skills": ["Workplace Safety", "Health Regulations", "Risk Management"]
+      "skills": [
+        "Workplace Safety",
+        "Health Regulations",
+        "Risk Management"
+      ]
     }
   ],
   "contact": {
@@ -382,23 +431,599 @@
   "social": [
     {
       "name": "GitHub",
-      "url": "https://github.com/BeratARPA",
-      "icon": "fab fa-github"
+      "url": "https://github.com/BeratARPA"
     },
     {
       "name": "LinkedIn",
-      "url": "https://linkedin.com/in/berat-arpa",
-      "icon": "fab fa-linkedin"
-    },
-    {
-      "name": "YouTube",
-      "url": "https://www.youtube.com/@BeratARPA1",
-      "icon": "fab fa-youtube"
-    },
-    {
-      "name": "Udemy",
-      "url": "https://www.udemy.com/user/berat-arpa",
-      "icon": "fas fa-graduation-cap"
+      "url": "https://linkedin.com/in/berat-arpa"
     }
-  ]
+  ],
+  "meta": {
+    "startYear": 2020,
+    "baseCity": {
+      "tr": "Ankara",
+      "en": "Ankara"
+    },
+    "timezone": "UTC+3",
+    "headline": {
+      "tr": [
+        "İşletmeler için",
+        "uçtan uca",
+        "yazılım geliştiriyorum."
+      ],
+      "en": [
+        "End-to-end software development",
+        "for businesses.",
+        ""
+      ]
+    },
+    "lede": {
+      "tr": "Web, mobil ve masaüstü uygulamalar; sistem ve cihaz entegrasyonları. {startYear}'den bu yana {companies} şirkette çalıştım, geliştirdiğim sistemlerin bir kısmı bugün hâlâ her gün kullanılıyor. Projenizi konuşmak için bir mesaj yeterli.",
+      "en": "Web, mobile and desktop applications; system and device integrations. I have worked at {companies} companies since {startYear}, and some of the systems I built are still in daily use. One message is enough to start talking about your project."
+    },
+    "note": {
+      "tr": [
+        "Yazılıma {startYear}'de stajyer olarak başladım. O günden beri masaüstü programlardan kurumsal platformlara, mobil uygulamalardan cihaz entegrasyonlarına kadar çok farklı ölçekte sistem geliştirdim; bir kısmı hâlâ her gün, gerçek işletmelerde çalışıyor.",
+        "Teknik tarafı düşünmek benim işim. Sizin anlatmanız gereken tek şey ne yapmak istediğiniz; gerisini birlikte netleştiririz.",
+        "Projelere tek başıma bakıyorum. Bu yüzden aynı anda az sayıda iş alıyorum — ama aldığım işin sonuna kadar arkasındayım."
+      ],
+      "en": [
+        "I started in software as an intern in {startYear}. Since then I have built systems of very different scales, from desktop software to enterprise platforms, from mobile apps to device integrations; some of them still run every day in real businesses.",
+        "Thinking about the technical side is my job. All you need to describe is what you want to achieve; we work out the rest together.",
+        "I take on projects on my own. That means I work on only a few at a time, and I stand behind every one of them to the end."
+      ]
+    },
+    "repo": "https://github.com/BeratARPA/BeratARPAPortfolio",
+    "siteUrl": "https://beratarpa.com/",
+    "siteName": {
+      "tr": "Berat ARPA",
+      "en": "Berat ARPA"
+    },
+    "title": {
+      "tr": "Berat ARPA — Yazılım Geliştirme ve Sistem Entegrasyonu | Ankara",
+      "en": "Berat ARPA — Software Development and System Integration | Ankara"
+    },
+    "imageAlt": {
+      "tr": "Berat ARPA, yazılım geliştirici",
+      "en": "Berat ARPA, software developer"
+    },
+    "imageW": 1420,
+    "imageH": 1420
+  },
+  "services": [
+    {
+      "tr": [
+        "Web uygulamaları ve yönetim panelleri",
+        "Kurumsal web siteniz ve onu yönettiğiniz panel. Sipariş, stok ve raporlamayı tek ekrandan takip edersiniz; bilgisayardan da telefondan da."
+      ],
+      "en": [
+        "Web applications and admin panels",
+        "Your corporate website and the panel you run it from. Orders, stock and reporting on one screen, on desktop and on mobile."
+      ]
+    },
+    {
+      "tr": [
+        "Mobil uygulamalar",
+        "iOS ve Android'i tek seferde geliştiriyorum. Müşterileriniz için de, sahadaki ekibiniz için de."
+      ],
+      "en": [
+        "Mobile applications",
+        "I build iOS and Android in one go, for your customers and for your field team alike."
+      ]
+    },
+    {
+      "tr": [
+        "Masaüstü yazılımlar",
+        "Satış, stok, üretim ve raporlama uygulamaları. İnternet kesildiğinde işiniz durmaz."
+      ],
+      "en": [
+        "Desktop software",
+        "Sales, stock, production and reporting applications. Your work does not stop when the connection does."
+      ]
+    },
+    {
+      "tr": [
+        "Sistem entegrasyonları",
+        "Kullandığınız sistemleri birbirine bağlarım. Veri tek yerden akar, aynı bilgiyi iki kez girmezsiniz."
+      ],
+      "en": [
+        "System integration",
+        "I connect the systems you already use. Data flows from one place and you never enter it twice."
+      ]
+    },
+    {
+      "tr": [
+        "Cihaz entegrasyonları",
+        "Yazarkasa, barkod okuyucu, terazi ve fiş yazıcısını sisteminize bağlarım. Satış biter, fiş kendiliğinden çıkar."
+      ],
+      "en": [
+        "Device integration",
+        "I connect fiscal registers, barcode scanners, scales and receipt printers. The sale ends and the receipt prints itself."
+      ]
+    },
+    {
+      "tr": [
+        "Bakım ve modernizasyon",
+        "Elinizdeki sistemi devralır, hızlandırır, üzerine yeni özellikler eklerim."
+      ],
+      "en": [
+        "Maintenance and modernisation",
+        "I take over your existing system, speed it up and build new features on top of it."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "pv": "web",
+      "url": "https://www.tek-cozum.com/",
+      "host": "tek-cozum.com",
+      "kind": {
+        "tr": "Masaüstü + web uygulaması",
+        "en": "Desktop + web application"
+      },
+      "tr": [
+        "Adisyon ve kasa sistemi",
+        "TZ Yazılım",
+        "Masa, paket servis ve müşteri yönetimini tek sistemde topladım. Sipariş girişinden mutfak ekranına, gün sonu raporuna kadar bütün akış aynı yerden yürüyor."
+      ],
+      "en": [
+        "Point-of-sale and order system",
+        "TZ Yazılım",
+        "I brought table, delivery and customer management into one system, from order entry through the kitchen display to the end-of-day report."
+      ]
+    },
+    {
+      "pv": "web",
+      "url": "https://www.sefimqr.com/",
+      "host": "sefimqr.com",
+      "kind": {
+        "tr": "Web uygulaması",
+        "en": "Web application"
+      },
+      "tr": [
+        "QR menü sistemi",
+        "TZ Yazılım",
+        "Masadan sipariş verilebilen dijital menüyü sıfırdan kurdum. Menü değiştiğinde yeniden baskıya gerek kalmıyor."
+      ],
+      "en": [
+        "QR menu system",
+        "TZ Yazılım",
+        "I built a digital menu that takes orders at the table. When the menu changes, nothing needs reprinting."
+      ]
+    },
+    {
+      "pv": "web",
+      "url": "https://pentegrasyon.net/",
+      "host": "pentegrasyon.net",
+      "kind": {
+        "tr": "Sistem entegrasyonu",
+        "en": "System integration"
+      },
+      "tr": [
+        "Sipariş platformu entegrasyonu",
+        "LiwaSoft · Innovative Software",
+        "Üç ayrı dış platformu tek bir merkezi servise bağladım. Her platformun kendi kuralı ve veri biçimi vardı; hepsini ortak bir akışa çevirdim. Elle giriş ve kayıp kayıt sorunu ortadan kalktı."
+      ],
+      "en": [
+        "Ordering platform integration",
+        "LiwaSoft · Innovative Software",
+        "I connected three external platforms into one central service. Each had its own rules and data format; I turned them into a single shared flow. Manual entry and lost records disappeared."
+      ]
+    },
+    {
+      "pv": "app",
+      "host": "Pentegrasyon\nKurye",
+      "kind": {
+        "tr": "Mobil uygulama · iOS + Android",
+        "en": "Mobile app · iOS + Android"
+      },
+      "links": [
+        [
+          "Google Play",
+          "https://play.google.com/store/apps/details?id=com.liwasoft.pentegrasyonkurye"
+        ],
+        [
+          "App Store",
+          "https://apps.apple.com/tr/app/pentegrasyon-kurye/id6746069750?l=tr"
+        ]
+      ],
+      "tr": [
+        "Kurye mobil uygulaması",
+        "LiwaSoft",
+        "iOS ve Android'de aynı anda çalışan saha uygulaması. Kuryeler siparişi telefondan görüyor, durumu anında merkeze düşüyor. İki mağazada da yayında."
+      ],
+      "en": [
+        "Courier mobile app",
+        "LiwaSoft",
+        "A field app running on iOS and Android at once. Couriers see the order on the phone and the status reaches head office instantly. Live on both stores."
+      ]
+    },
+    {
+      "pv": "web",
+      "url": "https://easyhr.com.tr/",
+      "host": "easyhr.com.tr",
+      "kind": {
+        "tr": "Kurumsal platform",
+        "en": "Enterprise platform"
+      },
+      "tr": [
+        "Yapay zekâ destekli İK platformu",
+        "EasyHR",
+        "İzin, bordro, işe alım ve özlük süreçlerinin tek platformda toplandığı kurumsal sistemde geliştirme yapıyorum."
+      ],
+      "en": [
+        "AI-assisted HR platform",
+        "EasyHR",
+        "I develop an enterprise platform that brings leave, payroll, recruitment and personnel records together in one place."
+      ]
+    },
+    {
+      "pv": "dev",
+      "kind": {
+        "tr": "Cihaz entegrasyonu",
+        "en": "Device integration"
+      },
+      "tr": [
+        "Yazarkasa entegrasyonu",
+        "TZ Yazılım",
+        "Satış tamamlandığında mali fişi otomatik kesen, gün sonu raporunu kendi hazırlayan yapıyı kurdum. Adisyon sisteminin içinde çalışıyor."
+      ],
+      "en": [
+        "Fiscal register integration",
+        "TZ Yazılım",
+        "I built the flow that issues the legal receipt automatically and prepares the end-of-day report. It runs inside the point-of-sale system."
+      ]
+    }
+  ],
+  "process": [
+    {
+      "tr": [
+        "Görüşme",
+        "Önce dinliyorum. Ne yapmak istediğinizi, mevcut sisteminizde neyin aksadığını birlikte netleştiriyoruz."
+      ],
+      "en": [
+        "First conversation",
+        "I listen first. Together we work out what you want to do and what is not working today."
+      ]
+    },
+    {
+      "tr": [
+        "Teklif",
+        "Kapsamı, takvimi ve bütçeyi yazılı olarak paylaşıyorum. Neyin dahil olduğu, neyin olmadığı baştan belli."
+      ],
+      "en": [
+        "Proposal",
+        "I share scope, timeline and budget in writing. What is included and what is not is clear from the start."
+      ]
+    },
+    {
+      "tr": [
+        "Geliştirme",
+        "Belirli aralıklarla çalışan sürümü gösteriyorum. Yolda fikir değiştirebilirsiniz, sona sürpriz bırakmıyorum."
+      ],
+      "en": [
+        "Development",
+        "I show you a working version at regular intervals. You can change your mind along the way."
+      ]
+    },
+    {
+      "tr": [
+        "Devreye alma",
+        "Kurulumu yapıyor, verilerinizi taşıyor, ekibinize kullanımını gösteriyorum."
+      ],
+      "en": [
+        "Going live",
+        "I handle installation, migrate your data and walk your team through it."
+      ]
+    },
+    {
+      "tr": [
+        "Destek",
+        "Teslimden sonra da yanınızdayım. Yeni bir ihtiyaç çıkarsa aynı yere yazmanız yeterli."
+      ],
+      "en": [
+        "Support",
+        "I am still here after delivery. If something new comes up, just write to the same place."
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "tr": "Arayüz",
+      "en": "Interface",
+      "note": {
+        "tr": "Web · mobil · masaüstü",
+        "en": "Web · mobile · desktop"
+      }
+    },
+    {
+      "tr": "Uygulama servisi",
+      "en": "Application service",
+      "note": {
+        "tr": "İstek ve yetkilendirme",
+        "en": "Requests and authorisation"
+      }
+    },
+    {
+      "tr": "İş kuralları",
+      "en": "Business logic",
+      "note": {
+        "tr": "Fiyatlandırma · onay · hesaplama",
+        "en": "Pricing · approval · calculation"
+      }
+    },
+    {
+      "tr": "Veri katmanı",
+      "en": "Data layer",
+      "note": {
+        "tr": "Kayıt · raporlama · yedekleme",
+        "en": "Records · reporting · backup"
+      }
+    },
+    {
+      "tr": "Donanım entegrasyonu",
+      "en": "Hardware integration",
+      "note": {
+        "tr": "Yazarkasa · yazıcı · barkod · terazi",
+        "en": "Register · printer · barcode · scale"
+      },
+      "accent": true
+    }
+  ],
+  "sources": [
+    {
+      "tr": [
+        "Ayrı çalışan programlar",
+        "BİRBİRİNİ GÖRMÜYOR",
+        "KONUŞUYOR"
+      ],
+      "en": [
+        "Separate programs",
+        "BLIND TO EACH OTHER",
+        "CONNECTED"
+      ]
+    },
+    {
+      "tr": [
+        "Elle tutulan kayıtlar",
+        "KAĞITTA",
+        "KAYIT ALTINDA"
+      ],
+      "en": [
+        "Records kept by hand",
+        "ON PAPER",
+        "RECORDED"
+      ]
+    },
+    {
+      "tr": [
+        "Tablolar ve dosyalar",
+        "GÜNCEL DEĞİL",
+        "ANLIK"
+      ],
+      "en": [
+        "Spreadsheets and files",
+        "OUT OF DATE",
+        "LIVE"
+      ]
+    },
+    {
+      "tr": [
+        "Sahadan gelen bilgi",
+        "GECİKMELİ",
+        "ANINDA"
+      ],
+      "en": [
+        "Data from the field",
+        "DELAYED",
+        "INSTANT"
+      ]
+    },
+    {
+      "tr": [
+        "Devraldığım eski sistem",
+        "BAKIMSIZ",
+        "AYAKTA"
+      ],
+      "en": [
+        "The legacy system",
+        "UNMAINTAINED",
+        "MAINTAINED"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "name": "C# · .NET",
+      "registry": "NuGet",
+      "url": "https://www.nuget.org/packages/ARE.Core/"
+    },
+    {
+      "name": "JavaScript",
+      "registry": "npm",
+      "url": "https://www.npmjs.com/package/are-engine-core"
+    },
+    {
+      "name": "Dart",
+      "registry": "pub.dev",
+      "url": "https://pub.dev/packages/are_engine_core"
+    }
+  ],
+  "timeline": [
+    {
+      "y": "2020",
+      "place": "Aniventi · Ankara",
+      "tr": [
+        "Yazılım geliştirme stajı",
+        "İlk kurumsal projelerde görev"
+      ],
+      "en": [
+        "Software development internship",
+        "First corporate projects"
+      ]
+    },
+    {
+      "y": "2021",
+      "place": "TZ Yazılım · Ankara",
+      "tr": [
+        "Adisyon ve kasa sistemi",
+        "QR menü sistemi",
+        "Yazarkasa entegrasyonu"
+      ],
+      "en": [
+        "Point-of-sale system",
+        "QR menu system",
+        "Fiscal register integration"
+      ]
+    },
+    {
+      "y": "2022",
+      "place": "Innovative Software · Ankara",
+      "tr": [
+        "Platform entegrasyonları",
+        "Anlık veri akışı ve bildirim"
+      ],
+      "en": [
+        "Platform integrations",
+        "Live data flow and notifications"
+      ]
+    },
+    {
+      "y": "2023",
+      "place": "Açık kaynak",
+      "tr": [
+        "Ön lisans eğitimi",
+        "Açık kaynak araç geliştirme"
+      ],
+      "en": [
+        "Associate degree studies",
+        "Open source tool development"
+      ]
+    },
+    {
+      "y": "2024",
+      "place": "LiwaSoft · Ankara",
+      "tr": [
+        "Merkezi entegrasyon servisi",
+        "Ekip koordinasyonu",
+        "Mobil uygulama geliştirme"
+      ],
+      "en": [
+        "Central integration service",
+        "Team coordination",
+        "Mobile application development"
+      ]
+    },
+    {
+      "y": "2025",
+      "place": "EasyHR · İstanbul",
+      "tr": [
+        "Kurumsal insan kaynakları platformu",
+        "Modül geliştirme ve performans"
+      ],
+      "en": [
+        "Enterprise HR platform",
+        "Module development and performance"
+      ]
+    },
+    {
+      "y": "2026",
+      "place": "Bugün",
+      "now": true,
+      "tr": [
+        "Açık kaynak araçlar üç platformda yayında",
+        "Yeni projelere açık"
+      ],
+      "en": [
+        "Open source tools live on three platforms",
+        "Open to new projects"
+      ]
+    }
+  ],
+  "scenes": {
+    "flow": [
+      {
+        "tr": [
+          "Çoğu işletmede bilgi dağınık durur.",
+          "BAŞLANGIÇ DURUMU"
+        ],
+        "en": [
+          "In most businesses information sits scattered.",
+          "STARTING POINT"
+        ]
+      },
+      {
+        "tr": [
+          "Aynı bilgi birkaç yere ayrı ayrı girilir.",
+          "MÜKERRER GİRİŞ · KAYIP KAYIT"
+        ],
+        "en": [
+          "The same data is entered in several places.",
+          "DUPLICATE ENTRY · LOST RECORDS"
+        ]
+      },
+      {
+        "tr": [
+          "Hepsini tek bir akışta birleştiriyorum.",
+          "SİSTEM ENTEGRASYONU"
+        ],
+        "en": [
+          "I bring them together into a single flow.",
+          "SYSTEM INTEGRATION"
+        ]
+      },
+      {
+        "tr": [
+          "Bilgi bir kez girilir, her yerde görünür.",
+          "TEK KAYNAK · ANLIK GÖRÜNÜRLÜK"
+        ],
+        "en": [
+          "Entered once, visible everywhere.",
+          "ONE SOURCE · LIVE VISIBILITY"
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "tr": [
+          "İhtiyacım olan aracı bulamayınca kendim yazıyorum.",
+          "KENDİ ARAÇLARIM"
+        ],
+        "en": [
+          "When I cannot find the tool I need, I build it.",
+          "MY OWN TOOLS"
+        ]
+      },
+      {
+        "tr": [
+          "Bir kez tasarla, {packages} ayrı dilde çalışsın.",
+          "TAŞINABİLİR TASARIM"
+        ],
+        "en": [
+          "Design once, run in {packages} languages.",
+          "PORTABLE BY DESIGN"
+        ]
+      },
+      {
+        "tr": [
+          "Hepsini herkesin kullanımına açtım.",
+          "AÇIK KAYNAK"
+        ],
+        "en": [
+          "I published them all for anyone to use.",
+          "OPEN SOURCE"
+        ]
+      },
+      {
+        "tr": [
+          "Bugün başka geliştiriciler de kullanıyor.",
+          "{repos} PROJE · {stars} YILDIZ"
+        ],
+        "en": [
+          "Other developers use them today.",
+          "{repos} PROJECTS · {stars} STARS"
+        ]
+      }
+    ]
+  }
 }

@@ -4,11 +4,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://beratarpa.com/</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="tr" href="https://beratarpa.com/?lang=tr" />
     <xhtml:link rel="alternate" hreflang="en" href="https://beratarpa.com/?lang=en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://beratarpa.com/" />
+  </url>
+  <url>
+    <loc>https://beratarpa.com/?lang=en</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://beratarpa.com/?lang=tr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://beratarpa.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beratarpa.com/" />
+  </url>
+  <url>
+    <loc>https://beratarpa.com/Resources/Berat_Arpa_FullStackDeveloper_TR_CV.pdf</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://beratarpa.com/Resources/Berat_Arpa_FullStackDeveloper_EN_CV.pdf</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
