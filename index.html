@@ -138,6 +138,11 @@
       .pulse { animation:cue 2.4s var(--ez) infinite; }
       @keyframes cue { 0%,100%{transform:scaleX(.3)} 50%{transform:scaleX(1)} }
 
+      /* ortak montaj dili: once satirin cizgisi cizilir, sonra parcalar yerine oturur */
+      .srv, .case, #edu .row { position:relative; }
+      .srv::after, .case::after, #edu .row::after {
+        content:""; position:absolute; left:0; right:0; top:-1px; height:1px; pointer-events:none;
+        background:var(--hot); transform:scaleX(var(--asm,0)); transform-origin:0 50%; opacity:var(--asmo,0); }
       .srv { display:grid; grid-template-columns:clamp(58px,6vw,104px) minmax(0,1fr) minmax(0,1.3fr); gap:clamp(16px,3.2vw,44px); align-items:start;
              border-top:1px solid var(--rule); padding:30px 0; will-change:transform,opacity; }
       .srv:last-of-type { border-bottom:1px solid var(--rule); }
@@ -1150,6 +1155,24 @@
           if (n) { n.style.transform = "translate3d(0," + (p * -70 * AMP).toFixed(1) + "px,0)"; n.style.opacity = (1 - p * 0.7).toFixed(3); }
           if (im) im.style.transform = "translate3d(0," + (p * 44 * AMP).toFixed(1) + "px,0) scale(" + (1 + p * 0.07 * AMP).toFixed(3) + ")";
         }
+        /* parcadan butune: cizgi cizilir, sonra cocuklar okuma sirasiyla soldan gelir */
+        function assemble(sel, partSel, dx) {
+          var vh = window.innerHeight;
+          document.querySelectorAll(sel).forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.bottom < -140 || r.top > vh + 140) return;
+            var p = clamp((vh * 0.94 - r.top) / (vh * 0.5), 0, 1);
+            el.style.setProperty("--asm", ease(clamp(p * 2.6, 0, 1)).toFixed(3));
+            el.style.setProperty("--asmo", clamp(1 - (p - 0.46) / 0.3, 0, 1).toFixed(3));
+            var kids = el.querySelectorAll(partSel);
+            for (var i = 0; i < kids.length; i++) {
+              var q = ease(clamp((p - 0.12) / 0.74 * (kids.length + 1.4) - i, 0, 1));
+              kids[i].style.opacity = (0.05 + q * 0.95).toFixed(3);
+              kids[i].style.transform = "translate3d(" + ((1 - q) * dx * AMP).toFixed(1) + "px,0,0)";
+            }
+          });
+        }
+
         function updateList(sel, dist) {
           var vh = window.innerHeight;
           document.querySelectorAll(sel).forEach(function (el) {
@@ -1304,8 +1327,11 @@
           else if (y < lastY - 4 || y < 250) bar.classList.remove("up");
           lastY = y;
           updateHero(y); updateSD(); updateViz(); updateTools(); updateLay(); updateRoad();
-          updateList("#services .srv", 40); updateList("#cases .case", 36); updateList(".step", 30);
-          updateList("#contactLines .cl2", 26); updateList("#edu .row", 30);
+          assemble("#services .srv", ":scope > *", 26);
+          assemble("#cases .case", ":scope > *:not(.pv)", 24);
+          assemble(".step", ":scope > *", 20);
+          assemble("#edu .row", ":scope > *", 22);
+          updateList("#contactLines .cl2", 26);
           updateFlow(); updateTally(); updateStack(); updateRepos(); updateKit(); updateGlyphs(); updateCases();
           updateNote(); updateTalk(); updateEdu(); updateJobAxis();
           ticking = false;
