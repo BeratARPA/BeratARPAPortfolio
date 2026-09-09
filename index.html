@@ -245,12 +245,15 @@
       .vn { position:absolute; width:22.22%; height:11.74%; border:1px solid var(--rule); background:var(--paper-2);
             display:flex; flex-direction:column; justify-content:center; padding:0 3%; will-change:transform;
             box-shadow:0 12px 26px -20px rgba(26,29,33,.5); transition:border-color .5s var(--ez); }
-      .vn .t { font-size:clamp(10.5px,1.2vw,14px); font-weight:500; line-height:1.25; }
-      .vn .s { position:relative; height:1.25em; margin-top:4px; }
+      .vn .t { font-size:clamp(10.5px,1.2vw,14px); font-weight:500; line-height:1.25; flex:none; }
+      .vn .s { position:relative; height:1.25em; margin-top:4px; flex:none; }
       .vn .s { overflow:hidden; }
       .vn .s span { position:absolute; left:0; top:0; white-space:nowrap; font-family:var(--mono);
                     font-size:clamp(9.5px,.9vw,10.5px); letter-spacing:.1em; text-transform:uppercase;
                     transition:opacity .34s var(--ez), transform .42s var(--ez); }
+      /* baslik iki satira dustugunde kutu metnin altinda kalmasin;
+         cok alcak ekranlarda ayri kural gecerli, orada .s zaten gizli */
+      @media (min-width:761px) and (min-height:481px) { .vn { min-height:62px; } }
       .vn .bad  { color:#a2624d; }
       .vn .good { color:var(--hot); opacity:0; transform:translateY(105%); }
       .vn.done .bad  { opacity:0; transform:translateY(-105%); }
@@ -265,7 +268,7 @@
 
       @media (max-width:760px) {
         .viz-stage { aspect-ratio:440/820; width:min(94vw, calc((100svh - 170px) * 440 / 820)); }
-        .vn { width:86.4%; height:7.3%; padding:0 4%; }
+        .vn { width:86.4%; height:7.3%; min-height:42px; padding:0 4%; }
         .viz-hub { left:6.8%; top:76.8%; width:86.4%; height:11%; }
         .vn .t { font-size:12.5px; }
         .vn .s span { font-size:9.5px; }
@@ -527,7 +530,8 @@
       /* yatay telefon: sahne cok kisaliyor, kutu ici bosluklari sikistir */
       @media (max-height:480px) and (min-width:761px) {
         .vn .t { line-height:1.15; }
-        .vn .s { margin-top:2px; }
+        /* yatay telefonda sahne cok alcak: ikincil etiket gizlenir, baslik anlami tasir */
+        .vn .s { display:none; }
         .tl-t { gap:1px; padding:0 4%; }
         .tl-t .n { line-height:1.05; }
         .tl-t .p { line-height:1.05; }
