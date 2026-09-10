@@ -126,6 +126,10 @@
       .hero-act { display:flex; flex-wrap:wrap; align-items:center; gap:16px 26px; margin-top:30px; }
       .hero-act .mini { font-family:var(--mono); font-size:12px; color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:3px; }
       .hero-act .mini:hover { color:var(--hot); border-bottom-color:var(--hot); }
+      /* musaitlik: hero'da gorunur, metin data.json'dan */
+      .avail { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono);
+               font-size:11.5px; letter-spacing:.06em; color:var(--ink-2); white-space:nowrap; }
+      .avail::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--hot); flex:none; }
       .cue { margin-top:clamp(22px,4.6vh,48px); display:flex; align-items:center; gap:12px; }
       .cue .t { width:40px; height:1px; background:var(--hot); transform-origin:0 50%; }
       .pulse { animation:cue 2.4s var(--ez) infinite; }
@@ -337,21 +341,6 @@
       .lay .tc { font-family:var(--mono); font-size:clamp(9.5px,1vw,11.5px); color:var(--ink-3); text-align:right; }
       .lay.hw { border-color:var(--hot); } .lay.hw .nm { color:var(--hot); }
 
-      .road-track { position:relative; }
-      .road-pin { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column; justify-content:center;
-                  background:var(--paper); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
-      .road-lbl { max-width:var(--maxw); margin:0 auto 24px; padding:0 var(--pad); width:100%; display:flex; justify-content:space-between; gap:16px; }
-      .road-strip { display:flex; will-change:transform; padding-left:calc(max(0px, (100% - var(--maxw)) / 2) + var(--pad)); padding-right:max(var(--pad),10vw); }
-      .yr { flex:none; width:clamp(240px,24vw,420px); border-left:1px solid var(--rule); padding:0 clamp(16px,2.2vw,32px) 0 clamp(14px,1.8vw,24px); will-change:transform,opacity; }
-      .yr .y { font-family:var(--disp); font-size:clamp(2.4rem,5vw,4.2rem); line-height:1; }
-      .yr.now .y { color:var(--hot); }
-      .yr .pl { font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--hot); margin:8px 0 12px; }
-      .yr ul { margin:0; padding:0; list-style:none; }
-      .yr li { font-size:14.5px; line-height:1.5; color:var(--ink-2); padding:6px 0; border-top:1px solid var(--rule-2); }
-      .yr li:first-child { border-top:0; }
-      .road-line { max-width:var(--maxw); margin:22px auto 0; padding:0 var(--pad); width:100%; }
-      .road-line .t { height:2px; background:var(--rule); }
-      .road-line .t i { display:block; height:2px; background:var(--hot); transform-origin:0 50%; transform:scaleX(0); }
 
       .head { padding:clamp(66px,10vh,124px) 0 34px; }
       .head .top { display:flex; align-items:baseline; gap:16px; margin-bottom:20px; }
@@ -502,7 +491,6 @@
         .jt { grid-template-columns:1fr; } .jt-rail { display:none; }
         .row .when { flex-direction:row; gap:12px; padding-top:0; }
         .repo { grid-template-columns:62px 1fr; } .repo .lg { display:none; }
-        .yr { width:78vw; }
         .bl { height:1.5em; line-height:1.5em; } .bl i { height:6px; }
         .lay { height:52px; margin-top:-26px; } .lay .tc { display:none; }
       }
@@ -539,7 +527,7 @@
 
       @media print {
         .bar,.rail,form,.cue { display:none; }
-        .code-pin,.lay-pin,.road-pin { position:static; height:auto; }
+        .code-pin,.lay-pin { position:static; height:auto; }
         body { background:#fff; font-size:11pt; }
       }
     </style>
@@ -557,7 +545,7 @@
           <a href="#isler" data-tr="Projeler" data-en="Projects">Projeler</a>
           <a href="#araclar" data-tr="Araçlarım" data-en="My tools">Araçlarım</a>
           <a href="#surec" data-tr="Süreç" data-en="Process">Süreç</a>
-          <a href="#yol" data-tr="Deneyim" data-en="Experience">Deneyim</a>
+          <a href="#teknik" data-tr="Deneyim" data-en="Experience">Deneyim</a>
           <a href="#iletisim" data-tr="İletişim" data-en="Contact">İletişim</a>
         </nav>
         <button class="tg" id="langBtn" type="button" aria-label="Language / Dil">EN</button>
@@ -580,6 +568,7 @@
               <div class="hero-act" data-sd="up">
                 <a class="cta" href="#iletisim"><span data-tr="İletişime geçin" data-en="Get in touch">İletişime geçin</span><b>&#8594;</b></a>
                 <a class="mini" href="#hizmet" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+                <span class="avail" id="avail"></span>
               </div>
               <div class="cue" data-sd="up">
                 <span class="t pulse"></span>
@@ -660,18 +649,6 @@
         </div>
       </section>
 
-      <section id="yol">
-        <div class="road-track" id="roadTrack">
-          <div class="road-pin">
-            <div class="road-lbl">
-              <span class="lbl lbl-hot"><span class="n-auto"></span> — <span data-tr="Deneyim" data-en="Experience">Deneyim</span></span>
-              <span class="lbl" data-tr="2020 → bugün" data-en="2020 → today">2020 → bugün</span>
-            </div>
-            <div class="road-strip" id="roadStrip"></div>
-            <div class="road-line"><div class="t"><i id="roadFill"></i></div></div>
-          </div>
-        </div>
-      </section>
 
       <section id="araclar">
         <div class="tl-track" id="tlTrack">
@@ -1113,7 +1090,7 @@
           }).join("");
         }
         var lTrack = document.getElementById("layTrack");
-        function setupLay() { if (lTrack) lTrack.style.height = "300svh"; }
+        function setupLay() { if (lTrack) lTrack.style.height = "190svh"; }
         function updateLay() {
           if (!lTrack) return;
           var r = lTrack.getBoundingClientRect(), span = lTrack.offsetHeight - window.innerHeight;
@@ -1129,36 +1106,6 @@
             els[i].style.opacity = (0.3 + 0.7 * e).toFixed(2);
             els[i].style.zIndex = n - i;
           }
-        }
-
-        /* ══ yol ══ */
-        function renderRoad() {
-          document.getElementById("roadStrip").innerHTML = D("timeline").map(function (r) {
-            return '<div class="yr' + (r.now ? " now" : "") + '"><div class="y">' + esc(r.y) + '</div><div class="pl">' +
-              esc(r.place) + "</div><ul>" + L2(r).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>";
-          }).join("");
-        }
-        var rTrack = document.getElementById("roadTrack"), rStrip = document.getElementById("roadStrip"), rFill = document.getElementById("roadFill");
-        function setupRoad() {
-          if (!rTrack) return;
-          var over = Math.max(0, rStrip.scrollWidth - window.innerWidth);
-          rTrack.dataset.over = over;
-          rTrack.style.height = (100 + (over / window.innerHeight) * 100 + 40) + "svh";
-        }
-        function updateRoad() {
-          if (!rTrack) return;
-          var r = rTrack.getBoundingClientRect(), span = rTrack.offsetHeight - window.innerHeight;
-          if (span <= 0) return;
-          var p = clamp(-r.top / span, 0, 1), over = +rTrack.dataset.over || 0;
-          rStrip.style.transform = "translate3d(" + (-p * over).toFixed(1) + "px,0,0)";
-          rFill.style.transform = "scaleX(" + p.toFixed(4) + ")";
-          var vw = window.innerWidth;
-          document.querySelectorAll(".yr").forEach(function (y) {
-            var b = y.getBoundingClientRect();
-            var q2 = ease(clamp((vw * 0.98 - b.left) / (vw * 0.45), 0, 1));
-            y.style.opacity = (0.18 + 0.82 * q2).toFixed(3);
-            y.style.transform = "translate3d(0," + ((1 - q2) * 26 * AMP).toFixed(1) + "px,0)";
-          });
         }
 
         /* ══ diğer bölümler ══ */
@@ -1342,7 +1289,7 @@
           if (y > 250 && y > lastY + 4) bar.classList.add("up");
           else if (y < lastY - 4 || y < 250) bar.classList.remove("up");
           lastY = y;
-          updateHero(y); updateSD(); updateViz(); updateTools(); updateLay(); updateRoad();
+          updateHero(y); updateSD(); updateViz(); updateTools(); updateLay();
           assemble("#services .srv", ":scope > *", 26);
           assemble("#cases .case", ":scope > *:not(.pv)", 24);
           assemble(".step", ":scope > *", 20);
@@ -1362,7 +1309,7 @@
               var u = document.createElement("span"); u.className = "uline"; f.appendChild(u);
             }
           });
-          collectSD(); setupViz(); setupTools(); setupLay(); setupRoad();
+          collectSD(); setupViz(); setupTools(); setupLay();
           document.querySelectorAll("#jobs .row").forEach(function (r, i) { r.style.top = (70 + i * 13) + "px"; });
           layoutJobAxis();
         }
@@ -1386,7 +1333,7 @@
 
         /* ══ render ══ */
         function renderAll() {
-          renderViz(); renderTools(); renderLayers(); renderRoad(); renderServices(); renderCases(); renderSteps();
+          renderViz(); renderTools(); renderLayers(); renderServices(); renderCases(); renderSteps();
           if (S.data) { renderIntro(); renderNote(); renderTally(); renderJobs(); renderJobAxis(); renderKit(); renderEdu(); renderContact(); }
           renderColophon(); renderRepos(); renumber(); renderMeta(); setupAll(); onScroll();
         }
@@ -1416,6 +1363,9 @@
           }
           var fc = document.querySelector(".photo figcaption");
           if (fc && pr.name) fc.textContent = pr.name + " · " + (t(meta.baseCity) || t((S.data.contact || {}).location));
+
+          var av = document.getElementById("avail");
+          if (av) av.textContent = t(meta.availability) || "";
 
           var h1 = document.getElementById("heroTitle");
           if (h1) {

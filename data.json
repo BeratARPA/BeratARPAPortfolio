@@ -492,6 +492,10 @@
     "description": {
       "tr": "İşletmeler için web, mobil ve masaüstü uygulama geliştiriyorum; sistem ve cihaz entegrasyonu kuruyorum. {startYear}'den bu yana {companies} şirkette çalıştım.",
       "en": "I build web, mobile and desktop applications for businesses and connect systems and devices. Working in software since {startYear}, across {companies} companies."
+    },
+    "availability": {
+      "tr": "Yeni projelere açık",
+      "en": "Open to new projects"
     }
   },
   "services": [
@@ -857,97 +861,6 @@
       "name": "Dart",
       "registry": "pub.dev",
       "url": "https://pub.dev/packages/are_engine_core"
-    }
-  ],
-  "timeline": [
-    {
-      "y": "2020",
-      "place": "Aniventi · Ankara",
-      "tr": [
-        "Yazılım geliştirme stajı",
-        "İlk kurumsal projelerde görev"
-      ],
-      "en": [
-        "Software development internship",
-        "First corporate projects"
-      ]
-    },
-    {
-      "y": "2021",
-      "place": "TZ Yazılım · Ankara",
-      "tr": [
-        "Adisyon ve kasa sistemi",
-        "QR menü sistemi",
-        "Yazarkasa entegrasyonu"
-      ],
-      "en": [
-        "Point-of-sale system",
-        "QR menu system",
-        "Fiscal register integration"
-      ]
-    },
-    {
-      "y": "2022",
-      "place": "Innovative Software · Ankara",
-      "tr": [
-        "Platform entegrasyonları",
-        "Anlık veri akışı ve bildirim"
-      ],
-      "en": [
-        "Platform integrations",
-        "Live data flow and notifications"
-      ]
-    },
-    {
-      "y": "2023",
-      "place": "Açık kaynak",
-      "tr": [
-        "Ön lisans eğitimi",
-        "Açık kaynak araç geliştirme"
-      ],
-      "en": [
-        "Associate degree studies",
-        "Open source tool development"
-      ]
-    },
-    {
-      "y": "2024",
-      "place": "LiwaSoft · Ankara",
-      "tr": [
-        "Merkezi entegrasyon servisi",
-        "Ekip koordinasyonu",
-        "Mobil uygulama geliştirme"
-      ],
-      "en": [
-        "Central integration service",
-        "Team coordination",
-        "Mobile application development"
-      ]
-    },
-    {
-      "y": "2025",
-      "place": "EasyHR · İstanbul",
-      "tr": [
-        "Kurumsal insan kaynakları platformu",
-        "Modül geliştirme ve performans"
-      ],
-      "en": [
-        "Enterprise HR platform",
-        "Module development and performance"
-      ]
-    },
-    {
-      "y": "2026",
-      "place": "Bugün",
-      "now": true,
-      "tr": [
-        "Açık kaynak araçlar üç platformda yayında",
-        "Yeni projelere açık"
-      ],
-      "en": [
-        "Open source tools live on three platforms",
-        "Open to new projects"
-      ]
     }
   ],
   "scenes": {
