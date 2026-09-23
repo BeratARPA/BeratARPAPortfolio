@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4f2ee" />
+    <meta name="theme-color" content="#ffffff" />
 
     <title>Berat ARPA — Yazılım Geliştirme ve Sistem Entegrasyonu | Ankara</title>
     <meta name="description" content="İşletmeler için web, mobil ve masaüstü uygulama geliştiriyorum; sistem ve cihaz entegrasyonu kuruyorum. 2020'den bu yana 5 şirkette çalıştım." />
@@ -35,1874 +35,878 @@
     <link rel="icon" href="Resources/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
     <style>
-      /* ═══════════════════════════════════════════════════════
-         BERAT ARPA — işletmeler için yazılım
-         Okuyucu: teknik bilgisi olmayan iş sahibi.
-         Her hareket kaydırma konumuna bağlıdır. Kütüphane yok.
-         ═══════════════════════════════════════════════════════ */
+      /* ═══════════════════════════════════════════════════════════════
+         BERAT ARPA
+         Tek fikir: yazılımı gerçek dünyaya bağlamak. Sayfanın tek
+         hareketi, kaydırdıkça basılan fiş. Metin ve sayılar data.json
+         ile GitHub'dan gelir; arayüzde sabit içerik yoktur.
+         ═══════════════════════════════════════════════════════════════ */
+
       :root {
-        --paper:#f8f7f3; --paper-2:#ffffff; --ink:#1a1d21; --ink-2:#545b63; --ink-3:#8a9199;
-        --rule:#e3e1db; --rule-2:#eeece7; --hot:#1e5a96;
-        --cbg:#151a20; --cbg2:#1d232b; --ckey:#a9a4dd; --cstr:#9dbf8c; --cnum:#cfa176;
-        --cfn:#7fa4cc; --ctxt:#8b95a1; --cpun:#49535f; --ccmt:#3a434e;
-        --disp:"Source Serif 4",Georgia,serif;
-        --ui:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
-        --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-        --pad:clamp(20px,4vw,80px); --maxw:1640px; --ez:cubic-bezier(.22,.68,.28,1);
+        --paper:#ffffff; --paper-2:#f7f6f3; --ink:#13141a; --ink-2:#585d66; --ink-3:#8d929b;
+        --rule:#e6e4df; --rule-2:#f0eeea; --hot:#c8321f;
+        --night:#15140f; --night-2:#211f19; --night-ink:#ece9e1; --night-ink-2:#a19c90; --night-rule:#332f27;
+        --slip:#fbfaf6; --slip-ink:#17160f;
+        --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+        --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+        --pad:clamp(20px,5vw,72px); --maxw:1240px;
       }
       *,*::before,*::after { box-sizing:border-box; }
       html { -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
       body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--ui);
-             font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-      html.soft .pulse { animation:none !important; }
-      ::selection { background:var(--hot); color:#fff; }
-      img { max-width:100%; display:block; }
+             font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+      img { max-width:100%; height:auto; display:block; }
       a { color:inherit; }
-      :focus-visible { outline:2px solid var(--hot); outline-offset:4px; }
-      .skip { position:absolute; left:-9999px; top:0; z-index:200; background:var(--ink); color:var(--paper); padding:10px 16px; font-family:var(--mono); font-size:12px; }
-      .skip:focus { left:10px; top:10px; }
+      svg { width:13px; height:13px; flex:none; }
+      button { font:inherit; }
+      h1,h2,h3 { margin:0; font-weight:600; letter-spacing:-.02em; line-height:1.08; }
+      p { margin:0; }
+      ul,ol { margin:0; padding:0; list-style:none; }
+
       .wrap { max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); }
+      .skip { position:absolute; left:-9999px; top:0; background:var(--ink); color:#fff; padding:10px 16px; z-index:99; }
+      .skip:focus { left:8px; top:8px; }
+      :focus-visible { outline:2px solid var(--hot); outline-offset:3px; }
 
-      .lbl { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
-      .lbl-hot { color:var(--hot); }
-      h1,h2 { font-family:var(--disp); font-weight:600; margin:0; letter-spacing:-0.014em; }
-      h3 { font-family:var(--ui); font-weight:500; margin:0; }
-      .h-hero { font-size:clamp(2rem,5vw,5rem); line-height:1.06; max-width:20ch; }
-      .h-hero i, .h-sec i { font-style:normal; color:var(--hot); }
-      .h-hero i { white-space:nowrap; }
-      .h-sec { font-size:clamp(1.55rem,3.4vw,3rem); line-height:1.1; }
-      p { margin:0 0 1em; text-wrap:pretty; }
-      .body-lg { font-size:clamp(1.02rem,1.35vw,1.24rem); color:var(--ink-2); max-width:58ch; }
+      /* ── üst çubuk ───────────────────────────────────────────── */
+      .top { position:sticky; top:0; z-index:40; background:var(--paper);
+             border-bottom:1px solid transparent; transition:border-color .2s; }
+      .top.on { border-bottom-color:var(--rule); }
+      .top-in { max-width:var(--maxw); margin:0 auto; padding:14px var(--pad);
+                display:flex; align-items:center; gap:24px; }
+      .mark { font-weight:600; letter-spacing:-.01em; text-decoration:none; font-size:16px; }
+      .mark span { color:var(--ink-3); font-weight:400; }
+      .nav { display:flex; gap:22px; margin-left:auto; }
+      .nav a { text-decoration:none; font-size:14.5px; color:var(--ink-2); padding:2px 0;
+               border-bottom:1px solid transparent; }
+      .nav a:hover { color:var(--ink); }
+      .nav a.on { color:var(--ink); border-bottom-color:var(--hot); }
+      .lang { display:flex; gap:2px; }
+      .lang button { background:none; border:0; cursor:pointer; font-size:13px; letter-spacing:.04em;
+                     color:var(--ink-3); padding:4px 6px; }
+      .lang button.on { color:var(--ink); font-weight:600; }
 
-      .bar { position:fixed; inset:0 0 auto 0; z-index:90; height:56px; display:flex; align-items:center;
-             background:color-mix(in srgb,var(--paper) 88%,transparent); backdrop-filter:blur(12px) saturate(140%);
-             border-bottom:1px solid var(--rule-2); transition:transform .35s var(--ez); }
-      .bar.up { transform:translateY(-100%); }
-      .bar-in { max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); width:100%; display:flex; align-items:center; gap:16px; }
-      .sig { font-family:var(--disp); font-weight:600; font-size:19px; text-decoration:none; white-space:nowrap; letter-spacing:-0.01em; }
-      .sig i { font-style:normal; color:var(--hot); }
-      .nav { display:flex; gap:18px; margin-left:auto; overflow-x:auto; scrollbar-width:none; }
-      .nav::-webkit-scrollbar { display:none; }
-      .nav a { font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; text-decoration:none;
-               color:var(--ink-3); white-space:nowrap; padding-bottom:2px; border-bottom:1px solid transparent; transition:color .2s,border-color .2s; }
-      .nav a:hover,.nav a.on { color:var(--ink); border-bottom-color:var(--hot); }
-      /* gorunumu degistirmeden dokunma/tiklama alanini 24px'e cikarir (WCAG 2.5.8) */
-      .nav a, .hero-act .mini, .plinks a { position:relative; }
-      .nav a::after, .hero-act .mini::after, .plinks a::after {
-        content:""; position:absolute; left:0; right:0; top:50%;
-        height:24px; transform:translateY(-50%); }
-      .tg { font-family:var(--mono); font-size:10px; letter-spacing:.06em; background:none; border:1px solid var(--rule);
-            color:var(--ink-2); padding:5px 8px; cursor:pointer; flex:none; white-space:nowrap; transition:border-color .2s,color .2s; }
-      .tg:hover { border-color:var(--hot); color:var(--hot); }
-      @media (max-height:620px) and (min-width:761px) {
-        .viz-cap, .sc-cap { height:clamp(48px,9vh,72px); }
-        .viz-cap .t, .sc-cap .t { font-size:clamp(1.05rem,2vw,1.5rem); }
-        .lay-stage { height:clamp(220px,44vh,320px); }
-        .viz-stage { width:min(1000px, 88vw, calc((100svh - 130px) * 900 / 460)); }
-        .tl-stage { width:min(940px, 86vw, calc((100svh - 130px) * 900 / 420)); }
-      }
+      /* ── giriş ───────────────────────────────────────────────── */
+      .hero { padding:clamp(48px,8vw,104px) 0 clamp(56px,8vw,112px); }
+      .hero-in { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr);
+                 gap:clamp(28px,5vw,72px); align-items:start; }
+      .hero h1 { font-size:clamp(2.1rem,5.2vw,4.1rem); letter-spacing:-.032em; max-width:16ch; }
+      .hero .lede { margin-top:clamp(18px,2.4vw,28px); color:var(--ink-2); font-size:clamp(16px,1.25vw,18.5px);
+                    max-width:54ch; }
+      .acts { margin-top:clamp(24px,3vw,34px); display:flex; flex-wrap:wrap; align-items:center; gap:14px 20px; }
+      .btn { display:inline-flex; align-items:center; gap:9px; background:var(--ink); color:#fff;
+             text-decoration:none; padding:13px 22px; border-radius:2px; font-size:15.5px; font-weight:500;
+             transition:background .15s; }
+      .btn:hover { background:#000; }
+      .btn svg { width:15px; height:15px; }
+      .btn-2 { display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-size:15.5px;
+               color:var(--ink-2); border-bottom:1px solid var(--rule); padding-bottom:2px; }
+      .btn-2:hover { color:var(--ink); border-bottom-color:var(--ink); }
+      .avail { margin-top:26px; display:flex; align-items:center; gap:9px; font-size:14px; color:var(--ink-2); }
+      .avail i { width:7px; height:7px; border-radius:50%; background:var(--hot); flex:none; }
+      .hero-ph { margin:0; }
+      .hero-ph img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 18%;
+                     background:var(--paper-2); }
+      .hero-ph figcaption { margin-top:10px; font-size:13px; color:var(--ink-3); }
 
+      /* ── bölüm başlıkları ────────────────────────────────────── */
+      .sec { padding:clamp(64px,9vw,128px) 0; border-top:1px solid var(--rule); }
+      .sec-h { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+               gap:clamp(16px,4vw,56px); align-items:end; }
+      .sec-h h2 { font-size:clamp(1.6rem,3vw,2.5rem); }
+      .sec-h p { color:var(--ink-2); max-width:52ch; font-size:16.5px; }
+      .sec-body { margin-top:clamp(34px,5vw,62px); }
+      .sub-h { font-size:14px; letter-spacing:.01em; color:var(--ink-3); font-weight:500; margin-bottom:14px; }
 
-      .rail { position:fixed; inset:0 0 auto 0; height:2px; background:var(--hot); transform:scaleX(0); transform-origin:0 50%; z-index:95; will-change:transform; }
+      /* ── fiş sahnesi ─────────────────────────────────────────── */
+      .rs { background:var(--night); color:var(--night-ink); border-top:0; }
+      .rs .sec-h h2 { color:var(--night-ink); }
+      .rs .sec-h p { color:var(--night-ink-2); }
+      .rs-head { padding:clamp(64px,9vw,120px) 0 0; }
+      .rs-track { height:300svh; position:relative; }
+      .rs-pin { position:sticky; top:0; height:100svh; display:flex; justify-content:center;
+                align-items:flex-start; }
+      .printer { width:min(400px,80vw); margin-top:9svh; position:relative; }
+      .slot { position:relative; z-index:3; height:26px; border-radius:3px;
+              background:linear-gradient(180deg,#39352c,#100f0c 72%,#26241d);
+              box-shadow:0 1px 0 rgba(255,255,255,.07) inset, 0 12px 26px rgba(0,0,0,.5); }
+      .slot::after { content:""; position:absolute; left:14px; right:14px; bottom:7px; height:4px;
+                     border-radius:2px; background:#000; box-shadow:inset 0 1px 2px rgba(0,0,0,.9); }
+      .paper { position:relative; width:100%; height:0; overflow:hidden; background:var(--slip);
+               color:var(--slip-ink); box-shadow:0 22px 44px rgba(0,0,0,.45); }
+      .paper::before { content:""; position:absolute; top:0; left:0; right:0; height:16px; z-index:2;
+                       background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,0)); }
+      .edge { position:absolute; left:0; right:0; bottom:0; height:2px; background:rgba(0,0,0,.4); z-index:2;
+              opacity:0; }
+      /* kesik kenar: kâğıdın alt ucu koparılmış görünür */
+      .tear { position:absolute; left:0; right:0; bottom:0; height:8px; z-index:3;
+              background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 8 L6 0 L12 8 Z' fill='%2315140f'/%3E%3C/svg%3E");
+              background-size:12px 8px; background-repeat:repeat-x; }
+      .paper-in { position:absolute; top:0; left:0; width:100%; transform-origin:top center;
+                  padding:20px 22px 26px; font-family:var(--mono); font-size:13px; line-height:1.62;
+                  font-weight:400; }
+      .r-mid { text-align:center; }
+      .r-name { font-weight:500; letter-spacing:.16em; font-size:15px; }
+      .r-role { color:#413d33; }
+      .r-rule { border-top:1px dashed rgba(0,0,0,.45); margin:11px 0; }
+      .r-rule.d { border-top:3px double rgba(0,0,0,.5); }
+      .r-row { display:flex; align-items:baseline; gap:8px; }
+      .r-row .k { white-space:nowrap; }
+      .r-row .d { flex:1; border-bottom:1px dotted rgba(0,0,0,.38); position:relative; top:-4px; }
+      .r-row .v { font-variant-numeric:tabular-nums; white-space:nowrap; }
+      .r-tot { display:flex; justify-content:space-between; align-items:baseline; font-weight:500; font-size:15px; }
+      .r-note { text-align:right; font-size:11px; color:#5d5849; margin-top:2px; }
+      .r-foot { text-align:center; font-size:11.5px; color:#413d33; line-height:1.5; }
+      .r-bc { display:block; margin:12px auto 5px; width:78%; height:38px; }
+      .r-bct { text-align:center; font-size:10.5px; letter-spacing:.22em; color:#3c3930; }
+      .rs-note { padding:clamp(28px,4vw,48px) 0 clamp(64px,9vw,120px); text-align:center; }
+      .rs-note p { max-width:56ch; margin:0 auto; color:var(--night-ink-2); font-size:15.5px; }
+      .rs-note a { color:var(--night-ink); text-decoration:none; border-bottom:1px solid var(--night-rule);
+                   font-family:var(--mono); font-size:14.5px; display:inline-block; margin-top:12px; }
+      .rs-note a:hover { border-bottom-color:var(--night-ink); }
+      .rs-note a b { font-weight:400; color:var(--night-ink-2); }
 
-      .cta { display:inline-flex; align-items:center; gap:10px; font-weight:500; font-size:16px;
-             background:var(--ink); color:var(--paper); border:1px solid var(--ink); padding:15px 28px;
-             text-decoration:none; position:relative; overflow:hidden; z-index:0; }
-      .cta::before { content:""; position:absolute; inset:0; background:var(--hot); z-index:-1; transform:translateY(101%); transition:transform .42s var(--ez); }
-      .cta:hover::before { transform:none; }
-      .cta:hover { border-color:var(--hot); }
-      .cta b { font-weight:400; transition:transform .35s var(--ez); }
-      .cta:hover b { transform:translateX(5px); }
+      /* ── işler ───────────────────────────────────────────────── */
+      .rows { border-bottom:1px solid var(--rule); }
+      .row { display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.25fr) auto;
+             gap:clamp(14px,3vw,44px); align-items:start; padding:clamp(22px,2.6vw,32px) 0;
+             border-top:1px solid var(--rule); }
+      .row-t { font-size:clamp(18px,1.5vw,21px); font-weight:600; letter-spacing:-.015em; }
+      .row-m { margin-top:5px; font-size:14px; color:var(--ink-3); }
+      .row-d { color:var(--ink-2); font-size:16px; }
+      .row-l { display:flex; flex-direction:column; gap:7px; align-items:flex-start; }
+      .lnk { display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-family:var(--mono);
+             font-size:13.5px; color:var(--ink-2); border-bottom:1px solid var(--rule); padding-bottom:2px;
+             white-space:nowrap; }
+      .lnk:hover { color:var(--ink); border-bottom-color:var(--hot); }
+      .lnk svg { width:12px; height:12px; flex:none; }
 
-      .intro { min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding:110px 0 40px; }
-      .intro-top { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; border-bottom:1px solid var(--rule); padding-bottom:14px; margin-bottom:clamp(24px,4.6vw,48px); }
-      .intro-grid { display:grid; grid-template-columns:minmax(0,1fr) clamp(160px,20vw,340px); gap:clamp(26px,5vw,60px); align-items:end; margin-top:clamp(24px,4vw,44px); }
-      .photo { position:relative; margin:0; overflow:hidden; }
-      .photo img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center 14%; filter:grayscale(1) contrast(1.12); mix-blend-mode:multiply; }
-      .photo figcaption { font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-top:10px; }
-      .hero-act { display:flex; flex-wrap:wrap; align-items:center; gap:16px 26px; margin-top:30px; }
-      .hero-act .mini { font-family:var(--mono); font-size:12px; color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:3px; }
-      .hero-act .mini:hover { color:var(--hot); border-bottom-color:var(--hot); }
-      /* musaitlik: hero'da gorunur, metin data.json'dan */
-      .avail { display:inline-flex; align-items:center; gap:8px; font-family:var(--mono);
-               font-size:11.5px; letter-spacing:.06em; color:var(--ink-2); white-space:nowrap; }
-      .avail::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--hot); flex:none; }
-      .cue { margin-top:clamp(22px,4.6vh,48px); display:flex; align-items:center; gap:12px; }
-      .cue .t { width:40px; height:1px; background:var(--hot); transform-origin:0 50%; }
-      .pulse { animation:cue 2.4s var(--ez) infinite; }
-      @keyframes cue { 0%,100%{transform:scaleX(.3)} 50%{transform:scaleX(1)} }
+      /* ── açık kaynak ─────────────────────────────────────────── */
+      .pkgs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--rule);
+              border:1px solid var(--rule); margin-bottom:clamp(30px,4vw,48px); }
+      .pkg { background:var(--paper); padding:clamp(16px,2vw,22px); text-decoration:none; display:block; }
+      .pkg:hover { background:var(--paper-2); }
+      .pkg b { display:block; font-size:16.5px; font-weight:600; }
+      .pkg span { display:flex; align-items:center; gap:7px; margin-top:4px; font-family:var(--mono);
+                  font-size:13px; color:var(--ink-3); }
+      .pkg:hover span { color:var(--ink); }
+      .repo { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr) auto;
+              gap:clamp(12px,3vw,40px); align-items:baseline; padding:16px 0; border-top:1px solid var(--rule-2);
+              text-decoration:none; }
+      .repo:first-child { border-top:1px solid var(--rule); }
+      .repo:hover { background:var(--paper-2); }
+      .repo b { font-family:var(--mono); font-size:15px; font-weight:500; }
+      .repo p { color:var(--ink-2); font-size:15px; }
+      .repo i { font-style:normal; font-family:var(--mono); font-size:13.5px; color:var(--ink-3);
+                white-space:nowrap; }
+      .repo i em { font-style:normal; color:var(--ink); }
+      .more { margin-top:22px; display:inline-flex; }
 
-      /* ortak montaj dili: once satirin cizgisi cizilir, sonra parcalar yerine oturur */
-      .srv, .case, #edu .row { position:relative; }
-      .srv::after, .case::after, #edu .row::after {
-        content:""; position:absolute; left:0; right:0; top:-1px; height:1px; pointer-events:none;
-        background:var(--hot); transform:scaleX(var(--asm,0)); transform-origin:0 50%; opacity:var(--asmo,0); }
-      .srv { display:grid; grid-template-columns:clamp(58px,6vw,104px) minmax(0,1fr) minmax(0,1.3fr); gap:clamp(16px,3.2vw,44px); align-items:start;
-             border-top:1px solid var(--rule); padding:30px 0; will-change:transform,opacity; }
-      .srv:last-of-type { border-bottom:1px solid var(--rule); }
-      .gl { width:58px; height:58px; }
-      .gl svg { width:100%; height:100%; display:block; overflow:visible; }
-      .gl path { fill:none; stroke:var(--hot); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
-      .srv .no { font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; color:var(--ink-3);
-                 display:block; margin-bottom:7px; }
-      .srv h3 { font-size:clamp(1.2rem,2.1vw,1.6rem); }
-      .srv p { color:var(--ink-2); font-size:16px; margin:0; }
+      /* ── hizmetler ve çalışma ────────────────────────────────── */
+      .svc { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:clamp(24px,5vw,72px); }
+      .svc li { padding:clamp(18px,2.2vw,26px) 0; border-top:1px solid var(--rule); }
+      .svc b { display:block; font-size:17.5px; font-weight:600; }
+      .svc p { margin-top:6px; color:var(--ink-2); font-size:15.5px; max-width:44ch; }
+      .steps { margin-top:clamp(48px,6vw,84px); display:grid;
+               grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(20px,3vw,34px); }
+      .steps li { border-top:2px solid var(--ink); padding-top:14px; }
+      .steps b { display:block; font-size:16.5px; font-weight:600; }
+      .steps b em { font-style:normal; font-family:var(--mono); font-size:13px; color:var(--ink-3);
+                    margin-right:8px; }
+      .steps p { margin-top:6px; color:var(--ink-2); font-size:15px; }
 
-      .flow { position:relative; padding-left:clamp(34px,5vw,56px); }
-      .flow .spine { position:absolute; left:clamp(11px,1.8vw,18px); top:12px; bottom:12px; width:2px; background:var(--rule-2); }
-      .flow .spine i { display:block; width:2px; background:var(--hot); height:0; }
-      .flow .dot { position:absolute; left:-5px; top:0; width:12px; height:12px; border-radius:50%;
-                   background:var(--hot); box-shadow:0 0 0 5px color-mix(in srgb,var(--hot) 14%,transparent);
-                   opacity:0; will-change:transform; }
-      .step { position:relative; padding:20px 0; will-change:transform,opacity; }
-      .step::before { content:""; position:absolute; left:calc(-1 * clamp(34px,5vw,56px) + clamp(11px,1.8vw,18px) - 5px);
-                      top:27px; width:12px; height:12px; border-radius:50%; background:var(--paper);
-                      border:2px solid var(--rule); transition:border-color .4s var(--ez),background .4s var(--ez); }
-      .step.on::before { border-color:var(--hot); background:var(--hot); }
-      .step h3 { font-size:clamp(1.1rem,1.9vw,1.35rem); margin-bottom:4px; }
-      .step p { color:var(--ink-2); margin:0; font-size:16px; max-width:60ch; }
-      .step .n { font-family:var(--mono); font-size:11px; color:var(--hot); letter-spacing:.14em; display:block; margin-bottom:6px; }
+      /* ── deneyim ─────────────────────────────────────────────── */
+      .job { display:grid; grid-template-columns:minmax(0,180px) minmax(0,1fr);
+             gap:clamp(12px,3vw,40px); padding:clamp(22px,2.6vw,30px) 0; border-top:1px solid var(--rule); }
+      .job-p { font-family:var(--mono); font-size:13.5px; color:var(--ink-3); }
+      .job-t { font-size:18.5px; font-weight:600; }
+      .job-c { margin-top:2px; font-size:15px; color:var(--ink-2); }
+      .job-d { margin-top:10px; color:var(--ink-2); font-size:15.5px; max-width:64ch; }
+      .tags { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+      .tags span { font-family:var(--mono); font-size:12.5px; color:var(--ink-3);
+                   border:1px solid var(--rule); padding:2px 8px; border-radius:2px; }
+      .extra { margin-top:clamp(44px,6vw,80px); display:grid;
+               grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(24px,4vw,56px); }
+      .extra li { padding:9px 0; border-top:1px solid var(--rule-2); font-size:15px; }
+      .extra li:first-child { border-top:1px solid var(--rule); }
+      .extra li span { display:block; color:var(--ink-3); font-size:13.5px; margin-top:2px; }
+      .chips { display:flex; flex-wrap:wrap; gap:6px; }
+      .chips span { font-family:var(--mono); font-size:12.5px; color:var(--ink-2);
+                    border:1px solid var(--rule); padding:3px 9px; border-radius:2px; }
 
-      .case { border-top:1px solid var(--rule); padding:30px 0; display:grid; grid-template-columns:clamp(150px,15vw,250px) minmax(0,1fr) minmax(0,1.35fr);
-              gap:clamp(16px,3vw,42px); will-change:transform,opacity; align-items:start; }
-      .case:last-of-type { border-bottom:1px solid var(--rule); }
-      .case h3 { font-size:clamp(1.15rem,2vw,1.5rem); margin-bottom:6px; }
-      .case .kind { display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
-                    text-transform:uppercase; color:var(--ink-3); margin-bottom:8px; }
-      .case .who { font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--hot); }
-      .case p { color:var(--ink-2); margin:0; font-size:16px; }
-
-      .pv { position:relative; border:1px solid var(--rule); background:var(--paper-2);
-            box-shadow:0 14px 30px -22px rgba(26,29,33,.5); will-change:transform,opacity; overflow:hidden; }
-      .pv .top { height:21px; border-bottom:1px solid var(--rule-2); display:flex; align-items:center;
-                 gap:4px; padding:0 8px; position:relative; }
-      .pv .top i { width:5px; height:5px; border-radius:50%; background:var(--rule); display:block; flex:none; }
-      .pv .load { position:absolute; left:0; bottom:-1px; height:2px; background:var(--hot); width:0; }
-      .pv .body { padding:20px 10px; font-family:var(--mono); font-size:10.5px; color:var(--ink-2);
-                  text-align:center; word-break:break-word; line-height:1.5; }
-      .pv-app { width:94px; border-radius:9px; }
-      .pv-app .top { border-bottom:0; justify-content:center; }
-      .pv-app .top i { display:none; }
-      .pv-app .top::after { content:""; width:24px; height:3px; border-radius:2px; background:var(--rule); }
-      .pv-app .body { padding:26px 5px 30px; font-size:8.5px; word-break:normal; line-height:1.6; }
-      /* proje mini sahneleri: her proje kendi yapisini kurar */
-      .sc { position:relative; padding:14px 12px 16px; }
-      .sc i, .sc span { display:block; opacity:0; will-change:transform,opacity; }
-      .sc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; }
-      .sc-grid i { height:15px; background:var(--rule); border-radius:1px; }
-      .sc-grid i.hot { background:var(--hot); }
-      .sc-scan .qr { display:grid; grid-template-columns:repeat(2,1fr); gap:4px; width:38px; margin:0 auto 12px; opacity:1; }
-      .sc-scan .qr i { height:17px; background:var(--ink-3); border-radius:1px; }
-      .sc-scan .beam { position:absolute; left:12px; right:12px; height:1px; background:var(--hot); top:14px; opacity:0; }
-      .sc-scan .ln { opacity:1; }
-      .sc-scan .ln i { height:4px; background:var(--ink-3); border-radius:2px; margin-bottom:6px; }
-      .sc-merge { height:78px;
-                  background:linear-gradient(var(--rule),var(--rule)) 14px 21px/calc(100% - 48px) 1px no-repeat,
-                             linear-gradient(var(--rule),var(--rule)) 14px 43px/calc(100% - 48px) 1px no-repeat,
-                             linear-gradient(var(--rule),var(--rule)) 14px 65px/calc(100% - 48px) 1px no-repeat; }
-      .sc-merge i { position:absolute; width:7px; height:7px; border-radius:50%; background:var(--ink-3); left:12px; }
-      .sc-merge .out { width:9px; height:9px; background:var(--hot); left:auto; right:12px; top:50%; margin-top:-4px; }
-      .sc-phone .hd { height:9px; background:var(--hot); border-radius:2px; margin-bottom:8px; }
-      .sc-phone i { height:5px; background:var(--rule); border-radius:2px; margin-bottom:6px; }
-      .sc-panel { display:flex; align-items:flex-end; gap:5px; height:62px; }
-      .sc-panel i { flex:1; background:var(--rule); border-radius:1px 1px 0 0; height:0; opacity:1; }
-      .sc-panel i.hot { background:var(--hot); }
-      .pv svg { width:44px; height:44px; margin:8px auto 4px; display:block; overflow:visible; }
-      .pv svg path { fill:none; stroke:var(--hot); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
-
-      .plinks { display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:14px; }
-      .plinks a { font-family:var(--mono); font-size:11.5px; color:var(--ink-2); text-decoration:none;
-                  border-bottom:1px solid var(--rule); padding-bottom:3px; transition:color .2s,border-color .2s; }
-      .plinks a:hover { color:var(--hot); border-bottom-color:var(--hot); }
-      .plinks .none { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
-
-      .caps { display:grid; grid-template-columns:clamp(120px,12vw,206px) minmax(0,1fr); gap:clamp(14px,3vw,40px);
-              border-top:1px solid var(--rule); padding:20px 0; }
-      .caps:last-of-type { border-bottom:1px solid var(--rule); }
-      .caps .k { font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
-                 color:var(--ink-3); padding-top:6px; }
-      .chipwrap { display:flex; flex-wrap:wrap; gap:7px; }
-      .chip { font-family:var(--mono); font-size:11.5px; color:var(--ink-2); border:1px solid var(--rule);
-              padding:5px 11px; white-space:nowrap; will-change:transform,opacity;
-              transition:border-color .3s var(--ez), color .3s var(--ez); }
-      .chip:hover { border-color:var(--hot); color:var(--hot); }
-
-      .viz-track { position:relative; }
-      .viz-pin { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column;
-                 align-items:center; justify-content:center; gap:clamp(14px,3vh,34px);
-                 background:var(--paper); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
-      .viz-cap { height:clamp(66px,10vh,104px); position:relative; width:min(880px,92vw); text-align:center; flex:none; }
-      .viz-cap div { position:absolute; inset:0; opacity:0; transform:translateY(14px);
-                     transition:opacity .45s var(--ez),transform .45s var(--ez); }
-      .viz-cap div.on { opacity:1; transform:none; }
-      .viz-cap .t { font-family:var(--disp); font-weight:600; font-size:clamp(1.25rem,2.7vw,2.05rem); line-height:1.16; display:block; }
-      .viz-cap .s { font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--ink-3); margin-top:9px; display:block; }
-
-      .viz-stage { position:relative; aspect-ratio:900/460; flex:none;
-                    width:min(1240px, 92vw, calc((100svh - 170px) * 900 / 460)); }
-      .viz-wire { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-      .viz-wire path { fill:none; stroke:var(--hot); stroke-width:1.4; opacity:.7; }
-      .viz-nodes { position:absolute; inset:0; }
-      .vn { position:absolute; width:22.22%; height:11.74%; border:1px solid var(--rule); background:var(--paper-2);
-            display:flex; flex-direction:column; justify-content:center; padding:0 3%; will-change:transform;
-            box-shadow:0 12px 26px -20px rgba(26,29,33,.5); transition:border-color .5s var(--ez); }
-      .vn .t { font-size:clamp(10.5px,1.2vw,14px); font-weight:500; line-height:1.25; flex:none; }
-      .vn .s { position:relative; height:1.25em; margin-top:4px; flex:none; }
-      .vn .s { overflow:hidden; }
-      .vn .s span { position:absolute; left:0; top:0; white-space:nowrap; font-family:var(--mono);
-                    font-size:clamp(9.5px,.9vw,10.5px); letter-spacing:.1em; text-transform:uppercase;
-                    transition:opacity .34s var(--ez), transform .42s var(--ez); }
-      /* baslik iki satira dustugunde kutu metnin altinda kalmasin;
-         cok alcak ekranlarda ayri kural gecerli, orada .s zaten gizli */
-      @media (min-width:761px) and (min-height:481px) { .vn { min-height:62px; } }
-      .vn .bad  { color:#a2624d; }
-      .vn .good { color:var(--hot); opacity:0; transform:translateY(105%); }
-      .vn.done .bad  { opacity:0; transform:translateY(-105%); }
-      .vn.done .good { opacity:1; transform:none; }
-      .viz-hub { position:absolute; left:66.67%; top:38.04%; width:28.89%; height:23.91%;
-                 border:1.5px solid var(--hot); background:var(--paper-2); display:flex; flex-direction:column;
-                 align-items:center; justify-content:center; gap:6px; will-change:transform,opacity; opacity:0;
-                 box-shadow:0 18px 40px -26px rgba(30,90,150,.55); }
-      .viz-hub .t { font-family:var(--disp); font-weight:600; font-size:clamp(1rem,1.7vw,1.4rem); color:var(--hot); }
-      .viz-hub .s { font-family:var(--mono); font-size:clamp(9.5px,.85vw,10.5px); letter-spacing:.12em;
-                    text-transform:uppercase; color:var(--ink-3); }
-
-      @media (max-width:760px) {
-        .viz-stage { aspect-ratio:440/820; width:min(94vw, calc((100svh - 170px) * 440 / 820)); }
-        .vn { width:86.4%; height:7.3%; min-height:42px; padding:0 4%; }
-        .viz-hub { left:6.8%; top:76.8%; width:86.4%; height:11%; }
-        .vn .t { font-size:12.5px; }
-        .vn .s span { font-size:9.5px; }
-      }
-
-      /* ── bir ekran nasıl doğar ── */
-      .sc-cap { height:clamp(64px,10vh,102px); position:relative; width:min(880px,92vw); text-align:center; flex:none; }
-      .sc-cap div { position:absolute; inset:0; opacity:0; transform:translateY(14px);
-                    transition:opacity .45s var(--ez),transform .45s var(--ez); }
-      .sc-cap div.on { opacity:1; transform:none; }
-      .sc-cap .t { font-family:var(--disp); font-weight:600; font-size:clamp(1.25rem,2.7vw,2.05rem); line-height:1.16; display:block; }
-      .sc-cap .s { font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--ink-3); margin-top:9px; display:block; }
-
-
-      /* ── kendi araçlarım ── */
-      .tl-track { position:relative; }
-      .tl-pin { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column;
-                align-items:center; justify-content:center; gap:clamp(12px,2.6vh,30px);
-                background:var(--paper); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
-      .tl-stage { position:relative; aspect-ratio:900/420; flex:none;
-                   width:min(1220px, 92vw, calc((100svh - 170px) * 900 / 420)); }
-      .tl-wire { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
-      .tl-wire path { fill:none; stroke:var(--rule); stroke-width:1.3; }
-      .tl-core { position:absolute; left:4.4%; top:36.9%; width:25.6%; height:26.2%;
-                 border:1.5px solid var(--ink); background:var(--paper-2); display:flex; flex-direction:column;
-                 align-items:center; justify-content:center; gap:5px; will-change:transform,opacity; }
-      .tl-core .t { font-family:var(--disp); font-weight:600; font-size:clamp(.95rem,1.6vw,1.3rem); }
-      .tl-core .s { font-family:var(--mono); font-size:clamp(9.5px,.85vw,10.5px); letter-spacing:.12em;
-                    text-transform:uppercase; color:var(--ink-3); text-align:center; }
-      .tl-t { position:absolute; left:68.9%; width:26.7%; height:19%; border:1px solid var(--rule);
-              background:var(--paper-2); display:flex; flex-direction:column; justify-content:center;
-              padding:0 5%; gap:4px; will-change:transform,opacity; opacity:0;
-              transition:border-color .45s var(--ez); }
-      .tl-t.on { border-color:var(--hot); }
-      .tl-t[role=link]:hover { border-color:var(--hot); background:color-mix(in srgb,var(--hot) 5%,var(--paper-2)); }
-      .tl-t[role=link]:hover .n { color:var(--hot); }
-      .tl-t .n { font-family:var(--mono); font-size:clamp(11px,1.15vw,13.5px); }
-      .tl-t.on .n { color:var(--hot); }
-      .tl-t .p { font-family:var(--mono); font-size:clamp(9.5px,.85vw,10px); letter-spacing:.12em;
-                 text-transform:uppercase; color:var(--ink-3); }
-      .tl-tok { position:absolute; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%;
-                background:var(--hot); opacity:0; will-change:transform;
-                box-shadow:0 0 0 5px color-mix(in srgb,var(--hot) 13%,transparent); }
-
-      @media (max-width:760px) {
-        .tl-stage { aspect-ratio:440/700; width:min(92vw, calc((100svh - 170px) * 440 / 700)); }
-        .tl-wire { display:none; }
-        .tl-core { left:6%; top:2%; width:88%; height:14%; }
-        .tl-t { left:6%; width:88%; height:12%; }
-        .tl-t[data-i="0"] { top:32% !important; }
-        .tl-t[data-i="1"] { top:52% !important; }
-        .tl-t[data-i="2"] { top:72% !important; }
-        .tl-tok { display:none; }
-      }
-
-      .lay-track { position:relative; }
-      .lay-pin { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column;
-                 align-items:center; justify-content:center; background:var(--paper-2);
-                 border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
-      .lay-head { text-align:center; margin-bottom:clamp(8px,2.4vh,28px); flex:none; padding:0 var(--pad); }
-      .lay-stage { perspective:1500px; width:min(1000px,90vw); height:clamp(285px,49vh,440px); position:relative; transform-style:preserve-3d; }
-      .lay { position:absolute; left:0; right:0; top:50%; height:clamp(56px,8.4vh,74px); margin-top:clamp(-37px,-4.2vh,-28px);
-             border:1px solid var(--rule); background:var(--paper); display:flex; align-items:center; justify-content:space-between;
-             padding:0 clamp(16px,2.6vw,30px); gap:16px; will-change:transform,opacity; box-shadow:0 22px 40px -30px rgba(19,18,17,.5); }
-      .lay .nm { font-weight:500; font-size:clamp(14px,1.6vw,18px); white-space:nowrap; }
-      .lay .tc { font-family:var(--mono); font-size:clamp(9.5px,1vw,11.5px); color:var(--ink-3); text-align:right; }
-      .lay.hw { border-color:var(--hot); } .lay.hw .nm { color:var(--hot); }
-
-
-      .head { padding:clamp(66px,10vh,124px) 0 34px; }
-      .head .top { display:flex; align-items:baseline; gap:16px; margin-bottom:20px; }
-      .head .top .ln { flex:1; height:1px; background:var(--rule); transform-origin:0 50%; }
-      .head .sub { color:var(--ink-2); max-width:62ch; margin:14px 0 0; font-size:clamp(1rem,1.15vw,1.1rem); }
-
-      .tally { display:flex; flex-wrap:wrap; gap:clamp(22px,5.4vw,66px); margin:26px 0 10px; }
-      .tally div { display:flex; flex-direction:column; gap:3px; }
-      .tally .v { font-family:var(--disp); font-size:clamp(2.2rem,5.6vw,4.6rem); line-height:1; font-variant-numeric:tabular-nums; }
-      .tally div:first-child .v { color:var(--hot); }
-      .tally .k2 { font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
-      .tally .barw { height:2px; background:var(--rule); margin:10px 0 6px; width:100%; }
-      .tally .barw i { display:block; height:2px; background:var(--hot); transform-origin:0 50%; transform:scaleX(0); }
-
-      .row { display:grid; grid-template-columns:clamp(140px,14vw,236px) minmax(0,1fr); gap:clamp(18px,4vw,48px); border-top:1px solid var(--rule); padding:24px 0; }
-      .row:last-of-type { border-bottom:1px solid var(--rule); }
-      /* deneyim zaman ekseni: kaydirdikca cizilir, yillar sirayla yanar */
-      .jt { position:relative; display:grid; grid-template-columns:clamp(56px,6vw,96px) minmax(0,1fr); gap:clamp(12px,2vw,28px); }
-      .jt-rail { position:relative; }
-      .jt-rail::before { content:""; position:absolute; left:calc(100% - 1px); top:0; bottom:0; width:1px; background:var(--rule); }
-      .jt-fill { position:absolute; left:calc(100% - 1px); top:0; width:1px; height:0; background:var(--hot); }
-      .jt-marks { position:absolute; inset:0; }
-      .jt-mark { position:absolute; right:0; transform:translateY(-50%); display:flex; align-items:center; gap:8px;
-                 white-space:nowrap; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
-                 color:var(--ink-3); opacity:.32; transition:opacity .45s var(--ez), color .45s var(--ez); }
-      .jt-mark::after { content:""; width:9px; height:1px; background:currentColor; }
-      .jt-mark.on { opacity:1; color:var(--hot); }
-      .stack .row { position:sticky; background:var(--paper); border:1px solid var(--rule); border-top:2px solid var(--ink);
-                    padding:24px clamp(16px,3vw,32px); margin-bottom:14px; will-change:transform; }
-      .row .when { display:flex; flex-direction:column; gap:4px; padding-top:4px; }
-      .egl { width:40px; height:40px; margin-bottom:8px; }
-      .egl svg { width:100%; height:100%; display:block; overflow:visible; }
-      .egl path { fill:none; stroke:var(--hot); stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
-      .dur { margin-top:14px; }
-      .dur .track { display:block; height:3px; background:var(--rule-2); position:relative; }
-      .dur .seg { position:absolute; top:0; height:3px; background:var(--hot); transform:scaleX(0); transform-origin:0 50%; }
-      .dur .cap { display:flex; justify-content:space-between; font-family:var(--mono); font-size:9.5px;
-                  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-top:6px; }
-      .row .when .p { font-family:var(--mono); font-size:12px; color:var(--ink-2); }
-      .row .when .c2 { font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
-      .row h3 { font-size:clamp(1.12rem,1.9vw,1.35rem); margin-bottom:2px; }
-      .row .org { font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--hot); margin-bottom:10px; }
-      .row p { color:var(--ink-2); max-width:64ch; margin:0; font-size:15.5px; }
-      .chips { display:flex; flex-wrap:wrap; margin:12px 0 0; padding:0; }
-      .chips li { list-style:none; font-family:var(--mono); font-size:11px; color:var(--ink-3); }
-      .chips li:not(:last-child)::after { content:"/"; margin:0 8px; color:var(--rule); }
-      .kit { font-size:16px; line-height:1.9; color:var(--ink-2); max-width:66ch; }
-      .kit b { font-weight:400; display:inline-block; will-change:transform,opacity; }
-      .kit i { font-style:normal; color:var(--rule); padding:0 4px; }
-      .certs { margin:0; padding:0; list-style:none; }
-      .certs li { display:grid; grid-template-columns:54px 1fr; gap:14px; padding:8px 0; border-top:1px solid var(--rule-2); font-size:14.5px; color:var(--ink-2); }
-      .certs li:first-child { border-top:0; }
-      .certs li { will-change:transform,opacity; }
-      .certs .y2 { font-family:var(--mono); font-size:12px; color:var(--ink-3); padding-top:3px; }
-      .certs .i2 { display:block; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
-      .repo { display:grid; grid-template-columns:clamp(74px,7vw,108px) minmax(0,1fr) clamp(96px,9vw,150px); gap:clamp(14px,3vw,34px); align-items:baseline;
-              border-top:1px solid var(--rule); padding:16px 0; text-decoration:none; color:inherit; position:relative; overflow:hidden; }
-      .repo:last-of-type { border-bottom:1px solid var(--rule); }
-      .repo::before { content:""; position:absolute; inset:0; background:rgba(217,61,22,.06); transform:scaleX(0); transform-origin:0 50%; transition:transform .5s var(--ez); }
-      .repo:hover::before { transform:none; }
-      .repo > * { position:relative; }
-      .repo .st { font-family:var(--mono); font-size:13px; color:var(--hot); font-variant-numeric:tabular-nums; display:block; }
-      .repo .sbar { display:block; height:2px; background:var(--hot); margin-top:5px; transform-origin:0 50%; transform:scaleX(0); opacity:.45; }
-      .repo .nm { font-family:var(--mono); font-size:14px; display:inline-block; transition:transform .35s var(--ez); }
-      .repo:hover .nm { transform:translateX(6px); }
-      .repo .ds { display:block; font-size:14.5px; color:var(--ink-2); margin-top:4px; max-width:60ch; }
-      .repo .lg { font-family:var(--mono); font-size:11px; color:var(--ink-3); }
-
-      .note { border-top:1px solid var(--ink); margin-top:clamp(60px,9vh,110px); padding-top:34px;
-              display:grid; grid-template-columns:clamp(140px,14vw,236px) minmax(0,1fr); gap:clamp(18px,4vw,48px); position:relative; }
-      .note .thread { position:absolute; left:0; top:34px; bottom:20px; width:2px; background:var(--rule-2); }
-      .note > .lbl { padding-left:18px; }
-      .note .thread i { display:block; width:2px; background:var(--hot); height:0; }
-      .note-body { will-change:transform,opacity; }
-      .sig-rule { display:block; height:1px; background:var(--hot); width:74px; transform:scaleX(0);
-                  transform-origin:0 50%; margin:14px 0 8px; }
-      .note-body { font-size:clamp(1rem,1.25vw,1.14rem); color:var(--ink-2); max-width:62ch; }
-      .note-body:last-of-type { margin-bottom:0; }
-      .sign { margin-top:28px; font-family:var(--disp); font-weight:600; font-size:1.35rem; letter-spacing:-0.01em; }
-      .sign .lbl { display:block; margin-top:6px; }
-      @media (max-width:760px) { .note { grid-template-columns:1fr; gap:12px; } }
-
-      .talk { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr); gap:clamp(26px,5vw,66px); border-top:1px solid var(--ink); padding-top:30px; }
-      #contactLines { position:relative; padding-left:20px; }
-      #contactLines .thread { position:absolute; left:0; top:6px; bottom:6px; width:2px; background:var(--rule-2); }
-      #contactLines .thread i { display:block; width:2px; background:var(--hot); height:0; }
-      .cl2 { display:block; padding:12px 0; border-bottom:1px solid var(--rule-2); text-decoration:none; color:var(--ink);
-             font-family:var(--mono); font-size:13.5px; transition:color .2s; will-change:transform,opacity; position:relative; }
-      .cl2::before { content:""; position:absolute; left:-20px; top:50%; width:12px; height:1px;
-                     background:var(--rule); transform:scaleX(0); transform-origin:0 50%; transition:transform .45s var(--ez),background .3s; }
-      .cl2.lit::before { transform:none; background:var(--hot); }
-      .cl2:hover { color:var(--hot); }
-      .cl2 .k3 { display:block; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:3px; }
-      form { display:flex; flex-direction:column; gap:15px; }
-      .fd { position:relative; }
-      .fd .uline { position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--hot);
-                   transform:scaleX(0); transform-origin:0 50%; }
-      .fd label { display:block; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-bottom:5px; }
-      .fd input,.fd textarea { width:100%; background:transparent; border:0; border-bottom:1px solid var(--rule); padding:8px 0;
-                               color:var(--ink); font-family:var(--ui); font-size:16px; border-radius:0; transition:border-color .2s; }
-      .fd textarea { resize:vertical; min-height:88px; }
-      .fd input:focus,.fd textarea:focus { outline:none; border-bottom-color:var(--hot); }
-      .send { align-self:flex-start; font-weight:500; font-size:15px; background:var(--ink); color:var(--paper);
-              border:1px solid var(--ink); padding:13px 28px; cursor:pointer; border-radius:0; position:relative; overflow:hidden; z-index:0; }
-      .send::before { content:""; position:absolute; inset:0; background:var(--hot); z-index:-1; transform:translateY(101%); transition:transform .42s var(--ez); }
-      .send:hover::before { transform:none; }
-      .send:hover { border-color:var(--hot); }
-      .send[disabled] { opacity:.5; cursor:default; }
-      .msg { font-family:var(--mono); font-size:12px; min-height:18px; color:var(--ink-3); margin:0; }
+      /* ── iletişim ────────────────────────────────────────────── */
+      .talk { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr);
+              gap:clamp(30px,5vw,80px); align-items:start; }
+      .cl { padding:14px 0; border-top:1px solid var(--rule); }
+      .cl:first-child { border-top:0; padding-top:0; }
+      .cl span { display:block; font-size:13.5px; color:var(--ink-3); }
+      .cl a,.cl p { font-size:clamp(17px,1.5vw,20px); text-decoration:none; display:inline-block; margin-top:2px; }
+      .cl a { border-bottom:1px solid var(--rule); }
+      .cl a:hover { border-bottom-color:var(--hot); }
+      form { display:grid; gap:16px; }
+      .fd label { display:block; font-size:13.5px; color:var(--ink-2); margin-bottom:6px; }
+      .fd input,.fd textarea { width:100%; font:inherit; font-size:16px; color:var(--ink); background:var(--paper);
+                               border:1px solid var(--rule); border-radius:2px; padding:12px 14px; }
+      .fd textarea { resize:vertical; min-height:120px; }
+      .fd input:focus,.fd textarea:focus { outline:none; border-color:var(--ink); }
+      .send { background:var(--ink); color:#fff; border:0; border-radius:2px; padding:14px 24px;
+              font-size:15.5px; font-weight:500; cursor:pointer; justify-self:start; }
+      .send:hover { background:#000; }
+      .send:disabled { opacity:.6; cursor:default; }
+      .msg { font-size:14.5px; color:var(--ink-2); min-height:1.2em; }
       .msg.err { color:var(--hot); }
 
-      footer .end { border-top:1px solid var(--ink); margin-top:clamp(56px,8vh,100px); padding:24px 0 48px;
-                    display:grid; grid-template-columns:clamp(140px,14vw,236px) minmax(0,1fr); gap:clamp(18px,4vw,48px); }
-      footer p { font-family:var(--mono); font-size:11px; line-height:1.8; color:var(--ink-3); margin:0; max-width:70ch; }
-      footer a { color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); }
-      footer a:hover { color:var(--hot); border-bottom-color:var(--hot); }
+      /* ── alt ─────────────────────────────────────────────────── */
+      footer { border-top:1px solid var(--rule); padding:34px 0 44px; }
+      .foot { display:flex; flex-wrap:wrap; gap:12px 28px; align-items:baseline;
+              font-size:13.5px; color:var(--ink-3); }
+      .foot a { color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); }
+      .foot a:hover { color:var(--ink); }
 
-      @media (min-width:1900px) { :root { --maxw:1820px; } }
-
-      @media (max-width:1280px) {
-        .case { grid-template-columns:clamp(130px,15vw,200px) minmax(0,1fr) minmax(0,1.2fr); }
-        .srv { grid-template-columns:clamp(52px,6vw,84px) minmax(0,1fr) minmax(0,1.2fr); }
+      /* ── duyarlı ─────────────────────────────────────────────── */
+      @media (max-width:1200px) {
+        .steps { grid-template-columns:repeat(3,minmax(0,1fr)); }
       }
-
+      @media (max-width:980px) {
+        .row { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); }
+        .row-l { grid-column:1/-1; flex-direction:row; flex-wrap:wrap; gap:14px; }
+        .repo { grid-template-columns:minmax(0,1fr) auto; }
+        .repo p { grid-column:1/-1; }
+      }
       @media (max-width:860px) {
-        .srv { grid-template-columns:52px 1fr; row-gap:0; }
-        .gl { width:44px; height:44px; }
-        .srv > div:last-child { grid-column:2; margin-top:10px; }
-        .case { grid-template-columns:clamp(120px,18vw,180px) minmax(0,1fr); gap:14px 20px; }
-        .case > .pv { grid-row:span 2; max-width:none; }
-        .case > div:last-child { grid-column:2; }
-        .caps { grid-template-columns:1fr; gap:8px; }
-      }
-      @media (max-width:760px) {
-        body { font-size:16px; }
-        /* dokunma hedefleri en az ~44px */
-        .plinks { gap:2px 18px; }
-        .plinks a { padding:11px 0 9px; }
-        .hero-act .mini { padding:11px 0 9px; }
-        .tg { padding:10px 13px; }
-        .links a { padding:10px 0 8px; }
-        footer a { display:inline-block; padding:9px 0 7px; }
-        .repo { padding:20px 0; }
-        .cl2 { padding:15px 0; }
+        body { font-size:16.5px; }
         .nav { display:none; }
-        .talk { grid-template-columns:1fr; }
-        .row, footer .end { grid-template-columns:1fr; gap:10px; }
-        .jt { grid-template-columns:1fr; } .jt-rail { display:none; }
-        .row .when { flex-direction:row; gap:12px; padding-top:0; }
-        .repo { grid-template-columns:62px 1fr; } .repo .lg { display:none; }
-        .bl { height:1.5em; line-height:1.5em; } .bl i { height:6px; }
-        .lay { height:52px; margin-top:-26px; } .lay .tc { display:none; }
+        .mark span { display:none; }
+        .hero-in { grid-template-columns:minmax(0,1fr); }
+        .hero h1 { max-width:18ch; }
+        .hero-ph { max-width:300px; }
+        .sec-h { grid-template-columns:minmax(0,1fr); gap:14px; align-items:start; }
+        .talk { grid-template-columns:minmax(0,1fr); }
+        .pkgs { grid-template-columns:minmax(0,1fr); }
+        .steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
       }
-      @media (max-width:600px) {
-        body { font-size:15.5px; }
-        .bar-in { gap:12px; }
-        .sig { font-size:17px; }
-        .cta { padding:13px 22px; font-size:15px; }
-        .head { padding:clamp(48px,8vh,84px) 0 26px; }
-        .srv { padding:24px 0; }
-        .intro-grid { grid-template-columns:1fr; }
-        .photo { max-width:clamp(200px,42vw,280px); }
-        .case { padding:24px 0; grid-template-columns:1fr; gap:12px; }
-        .case > .pv { grid-row:auto; max-width:clamp(190px,46vw,260px); }
-        .case > div:last-child { grid-column:1; }
-      }
-      @media (max-width:400px) {
-        :root { --pad:16px; }
-        .h-hero { font-size:clamp(1.75rem,8.4vw,2.2rem); }
-        .tally { gap:18px 26px; }
-        .tally .v { font-size:2rem; }
-        .gl { width:38px; height:38px; }
+      @media (max-width:640px) {
+        .row { grid-template-columns:minmax(0,1fr); gap:10px; }
+        .steps { grid-template-columns:minmax(0,1fr); gap:0; }
+        .steps li { border-top-width:1px; padding:16px 0; }
+        .svc { grid-template-columns:minmax(0,1fr); }
+        .job { grid-template-columns:minmax(0,1fr); gap:6px; }
+        .rs-track { height:260svh; }
+        .printer { width:min(300px,86vw); margin-top:6svh; }
+        .paper-in { padding:16px 16px 22px; }
       }
 
-      /* yatay telefon: sahne cok kisaliyor, kutu ici bosluklari sikistir */
-      @media (max-height:480px) and (min-width:761px) {
-        .vn .t { line-height:1.15; }
-        /* yatay telefonda sahne cok alcak: ikincil etiket gizlenir, baslik anlami tasir */
-        .vn .s { display:none; }
-        .tl-t { gap:1px; padding:0 4%; }
-        .tl-t .n { line-height:1.05; }
-        .tl-t .p { line-height:1.05; }
+      @media (prefers-reduced-motion:reduce) {
+        html { scroll-behavior:auto; }
       }
 
       @media print {
-        .bar,.rail,form,.cue { display:none; }
-        .code-pin,.lay-pin { position:static; height:auto; }
-        body { background:#fff; font-size:11pt; }
+        .top,.rs-track,.rs-note,form,.skip,.acts { display:none !important; }
+        body { font-size:11pt; }
+        .sec { padding:14pt 0; break-inside:avoid; }
+        a { text-decoration:none; }
       }
     </style>
   </head>
 
   <body>
-    <a class="skip" href="#main" data-tr="İçeriğe atla" data-en="Skip to content">İçeriğe atla</a>
-    <div class="rail" id="rail"></div>
+    <a class="skip" id="skipLink" href="#main">İçeriğe geç</a>
 
-    <header class="bar" id="bar">
-      <div class="bar-in">
-        <a class="sig" href="#top">Berat <i>ARPA</i></a>
-        <nav class="nav" aria-label="Bölümler">
-          <a href="#hizmet" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
-          <a href="#isler" data-tr="Projeler" data-en="Projects">Projeler</a>
-          <a href="#araclar" data-tr="Araçlarım" data-en="My tools">Araçlarım</a>
-          <a href="#surec" data-tr="Süreç" data-en="Process">Süreç</a>
-          <a href="#teknik" data-tr="Deneyim" data-en="Experience">Deneyim</a>
-          <a href="#iletisim" data-tr="İletişim" data-en="Contact">İletişim</a>
-        </nav>
-        <button class="tg" id="langBtn" type="button" aria-label="Language / Dil">EN</button>
+    <header class="top" id="top">
+      <div class="top-in">
+        <a class="mark" href="#main" id="mark">Berat ARPA</a>
+        <nav class="nav" id="nav" aria-label="Bölümler"></nav>
+        <div class="lang">
+          <button type="button" data-l="tr" class="on">TR</button>
+          <button type="button" data-l="en">EN</button>
+        </div>
       </div>
     </header>
 
     <main id="main">
-      <div class="wrap" id="top">
-        <section class="intro">
-          <div class="intro-top" data-sd="up">
-            <span class="lbl" id="introRole"></span>
-            <span class="lbl" id="introSince"></span>
+      <section class="hero">
+        <div class="wrap hero-in">
+          <div>
+            <h1 id="h1"></h1>
+            <p class="lede" id="lede"></p>
+            <div class="acts">
+              <a class="btn" id="ctaTalk" href="#iletisim"></a>
+              <a class="btn-2" id="ctaCv" href="#" download></a>
+            </div>
+            <p class="avail"><i aria-hidden="true"></i><span id="avail"></span></p>
           </div>
+          <figure class="hero-ph">
+            <img id="heroPhoto" src="Resources/Images/BeratARPA.webp" width="1420" height="1420"
+                 alt="Berat ARPA, yazılım geliştirici" fetchpriority="high" />
+            <figcaption id="photoCap"></figcaption>
+          </figure>
+        </div>
+      </section>
 
-          <h1 class="h-hero" id="heroTitle"></h1>
-
-          <div class="intro-grid">
-            <div>
-              <p class="body-lg" data-sd="up" style="margin-top:20px" id="heroLede"></p>
-              <div class="hero-act" data-sd="up">
-                <a class="cta" href="#iletisim"><span data-tr="İletişime geçin" data-en="Get in touch">İletişime geçin</span><b>&#8594;</b></a>
-                <a class="mini" href="#hizmet" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
-                <span class="avail" id="avail"></span>
+      <section class="rs" id="ozet">
+        <div class="wrap rs-head">
+          <div class="sec-h">
+            <h2 id="ozetT"></h2>
+            <p id="ozetL"></p>
+          </div>
+        </div>
+        <div class="rs-track" id="rsTrack">
+          <div class="rs-pin">
+            <div class="printer">
+              <div class="slot" aria-hidden="true"></div>
+              <div class="paper" id="paper">
+                <div class="paper-in" id="paperIn"></div>
+                <div class="edge" id="edge" aria-hidden="true"></div>
+                <div class="tear" aria-hidden="true"></div>
               </div>
-              <div class="cue" data-sd="up">
-                <span class="t pulse"></span>
-                <span class="lbl" data-tr="Kaydırın" data-en="Scroll">Kaydırın</span>
-              </div>
-            </div>
-            <figure class="photo" data-sd="clip">
-              <img id="heroPhoto" src="Resources/Images/BeratARPA.webp" alt="Berat ARPA" width="260" height="325" loading="eager" fetchpriority="high" />
-              <figcaption data-tr="Berat ARPA · Ankara" data-en="Berat ARPA · Ankara">Berat ARPA · Ankara</figcaption>
-            </figure>
-          </div>
-        </section>
-      </div>
-
-      <section id="hizmet">
-        <div class="wrap">
-          <div class="head">
-            <div class="top" data-sd="up"><span class="lbl lbl-hot n-auto"></span><span class="ln" data-sd="line"></span>
-              <span class="lbl" data-tr="Hizmetler" data-en="Services">Hizmetler</span></div>
-            <h2 class="h-sec" data-sd="up" data-tr="Uçtan uca geliştirme ve entegrasyon." data-en="End-to-end development and integration.">Uçtan uca geliştirme ve entegrasyon.</h2>
-            <p class="sub" data-sd="up" data-tr="Analizden devreye almaya kadar her aşamayı ben yürütüyorum. Ayrı ayrı firmalarla uğraşmanız gerekmiyor." data-en="I handle every stage myself, from analysis to deployment. You do not have to coordinate several suppliers.">Analizden devreye almaya kadar her aşamayı ben yürütüyorum. Ayrı ayrı firmalarla uğraşmanız gerekmiyor.</p>
-          </div>
-          <div id="services"></div>
-        </div>
-      </section>
-
-      <section id="isler">
-        <div class="wrap">
-          <div class="head">
-            <div class="top" data-sd="up"><span class="lbl lbl-hot n-auto"></span><span class="ln" data-sd="line"></span>
-              <span class="lbl" data-tr="Projeler" data-en="Projects">Projeler</span></div>
-            <h2 class="h-sec" data-sd="up" data-tr="Referans projeler." data-en="Selected projects.">Referans projeler.</h2>
-            <p class="sub" data-sd="up" data-tr="Hepsini gerçek işletmeler için kurdum; bugün hâlâ çalışıyorlar." data-en="I built each one for a real business, and they are still running today.">Hepsini gerçek işletmeler için kurdum; bugün hâlâ çalışıyorlar.</p>
-          </div>
-          <div id="cases"></div>
-        </div>
-      </section>
-
-      <section id="akis">
-        <div class="viz-track" id="vizTrack">
-          <div class="viz-pin">
-            <div class="viz-cap" id="vizCap"></div>
-            <div class="viz-stage" id="vizStage">
-              <svg class="viz-wire" id="vizWire" viewBox="0 0 900 460" preserveAspectRatio="none" aria-hidden="true"></svg>
-              <div class="viz-nodes" id="vizNodes"></div>
-              <div class="viz-hub" id="vizHub"></div>
             </div>
           </div>
         </div>
-      </section>
-
-      <section id="katmanlar">
-        <div class="lay-track" id="layTrack">
-          <div class="lay-pin">
-            <div class="lay-head">
-              <span class="lbl lbl-hot n-auto"></span>
-              <h2 class="h-sec" style="margin-top:10px" data-tr="Uçtan uca sorumluluk." data-en="End-to-end ownership.">Uçtan uca sorumluluk.</h2>
-              <p class="lbl" style="margin-top:12px" data-tr="Bir uygulamanın beş katmanı. Hepsinde çalışıyorum." data-en="The five layers of an application. I work in all of them.">Bir uygulamanın beş katmanı. Hepsinde çalışıyorum.</p>
-            </div>
-            <div class="lay-stage" id="layStage"></div>
-          </div>
+        <div class="wrap rs-note">
+          <p id="rsNote"></p>
+          <a id="rsRepo" href="#" target="_blank" rel="noopener"></a>
         </div>
       </section>
 
-
-
-      <section id="surec">
+      <section class="sec" id="isler">
         <div class="wrap">
-          <div class="head">
-            <div class="top" data-sd="up"><span class="lbl lbl-hot n-auto"></span><span class="ln" data-sd="line"></span>
-              <span class="lbl" data-tr="Süreç" data-en="Process">Süreç</span></div>
-            <h2 class="h-sec" data-sd="up" data-tr="Çalışma süreci." data-en="How a project runs.">Çalışma süreci.</h2>
-          </div>
-          <div class="flow" id="flow">
-            <div class="spine"><i id="spineFill"></i><b class="dot" id="spineDot"></b></div>
-            <div id="steps"></div>
+          <div class="sec-h"><h2 id="islerT"></h2><p id="islerL"></p></div>
+          <div class="sec-body"><div class="rows" id="work"></div></div>
+        </div>
+      </section>
+
+      <section class="sec" id="acik">
+        <div class="wrap">
+          <div class="sec-h"><h2 id="acikT"></h2><p id="acikL"></p></div>
+          <div class="sec-body">
+            <div class="pkgs" id="pkgs"></div>
+            <div id="repos"></div>
+            <a class="lnk more" id="allRepos" href="https://github.com/BeratARPA" target="_blank" rel="noopener"></a>
           </div>
         </div>
       </section>
 
+      <section class="sec" id="hizmetler">
+        <div class="wrap">
+          <div class="sec-h"><h2 id="hizT"></h2><p id="hizL"></p></div>
+          <div class="sec-body">
+            <ul class="svc" id="svc"></ul>
+            <h3 class="sr-h" id="calT" style="margin-top:clamp(48px,6vw,84px);font-size:clamp(1.3rem,2.2vw,1.8rem)"></h3>
+            <ol class="steps" id="steps"></ol>
+          </div>
+        </div>
+      </section>
 
-      <section id="araclar">
-        <div class="tl-track" id="tlTrack">
-          <div class="tl-pin">
-            <div class="sc-cap" id="tlCap"></div>
-            <div class="tl-stage" id="tlStage">
-              <svg class="tl-wire" viewBox="0 0 900 420" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M270 210 C 420 210, 470 70, 620 70" />
-                <path d="M270 210 L 620 210" />
-                <path d="M270 210 C 420 210, 470 350, 620 350" />
-              </svg>
-              <div class="tl-core" id="tlCore"></div>
-              <div class="tl-t" data-i="0" style="top:7.1%"></div>
-              <div class="tl-t" data-i="1" style="top:40.5%"></div>
-              <div class="tl-t" data-i="2" style="top:73.8%"></div>
-              <span class="tl-tok" data-i="0"></span>
-              <span class="tl-tok" data-i="1"></span>
-              <span class="tl-tok" data-i="2"></span>
+      <section class="sec" id="deneyim">
+        <div class="wrap">
+          <div class="sec-h"><h2 id="denT"></h2><p id="denL"></p></div>
+          <div class="sec-body">
+            <div id="jobs"></div>
+            <div class="extra">
+              <div><p class="sub-h" id="eduT"></p><ul id="edu"></ul></div>
+              <div><p class="sub-h" id="certT"></p><ul id="certs"></ul></div>
+              <div><p class="sub-h" id="skillT"></p><div class="chips" id="skills"></div></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="guven">
+      <section class="sec" id="iletisim">
         <div class="wrap">
-          <div class="head">
-            <div class="top" data-sd="up"><span class="lbl lbl-hot n-auto"></span><span class="ln" data-sd="line"></span>
-              <span class="lbl" data-tr="Özet" data-en="Summary">Özet</span></div>
-            <h2 class="h-sec" data-sd="up" data-tr="Rakamlarla." data-en="In numbers.">Rakamlarla.</h2>
-          </div>
-          <div class="tally" id="tally"></div>
-          <p class="body-lg" data-sd="up" style="margin-top:26px" data-fill data-tr="Geliştirdiğim {packages} aracı açık kaynak olarak yayınladım; {repos} projemin tamamı herkese açık. Bugün dünyanın farklı yerlerinden geliştiriciler indirip kendi projelerinde kullanıyor." data-en="I published {packages} of my tools as open source, and all {repos} of my projects are public. Developers around the world use them today.">Geliştirdiğim araçları açık kaynak olarak yayınladım.</p>
-        </div>
-      </section>
-
-      <section id="not">
-        <div class="wrap">
-          <div class="note">
-            <span class="thread"><i id="noteThread"></i></span>
-            <span class="lbl" data-sd="up" data-tr="Kısaca" data-en="In short">Kısaca</span>
-            <div data-sd="up">
-              <div id="noteBody"></div>
-              <span class="sig-rule" id="sigRule"></span>
-              <div class="sign">Berat ARPA<span class="lbl" data-tr="Yazılım geliştirici · Ankara" data-en="Software developer · Ankara">Yazılım geliştirici · Ankara</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="iletisim">
-        <div class="wrap">
-          <div class="head">
-            <div class="top" data-sd="up"><span class="lbl lbl-hot n-auto"></span><span class="ln" data-sd="line"></span>
-              <span class="lbl" data-tr="İletişim" data-en="Contact">İletişim</span></div>
-            <h2 class="h-sec" data-sd="scale" data-tr="İletişim." data-en="Contact.">İletişim.</h2>
-            <p class="sub" data-sd="up" data-tr="Formu doldurabilir ya da doğrudan arayabilirsiniz. Mesajlara genellikle aynı gün içinde dönüş yapıyorum." data-en="Fill in the form or simply call. I usually reply the same day.">Formu doldurabilir ya da doğrudan arayabilirsiniz. Mesajlara genellikle aynı gün içinde dönüş yapıyorum.</p>
-          </div>
-          <div class="talk">
-            <div id="contactLines"></div>
-            <form id="form" data-sd="right" novalidate>
-              <div class="fd"><label for="name" data-tr="Adınız" data-en="Your name">Adınız</label>
+          <div class="sec-h"><h2 id="iltT"></h2><p id="iltL"></p></div>
+          <div class="sec-body talk">
+            <div id="lines"></div>
+            <form id="form" novalidate>
+              <div class="fd"><label for="name" id="lName"></label>
                 <input type="text" id="name" name="name" required autocomplete="name" /></div>
-              <div class="fd"><label for="email" data-tr="E-posta adresiniz" data-en="Your email">E-posta adresiniz</label>
+              <div class="fd"><label for="email" id="lEmail"></label>
                 <input type="email" id="email" name="email" required autocomplete="email" /></div>
-              <div class="fd"><label for="message" data-tr="Projeniz" data-en="Your project">Projeniz</label>
-                <textarea id="message" name="message" rows="4" required></textarea></div>
-              <button class="send" type="submit" id="sendBtn" data-tr="Gönder" data-en="Send">Gönder</button>
+              <div class="fd"><label for="message" id="lMsg"></label>
+                <textarea id="message" name="message" rows="5" required></textarea></div>
+              <button class="send" type="submit" id="sendBtn"></button>
               <p class="msg" id="msg" role="status" aria-live="polite"></p>
             </form>
-          </div>
-        </div>
-      </section>
-
-      <section id="teknik">
-        <div class="wrap">
-          <div class="head">
-            <div class="top" data-sd="up"><span class="lbl lbl-hot n-auto"></span><span class="ln" data-sd="line"></span>
-              <span class="lbl" data-tr="Yetkinlik" data-en="Capabilities">Yetkinlik</span></div>
-            <h2 class="h-sec" data-sd="up" data-tr="Teknik yetkinlikler ve deneyim." data-en="Technical capabilities and experience.">Teknik yetkinlikler ve deneyim.</h2>
-          </div>
-          <div class="jt">
-            <div class="jt-rail" aria-hidden="true">
-              <i class="jt-fill" id="jtFill"></i>
-              <div class="jt-marks" id="jtMarks"></div>
-            </div>
-            <div id="jobs" class="stack"></div>
-          </div>
-          <div id="kitMount"></div>
-          <div id="repos"></div>
-          <div id="edu"></div>
-          <div class="row" data-sd="up">
-            <span class="lbl" data-tr="Sertifika" data-en="Certificates">Sertifika</span>
-            <ul class="certs" id="certs"></ul>
           </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="wrap">
-        <div class="end" data-sd="up"><span class="lbl">Colophon</span><p id="colophon"></p></div>
-      </div>
+      <div class="wrap foot" id="foot"></div>
     </footer>
 
-    <script type="application/ld+json" id="ldjson">
-      {
-        "@context": "https://schema.org", "@type": "Person", "name": "Berat ARPA",
-        "jobTitle": "Software Developer", "url": "https://beratarpa.com",
-        "image": "https://beratarpa.com/Resources/Images/BeratARPA.webp",
-        "email": "beratarpa@hotmail.com", "telephone": "+90 507 678 89 18",
-        "knowsAbout": ["C#", ".NET", "ASP.NET Core", "Web API", "SignalR", "Entity Framework", "MSSQL", "Flutter", "TypeScript", "WPF", "WinForms"],
-        "address": { "@type": "PostalAddress", "addressLocality": "Ankara", "addressCountry": "TR" },
-        "sameAs": ["https://github.com/BeratARPA","https://linkedin.com/in/berat-arpa",
-                   "https://www.nuget.org/packages/ARE.Core/","https://www.npmjs.com/package/are-engine-core",
-                   "https://pub.dev/packages/are_engine_core"]
-      }
-    </script>
-
+    <script type="application/ld+json" id="ldjson">{}</script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+
     <script>
       (function () {
         "use strict";
-        var H = document.documentElement;
-        var S = { lang: "tr", data: null, repos: [], cap: -1, tab: -1, tcap: -1 };
-        function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
-        function ease(p) { return 1 - Math.pow(1 - p, 3); }
 
-        /* Hareket kaydırmaya bağlıdır, yani kullanıcının kendi kontrolündedir.
-           Sistem "hareketi azalt" diyorsa yalnızca kendiliğinden oynayan
-           döngüsel animasyon durdurulur. */
-        var AMP = 1;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) H.classList.add("soft");
+        var S = { lang: "tr", data: null, repos: [], ph: 0 };
+        var $ = function (id) { return document.getElementById(id); };
+        var esc = function (s) {
+          return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+          });
+        };
+        var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
 
-        /* ── dil ── */
+        /* ── dil ───────────────────────────────────────────────── */
         var q = new URLSearchParams(location.search).get("lang");
-        var ls = null; try { ls = localStorage.getItem("lang"); } catch (e) {}
-        S.lang = (q === "en" || q === "tr") ? q : (ls === "en" || ls === "tr") ? ls
-               : (navigator.language || "tr").toLowerCase().indexOf("tr") === 0 ? "tr" : "en";
-        document.getElementById("langBtn").addEventListener("click", function () { setLang(S.lang === "tr" ? "en" : "tr"); });
+        var saved = null;
+        try { saved = localStorage.getItem("lang"); } catch (e) {}
+        S.lang = (q === "en" || q === "tr") ? q
+               : (saved === "en" || saved === "tr") ? saved
+               : ((navigator.language || "tr").toLowerCase().indexOf("tr") === 0 ? "tr" : "en");
 
-        function setLang(l) {
-          S.lang = l;
-          try { localStorage.setItem("lang", l); } catch (e) {}
-          H.lang = l;
-          document.getElementById("langBtn").textContent = l === "tr" ? "EN" : "TR";
-          document.querySelectorAll("[data-tr][data-en]").forEach(function (el) { el.textContent = el.getAttribute("data-" + l); });
-          renderAll();
-          applyFill();
-        }
-        function t(v) { return v == null ? "" : typeof v === "string" ? v : (v[S.lang] || v.tr || v.en || ""); }
-
-        /* ── her şey data.json'dan; hiçbir sayı arayüzde sabit değil ── */
+        function t(o) { return (o && (typeof o === "string" ? o : o[S.lang] || o.tr || o.en)) || ""; }
         function D(k) { return (S.data && S.data[k]) || []; }
-        function L(o) { return (o && (o[S.lang] || o.tr || o.en)) || []; }
+        function U(k) { return t(((S.data && S.data.ui) || {})[k]); }
+        function SEC(k) { return ((S.data && S.data.sections) || {})[k] || {}; }
+        function L2(o) { return (o && (o[S.lang] || o.tr || o.en)) || []; }
+        function num(n) { return Number(n).toLocaleString(S.lang === "tr" ? "tr-TR" : "en-US"); }
 
+        /* ── sayılar: hepsi hesaplanır ─────────────────────────── */
         function STAT() {
           var meta = (S.data && S.data.meta) || {};
           var exp = D("experience");
-          var start = +meta.startYear || 2020, startMonth = 0;
+          var start = +meta.startYear || 2020, sm = 0;
           exp.forEach(function (e) {
             var m = String(t(e.period)).match(/(\d{1,2})\/(\d{4})/g) || [];
             m.forEach(function (x) {
-              var q = x.split("/"), yy = +q[1], mo = +q[0] - 1;
-              if (yy < start || (yy === start && mo < startMonth)) { start = yy; startMonth = mo; }
+              var p = x.split("/"), y = +p[1], mo = +p[0] - 1;
+              if (y < start || (y === start && mo < sm)) { start = y; sm = mo; }
             });
           });
           var now = new Date();
-          var mo = (now.getFullYear() - start) * 12 + (now.getMonth() - startMonth);
+          var months = (now.getFullYear() - start) * 12 + (now.getMonth() - sm);
+          var days = Math.round(months * 30.44);
           var comp = {}; exp.forEach(function (e) { if (e.company) comp[e.company] = 1; });
-          var stars = 0; S.repos.forEach(function (r) { stars += r.stargazers_count; });
-          var langs = {}; S.repos.forEach(function (r) { if (r.language) langs[r.language] = 1; });
+          var stars = 0; S.repos.forEach(function (r) { stars += r.stargazers_count || 0; });
           return {
-            startYear: start,
-            years: Math.max(1, Math.floor(mo / 12)),
-            months: mo,
+            startYear: start, months: months, days: days,
+            years: Math.max(1, Math.floor(months / 12)), rest: months % 12,
             companies: Object.keys(comp).length,
+            products: D("projects").length,
             repos: S.repos.length,
             stars: stars,
-            languages: Object.keys(langs).length,
             packages: D("packages").length,
             skills: D("skills").length,
             certs: D("certificates").length
           };
         }
-
-        function fill(str) {
+        function fill(s) {
           var st = STAT();
-          return String(str).replace(/\{(\w+)\}/g, function (m, k) {
-            return st[k] !== undefined ? st[k] : m;
+          return String(s).replace(/\{(\w+)\}/g, function (m, k) {
+            return st[k] !== undefined ? st[k] : (k === "email" ? (S.data.contact || {}).email : m);
           });
         }
+        function ico(d) { return '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">' + d + "</svg>"; }
+        var arrowOut = ico('<path d="M5.5 10.5 10.5 5.5M6.5 5.5h4v4"/>');
+        var arrowR = ico('<path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/>');
 
-        /* sahne alt yazıları: [başlık, etiket] çiftleri */
-        function caps(list) {
-          return (list || []).map(function (c, i) {
-            var x = L(c);
-            return '<div data-c="' + i + '"><span class="t">' + esc(fill(x[0])) +
-              '</span><span class="s">' + esc(fill(x[1])) + "</span></div>";
-          }).join("");
+        /* ── Code 128-B: gerçek, okunabilir barkod ─────────────── */
+        var C128 = "6cc66c66649848c44c4c84c446464864462459c4dc4ce5cc4ec4e667265c64e6e467476e74c72c7267647347326d86c66365184584465884684626886286225b858e46e5d85c647677668e62e6e86e26ee75874671676876271a77a64278a53050c4b048642c4265905844d04c24344326126507ba61447a53c4bc49e5e44f44f27a47947926de6f67b657851e45e5e85e27a87a25de5ee75e7ae68469069c";
+        function pat(i) {
+          if (i === 106) return "1100011101011";
+          var v = parseInt(C128.substr(i * 3, 3), 16).toString(2);
+          while (v.length < 11) v = "0" + v;
+          return v;
         }
-        function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+        function bars128(text) {
+          var codes = [104], i, sum = 104;
+          for (i = 0; i < text.length; i++) {
+            var v = text.charCodeAt(i) - 32;
+            if (v < 0 || v > 94) v = 0;
+            codes.push(v); sum += v * (i + 1);
+          }
+          codes.push(sum % 103); codes.push(106);
+          return codes.map(pat).join("");
+        }
+        function drawBarcode(cv, text) {
+          var b = bars128(text), dpr = Math.min(window.devicePixelRatio || 1, 3);
+          var w = cv.clientWidth || 200, h = cv.clientHeight || 38;
+          cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+          var c = cv.getContext("2d");
+          c.scale(dpr, dpr); c.clearRect(0, 0, w, h);
+          c.fillStyle = "#17160f";
+          var mw = w / b.length, x = 0, i;
+          for (i = 0; i < b.length; i++) {
+            if (b[i] === "1") c.fillRect(x, 0, Math.ceil(mw) , h);
+            x += mw;
+          }
+        }
 
-        /* ══ içerik ══ */
-        /* hizmet desenleri: kaydırdıkça çizilen çizgi resimler */
-        var GLYPH = [
-          /* web sitesi + panel */
-          ["M6 13 h46 v32 h-46 z","M6 22 h46","M11 18 h3","M16 18 h3","M21 18 h3","M12 30 h16","M12 37 h24","M34 30 h12"],
-          /* mobil: iki cihaz */
-          ["M9 8 h15 v40 h-15 z","M14 12 h5","M14 44 h5","M31 15 h16 v33 h-16 z","M36 19 h6"],
-          /* masaüstü */
-          ["M5 11 h48 v27 h-48 z","M11 17 h18","M11 23 h30","M29 38 v7","M20 45 h18"],
-          /* sistem entegrasyonu */
-          ["M4 9 h13 v9 h-13 z","M4 24 h13 v9 h-13 z","M4 39 h13 v9 h-13 z","M17 13 C29 13, 30 28, 38 28",
-           "M17 28 h21","M17 43 C29 43, 30 28, 38 28","M38 19 h15 v18 h-15 z"],
-          /* cihaz: yazıcı + fiş + barkod */
-          ["M8 28 h30 v17 h-30 z","M14 28 v-16 h18 v16","M18 17 h10","M18 22 h6","M14 36 h12",
-           "M44 27 v11","M48 27 v11","M52 27 v11"],
-          /* bakım: kutu + döngü */
-          ["M17 19 h24 v20 h-24 z","M23 26 h12","M23 32 h8","M9 33 A19 19 0 1 1 17 46","M17 46 l-6 -2","M17 46 l1 -6"]
-        ];
+        /* ── kurulum ───────────────────────────────────────────── */
+        function renderNav() {
+          var sc = (S.data && S.data.sections) || {};
+          $("nav").innerHTML = Object.keys(sc).filter(function (k) { return sc[k].nav; })
+            .map(function (k) { return '<a href="#' + k + '">' + esc(t(sc[k].nav)) + "</a>"; }).join("");
+          $("skipLink").textContent = U("skip");
+          var p = S.data.personal || {};
+          $("mark").innerHTML = esc(p.name) + ' <span>' + esc(t(p.title)) + "</span>";
+        }
 
-        /* eğitim desenleri */
-        var EGL = [
-          ["M8 14 h24 v22 h-24 z","M32 14 h0","M12 20 h16","M12 26 h16","M12 32 h10","M8 14 l12 -6 l12 6"],
-          ["M6 34 h28","M10 34 v-16 h20 v16","M14 22 h4","M22 22 h4","M14 28 h4","M22 28 h4","M20 12 l0 -4"],
-          ["M10 10 h20 v20 h-20 z","M15 16 h10","M15 21 h10","M20 30 v6","M16 36 h8"]
-        ];
+        function renderHero() {
+          var m = S.data.meta || {}, p = S.data.personal || {};
+          $("h1").textContent = L2(m.headline).filter(Boolean).join(" ");
+          $("lede").textContent = fill(t(m.lede));
+          $("ctaTalk").innerHTML = esc(U("talk")) + arrowR;
+          var cv = t(p.cv);
+          $("ctaCv").setAttribute("href", cv);
+          $("ctaCv").textContent = U("cv");
+          $("avail").textContent = t(m.availability);
+          $("photoCap").textContent = U("photoCaption");
+          var img = $("heroPhoto");
+          if (p.image) img.setAttribute("src", p.image);
+          img.setAttribute("alt", t(m.imageAlt) || p.name);
+        }
 
-        /* iş süreleri: 2020'den bugüne ortak zaman çizgisinde */
-        function months(str) {
-          var m = String(str).match(/(\d{1,2})\/(\d{4})/g) || [];
-          function toIdx(t) { var q = t.split("/"); return (+q[1] - 2020) * 12 + (+q[0] - 1); }
+        function secHead(id, key) {
+          var s = SEC(key);
+          if ($(id + "T")) $(id + "T").textContent = fill(t(s.title));
+          if ($(id + "L")) $(id + "L").textContent = fill(t(s.lede));
+        }
+
+        /* ── fiş ───────────────────────────────────────────────── */
+        function renderReceipt() {
+          var r = S.data.receipt || {}, m = S.data.meta || {}, c = S.data.contact || {}, st = STAT();
           var now = new Date();
-          var end = (now.getFullYear() - 2020) * 12 + now.getMonth();
-          if (!m.length) return null;
-          return { a: toIdx(m[0]), b: m.length > 1 ? toIdx(m[1]) : end, total: end };
-        }
-
-        /* bir ekran nasıl doğar — 900x520 koordinat */
-
-        /* kendi araçlarım */
-        var TL_TOK = [[270,210,620,70],[270,210,620,210],[270,210,620,350]];
-
-        var LAY_D = {
-          vb:[900,460],
-          order:[[20,20],[20,105],[20,190],[20,275],[20,360]],
-          scatter:[[62,26,-7],[418,8,6],[522,296,-5],[28,332,9],[248,168,-11]],
-          wire:function (y) { return "M220 " + (y + 27) + " C 400 " + (y + 27) + ", 430 230, 600 230"; }
-        };
-        var LAY_M = {
-          vb:[440,820],
-          order:[[30,10],[30,110],[30,210],[30,310],[30,410]],
-          scatter:[[70,4,-6],[8,120,5],[54,196,-8],[4,322,7],[46,398,-4]],
-          wire:function (y) { return "M220 " + (y + 60) + " C 220 " + (y + 130) + ", 220 560, 220 630"; }
-        };
-        function layout() { return window.innerWidth <= 760 ? LAY_M : LAY_D; }
-
-        /* ══ genel kaydırma motoru ══ */
-        var SD = [];
-        function collectSD() { SD = [].slice.call(document.querySelectorAll("[data-sd]")); }
-        /* yatay giris mesafesi sayfa olugunu asmamali; yoksa oge ekran disina tasar */
-        function yatayPay(istenen) {
-          var pad = parseFloat(getComputedStyle(H).getPropertyValue("--pad")) || 20;
-          return Math.max(0, Math.min(istenen, pad - 4));
-        }
-
-        function updateSD() {
-          var vh = window.innerHeight;
-          for (var i = 0; i < SD.length; i++) {
-            var el = SD[i], r = el.getBoundingClientRect();
-            if (r.bottom < -160 || r.top > vh + 160) continue;
-            var idx = +(el.dataset.i || 0);
-            var p = ease(clamp((vh * 0.96 - idx * 46 - r.top) / (vh * 0.42), 0, 1));
-            var k = el.dataset.sd;
-            if (k === "up")         el.style.transform = "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
-            else if (k === "left")  {
-              var lx = yatayPay(60);
-              el.style.transform = lx >= 10
-                ? "translate3d(" + ((1 - p) * -lx * AMP).toFixed(1) + "px,0,0)"
-                : "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
-            }
-            else if (k === "right") {
-              var rx = yatayPay(60);
-              el.style.transform = rx >= 10
-                ? "translate3d(" + ((1 - p) * rx * AMP).toFixed(1) + "px,0,0)"
-                : "translate3d(0," + ((1 - p) * 46 * AMP).toFixed(1) + "px,0)";
-            }
-            else if (k === "scale") el.style.transform = "scale(" + (1 - (1 - p) * 0.1 * AMP).toFixed(3) + ")";
-            else if (k === "line")  { el.style.transform = "scaleX(" + p.toFixed(3) + ")"; el.style.opacity = 1; continue; }
-            else if (k === "clip")  el.style.clipPath = "inset(" + ((1 - p) * 100).toFixed(1) + "% 0 0 0)";
-            el.style.opacity = (0.08 + p * 0.92).toFixed(3);
-          }
-        }
-
-        /* ══ dağınık sistemler → tek akış ══ */
-        function L2(o) { return (o && (o[S.lang] || o.tr || o.en)) || []; }
-
-        function renderViz() {
-          document.getElementById("vizCap").innerHTML = caps(((S.data && S.data.scenes) || {}).flow);
-
-          var L = layout();
-          document.getElementById("vizNodes").innerHTML = D("sources").slice(0, 5).map(function (v, i) {
-            var x = L2(v);
-            return '<div class="vn" style="left:' + (L.order[i][0] / L.vb[0] * 100).toFixed(3) +
-              "%;top:" + (L.order[i][1] / L.vb[1] * 100).toFixed(3) + '%">' +
-              '<span class="t">' + esc(x[0]) + '</span><span class="s"><span class="bad">' + esc(x[1]) +
-              '</span><span class="good">' + esc(x[2]) + "</span></span></div>";
-          }).join("");
-
-          document.getElementById("vizHub").innerHTML =
-            '<span class="t">' + (S.lang === "tr" ? "Tek sistem" : "One system") + "</span>" +
-            '<span class="s">' + (S.lang === "tr" ? "HEPSİ AYNI YERDE" : "ALL IN ONE PLACE") + "</span>";
-
-          var wire = document.getElementById("vizWire");
-          wire.setAttribute("viewBox", "0 0 " + L.vb[0] + " " + L.vb[1]);
-          wire.innerHTML = L.order.map(function (o) { return '<path d="' + L.wire(o[1]) + '" />'; }).join("");
-          wire.querySelectorAll("path").forEach(function (pt) {
-            var len = pt.getTotalLength();
-            pt.style.strokeDasharray = len;
-            pt.style.strokeDashoffset = len;
-            pt.dataset.len = len;
-          });
-          S.cap = -1;
-        }
-
-        var vTrack = document.getElementById("vizTrack");
-        function setupViz() { if (vTrack) vTrack.style.height = "230svh"; }
-
-        function updateViz() {
-          if (!vTrack) return;
-          var r = vTrack.getBoundingClientRect(), span = vTrack.offsetHeight - window.innerHeight;
-          if (span <= 0) return;
-          var p = clamp(-r.top / span, 0, 1);
-          var L = layout();
-          var sc = document.getElementById("vizStage").clientWidth / L.vb[0];
-
-          var gather = ease(clamp(p / 0.30, 0, 1));
-          document.querySelectorAll(".vn").forEach(function (el, i) {
-            var o = L.order[i], t2 = L.scatter[i];
-            el.style.transform =
-              "translate3d(" + ((t2[0] - o[0]) * sc * (1 - gather) * AMP).toFixed(1) + "px," +
-              ((t2[1] - o[1]) * sc * (1 - gather) * AMP).toFixed(1) + "px,0) rotate(" +
-              (t2[2] * (1 - gather) * AMP).toFixed(2) + "deg)";
-          });
-
-          var draw = clamp((p - 0.30) / 0.34, 0, 1);
-          document.querySelectorAll("#vizWire path").forEach(function (pt, i) {
-            pt.style.strokeDashoffset = (+pt.dataset.len) * (1 - ease(clamp(draw * 6 - i, 0, 1)));
-          });
-
-          var hub = ease(clamp((p - 0.56) / 0.24, 0, 1));
-          var h = document.getElementById("vizHub");
-          h.style.opacity = hub.toFixed(3);
-          h.style.transform = "scale(" + (0.86 + hub * 0.14).toFixed(3) + ")";
-
-          document.querySelectorAll(".vn").forEach(function (el, i) {
-            var on = p > 0.76 + i * 0.03;
-            el.classList.toggle("done", on);
-            el.style.borderColor = on ? "var(--hot)" : "var(--rule)";
-          });
-
-          var ci = p < 0.20 ? 0 : p < 0.44 ? 1 : p < 0.72 ? 2 : 3;
-          if (ci !== S.cap) {
-            S.cap = ci;
-            document.querySelectorAll("#vizCap div").forEach(function (d) { d.classList.toggle("on", +d.dataset.c === ci); });
-          }
-        }
-
-
-        /* ══ kendi araçlarım ══ */
-        function renderTools() {
-          document.getElementById("tlCap").innerHTML = caps(((S.data && S.data.scenes) || {}).tools);
-          document.getElementById("tlCore").innerHTML =
-            '<span class="t">' + (S.lang === "tr" ? "Yazdığım araç" : "The tool I wrote") + "</span>" +
-            '<span class="s">' + (S.lang === "tr" ? "TEK ÇEKİRDEK · SIFIR BAĞIMLILIK" : "ONE CORE · ZERO DEPENDENCIES") + "</span>";
-          var pk = D("packages");
-          document.querySelectorAll(".tl-t").forEach(function (el, i) {
-            var k = pk[i];
-            el.style.display = k ? "" : "none";
-            if (!k) return;
-            el.innerHTML = '<span class="n">' + esc(k.name) + '</span><span class="p">' +
-              esc(k.registry) + " · " + (S.lang === "tr" ? "yayında" : "published") + " &#8599;</span>";
-            if (k.url) {
-              el.setAttribute("role", "link");
-              el.setAttribute("tabindex", "0");
-              el.style.cursor = "pointer";
-              el.onclick = function () { window.open(k.url, "_blank", "noopener"); };
-              el.onkeydown = function (e) {
-                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); window.open(k.url, "_blank", "noopener"); }
-              };
-            }
-          });
-          S.tcap = -1;
-        }
-
-        var tTrack = document.getElementById("tlTrack");
-        function setupTools() { if (tTrack) tTrack.style.height = "250svh"; }
-
-        function updateTools() {
-          if (!tTrack) return;
-          var r = tTrack.getBoundingClientRect(), span = tTrack.offsetHeight - window.innerHeight;
-          if (span <= 0) return;
-          var p = clamp(-r.top / span, 0, 1);
-          var stage = document.getElementById("tlStage");
-          var sw = stage.clientWidth / 900, sh = stage.clientHeight / 420;
-
-          var core = document.getElementById("tlCore");
-          var cq = ease(clamp(p / 0.14, 0, 1));
-          core.style.opacity = cq.toFixed(3);
-          core.style.transform = "scale(" + (0.9 + cq * 0.1).toFixed(3) + ")";
-
-          var send = clamp((p - 0.15) / 0.70, 0, 1);
-          document.querySelectorAll(".tl-tok").forEach(function (tok, i) {
-            var q = clamp(send * 1.7 - i * 0.35, 0, 1);
-            var c = TL_TOK[i];
-            tok.style.opacity = q > 0.02 && q < 0.99 ? 1 : 0;
-            tok.style.transform = "translate3d(" + ((c[0] + (c[2] - c[0]) * q) * sw).toFixed(1) + "px," +
-              ((c[1] + (c[3] - c[1]) * q) * sh).toFixed(1) + "px,0)";
-          });
-          document.querySelectorAll(".tl-t").forEach(function (el, i) {
-            var q = clamp(send * 1.7 - i * 0.35, 0, 1);
-            el.style.opacity = (0.12 + ease(clamp(q * 2, 0, 1)) * 0.88).toFixed(3);
-            el.style.transform = "translate3d(" + ((1 - ease(clamp(q * 2, 0, 1))) * 22 * AMP).toFixed(1) + "px,0,0)";
-            el.classList.toggle("on", q > 0.97);
-          });
-
-          var ci = p < 0.18 ? 0 : p < 0.42 ? 1 : p < 0.68 ? 2 : 3;
-          if (ci !== S.tcap) {
-            S.tcap = ci;
-            document.querySelectorAll("#tlCap div").forEach(function (d) { d.classList.toggle("on", +d.dataset.c === ci); });
-          }
-        }
-
-        /* ══ katmanlar ══ */
-        function renderLayers() {
-          document.getElementById("layStage").innerHTML = D("layers").slice(0, 5).map(function (l) {
-            return '<div class="lay' + (l.accent ? " hw" : "") + '"><span class="nm">' + esc(t(l)) +
-                   '</span><span class="tc">' + esc(t(l.note)) + "</span></div>";
-          }).join("");
-        }
-        var lTrack = document.getElementById("layTrack");
-        function setupLay() { if (lTrack) lTrack.style.height = "190svh"; }
-        function updateLay() {
-          if (!lTrack) return;
-          var r = lTrack.getBoundingClientRect(), span = lTrack.offsetHeight - window.innerHeight;
-          if (span <= 0) return;
-          var p = clamp(-r.top / span, 0, 1);
-          var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-          var els = document.querySelectorAll(".lay"), n = els.length;
-          var gap = Math.min(92, window.innerHeight * 0.11);
-          for (var i = 0; i < n; i++) {
-            var off = i - (n - 1) / 2;
-            els[i].style.transform = "translate3d(0," + (off * gap * e).toFixed(1) + "px," +
-              (off * 26 * e * AMP).toFixed(1) + "px) rotateX(" + (54 * (1 - e) * AMP).toFixed(1) + "deg)";
-            els[i].style.opacity = (0.3 + 0.7 * e).toFixed(2);
-            els[i].style.zIndex = n - i;
-          }
-        }
-
-        /* ══ diğer bölümler ══ */
-        function updateHero(y) {
-          var p = clamp(y / window.innerHeight, 0, 1);
-          var n = document.getElementById("heroTitle"), im = document.getElementById("heroPhoto");
-          if (n) { n.style.transform = "translate3d(0," + (p * -70 * AMP).toFixed(1) + "px,0)"; n.style.opacity = (1 - p * 0.7).toFixed(3); }
-          if (im) im.style.transform = "translate3d(0," + (p * 44 * AMP).toFixed(1) + "px,0) scale(" + (1 + p * 0.07 * AMP).toFixed(3) + ")";
-        }
-        /* parcadan butune: cizgi cizilir, sonra cocuklar okuma sirasiyla soldan gelir */
-        function assemble(sel, partSel, dx) {
-          var vh = window.innerHeight;
-          document.querySelectorAll(sel).forEach(function (el) {
-            var r = el.getBoundingClientRect();
-            if (r.bottom < -140 || r.top > vh + 140) return;
-            var p = clamp((vh * 0.94 - r.top) / (vh * 0.5), 0, 1);
-            el.style.setProperty("--asm", ease(clamp(p * 2.6, 0, 1)).toFixed(3));
-            el.style.setProperty("--asmo", clamp(1 - (p - 0.46) / 0.3, 0, 1).toFixed(3));
-            var kids = el.querySelectorAll(partSel);
-            var ax = yatayPay(dx);
-            for (var i = 0; i < kids.length; i++) {
-              var q = ease(clamp((p - 0.12) / 0.74 * (kids.length + 1.4) - i, 0, 1));
-              kids[i].style.opacity = (0.05 + q * 0.95).toFixed(3);
-              kids[i].style.transform = ax >= 8
-                ? "translate3d(" + (-(1 - q) * ax * AMP).toFixed(1) + "px,0,0)"
-                : "translate3d(0," + ((1 - q) * 18 * AMP).toFixed(1) + "px,0)";
-            }
-          });
-        }
-
-        function updateList(sel, dist) {
-          var vh = window.innerHeight;
-          document.querySelectorAll(sel).forEach(function (el) {
-            var r = el.getBoundingClientRect();
-            if (r.bottom < -120 || r.top > vh + 120) return;
-            var p = ease(clamp((vh * 0.94 - r.top) / (vh * 0.38), 0, 1));
-            el.style.opacity = (0.06 + p * 0.94).toFixed(3);
-            el.style.transform = "translate3d(0," + ((1 - p) * dist * AMP).toFixed(1) + "px,0)";
-          });
-        }
-        function updateFlow() {
-          var box = document.getElementById("flow");
-          if (!box) return;
-          var r = box.getBoundingClientRect(), vh = window.innerHeight;
-          var p = clamp((vh * 0.68 - r.top) / Math.max(1, r.height * 0.82), 0, 1);
-          var fill = document.getElementById("spineFill");
-          if (fill) fill.style.height = (p * 100).toFixed(1) + "%";
-          var dot = document.getElementById("spineDot");
-          if (dot) {
-            dot.style.transform = "translateY(" + (p * (r.height - 24)).toFixed(1) + "px)";
-            dot.style.opacity = p > 0.01 && p < 0.99 ? 1 : 0;
-          }
-          document.querySelectorAll(".step").forEach(function (s) {
-            s.classList.toggle("on", s.getBoundingClientRect().top < vh * 0.66);
-          });
-        }
-        function updateTally() {
-          var box = document.getElementById("tally");
-          if (!box) return;
-          var r = box.getBoundingClientRect(), vh = window.innerHeight;
-          var p = ease(clamp((vh * 0.92 - r.top) / (vh * 0.42), 0, 1));
-          box.querySelectorAll(".v").forEach(function (e) { e.textContent = Math.round((+e.dataset.to || 0) * p); });
-          box.querySelectorAll(".barw i").forEach(function (b, i) {
-            b.style.transform = "scaleX(" + ease(clamp(p * 1.6 - i * 0.12, 0, 1)).toFixed(3) + ")";
-          });
-        }
-        function updateStack() {
-          var rows = document.querySelectorAll("#jobs .row");
-          for (var i = 0; i < rows.length; i++) {
-            var r = rows[i].getBoundingClientRect(), nx = rows[i + 1], k = 0;
-            if (nx) k = clamp((r.bottom - nx.getBoundingClientRect().top) / Math.max(1, r.height), 0, 1);
-            rows[i].style.transform = "scale(" + (1 - k * 0.05 * AMP).toFixed(4) + ")";
-            rows[i].style.opacity = (1 - k * 0.4).toFixed(3);
-          }
-        }
-        function updateRepos() {
-          var vh = window.innerHeight;
-          document.querySelectorAll("#repos .repo").forEach(function (el) {
-            var r = el.getBoundingClientRect();
-            if (r.bottom < -100 || r.top > vh + 100) return;
-            var p = ease(clamp((vh * 0.94 - r.top) / (vh * 0.38), 0, 1));
-            el.style.opacity = (0.06 + p * 0.94).toFixed(3);
-            el.style.transform = "translate3d(0," + ((1 - p) * 30 * AMP).toFixed(1) + "px,0)";
-            var b = el.querySelector(".sbar");
-            if (b) b.style.transform = "scaleX(" + (p * (+el.dataset.share || 0)).toFixed(3) + ")";
-          });
-        }
-        /* kısaca bölümü: paragraflar ve imza çizgisi */
-        function updateNote() {
-          var box = document.querySelector(".note");
-          if (!box) return;
-          var r = box.getBoundingClientRect(), vh = window.innerHeight;
-          var p = clamp((vh * 0.78 - r.top) / Math.max(1, r.height * 0.8), 0, 1);
-          var th = document.getElementById("noteThread");
-          if (th) th.style.height = (p * 100).toFixed(1) + "%";
-          var ps = box.querySelectorAll(".note-body");
-          for (var i = 0; i < ps.length; i++) {
-            var q = ease(clamp(p * (ps.length + 1.4) - i, 0, 1));
-            ps[i].style.opacity = (0.12 + q * 0.88).toFixed(3);
-            ps[i].style.transform = "translate3d(0," + ((1 - q) * 18 * AMP).toFixed(1) + "px,0)";
-          }
-          var sr = document.getElementById("sigRule");
-          if (sr) sr.style.transform = "scaleX(" + ease(clamp(p * 1.5 - 0.55, 0, 1)).toFixed(3) + ")";
-        }
-
-        /* iletişim: dikey bağlantı çizgisi, satır çentikleri, form alt çizgileri */
-        function updateTalk() {
-          var box = document.getElementById("contactLines"), vh = window.innerHeight;
-          if (box) {
-            var r = box.getBoundingClientRect();
-            var p = clamp((vh * 0.76 - r.top) / Math.max(1, r.height * 0.85), 0, 1);
-            var th = document.getElementById("cThread");
-            if (th) th.style.height = (p * 100).toFixed(1) + "%";
-            var rows = box.querySelectorAll(".cl2");
-            for (var i = 0; i < rows.length; i++) {
-              rows[i].classList.toggle("lit", p > (i + 0.4) / rows.length);
-            }
-          }
-          document.querySelectorAll(".fd").forEach(function (f, i) {
-            var fr = f.getBoundingClientRect();
-            if (fr.bottom < -80 || fr.top > vh + 80) return;
-            var q = ease(clamp((vh * 0.9 - fr.top) / (vh * 0.3) - i * 0.25, 0, 1));
-            var u = f.querySelector(".uline");
-            if (u) u.style.transform = "scaleX(" + q.toFixed(3) + ")";
-          });
-        }
-
-        /* eğitim desenleri + sertifika sırası + iş süre çubukları */
-        function updateEdu() {
-          var vh = window.innerHeight;
-          document.querySelectorAll("#edu .row").forEach(function (row) {
-            var r = row.getBoundingClientRect();
-            if (r.bottom < -100 || r.top > vh + 100) return;
-            var base = clamp((vh * 0.9 - r.top) / (vh * 0.32), 0, 1);
-            row.querySelectorAll(".egl path").forEach(function (pt, i) {
-              pt.style.strokeDashoffset = ((+pt.dataset.len) * (1 - ease(clamp(base * 8 - i, 0, 1)))).toFixed(1);
-            });
-          });
-          var cl = document.querySelectorAll(".certs li");
-          if (cl.length) {
-            var cr = cl[0].parentNode.getBoundingClientRect();
-            var cp = clamp((vh * 0.92 - cr.top) / (vh * 0.4), 0, 1);
-            for (var i = 0; i < cl.length; i++) {
-              var q = ease(clamp(cp * (cl.length + 3) - i, 0, 1));
-              cl[i].style.opacity = (0.1 + q * 0.9).toFixed(3);
-              cl[i].style.transform = "translate3d(0," + ((1 - q) * 12 * AMP).toFixed(1) + "px,0)";
-            }
-          }
-          document.querySelectorAll("#jobs .dur").forEach(function (d) {
-            var r = d.getBoundingClientRect();
-            if (r.bottom < -80 || r.top > vh + 80) return;
-            var q = ease(clamp((vh * 0.88 - r.top) / (vh * 0.26), 0, 1));
-            var seg = d.querySelector(".seg");
-            if (seg) seg.style.transform = "scaleX(" + q.toFixed(3) + ")";
-          });
-        }
-
-        function updateKit() {
-          var vh = window.innerHeight;
-          document.querySelectorAll("#kitMount .caps").forEach(function (row) {
-            var r = row.getBoundingClientRect();
-            if (r.bottom < -100 || r.top > vh + 100) return;
-            var base = clamp((vh * 0.94 - r.top) / (vh * 0.38), 0, 1);
-            var w = row.querySelectorAll(".chip");
-            for (var i = 0; i < w.length; i++) {
-              var q = ease(clamp(base * (w.length + 5) - i, 0, 1));
-              w[i].style.opacity = q.toFixed(3);
-              w[i].style.transform = "translate3d(0," + ((1 - q) * 14 * AMP).toFixed(1) +
-                "px,0) scale(" + (1 - (1 - q) * 0.12 * AMP).toFixed(3) + ")";
-            }
-          });
-        }
-
-        /* ══ döngü ══ */
-        var ticking = false, lastY = 0;
-        var rail = document.getElementById("rail"), bar = document.getElementById("bar");
-        function frame() {
-          var y = window.scrollY || H.scrollTop;
-          var max = H.scrollHeight - window.innerHeight;
-          rail.style.transform = "scaleX(" + (max > 0 ? y / max : 0).toFixed(4) + ")";
-          if (y > 250 && y > lastY + 4) bar.classList.add("up");
-          else if (y < lastY - 4 || y < 250) bar.classList.remove("up");
-          lastY = y;
-          updateHero(y); updateSD(); updateViz(); updateTools(); updateLay();
-          assemble("#services .srv", ":scope > *", 26);
-          assemble("#cases .case", ":scope > *:not(.pv)", 24);
-          assemble(".step", ":scope > *", 20);
-          assemble("#edu .row", ":scope > *", 22);
-          updateList("#contactLines .cl2", 26);
-          updateFlow(); updateTally(); updateStack(); updateRepos(); updateKit(); updateGlyphs(); updateCases();
-          updateNote(); updateTalk(); updateEdu(); updateJobAxis(); updateNav();
-          ticking = false;
-        }
-        function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(frame); }
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", function () { renderViz(); setupAll(); onScroll(); });
-        document.addEventListener("visibilitychange", function () { if (!document.hidden) { ticking = false; S.cap = -1; onScroll(); } });
-        function setupAll() {
-          document.querySelectorAll(".fd").forEach(function (f) {
-            if (!f.querySelector(".uline")) {
-              var u = document.createElement("span"); u.className = "uline"; f.appendChild(u);
-            }
-          });
-          collectSD(); setupViz(); setupTools(); setupLay();
-          document.querySelectorAll("#jobs .row").forEach(function (r, i) { r.style.top = (70 + i * 13) + "px"; });
-          layoutJobAxis();
-        }
-        /* menude aktif bolum: ayri bir gozlemci yerine zaten her karede donen dongu */
-        var navLinks = [].slice.call(document.querySelectorAll(".nav a"));
-        /* yalniz menude karsiligi olan bolumler; aradaki sahnelerde vurgu
-           gecilen son menu bolumunde kalir, menu hic sonmez */
-        var navSecs = navLinks.map(function (a) {
-          var h = a.getAttribute("href") || "";
-          return h.charAt(0) === "#" ? document.getElementById(h.slice(1)) : null;
-        });
-        function updateNav() {
-          var mid = window.innerHeight * 0.5, best = -1, bestTop = -Infinity;
-          for (var i = 0; i < navSecs.length; i++) {
-            if (!navSecs[i]) continue;
-            var top = navSecs[i].getBoundingClientRect().top;
-            if (top <= mid && top > bestTop) { bestTop = top; best = i; }
-          }
-          for (var k = 0; k < navLinks.length; k++) navLinks[k].classList.toggle("on", k === best);
-        }
-
-        /* ══ render ══ */
-        function renderAll() {
-          renderViz(); renderTools(); renderLayers(); renderServices(); renderCases(); renderSteps();
-          if (S.data) { renderIntro(); renderNote(); renderTally(); renderJobs(); renderJobAxis(); renderKit(); renderEdu(); renderContact(); }
-          renderColophon(); renderRepos(); renumber(); renderMeta(); setupAll(); onScroll();
-        }
-        /* {years} {companies} {repos} {stars} {packages} jetonlarını doldurur */
-        function applyFill() {
-          document.querySelectorAll("[data-fill]").forEach(function (el) {
-            var raw = el.getAttribute("data-" + S.lang) || el.getAttribute("data-raw");
-            if (raw) { el.setAttribute("data-raw", raw); el.textContent = fill(raw); }
-          });
-        }
-
-        function renderIntro() {
-          var meta = (S.data && S.data.meta) || {};
-          var st = STAT();
-          var role = document.getElementById("introRole");
-          if (role) role.textContent = (S.lang === "tr" ? "Yazılım geliştirici · " : "Software developer · ") +
-            (t(meta.baseCity) || t((S.data.contact || {}).location));
-          var since = document.getElementById("introSince");
-          if (since) since.textContent = S.lang === "tr" ? st.startYear + "'den beri" : "Since " + st.startYear;
-
-          /* fotograf yolu ve adi da veriden; src HTML'de de duruyor ki LCP gecikmesin */
-          var pr = S.data.personal || {};
-          var ph = document.getElementById("heroPhoto");
-          if (ph) {
-            if (pr.image && ph.getAttribute("src") !== pr.image) ph.setAttribute("src", pr.image);
-            if (pr.name) ph.setAttribute("alt", pr.name);
-          }
-          var fc = document.querySelector(".photo figcaption");
-          if (fc && pr.name) fc.textContent = pr.name + " · " + (t(meta.baseCity) || t((S.data.contact || {}).location));
-
-          var av = document.getElementById("avail");
-          if (av) av.textContent = t(meta.availability) || "";
-
-          var h1 = document.getElementById("heroTitle");
-          if (h1) {
-            var hl = L2(meta.headline);
-            h1.innerHTML = hl.length
-              ? esc(hl[0]) + ' <i>' + esc(hl[1]) + "</i> " + esc(hl[2] || "")
-              : esc(t((S.data.personal || {}).title));
-          }
-          var ld = document.getElementById("heroLede");
-          if (ld) ld.textContent = fill(t(meta.lede) || t((S.data.personal || {}).description));
-        }
-
-        function renderNote() {
-          var box = document.getElementById("noteBody");
-          if (!box) return;
-          var meta = (S.data && S.data.meta) || {};
-          box.innerHTML = L2(meta.note).map(function (x) {
-            return '<p class="note-body">' + esc(fill(x)) + "</p>";
-          }).join("");
-        }
-
-        function renderTally() {
-          var box = document.getElementById("tally");
-          if (!box) return;
-          var st = STAT();
-          var items = [
-            [st.years,     { tr: "Yıl deneyim", en: "Years" }],
-            [st.companies, { tr: "Şirket",      en: "Companies" }],
-            [st.repos,     { tr: "Proje",       en: "Projects" }],
-            [st.stars,     { tr: "Yıldız",      en: "Stars" }]
+          var two = function (n) { return (n < 10 ? "0" : "") + n; };
+          var date = S.lang === "tr"
+            ? two(now.getDate()) + "." + two(now.getMonth() + 1) + "." + now.getFullYear()
+            : now.getFullYear() + "-" + two(now.getMonth() + 1) + "-" + two(now.getDate());
+          var time = two(now.getHours()) + ":" + two(now.getMinutes());
+          var head = [
+            [t(r.date), date],
+            [t(r.time), time],
+            [t(r.place), t(m.baseCity) + " · " + m.timezone]
           ];
-          box.innerHTML = items.map(function (it, i) {
-            return '<div data-sd="up" data-i="' + i + '"><span class="v" data-to="' + it[0] +
-              '">0</span><span class="barw"><i></i></span><span class="k2">' + esc(t(it[1])) + "</span></div>";
-          }).join("");
-        }
-
-        function renderServices() {
-          document.getElementById("services").innerHTML = D("services").map(function (s, i) {
-            var x = L2(s);
-            var g = (GLYPH[i] || []).map(function (d) { return '<path d="' + d + '" />'; }).join("");
-            return '<article class="srv"><div class="gl"><svg viewBox="0 0 58 58" aria-hidden="true">' + g +
-              '</svg></div><div><span class="no">0' + (i + 1) + "</span><h3>" + esc(x[0]) +
-              "</h3></div><div><p>" + esc(x[1]) + "</p></div></article>";
-          }).join("");
-          document.querySelectorAll(".gl path").forEach(function (pt) {
-            var len = pt.getTotalLength();
-            pt.style.strokeDasharray = len;
-            pt.style.strokeDashoffset = len;
-            pt.dataset.len = len;
+          var live = S.repos.length > 0;
+          var rows = (r.rows || []).map(function (x) {
+            var pending = (x.key === "repos" || x.key === "stars") && !live;
+            return [t(x.label), pending ? "…" : num(st[x.key] || 0)];
           });
-        }
-
-        /* desenler satırın kaydırma ilerlemesine göre çizilir */
-        function updateGlyphs() {
-          var vh = window.innerHeight;
-          document.querySelectorAll("#services .srv").forEach(function (row) {
-            var r = row.getBoundingClientRect();
-            if (r.bottom < -120 || r.top > vh + 120) return;
-            var base = clamp((vh * 0.9 - r.top) / (vh * 0.34), 0, 1);
-            var paths = row.querySelectorAll(".gl path");
-            for (var i = 0; i < paths.length; i++) {
-              var lp = ease(clamp(base * (paths.length + 2) - i, 0, 1));
-              paths[i].style.strokeDashoffset = ((+paths[i].dataset.len) * (1 - lp)).toFixed(1);
-            }
-          });
-        }
-        var PRINTER = ["M8 28 h30 v17 h-30 z","M14 28 v-16 h18 v16","M18 17 h10","M18 22 h6","M14 36 h12","M44 27 v11","M48 27 v11","M52 27 v11"];
-
-        /* mini sahne isaretlemesi; tip data.json'daki projects[].scene alanindan gelir */
-        function scene(kind) {
-          var n = function (c, k) { var o = ""; for (var i = 0; i < c; i++) o += "<i" + (k ? ' class="' + k + '"' : "") + "></i>"; return o; };
-          if (kind === "scan")  return '<div class="sc sc-scan"><span class="beam"></span><span class="qr">' + n(4) + '</span><span class="ln">' + n(3) + "</span></div>";
-          if (kind === "merge") return '<div class="sc sc-merge">' + n(3) + '<i class="out"></i></div>';
-          if (kind === "phone") return '<div class="sc sc-phone"><i class="hd"></i>' + n(4) + "</div>";
-          if (kind === "panel") return '<div class="sc sc-panel">' + n(5) + "</div>";
-          return '<div class="sc sc-grid">' + n(9) + "</div>";
-        }
-
-        /* her sahnenin kendi koreografisi; q = o projenin kaydirma ilerlemesi */
-        function playScene(pv, q) {
-          var sc = pv.querySelector(".sc");
-          if (!sc) return;
-          var el = sc.querySelectorAll("i"), i, w;
-
-          if (sc.classList.contains("sc-grid")) {
-            for (i = 0; i < el.length; i++) {
-              w = ease(clamp(q * (el.length + 3) - i, 0, 1));
-              el[i].style.opacity = w.toFixed(3);
-              el[i].style.transform = "scale(" + (0.5 + w * 0.5).toFixed(3) + ")";
-              el[i].classList.toggle("hot", q > 0.82 && (i === 2 || i === 4 || i === 6));
-            }
-            return;
-          }
-          if (sc.classList.contains("sc-scan")) {
-            var qr = sc.querySelectorAll(".qr i"), ln = sc.querySelectorAll(".ln i");
-            var beam = sc.querySelector(".beam");
-            for (i = 0; i < qr.length; i++) {
-              w = ease(clamp(q * 6 - i * 0.5, 0, 1));
-              qr[i].style.opacity = w.toFixed(3);
-              qr[i].style.transform = "scale(" + (0.6 + w * 0.4).toFixed(3) + ")";
-            }
-            var sweep = clamp((q - 0.34) / 0.3, 0, 1);
-            if (beam) {
-              beam.style.opacity = sweep > 0.02 && sweep < 0.98 ? 1 : 0;
-              beam.style.transform = "translateY(" + (sweep * 58).toFixed(1) + "px)";
-            }
-            for (i = 0; i < ln.length; i++) {
-              w = ease(clamp((q - 0.6) / 0.32 * (ln.length + 1) - i, 0, 1));
-              ln[i].style.opacity = w.toFixed(3);
-              ln[i].style.transform = "translate3d(" + ((1 - w) * -10 * AMP).toFixed(1) + "px,0,0)";
-            }
-            return;
-          }
-          if (sc.classList.contains("sc-merge")) {
-            var dots = sc.querySelectorAll("i:not(.out)"), out = sc.querySelector(".out");
-            var box = Math.max(20, sc.clientWidth - 40);
-            for (i = 0; i < dots.length; i++) {
-              w = clamp((q - 0.12) / 0.62 * 1.5 - i * 0.16, 0, 1);
-              dots[i].style.opacity = (w <= 0.02 ? 0 : w < 0.86 ? 1 : Math.max(0, 1 - (w - 0.86) / 0.14)).toFixed(3);
-              dots[i].style.top = (18 + i * 22) + "px";
-              dots[i].style.transform = "translate3d(" + (w * box).toFixed(1) + "px," +
-                (w * (39 - 18 - i * 22)).toFixed(1) + "px,0)";
-            }
-            if (out) {
-              var oq = ease(clamp((q - 0.7) / 0.24, 0, 1));
-              out.style.opacity = oq.toFixed(3);
-              out.style.transform = "scale(" + (0.4 + oq * 0.6).toFixed(3) + ")";
-            }
-            return;
-          }
-          if (sc.classList.contains("sc-phone")) {
-            for (i = 0; i < el.length; i++) {
-              w = ease(clamp(q * (el.length + 2.5) - i, 0, 1));
-              el[i].style.opacity = w.toFixed(3);
-              el[i].style.transform = "translate3d(0," + ((1 - w) * 10 * AMP).toFixed(1) + "px,0)";
-            }
-            return;
-          }
-          if (sc.classList.contains("sc-panel")) {
-            var hs = [42, 70, 30, 88, 58];
-            for (i = 0; i < el.length; i++) {
-              w = ease(clamp(q * (el.length + 2) - i, 0, 1));
-              el[i].style.height = (w * hs[i % hs.length]).toFixed(1) + "%";
-              el[i].classList.toggle("hot", q > 0.8 && i === 3);
-            }
-          }
-        }
-
-        function renderCases() {
-          document.getElementById("cases").innerHTML = D("projects").map(function (c) {
-            var x = L2(c);
-            var pv;
-            if (c.pv === "dev") {
-              pv = '<div class="pv"><div class="top"><i></i><i></i><i></i><span class="load"></span></div>' +
-                   '<svg viewBox="0 0 58 58" aria-hidden="true">' +
-                   PRINTER.map(function (d) { return '<path d="' + d + '" />'; }).join("") + "</svg>" +
-                   '<div class="body">' + (S.lang === "tr" ? "cihaz" : "device") + "</div></div>";
-            } else if (c.pv === "app") {
-              pv = '<div class="pv pv-app"><div class="top"><span class="load"></span></div>' +
-                   scene(c.scene || "phone") + "</div>";
-            } else {
-              pv = '<div class="pv"><div class="top"><i></i><i></i><i></i><span class="load"></span></div>' +
-                   scene(c.scene || "grid") + "</div>";
-            }
-
-            var links = "";
-            if (c.links) {
-              links = c.links.map(function (l) {
-                return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + " &#8599;</a>";
-              }).join("");
-            } else if (c.url) {
-              links = '<a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.host) + " &#8599;</a>";
-            } else {
-              links = '<span class="none">' + (S.lang === "tr" ? "Kapalı sistem" : "Internal system") + "</span>";
-            }
-
-            return '<article class="case">' + pv +
-              '<div><span class="kind">' + esc(t(c.kind)) + '</span><h3>' + esc(x[0]) +
-              '</h3><span class="who">' + esc(x[1]) + "</span></div>" +
-              '<div><p>' + esc(x[2]) + '</p><div class="plinks">' + links + "</div></div></article>";
-          }).join("");
-          document.querySelectorAll(".pv svg path").forEach(function (pt) {
-            var len = pt.getTotalLength();
-            pt.style.strokeDasharray = len;
-            pt.style.strokeDashoffset = len;
-            pt.dataset.len = len;
-          });
-        }
-
-        /* proje önizlemeleri: çerçeve yaklaşır, üstteki çizgi "yüklenir" */
-        function updateCases() {
-          var vh = window.innerHeight;
-          document.querySelectorAll("#cases .case").forEach(function (row) {
-            var r = row.getBoundingClientRect();
-            if (r.bottom < -120 || r.top > vh + 120) return;
-            var raw = clamp((vh * 0.92 - r.top) / (vh * 0.58), 0, 1);
-            var q = ease(raw);
-            var pv = row.querySelector(".pv");
-            if (pv) {
-              pv.style.transform = "translate3d(0," + ((1 - q) * 22 * AMP).toFixed(1) + "px,0) scale(" +
-                (1 - (1 - q) * 0.06 * AMP).toFixed(3) + ")";
-              pv.style.opacity = (0.1 + q * 0.9).toFixed(3);
-              playScene(pv, raw);
-              var ld = pv.querySelector(".load");
-              if (ld) ld.style.width = (clamp(q * 1.35, 0, 1) * 100).toFixed(1) + "%";
-              pv.querySelectorAll("svg path").forEach(function (pt, i) {
-                pt.style.strokeDashoffset = ((+pt.dataset.len) * (1 - ease(clamp(q * 9 - i, 0, 1)))).toFixed(1);
-              });
-            }
-          });
-        }
-        function renderSteps() {
-          document.getElementById("steps").innerHTML = D("process").map(function (s, i) {
-            var x = L2(s);
-            return '<div class="step"><span class="n">0' + (i + 1) + "</span><h3>" + esc(x[0]) + "</h3><p>" + esc(x[1]) + "</p></div>";
-          }).join("");
-        }
-        function renderJobs() {
-          document.getElementById("jobs").innerHTML = (S.data.experience || []).map(function (e) {
-            var mm = months(t(e.period)), dur = "";
-            if (mm && mm.total > 0) {
-              var L = (mm.a / mm.total) * 100, W = Math.max(2, ((mm.b - mm.a) / mm.total) * 100);
-              var len = mm.b - mm.a;
-              var lbl = S.lang === "tr"
-                ? (len >= 12 ? Math.floor(len / 12) + " yıl" + (len % 12 ? " " + (len % 12) + " ay" : "") : len + " ay")
-                : (len >= 12 ? Math.floor(len / 12) + " yr" + (len % 12 ? " " + (len % 12) + " mo" : "") : len + " mo");
-              dur = '<div class="dur"><span class="track"><i class="seg" style="left:' + L.toFixed(2) +
-                "%;width:" + W.toFixed(2) + '%"></i></span><span class="cap"><span>2020</span><span>' +
-                esc(lbl) + "</span><span>" + (S.lang === "tr" ? "bugün" : "today") + "</span></span></div>";
-            }
-            return '<article class="row"><div class="when"><span class="p">' + esc(t(e.period)) +
-              '</span><span class="c2">' + esc(e.location) + "</span></div><div><h3>" + esc(t(e.title)) +
-              '</h3><div class="org">' + esc(e.company) + "</div><p>" + esc(t(e.description)) +
-              '</p><ul class="chips"><li>' + (e.tags || []).map(esc).join("</li><li>") + "</li></ul>" + dur + "</div></article>";
-          }).join("");
-        }
-        /* deneyim ekseni: her isin kendi dugumu, kendi kartinin hizasinda */
-        function renderJobAxis() {
-          var marks = document.getElementById("jtMarks");
-          if (!marks) return;
-          var exp = D("experience");
-          if (!exp.length) { marks.innerHTML = ""; return; }
-          marks.innerHTML = exp.map(function (e) {
-            var per = String(t(e.period));
-            var y = (per.match(/\d{4}/) || [""])[0];
-            return '<span class="jt-mark">' + esc(y) + "</span>";
-          }).join("");
-          layoutJobAxis();
-        }
-
-        /* dugumleri kart konumlarina oturt; yerlesim degisince tekrar cagrilir */
-        function layoutJobAxis() {
-          var wrap = document.querySelector(".jt"), jobs = document.getElementById("jobs");
-          if (!wrap || !jobs) return;
-          var marks = document.querySelectorAll(".jt-mark");
-          var rows = jobs.querySelectorAll(".row");
-          var H = wrap.offsetHeight || 1;
-          for (var i = 0; i < marks.length && i < rows.length; i++) {
-            var top = rows[i].offsetTop + rows[i].offsetHeight * 0.5;
-            var pos = clamp(top / H * 100, 0, 100);
-            marks[i].style.top = pos.toFixed(2) + "%";
-            marks[i].dataset.p = pos.toFixed(2);
-          }
-        }
-
-        function updateJobAxis() {
-          var wrap = document.querySelector(".jt"), fill = document.getElementById("jtFill");
-          if (!wrap || !fill) return;
-          var r = wrap.getBoundingClientRect(), vh = window.innerHeight;
-          if (r.bottom < -120 || r.top > vh + 120) return;
-          var p = clamp((vh * 0.82 - r.top) / Math.max(1, r.height * 1.12), 0, 1);
-          fill.style.height = (p * 100).toFixed(1) + "%";
-          var pct = p * 100;
-          document.querySelectorAll(".jt-mark").forEach(function (m) {
-            m.classList.toggle("on", pct >= (+m.dataset.p || 0) - 0.4);
-          });
-        }
-
-        function renderKit() {
-          var G = { frontend:{tr:"Arayüz",en:"Interface"}, backend:{tr:"Servis ve iş kuralları",en:"Service and logic"},
-                    database:{tr:"Veri",en:"Data"}, tools:{tr:"Araç ve altyapı",en:"Tooling and infra"} };
-          var out = "";
-          Object.keys(G).forEach(function (g) {
-            var n = (S.data.skills || []).filter(function (s) { return s.category === g; });
-            if (!n.length) return;
-            out += '<div class="caps"><span class="k">' + esc(G[g][S.lang]) + '</span><div class="chipwrap">' +
-              n.map(function (s) { return '<span class="chip">' + esc(s.name) + "</span>"; }).join("") + "</div></div>";
-          });
-          document.getElementById("kitMount").innerHTML = out;
-        }
-        function renderEdu() {
-          document.getElementById("edu").innerHTML = (S.data.education || []).map(function (e, i) {
-            var g = (EGL[i % EGL.length] || []).map(function (d) { return '<path d="' + d + '" />'; }).join("");
-            return '<article class="row"><div class="when"><span class="egl"><svg viewBox="0 0 40 40" aria-hidden="true">' +
-              g + '</svg></span><span class="p">' + esc(e.period) +
-              '</span><span class="c2">' + esc(e.location) + "</span></div><div><h3>" + esc(t(e.degree)) +
-              '</h3><div class="org">' + esc(e.school) + "</div><p>" + esc(t(e.description)) + "</p></div></article>";
-          }).join("");
-          document.querySelectorAll(".egl path").forEach(function (pt) {
-            var len = pt.getTotalLength();
-            pt.style.strokeDasharray = len; pt.style.strokeDashoffset = len; pt.dataset.len = len;
-          });
-          document.getElementById("certs").innerHTML = (S.data.certificates || []).map(function (x) {
-            return '<li><span class="y2">' + esc(x.year) + "</span><span>" + esc(t(x.name)) +
-                   '<span class="i2">' + esc(x.issuer) + "</span></span></li>";
-          }).join("");
-        }
-        function renderContact() {
-          var c = S.data.contact;
-          var rows = [
-            [S.lang === "tr" ? "E-posta" : "Email", c.email, "mailto:" + c.email],
-            [S.lang === "tr" ? "Telefon" : "Phone", c.phone, "tel:" + String(c.phone).replace(/[^\d+]/g, "")],
-            [S.lang === "tr" ? "Konum" : "Location", t(c.location), null]
-          ];
-          /* sosyal hesaplar data.json'daki social listesinden gelir */
-          D("social").forEach(function (so) {
-            if (!so.url) return;
-            rows.push([so.label ? t(so.label) : so.name,
-                       String(so.url).replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, ""),
-                       so.url]);
-          });
-          rows.push([S.lang === "tr" ? "Özgeçmiş" : "Résumé", "CV (PDF)", t(S.data.personal.cv)]);
-          var head = '<span class="thread"><i id="cThread"></i></span>';
-          document.getElementById("contactLines").innerHTML = head + rows.map(function (r, i) {
-            var inner = '<span class="k3">' + esc(r[0]) + "</span>" + esc(r[1]);
-            return r[2] ? '<a class="cl2" data-i="' + i + '" href="' + esc(r[2]) + '"' +
-              (r[2].indexOf("http") === 0 ? ' target="_blank" rel="noopener"' : "") + ">" + inner + "</a>"
-              : '<span class="cl2" data-i="' + i + '">' + inner + "</span>";
-          }).join("");
-        }
-        /* bölüm numaraları DOM sırasına göre; yeni bölüm eklenince kendi düzelir */
-        function renumber() {
-          var i = 0;
-          document.querySelectorAll("main .n-auto").forEach(function (el) {
-            i++; el.textContent = (i < 10 ? "0" : "") + i;
-          });
-        }
-
-        /* sayfa açıklaması da veriden üretilir */
-        /* ── arama motoru sinyalleri: hepsi data.json'dan, dile gore ── */
-        function setAttr(sel, val) {
-          var el = document.querySelector(sel);
-          if (el && val) el.setAttribute("content", val);
-        }
-        function renderMeta() {
-          var meta = (S.data && S.data.meta) || {};
-          var pr = (S.data && S.data.personal) || {};
-          var site = meta.siteUrl || "https://beratarpa.com/";
-          var isEN = S.lang === "en";
-          var pageUrl = isEN ? site + "?lang=en" : site;
-
-          /* belge dili, hreflang ile tutarli olmali */
-          H.setAttribute("lang", S.lang);
-
-          var title = t(meta.title) || document.title;
-          document.title = title;
-          setAttr('meta[property="og:title"]', title);
-          setAttr('meta[name="twitter:title"]', title);
-
-          var txt = fill(t(meta.description) || t(meta.lede) || "");
-          if (txt) {
-            setAttr('meta[name="description"]', txt);
-            setAttr('meta[property="og:description"]', txt);
-            setAttr('meta[name="twitter:description"]', txt);
-          }
-
-          /* her dil kendini isaret eden canonical tasir */
-          var can = document.querySelector('link[rel="canonical"]');
-          if (can) can.setAttribute("href", pageUrl);
-          setAttr('meta[property="og:url"]', pageUrl);
-          setAttr('meta[property="og:locale"]', isEN ? "en_US" : "tr_TR");
-          setAttr('meta[property="og:locale:alternate"]', isEN ? "tr_TR" : "en_US");
-
-          var alt = t(meta.imageAlt);
-          setAttr('meta[property="og:image:alt"]', alt);
-          setAttr('meta[name="twitter:image:alt"]', alt);
-          if (pr.image) {
-            var abs = site.replace(/\/$/, "") + "/" + String(pr.image).replace(/^\//, "");
-            setAttr('meta[property="og:image"]', abs);
-            setAttr('meta[name="twitter:image"]', abs);
-          }
-          renderJsonLd();
-        }
-
-        /* schema.org grafigi tamamen veriden uretilir; yeni proje eklenince kendi buyur */
-        function renderJsonLd() {
-          var el = document.getElementById("ldjson");
-          if (!el || !S.data) return;
-          var meta = S.data.meta || {}, pr = S.data.personal || {}, c = S.data.contact || {};
-          var site = (meta.siteUrl || "https://beratarpa.com/").replace(/\/$/, "") + "/";
-          var isEN = S.lang === "en";
-          var pageUrl = isEN ? site + "?lang=en" : site;
-          var lang = isEN ? "en" : "tr";
-          var img = pr.image ? site + String(pr.image).replace(/^\//, "") : null;
-
-          var jobs = D("experience"), edu = D("education"), certs = D("certificates");
-          var g = [];
-
-          g.push({ "@type": "WebSite", "@id": site + "#website", url: site,
-                   name: t(meta.siteName) || pr.name, inLanguage: lang,
-                   publisher: { "@id": site + "#person" } });
-
-          g.push({ "@type": "ProfilePage", "@id": pageUrl + "#page", url: pageUrl,
-                   name: t(meta.title), description: fill(t(meta.lede) || ""), inLanguage: lang,
-                   isPartOf: { "@id": site + "#website" }, about: { "@id": site + "#person" },
-                   mainEntity: { "@id": site + "#person" } });
-
-          if (img) g.push({ "@type": "ImageObject", "@id": site + "#photo", url: img,
-                            width: meta.imageW || undefined, height: meta.imageH || undefined,
-                            caption: t(meta.imageAlt) || pr.name });
-
-          var person = {
-            "@type": "Person", "@id": site + "#person",
-            name: pr.name, url: site, jobTitle: t(pr.title),
-            description: fill(t(meta.lede) || ""),
-            knowsAbout: D("skills").map(function (x) { return x.name; }),
-            knowsLanguage: ["tr", "en"]
+          var line = function (k, v) {
+            return '<div class="r-row"><span class="k">' + esc(k) + '</span><span class="d"></span>' +
+                   '<span class="v">' + esc(v) + "</span></div>";
           };
-          if (img) person.image = { "@id": site + "#photo" };
-          if (c.email) person.email = c.email;
-          if (c.phone) person.telephone = String(c.phone).replace(/\s+/g, " ");
-          if (t(meta.baseCity)) person.address = { "@type": "PostalAddress",
-            addressLocality: t(meta.baseCity), addressCountry: "TR" };
-          var sa = D("social").map(function (x) { return x.url; })
-                     .concat(D("packages").map(function (x) { return x.url; }));
-          if (meta.repo) sa.push(meta.repo);
-          if (sa.length) person.sameAs = sa.filter(Boolean);
-          if (jobs.length && jobs[0].company) person.worksFor = { "@type": "Organization", name: jobs[0].company };
-          if (edu.length) person.alumniOf = edu.map(function (e) {
-            return { "@type": "EducationalOrganization", name: e.school }; });
-          if (certs.length) person.hasCredential = certs.map(function (x) {
-            return { "@type": "EducationalOccupationalCredential",
-                     name: t(x.name), credentialCategory: "certificate",
-                     recognizedBy: x.issuer ? { "@type": "Organization", name: x.issuer } : undefined }; });
-          g.push(person);
-
-          D("projects").forEach(function (pj, i) {
-            var x = L2(pj);
-            if (!x.length) return;
-            g.push({ "@type": "CreativeWork", "@id": site + "#proje" + (i + 1),
-                     name: x[0], description: x[2], url: pj.url || undefined,
-                     inLanguage: lang, creator: { "@id": site + "#person" },
-                     about: t(pj.kind) || undefined });
-          });
-
-          D("packages").forEach(function (k, i) {
-            if (!k.url) return;
-            var slug = String(k.url).replace(/\/$/, "").split("/").pop();
-            g.push({ "@type": "SoftwareSourceCode", "@id": site + "#paket" + (i + 1),
-                     name: slug, programmingLanguage: k.name,
-                     codeRepository: meta.repo || undefined, url: k.url,
-                     author: { "@id": site + "#person" } });
-          });
-
-          try {
-            el.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": g });
-          } catch (e) {}
+          var html =
+            '<div class="r-mid r-name">' + esc((S.data.personal || {}).name).toUpperCase() + "</div>" +
+            '<div class="r-mid r-role">' + esc(t(r.role)) + "</div>" +
+            '<div class="r-rule"></div>' +
+            head.map(function (x) { return line(x[0], x[1]); }).join("") +
+            '<div class="r-rule d"></div>' +
+            rows.map(function (x) { return line(x[0], x[1]); }).join("") +
+            '<div class="r-rule"></div>' +
+            '<div class="r-tot"><span>' + esc(t(r.total)) + "</span><span>" +
+              esc(num(st.days) + " " + t(r.totalUnit)) + "</span></div>" +
+            '<div class="r-note">' + esc(fill(t(r.totalNote))) + "</div>" +
+            '<div class="r-rule d"></div>' +
+            '<div class="r-foot">' + esc(c.email) + "<br />" + esc(c.phone) + "</div>" +
+            '<div class="r-rule"></div>' +
+            '<div class="r-foot">' + esc(t(r.footer)) + "</div>" +
+            '<canvas class="r-bc" id="bc" height="38" role="img" aria-label="' + esc(c.website) + '"></canvas>' +
+            '<div class="r-bct">' + esc(c.website) + "</div>";
+          $("paperIn").innerHTML = html;
+          $("rsNote").textContent = U("receiptNote");
+          layoutReceipt();
         }
 
-        function renderColophon() {
-          var y = new Date().getFullYear();
-          var meta = (S.data && S.data.meta) || {};
-          var nm = ((S.data && S.data.personal) || {}).name || "Berat ARPA";
-          var repo = meta.repo || "https://github.com/BeratARPA/BeratARPAPortfolio";
-          var src = '<a href="' + esc(repo) + '" target="_blank" rel="noopener">' +
-                    esc(String(repo).replace(/^https?:\/\//, "")) + "</a>";
-          document.getElementById("colophon").innerHTML = S.lang === "tr"
-            ? "Bu sayfanın kodunu kendim yazdım; harici animasyon kütüphanesi kullanmadım. Kaynağı açık: " + src + ". &copy; " + y + " " + esc(nm) + "."
-            : "I wrote this page myself, with no external animation library. The source is open: " + src + ". &copy; " + y + " " + esc(nm) + ".";
+        function layoutReceipt() {
+          var pin = $("paperIn"), paper = $("paper");
+          if (!pin || !paper) return;
+          pin.style.transform = "scale(1)";
+          var natural = pin.offsetHeight;
+          var printer = paper.parentNode;
+          var slotH = (printer.querySelector(".slot") || {}).offsetHeight || 26;
+          var vh = window.innerHeight, edge = vh * 0.06;
+          var sc = clamp((vh - slotH - edge * 2) / natural, 0.42, 1);
+          var full = natural * sc;
+          pin.style.transform = "scale(" + sc + ")";
+          /* basımı biten fiş dikey olarak ortalanır */
+          printer.style.marginTop = Math.max(edge, (vh - slotH - full) / 2) + "px";
+          S.rFull = full;
+          S.rLine = 13 * 1.62 * sc;
+          var cv = $("bc");
+          if (cv) drawBarcode(cv, ((S.data.contact || {}).website || "beratarpa.com"));
+          update();
         }
-        var PICK = ["ARE","HTML-Thermal-Printer","BarcodePOS","ARED-Architecture","ARPA-Programming-Language","Service-Watchdog"];
-        function renderRepos() {
-          var m = document.getElementById("repos");
-          if (!m) return;
-          if (!S.repos.length) {
-            var gh = D("social").filter(function (x) { return x.name === "GitHub"; })[0] || {};
-            var gu = gh.url || "https://github.com/BeratARPA";
-            m.innerHTML = '<div class="row"><span class="lbl">' +
-              (S.lang === "tr" ? "Açık kaynak" : "Open source") +
-              '</span><div class="kit"><a href="' + esc(gu) + '" target="_blank" rel="noopener">' +
-              esc(String(gu).replace(/^https?:\/\//, "")) + "</a></div></div>";
-            return;
-          }
-          var by = {}; S.repos.forEach(function (r) { by[r.name] = r; });
-          var chosen = PICK.map(function (n) { return by[n]; }).filter(Boolean)
-                          .sort(function (a, b) { return b.stargazers_count - a.stargazers_count; });
-          var top = 1; chosen.forEach(function (r) { if (r.stargazers_count > top) top = r.stargazers_count; });
-          m.innerHTML = chosen.map(function (r) {
-            return '<a class="repo" data-share="' + (r.stargazers_count / top).toFixed(3) + '" href="' + esc(r.html_url) +
-              '" target="_blank" rel="noopener"><span><span class="st">' +
-              (r.stargazers_count ? "&#9733; " + r.stargazers_count : "&mdash;") + '</span><span class="sbar"></span></span>' +
-              '<span><span class="nm">' + esc(r.name) + '</span><span class="ds">' + esc(r.description || "") + "</span></span>" +
-              '<span class="lg">' + esc(r.language || "&mdash;") + "</span></a>";
+
+        /* ── işler ─────────────────────────────────────────────── */
+        function renderWork() {
+          $("work").innerHTML = D("projects").map(function (p) {
+            var x = L2(p);
+            var links = [];
+            if (p.url) links.push([p.host || U("openSite"), p.url]);
+            (p.links || []).forEach(function (l) { links.push([l[0], l[1]]); });
+            return '<article class="row">' +
+              '<div><div class="row-t">' + esc(x[0]) + "</div>" +
+              '<div class="row-m">' + esc(x[1]) + " · " + esc(t(p.kind)) + "</div></div>" +
+              '<p class="row-d">' + esc(x[2]) + "</p>" +
+              '<div class="row-l">' + links.map(function (l) {
+                return '<a class="lnk" href="' + esc(l[1]) + '" target="_blank" rel="noopener">' +
+                       esc(String(l[0]).replace(/\n/g, " ")) + arrowOut + "</a>";
+              }).join("") + "</div></article>";
           }).join("");
-          onScroll();
         }
 
-        fetch("data.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (d) { S.data = d; setLang(S.lang); })
-          .catch(function () { renderAll(); });
-        fetch("https://api.github.com/users/BeratARPA/repos?per_page=100&sort=updated")
-          .then(function (r) { return r.ok ? r.json() : []; })
-          .then(function (l) {
-            S.repos = (l || []).filter(function (r) { return !r.fork; });
-            renderRepos(); renderTally(); renderIntro();
-            renderViz(); renderTools();
-            applyFill(); setupAll(); onScroll();
+        /* ── açık kaynak ───────────────────────────────────────── */
+        function renderOpen() {
+          $("pkgs").innerHTML = D("packages").map(function (p) {
+            return '<a class="pkg" href="' + esc(p.url) + '" target="_blank" rel="noopener">' +
+              "<b>" + esc(p.name) + "</b><span>" + esc(p.registry) + arrowOut + "</span></a>";
+          }).join("");
+          var top = S.repos.slice().sort(function (a, b) { return b.stargazers_count - a.stargazers_count; })
+                    .slice(0, 6);
+          $("repos").innerHTML = top.map(function (r) {
+            return '<a class="repo" href="' + esc(r.html_url) + '" target="_blank" rel="noopener">' +
+              "<b>" + esc(r.name) + "</b>" +
+              "<p>" + esc(r.description || "") + "</p>" +
+              "<i>" + (r.language ? esc(r.language) + " · " : "") +
+              "<em>" + num(r.stargazers_count) + "</em> " + esc(U("stars")) + "</i></a>";
+          }).join("");
+          $("allRepos").innerHTML = esc(U("allRepos")) + arrowOut;
+          var gh = D("social").filter(function (s) { return /github/i.test(s.name); })[0];
+          if (gh) $("allRepos").setAttribute("href", gh.url);
+          var rp = (S.data.meta || {}).repo;
+          var best = S.repos.slice().sort(function (a, b) { return b.stargazers_count - a.stargazers_count; })[0];
+          if (best) {
+            $("rsRepo").setAttribute("href", best.html_url);
+            $("rsRepo").innerHTML = esc(best.name) + " <b>· " + num(best.stargazers_count) + " " +
+                                    esc(U("stars")) + "</b>" + arrowOut;
+          } else if (rp) {
+            $("rsRepo").setAttribute("href", rp);
+            $("rsRepo").textContent = rp.replace("https://github.com/", "");
+          }
+        }
+
+        /* ── hizmetler, süreç ──────────────────────────────────── */
+        function renderServices() {
+          $("svc").innerHTML = D("services").map(function (s) {
+            var x = L2(s);
+            return "<li><b>" + esc(x[0]) + "</b><p>" + esc(x[1]) + "</p></li>";
+          }).join("");
+          $("calT").textContent = t(SEC("calisma").title);
+          $("steps").innerHTML = D("process").map(function (s, i) {
+            var x = L2(s);
+            return "<li><b><em>" + (i + 1) + "</em>" + esc(x[0]) + "</b><p>" + esc(x[1]) + "</p></li>";
+          }).join("");
+        }
+
+        /* ── deneyim ───────────────────────────────────────────── */
+        function renderExperience() {
+          $("jobs").innerHTML = D("experience").map(function (e) {
+            return '<article class="job"><div class="job-p">' + esc(t(e.period)) + "<br />" +
+              esc(e.location || "") + "</div><div>" +
+              '<h3 class="job-t">' + esc(t(e.title)) + "</h3>" +
+              '<div class="job-c">' + esc(e.company) + "</div>" +
+              '<p class="job-d">' + esc(t(e.description)) + "</p>" +
+              '<div class="tags">' + (e.tags || []).map(function (g) {
+                return "<span>" + esc(g) + "</span>";
+              }).join("") + "</div></div></article>";
+          }).join("");
+
+          $("eduT").textContent = U("educationTitle");
+          $("edu").innerHTML = D("education").map(function (e) {
+            return "<li>" + esc(t(e.degree)) + "<span>" + esc(e.school) + " · " + esc(e.period) + "</span></li>";
+          }).join("");
+
+          $("certT").textContent = U("certsTitle");
+          $("certs").innerHTML = D("certificates").map(function (c) {
+            return "<li>" + esc(t(c.name)) + "<span>" + esc(c.issuer) + " · " + esc(c.year) + "</span></li>";
+          }).join("");
+
+          $("skillT").textContent = U("skillsTitle");
+          $("skills").innerHTML = D("skills").map(function (s) {
+            return "<span>" + esc(s.name) + "</span>";
+          }).join("");
+        }
+
+        /* ── iletişim, alt bilgi ───────────────────────────────── */
+        function renderContact() {
+          var c = S.data.contact || {}, p = S.data.personal || {};
+          var items = [
+            [U("email"), c.email, "mailto:" + c.email],
+            [U("phone"), c.phone, "tel:" + String(c.phone).replace(/[^+\d]/g, "")],
+            [U("location"), t(c.location), null]
+          ];
+          D("social").forEach(function (s) { items.push([s.name, s.url.replace(/^https?:\/\//, ""), s.url]); });
+          items.push([U("cv"), S.lang.toUpperCase() + " · PDF", t(p.cv)]);
+          $("lines").innerHTML = items.map(function (i) {
+            return '<div class="cl"><span>' + esc(i[0]) + "</span>" +
+              (i[2] ? '<a href="' + esc(i[2]) + '"' + (/^https/.test(i[2]) ? ' target="_blank" rel="noopener"' : "") +
+                      ">" + esc(i[1]) + "</a>" : "<p>" + esc(i[1]) + "</p>") + "</div>";
+          }).join("");
+          $("lName").textContent = U("formName");
+          $("lEmail").textContent = U("formEmail");
+          $("lMsg").textContent = U("formMessage");
+          $("sendBtn").textContent = U("formSend");
+        }
+
+        function renderFoot() {
+          var m = S.data.meta || {}, y = new Date().getFullYear();
+          $("foot").innerHTML = "<span>© " + y + " " + esc((S.data.personal || {}).name) + "</span>" +
+            "<span>" + esc(U("colophon")) + "</span>" +
+            (m.repo ? ' <a href="' + esc(m.repo) + '" target="_blank" rel="noopener">github.com/BeratARPA</a>' : "");
+        }
+
+        /* ── meta ve JSON-LD ───────────────────────────────────── */
+        function renderMeta() {
+          var m = S.data.meta || {}, p = S.data.personal || {};
+          var title = fill(t(m.title)), desc = fill(t(m.description));
+          document.documentElement.lang = S.lang;
+          document.title = title;
+          var set = function (sel, attr, val) {
+            var el = document.querySelector(sel); if (el) el.setAttribute(attr, val);
+          };
+          set('meta[name="description"]', "content", desc);
+          set('meta[property="og:title"]', "content", title);
+          set('meta[property="og:description"]', "content", desc);
+          set('meta[name="twitter:title"]', "content", title);
+          set('meta[name="twitter:description"]', "content", desc);
+          set('meta[property="og:locale"]', "content", S.lang === "tr" ? "tr_TR" : "en_US");
+          set('meta[property="og:locale:alternate"]', "content", S.lang === "tr" ? "en_US" : "tr_TR");
+          set('meta[property="og:url"]', "content", m.siteUrl + (S.lang === "en" ? "?lang=en" : ""));
+          set('link[rel="canonical"]', "href", m.siteUrl + (S.lang === "en" ? "?lang=en" : ""));
+          set('meta[property="og:image:alt"]', "content", t(m.imageAlt));
+          set('meta[name="twitter:image:alt"]', "content", t(m.imageAlt));
+        }
+
+        function renderJsonLd() {
+          var m = S.data.meta || {}, p = S.data.personal || {}, c = S.data.contact || {}, st = STAT();
+          var site = m.siteUrl || "https://beratarpa.com/";
+          var orgs = {}; D("experience").forEach(function (e) { if (e.company) orgs[e.company] = 1; });
+          var g = [
+            { "@type": "WebSite", "@id": site + "#site", url: site, name: t(m.siteName),
+              inLanguage: S.lang === "tr" ? "tr-TR" : "en-US",
+              publisher: { "@id": site + "#me" } },
+            { "@type": "ProfilePage", "@id": site + "#page", url: site, name: fill(t(m.title)),
+              isPartOf: { "@id": site + "#site" }, about: { "@id": site + "#me" },
+              inLanguage: S.lang === "tr" ? "tr-TR" : "en-US" },
+            { "@type": "Person", "@id": site + "#me", name: p.name, jobTitle: t(p.title),
+              description: fill(t(m.description)), url: site,
+              image: site + (p.image || "").replace(/^\//, ""),
+              email: "mailto:" + c.email, telephone: c.phone,
+              address: { "@type": "PostalAddress", addressLocality: t(m.baseCity), addressCountry: "TR" },
+              sameAs: D("social").map(function (s) { return s.url; }),
+              knowsAbout: D("skills").map(function (s) { return s.name; }),
+              alumniOf: D("education").map(function (e) { return { "@type": "CollegeOrUniversity", name: e.school }; }),
+              worksFor: Object.keys(orgs).map(function (o) { return { "@type": "Organization", name: o }; }) }
+          ];
+          D("projects").forEach(function (pr, i) {
+            var x = L2(pr);
+            g.push({ "@type": "SoftwareApplication", "@id": site + "#p" + i, name: x[0],
+                     applicationCategory: "BusinessApplication", description: x[2],
+                     operatingSystem: "Web", url: pr.url || site,
+                     author: { "@id": site + "#me" } });
+          });
+          D("services").forEach(function (s, i) {
+            var x = L2(s);
+            g.push({ "@type": "Service", "@id": site + "#s" + i, name: x[0], description: x[1],
+                     provider: { "@id": site + "#me" }, areaServed: "TR" });
+          });
+          $("ldjson").textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": g });
+        }
+
+        /* ── kaydırma: tek hareket, fiş ────────────────────────── */
+        function update() {
+          var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+          $("top").classList.toggle("on", y > 8);
+
+          var tr = $("rsTrack"), paper = $("paper");
+          if (tr && paper && S.rFull) {
+            var r = tr.getBoundingClientRect();
+            var span = tr.offsetHeight - window.innerHeight;
+            var p = span > 0 ? clamp(-r.top / span, 0, 1) : 0;
+            var k = clamp((p - 0.05) / 0.70, 0, 1);
+            var h = k * S.rFull;
+            if (S.rLine > 2) h = Math.min(S.rFull, Math.floor(h / S.rLine) * S.rLine);
+            paper.style.height = h.toFixed(1) + "px";
+            $("edge").style.opacity = (k > 0.01 && k < 1) ? "1" : "0";
+          }
+
+          var best = "", secs = document.querySelectorAll("main section[id]");
+          for (var i = 0; i < secs.length; i++) {
+            if (secs[i].getBoundingClientRect().top <= window.innerHeight * 0.34) best = secs[i].id;
+          }
+          var links = $("nav").querySelectorAll("a");
+          for (var j = 0; j < links.length; j++) {
+            links[j].classList.toggle("on", links[j].getAttribute("href") === "#" + best);
+          }
+        }
+        /* ── çizim ─────────────────────────────────────────────── */
+        function renderAll() {
+          renderNav(); renderHero();
+          secHead("ozet", "ozet"); secHead("isler", "isler"); secHead("acik", "acik");
+          secHead("hiz", "hizmetler"); secHead("den", "deneyim"); secHead("ilt", "iletisim");
+          renderReceipt(); renderWork(); renderOpen(); renderServices();
+          renderExperience(); renderContact(); renderFoot();
+          renderMeta(); renderJsonLd();
+          update();
+        }
+
+        function setLang(l) {
+          S.lang = l;
+          try { localStorage.setItem("lang", l); } catch (e) {}
+          var b = document.querySelectorAll(".lang button");
+          for (var i = 0; i < b.length; i++) b[i].classList.toggle("on", b[i].getAttribute("data-l") === l);
+          if (S.data) renderAll();
+        }
+        var lb = document.querySelectorAll(".lang button");
+        for (var i = 0; i < lb.length; i++) {
+          lb[i].addEventListener("click", function () { setLang(this.getAttribute("data-l")); });
+        }
+
+        /* ── veri ──────────────────────────────────────────────── */
+        fetch("data.json")
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            S.data = d;
+            setLang(S.lang);
+            renderAll();
+            return fetch("https://api.github.com/users/BeratARPA/repos?per_page=100&sort=updated");
+          })
+          .then(function (r) { return r && r.ok ? r.json() : []; })
+          .then(function (list) {
+            S.repos = (list || []).filter(function (r) { return !r.fork; });
+            if (S.data) { renderOpen(); renderReceipt(); renderJsonLd(); update(); }
           })
           .catch(function () {});
 
-        document.getElementById("form").addEventListener("submit", function (e) {
+        /* ── form ──────────────────────────────────────────────── */
+        $("form").addEventListener("submit", function (e) {
           e.preventDefault();
-          var f = e.target, b = document.getElementById("sendBtn"), m = document.getElementById("msg");
+          var f = e.target, b = $("sendBtn"), m = $("msg");
           m.className = "msg";
           if (!f.name.value.trim() || !f.email.value.trim() || !f.message.value.trim()) {
-            m.className = "msg err";
-            m.textContent = S.lang === "tr" ? "Lütfen tüm alanları doldurun." : "Please fill in every field."; return;
+            m.className = "msg err"; m.textContent = U("formEmpty"); return;
           }
           if (typeof emailjs === "undefined") {
-            m.className = "msg err";
-            m.textContent = S.lang === "tr" ? "Mesaj iletilemedi. Doğrudan e-posta gönderebilirsiniz." : "Could not send. Please email me directly."; return;
+            m.className = "msg err"; m.textContent = fill(U("formErr")); return;
           }
-          b.disabled = true; b.textContent = S.lang === "tr" ? "Gönderiliyor" : "Sending";
+          b.disabled = true; b.textContent = U("formSending");
           emailjs.init({ publicKey: "Fo7vBbMCWdic4Sge_" });
           emailjs.sendForm("service_yw336er", "template_ugvsp1h", f).then(function () {
-            f.reset(); b.disabled = false; b.textContent = S.lang === "tr" ? "Gönder" : "Send";
-            m.textContent = S.lang === "tr" ? "Mesajınız bana ulaştı. En kısa sürede döneceğim." : "Received. I will get back to you shortly.";
+            f.reset(); b.disabled = false; b.textContent = U("formSend");
+            m.textContent = U("formOk");
           }, function () {
-            b.disabled = false; b.textContent = S.lang === "tr" ? "Gönder" : "Send";
-            m.className = "msg err";
-            m.textContent = S.lang === "tr" ? "Mesaj iletilemedi. beratarpa@hotmail.com adresine yazabilirsiniz." : "Could not send. Please write to beratarpa@hotmail.com.";
+            b.disabled = false; b.textContent = U("formSend");
+            m.className = "msg err"; m.textContent = fill(U("formErr"));
           });
         });
 
-        setLang(S.lang);
-        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setupAll(); onScroll(); });
-        window.addEventListener("load", function () { setupAll(); onScroll(); });
+        /* ── olaylar ───────────────────────────────────────────── */
+        var rid = 0;
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", function () {
+          clearTimeout(rid); rid = setTimeout(layoutReceipt, 120);
+        });
+        window.addEventListener("load", function () { layoutReceipt(); });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutReceipt);
       })();
     </script>
   </body>
