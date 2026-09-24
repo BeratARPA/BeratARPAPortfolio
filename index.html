@@ -473,17 +473,19 @@
         function STAT() {
           var meta = (S.data && S.data.meta) || {};
           var exp = D("experience");
-          var start = +meta.startYear || 2020, sm = 0;
+          /* başlangıç: deneyimdeki en eski ay; yoksa meta.startYear */
+          var start = null, sm = 0;
           exp.forEach(function (e) {
             var m = String(t(e.period)).match(/(\d{1,2})\/(\d{4})/g) || [];
             m.forEach(function (x) {
               var p = x.split("/"), y = +p[1], mo = +p[0] - 1;
-              if (y < start || (y === start && mo < sm)) { start = y; sm = mo; }
+              if (start === null || y < start || (y === start && mo < sm)) { start = y; sm = mo; }
             });
           });
+          if (start === null) { start = +meta.startYear || new Date().getFullYear(); sm = 0; }
           var now = new Date();
           var months = (now.getFullYear() - start) * 12 + (now.getMonth() - sm);
-          var days = Math.round(months * 30.44);
+          var days = Math.floor((now - new Date(start, sm, 1)) / 864e5);
           var comp = {}; exp.forEach(function (e) { if (e.company) comp[e.company] = 1; });
           var stars = 0; S.repos.forEach(function (r) { stars += r.stargazers_count || 0; });
           return {
