@@ -1505,7 +1505,8 @@
             if (!f.firstElementChild) continue;
             var lag = +f.getAttribute("data-lag") || 0;
             var p = clamp((vh * 0.92 - r.top - lag * vh) / (vh * 0.62), 0, 1);
-            if (f._p !== undefined && Math.abs(f._p - p) < 0.002) continue;
+            /* küçük adımlar atlanır ama uçlar (0 ve 1) hep uygulanır; sahne yarıda kalmasın */
+            if (f._p === p || (f._p !== undefined && Math.abs(f._p - p) < 0.002 && p > 0 && p < 1)) continue;
             f._p = p;
             var sc = SC[f.getAttribute("data-scene")];
             if (sc) sc.upd(f, p);
@@ -1781,7 +1782,7 @@
           var r = box.getBoundingClientRect(), vh = window.innerHeight;
           var p = g.vert ? clamp((vh * 0.62 - r.top) / Math.max(1, r.height), 0, 1)
                          : clamp((vh * 0.86 - r.top) / (vh * 0.56), 0, 1);
-          if (g.p !== undefined && Math.abs(g.p - p) < 0.002) return;
+          if (g.p === p || (g.p !== undefined && Math.abs(g.p - p) < 0.002 && p > 0 && p < 1)) return;
           g.p = p;
           var pos = g.a0 + (g.a1 - g.a0) * p, svg = box.firstElementChild;
           var clip = svg.querySelector(".tlc"), head = svg.querySelector(".phd");
