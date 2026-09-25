@@ -477,6 +477,17 @@
         .paper-in { padding:20px 14px 22px; font-size:12px; }
       }
 
+      /* alçak ekran (yatay telefon): fiş masaya sığmaz; sabitlenmez, basılmış hâliyle akışta durur */
+      @media (max-height:520px) {
+        .rs-track { height:auto; }
+        .rs-pin { position:static; height:auto; padding:18px 0 8px; }
+        .rs-desk { height:auto; padding:28px 0 18px; }
+        .prn { position:relative; left:auto; bottom:auto; transform:none; width:min(420px,80%); margin:0 auto; }
+        .paper { position:relative; left:auto; bottom:auto !important; transform:none; height:auto !important;
+                 margin:0 auto -42px; }
+        .paper-in { position:relative; transform:none !important; }
+      }
+
       @media (prefers-reduced-motion:reduce) {
         html { scroll-behavior:auto; }
       }
@@ -903,9 +914,18 @@
         }
 
         /* kâğıt yazıcının ağzından (çizimde y=42) yukarı büyür; masaya sığacak kadar ölçeklenir */
+        var SHORT = window.matchMedia("(max-height: 520px)");
         function layoutReceipt() {
           var pin = $("paperIn"), paper = $("paper"), prn = $("prn"), desk = $("rsDesk");
           if (!pin || !paper || !prn || !desk) return;
+          if (SHORT.matches) {
+            S.rFull = 0;
+            paper.style.bottom = ""; paper.style.height = ""; pin.style.transform = "";
+            prn.classList.remove("on");
+            var c0 = $("bc");
+            if (c0) drawBarcode(c0, ((S.data.contact || {}).website || "beratarpa.com"));
+            return;
+          }
           var box = prn.querySelector("svg").getBoundingClientRect();
           var mouth = box.height - 42 * (box.width / 420);
           paper.style.bottom = mouth.toFixed(1) + "px";
