@@ -174,6 +174,7 @@
         "en": "Back End Developer"
       },
       "company": "EasyHR",
+      "short": "EasyHR",
       "period": {
         "tr": "10/2025 - Günümüz",
         "en": "10/2025 - Present"
@@ -196,6 +197,7 @@
         "en": "Full Stack Developer"
       },
       "company": "LiwaSoft",
+      "short": "LiwaSoft",
       "period": {
         "tr": "06/2024 - 06/2025",
         "en": "06/2024 - 06/2025"
@@ -219,6 +221,7 @@
         "en": "Back End Developer"
       },
       "company": "Innovative Software Company",
+      "short": "Innovative Software",
       "period": {
         "tr": "03/2022 - 01/2023",
         "en": "03/2022 - 01/2023"
@@ -242,6 +245,7 @@
         "en": "Back End Developer"
       },
       "company": "TZ Yazılım",
+      "short": "TZ Yazılım",
       "period": {
         "tr": "10/2021 - 03/2022",
         "en": "10/2021 - 03/2022"
@@ -264,6 +268,7 @@
         "en": "Software Intern"
       },
       "company": "Aniventi İnovasyon Bilişim ve Teknoloji A.Ş.",
+      "short": "Aniventi",
       "period": {
         "tr": "09/2020 - 06/2021",
         "en": "09/2020 - 06/2021"
@@ -500,6 +505,7 @@
   },
   "services": [
     {
+      "scene": "web",
       "tr": [
         "Web uygulamaları ve yönetim panelleri",
         "Kurumsal web siteniz ve onu yönettiğiniz panel. Sipariş, stok ve raporlamayı tek ekrandan takip edersiniz; bilgisayardan da telefondan da."
@@ -510,6 +516,7 @@
       ]
     },
     {
+      "scene": "mobile",
       "tr": [
         "Mobil uygulamalar",
         "iOS ve Android'i tek seferde geliştiriyorum. Müşterileriniz için de, sahadaki ekibiniz için de."
@@ -520,6 +527,7 @@
       ]
     },
     {
+      "scene": "desktop",
       "tr": [
         "Masaüstü yazılımlar",
         "Satış, stok, üretim ve raporlama uygulamaları. İnternet kesildiğinde işiniz durmaz."
@@ -530,6 +538,7 @@
       ]
     },
     {
+      "scene": "hub",
       "tr": [
         "Sistem entegrasyonları",
         "Kullandığınız sistemleri birbirine bağlarım. Veri tek yerden akar, aynı bilgiyi iki kez girmezsiniz."
@@ -540,6 +549,7 @@
       ]
     },
     {
+      "scene": "devices",
       "tr": [
         "Cihaz entegrasyonları",
         "Yazarkasa, barkod okuyucu, terazi ve fiş yazıcısını sisteminize bağlarım. Satış biter, fiş kendiliğinden çıkar."
@@ -550,6 +560,7 @@
       ]
     },
     {
+      "scene": "care",
       "tr": [
         "Bakım ve modernizasyon",
         "Elinizdeki sistemi devralır, hızlandırır, üzerine yeni özellikler eklerim."
@@ -691,6 +702,7 @@
   ],
   "process": [
     {
+      "scene": "meet",
       "tr": [
         "Görüşme",
         "Önce dinliyorum. Ne yapmak istediğinizi, mevcut sisteminizde neyin aksadığını birlikte netleştiriyoruz."
@@ -701,6 +713,7 @@
       ]
     },
     {
+      "scene": "offer",
       "tr": [
         "Teklif",
         "Kapsamı, takvimi ve bütçeyi yazılı olarak paylaşıyorum. Neyin dahil olduğu, neyin olmadığı baştan belli."
@@ -711,6 +724,7 @@
       ]
     },
     {
+      "scene": "build",
       "tr": [
         "Geliştirme",
         "Belirli aralıklarla çalışan sürümü gösteriyorum. Yolda fikir değiştirebilirsiniz, sona sürpriz bırakmıyorum."
@@ -721,6 +735,7 @@
       ]
     },
     {
+      "scene": "live",
       "tr": [
         "Devreye alma",
         "Kurulumu yapıyor, verilerinizi taşıyor, ekibinize kullanımını gösteriyorum."
@@ -731,6 +746,7 @@
       ]
     },
     {
+      "scene": "support",
       "tr": [
         "Destek",
         "Teslimden sonra da yanınızdayım. Yeni bir ihtiyaç çıkarsa aynı yere yazmanız yeterli."
@@ -745,17 +761,29 @@
     {
       "name": "C# · .NET",
       "registry": "NuGet",
-      "url": "https://www.nuget.org/packages/ARE.Core/"
+      "url": "https://www.nuget.org/packages/ARE.Core/",
+      "platform": {
+        "tr": "Masaüstü",
+        "en": "Desktop"
+      }
     },
     {
       "name": "JavaScript",
       "registry": "npm",
-      "url": "https://www.npmjs.com/package/are-engine-core"
+      "url": "https://www.npmjs.com/package/are-engine-core",
+      "platform": {
+        "tr": "Web",
+        "en": "Web"
+      }
     },
     {
       "name": "Dart",
       "registry": "pub.dev",
-      "url": "https://pub.dev/packages/are_engine_core"
+      "url": "https://pub.dev/packages/are_engine_core",
+      "platform": {
+        "tr": "Mobil",
+        "en": "Mobile"
+      }
     }
   ],
   "sections": {
@@ -797,8 +825,8 @@
         "en": "Part of the code I write is public."
       },
       "lede": {
-        "tr": "Kural motorumu üç ayrı ekosistemde yayınladım. Aşağıdaki liste ve sayılar GitHub'dan canlı geliyor.",
-        "en": "I publish my rule engine in three separate ecosystems. The list and the numbers below come live from GitHub."
+        "tr": "Yazdığım kural motoru masaüstü, web ve mobil uygulamalarda aynı şekilde çalışıyor; üçü de herkese açık yayında. Aşağıdaki sayılar GitHub'dan canlı geliyor.",
+        "en": "The rule engine I wrote runs the same way in desktop, web and mobile apps, and all three are published openly. The numbers below come live from GitHub."
       }
     },
     "hizmetler": {
@@ -842,7 +870,7 @@
       },
       "title": {
         "tr": "Projenizi konuşalım.",
-        "en": "Let us talk about your project."
+        "en": "Let's talk about your project."
       },
       "lede": {
         "tr": "Formu doldurabilir ya da doğrudan arayabilirsiniz. Mesajlara genellikle aynı gün dönüyorum.",
@@ -926,9 +954,13 @@
       "tr": "İçeriğe geç",
       "en": "Skip to content"
     },
+    "navLabel": {
+      "tr": "Bölümler",
+      "en": "Sections"
+    },
     "talk": {
       "tr": "Projenizi konuşalım",
-      "en": "Let us talk"
+      "en": "Let's talk"
     },
     "cv": {
       "tr": "CV (PDF)",
@@ -961,6 +993,10 @@
     "educationTitle": {
       "tr": "Eğitim",
       "en": "Education"
+    },
+    "workLane": {
+      "tr": "İş",
+      "en": "Work"
     },
     "certsTitle": {
       "tr": "Sertifikalar",
@@ -1021,6 +1057,10 @@
     "menu": {
       "tr": "Menü",
       "en": "Menu"
+    },
+    "ruleCaption": {
+      "tr": "Örnek bir kural: 5.000'in üzerindeki her siparişe otomatik olarak özel bir karşılama e-postası gider. Aynı kural üç ortamda da aynı sonucu verir.",
+      "en": "An example rule: every order over 5,000 automatically gets a special welcome email. The same rule gives the same result on all three platforms."
     }
   }
 }

@@ -40,15 +40,15 @@
     <style>
       /* ═══════════════════════════════════════════════════════════════
          BERAT ARPA
-         Tek fikir: yazılımı gerçek dünyaya bağlamak. Sayfanın tek
-         hareketi, kaydırdıkça basılan fiş. Metin ve sayılar data.json
-         ile GitHub'dan gelir; arayüzde sabit içerik yoktur.
+         Tek fikir: yazılımı gerçek dünyaya bağlamak. Her bölümün kendine
+         özgü, elle çizilmiş bir sahnesi var (fiş, sistem haritası...) ve
+         hepsi kaydırmaya bağlı; kendi kendine oynayan hareket yok. Metin
+         ve sayılar data.json ile GitHub'dan gelir; sabit içerik yoktur.
          ═══════════════════════════════════════════════════════════════ */
 
       :root {
         --paper:#ffffff; --paper-2:#f7f6f3; --ink:#13141a; --ink-2:#585d66; --ink-3:#8d929b;
         --rule:#e6e4df; --rule-2:#f0eeea; --hot:#c8321f;
-        --night:#15140f; --night-2:#211f19; --night-ink:#ece9e1; --night-ink-2:#a19c90; --night-rule:#332f27;
         --slip:#fbfaf6; --slip-ink:#17160f;
         --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
         --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -107,10 +107,10 @@
       .btn-2:hover { color:var(--ink); border-bottom-color:var(--ink); }
       .avail { margin-top:26px; display:flex; align-items:center; gap:9px; font-size:14px; color:var(--ink-2); }
       .avail i { width:7px; height:7px; border-radius:50%; background:var(--hot); flex:none; }
-      .hero-ph { margin:0; }
-      .hero-ph img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 18%;
-                     background:var(--paper-2); }
-      .hero-ph figcaption { margin-top:10px; font-size:13px; color:var(--ink-3); }
+      /* fotoğraf dosyası zaten daire kesimli, köşeleri saydam: kutuya değil daireye oturt */
+      .hero-ph { margin:0; width:100%; max-width:360px; justify-self:end; align-self:center; }
+      .hero-ph img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:50%; }
+      .hero-ph figcaption { margin-top:12px; font-size:13px; color:var(--ink-3); text-align:center; }
 
       /* ── bölüm başlıkları ────────────────────────────────────── */
       .sec { padding:clamp(64px,9vw,128px) 0; border-top:1px solid var(--rule); }
@@ -121,32 +121,37 @@
       .sec-body { margin-top:clamp(34px,5vw,62px); }
       .sub-h { font-size:14px; letter-spacing:.01em; color:var(--ink-3); font-weight:500; margin-bottom:14px; }
 
-      /* ── fiş sahnesi ─────────────────────────────────────────── */
-      .rs { background:var(--night); color:var(--night-ink); border-top:0; }
-      .rs .sec-h h2 { color:var(--night-ink); }
-      .rs .sec-h p { color:var(--night-ink-2); }
-      .rs-head { padding:clamp(64px,9vw,120px) 0 0; }
+      /* ── fiş sahnesi: masadaki fiş yazıcısı, kâğıt yukarı doğru basılır ──
+         Kâğıdın alt ucu yazıcının ağzında sabittir. Basıldıkça ilk satır
+         yukarı yükselir, yeni satır ağızdan çıkar; kâğıt satır satır ilerler. */
+      .rs { border-top:1px solid var(--rule); }
+      .rs-head { padding:clamp(64px,9vw,128px) 0 0; }
       .rs-track { height:300svh; position:relative; }
-      .rs-pin { position:sticky; top:0; height:100svh; display:flex; justify-content:center;
-                align-items:flex-start; }
-      .printer { width:min(400px,80vw); margin-top:9svh; position:relative; }
-      .slot { position:relative; z-index:3; height:26px; border-radius:3px;
-              background:linear-gradient(180deg,#39352c,#100f0c 72%,#26241d);
-              box-shadow:0 1px 0 rgba(255,255,255,.07) inset, 0 12px 26px rgba(0,0,0,.5); }
-      .slot::after { content:""; position:absolute; left:14px; right:14px; bottom:7px; height:4px;
-                     border-radius:2px; background:#000; box-shadow:inset 0 1px 2px rgba(0,0,0,.9); }
-      .paper { position:relative; width:100%; height:0; overflow:hidden; background:var(--slip);
-               color:var(--slip-ink); box-shadow:0 22px 44px rgba(0,0,0,.45); }
-      .paper::before { content:""; position:absolute; top:0; left:0; right:0; height:16px; z-index:2;
-                       background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,0)); }
-      .edge { position:absolute; left:0; right:0; bottom:0; height:2px; background:rgba(0,0,0,.4); z-index:2;
-              opacity:0; }
-      /* kesik kenar: kâğıdın alt ucu koparılmış görünür */
-      .tear { position:absolute; left:0; right:0; bottom:0; height:8px; z-index:3;
-              background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 8 L6 0 L12 8 Z' fill='%2315140f'/%3E%3C/svg%3E");
+      .rs-pin { position:sticky; top:0; height:100svh; padding:74px 0 20px; }
+      .rs-stage { height:100%; max-width:var(--maxw); margin:0 auto; padding:0 var(--pad); }
+      .rs-desk { position:relative; height:100%; background:#f4f3ef; border-radius:24px; overflow:hidden; }
+      .prn { position:absolute; left:50%; bottom:clamp(12px,3svh,32px); width:min(460px,86%);
+             transform:translateX(-50%); }
+      .prn svg { position:relative; z-index:2; display:block; width:100%; height:auto; overflow:visible; }
+      .prn .b { fill:#fff; stroke:var(--ink); stroke-width:2; stroke-linejoin:round; }
+      .prn .l2 { fill:none; stroke:#d3d0c8; stroke-width:2; stroke-linecap:round; }
+      .prn .t { fill:#e6e3dc; }
+      .prn .sl { fill:#17191e; }
+      .prn .sh { fill:rgba(20,20,20,.07); }
+      .prn .cab { fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round; }
+      .prn .led { fill:#dcd9d2; transition:fill .2s; }
+      .prn.on .led { fill:var(--hot); }
+      .paper { position:absolute; z-index:1; left:50%; bottom:0; width:70%; height:0; overflow:hidden;
+               transform:translateX(-50%); background:var(--slip); color:var(--slip-ink);
+               box-shadow:0 18px 40px -18px rgba(0,0,0,.35); }
+      .paper::after { content:""; position:absolute; left:0; right:0; bottom:0; height:22px; z-index:2;
+                      background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.13)); }
+      /* kesik kenar: kâğıdın serbest ucu (üstü) koparılmış görünür */
+      .tear { position:absolute; left:0; right:0; top:0; height:8px; z-index:3;
+              background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0 L6 8 L12 0 Z' fill='%23f4f3ef'/%3E%3C/svg%3E");
               background-size:12px 8px; background-repeat:repeat-x; }
       .paper-in { position:absolute; top:0; left:0; width:100%; transform-origin:top center;
-                  padding:20px 22px 26px; font-family:var(--mono); font-size:13px; line-height:1.62;
+                  padding:24px 22px 26px; font-family:var(--mono); font-size:13px; line-height:1.62;
                   font-weight:400; }
       .r-mid { text-align:center; }
       .r-name { font-weight:500; letter-spacing:.16em; font-size:15px; }
@@ -162,22 +167,89 @@
       .r-foot { text-align:center; font-size:11.5px; color:#413d33; line-height:1.5; }
       .r-bc { display:block; margin:12px auto 5px; width:78%; height:38px; }
       .r-bct { text-align:center; font-size:10.5px; letter-spacing:.22em; color:#3c3930; }
-      .rs-note { padding:clamp(28px,4vw,48px) 0 clamp(64px,9vw,120px); text-align:center; }
-      .rs-note p { max-width:56ch; margin:0 auto; color:var(--night-ink-2); font-size:15.5px; }
-      .rs-note a { color:var(--night-ink); text-decoration:none; border-bottom:1px solid var(--night-rule);
-                   font-family:var(--mono); font-size:14.5px; display:inline-block; margin-top:12px; }
-      .rs-note a:hover { border-bottom-color:var(--night-ink); }
-      .rs-note a b { font-weight:400; color:var(--night-ink-2); }
+      .rs-note { padding:clamp(28px,4vw,44px) 0 clamp(64px,9vw,120px); text-align:center; }
+      .rs-note p { max-width:56ch; margin:0 auto; color:var(--ink-2); font-size:15.5px; }
+      .rs-note a { color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rule);
+                   font-family:var(--mono); font-size:14.5px; display:inline-flex; align-items:center; gap:7px;
+                   margin-top:12px; }
+      .rs-note a:hover { border-bottom-color:var(--hot); }
+      .rs-note a b { font-weight:400; color:var(--ink-3); }
 
-      /* ── işler ───────────────────────────────────────────────── */
-      .rows { border-bottom:1px solid var(--rule); }
-      .row { display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.25fr) auto;
-             gap:clamp(14px,3vw,44px); align-items:start; padding:clamp(22px,2.6vw,32px) 0;
-             border-top:1px solid var(--rule); }
-      .row-t { font-size:clamp(18px,1.5vw,21px); font-weight:600; letter-spacing:-.015em; }
-      .row-m { margin-top:5px; font-size:14px; color:var(--ink-3); }
-      .row-d { color:var(--ink-2); font-size:16px; }
-      .row-l { display:flex; flex-direction:column; gap:7px; align-items:flex-start; }
+      /* ── işler: her proje kendi çizimiyle anlatılır ─────────────
+         Çizim ekrana girdikçe --p 0→1 ilerler; sahnenin hikâyesi
+         (sipariş, tarama, birleşme, rota…) bu ilerlemeye bağlıdır. */
+      .pjs { display:grid; gap:clamp(64px,9vw,120px); }
+      .pj { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(28px,5vw,76px);
+            align-items:center; }
+      .pj:nth-child(even) .pj-fig { order:-1; }
+      .pj-k { font-family:var(--mono); font-size:13px; color:var(--ink-3); }
+      .pj-t { margin-top:10px; font-size:clamp(23px,2.3vw,31px); font-weight:600; letter-spacing:-.022em;
+              line-height:1.14; }
+      .pj-d { margin-top:14px; color:var(--ink-2); font-size:16.5px; max-width:48ch; }
+      .pj-l { margin-top:18px; display:flex; flex-wrap:wrap; gap:8px 20px; }
+      .pj-fig { margin:0; background:#f4f3ef; border-radius:20px; padding:clamp(14px,2.4vw,30px); }
+      .pj-fig svg { width:100%; height:auto; overflow:visible; }
+
+      /* sahnelerin ortak çizim dili */
+      .sc .sh { fill:rgba(20,20,20,.06); }
+      .sc .b { fill:#fff; stroke:var(--ink); stroke-width:2; stroke-linejoin:round; }
+      .sc .b2 { fill:#fff; stroke:#d4d1c9; stroke-width:1.5; }
+      .sc .s { fill:#17191e; }
+      .sc .u { fill:#474d59; }
+      .sc .u2 { fill:#262a32; }
+      .sc .u3 { fill:#cfccc4; }
+      .sc .ua { fill:var(--hot); }
+      .sc .t { fill:#e6e3dc; }
+      .sc .w2 { fill:#fff; }
+      .sc .l { fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+      .sc .l2 { fill:none; stroke:#bdb9b0; stroke-width:2; stroke-linecap:round; }
+      .sc .lg { fill:none; stroke:#c3bfb6; stroke-width:2; stroke-dasharray:3 7; stroke-linecap:round; }
+      .sc .gl { fill:none; stroke:#ebe8e2; stroke-width:1.5; stroke-linecap:round; }
+      .sc .beam { fill:none; stroke:var(--hot); stroke-width:2; stroke-dasharray:4 5; opacity:0; transition:opacity .25s; }
+      .sc .tile, .sc .cal, .sc .sd { transition:fill .3s; }
+      .sc .cal { fill:#efede8; }
+      .sc .sd { fill:#474d59; }
+      .sc .tile.hot, .sc .cal.hot, .sc .sd.hot { fill:var(--hot); }
+      .sc .sdl { fill:none; stroke:#474d59; stroke-width:2; }
+      .sc .bar { transform-box:fill-box; transform-origin:50% 100%; }
+      .sc .qf { fill:none; stroke:var(--ink); stroke-width:3; }
+      .sc .qi, .sc .qm { fill:var(--ink); }
+      .sc .cam .qf { stroke:#e7e5df; stroke-width:2; }
+      .sc .cam .qi, .sc .cam .qm { fill:#e7e5df; }
+      .sc .cb { fill:none; stroke:#e7e5df; stroke-width:2.5; stroke-linecap:round; }
+      .sc .ck, .sc .ck2 { fill:none; stroke:#fff; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+      .sc .ck { stroke-dasharray:24; stroke-dashoffset:24; }
+      .sc .pk { fill:var(--ink); }
+      .sc .st { fill:none; stroke:#2b2f38; stroke-width:9; stroke-linecap:round; }
+      .sc .rt2 { fill:none; stroke:var(--hot); stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+      .sc .cour { fill:#fff; stroke:var(--hot); stroke-width:3; }
+      .sc .wave { fill:none; stroke:var(--hot); stroke-width:2; stroke-linecap:round; stroke-dasharray:3 5;
+                  transition:opacity .3s; }
+      .sc .dr, .sc .lr, .sc .oc, .sc .zr, .sc .sig, .sc .card, .sc .qbtn, .sc .dg, .sc .tot, .sc .tt { transition:opacity .25s; }
+      .sc .av { transform-box:fill-box; transform-origin:center; }
+      .sc .avc { fill:#e6e3dc; }
+      .sc .avh { fill:#b7b3aa; }
+      .sc .avb { fill:none; stroke:#b7b3aa; stroke-width:2.5; stroke-linecap:round; }
+      .sc .pl { fill:none; stroke:var(--ink); stroke-width:2.5; stroke-linejoin:round; stroke-linecap:round; }
+      .sc .kc { fill:var(--hot); }
+      .sc .ai { fill:var(--hot); transform-box:fill-box; transform-origin:center; }
+      .sc .key { fill:#f1efea; stroke:#cfccc4; stroke-width:1.2; }
+      .sc .sig { fill:var(--hot); }
+      .sc .blk { transition:fill .3s, stroke .3s; }
+      .sc .blk.wx { fill:none; stroke:none; }
+      .sc .blk.w0 { fill:none; stroke:#bdb9b0; stroke-width:1.5; stroke-dasharray:3 3; }
+      .sc .blk.w1 { fill:#dcd9d2; stroke:none; }
+      .sc .blk.w2 { fill:#474d59; stroke:none; }
+      .sc .blk.w2.bt { fill:var(--hot); }
+      .sc .vd { fill:#e6e3dc; transition:fill .3s; }
+      .sc .vd.hot { fill:var(--hot); }
+      .sc .scr { fill:#e6e3dc; transition:fill .35s; }
+      .sc .scr.lit { fill:#17191e; }
+      .sc .inr { transition:fill .3s; }
+      .sc .inr.lit { fill:#6b3a33; }
+      .sc .ui, .sc .ok, .sc .rb, .sc .m1, .sc .m2, .sc .m3, .sc .typ, .sc .tt2, .sc .or, .sc .bd, .sc .inr2, .sc .e1, .sc .e2 { transition:opacity .25s; }
+      .sc .ok, .sc .rb { transform-box:fill-box; transform-origin:center; }
+      .sc .d2, .sc .d3 { transition:opacity .25s; }
       .lnk { display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-family:var(--mono);
              font-size:13.5px; color:var(--ink-2); border-bottom:1px solid var(--rule); padding-bottom:2px;
              white-space:nowrap; }
@@ -185,6 +257,18 @@
       .lnk svg { width:12px; height:12px; flex:none; }
 
       /* ── açık kaynak ─────────────────────────────────────────── */
+      /* kural motoru: üç ortam, aynı kural, aynı sonuç */
+      .rules { margin-bottom:clamp(36px,5vw,56px); }
+      .rules .pj-fig { padding:clamp(14px,3vw,40px); }
+      .rules-cap { margin-top:16px; max-width:66ch; color:var(--ink-2); font-size:15.5px; }
+      .sc .pn { font-family:var(--ui); font-size:17px; font-weight:600; fill:var(--ink); }
+      .sc .eng { transition:stroke .3s; }
+      .sc .eng.hot { stroke:var(--hot); }
+      .sc .led2 { fill:#dcd9d2; transition:fill .3s; }
+      .sc .led2.hot { fill:var(--hot); }
+      .sc .mf { fill:var(--ink); }
+      .sc .thr { stroke:var(--hot); stroke-width:2.5; stroke-linecap:round; }
+      .sc .env { transition:opacity .25s; }
       .pkgs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--rule);
               border:1px solid var(--rule); margin-bottom:clamp(30px,4vw,48px); }
       .pkg { background:var(--paper); padding:clamp(16px,2vw,22px); text-decoration:none; display:block; }
@@ -205,20 +289,100 @@
       .repo i em { font-style:normal; color:var(--ink); }
       .more { margin-top:22px; display:inline-flex; }
 
-      /* ── hizmetler ve çalışma ────────────────────────────────── */
-      .svc { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:clamp(24px,5vw,72px); }
-      .svc li { padding:clamp(18px,2.2vw,26px) 0; border-top:1px solid var(--rule); }
-      .svc b { display:block; font-size:17.5px; font-weight:600; }
-      .svc p { margin-top:6px; color:var(--ink-2); font-size:15.5px; max-width:44ch; }
+      /* ── hizmetler: bir işletmenin bütün sistemi tek çizimde ─────
+         Liste kaydıkça ilgili cihaz mürekkeple canlanır, hattı çizilir
+         ve üzerinden bir veri paketi geçer. Çizim sabit, liste akar. */
+      .svc-wrap { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+                  gap:clamp(28px,5vw,80px); align-items:start; }
+      .svc li { position:relative; padding:clamp(20px,2.6vw,30px) 0 clamp(20px,2.6vw,30px) 26px;
+                border-top:1px solid var(--rule); }
+      .svc li:last-child { border-bottom:1px solid var(--rule); }
+      .svc li::before { content:""; position:absolute; left:0; top:calc(clamp(20px,2.6vw,30px) + 8px);
+                        width:9px; height:9px; border-radius:50%; background:var(--rule);
+                        transition:background .3s, transform .3s; }
+      .svc li.on::before { background:var(--hot); transform:scale(1.2); }
+      .svc b { display:block; font-size:18px; font-weight:600; color:var(--ink-3); transition:color .3s; }
+      .svc p { margin-top:6px; color:var(--ink-3); font-size:15.5px; max-width:46ch; transition:color .3s; }
+      .svc li.on b { color:var(--ink); }
+      .svc li.on p { color:var(--ink-2); }
+
+      .map { position:sticky; top:clamp(84px,14vh,140px); --off:#c6c2b9; --on:var(--ink); --rot:0deg; }
+      .map svg { width:100%; height:auto; overflow:visible; }
+      .map .sh { fill:rgba(20,20,20,.055); }
+      .map .b { fill:#fff; stroke:var(--off); stroke-width:2.2; stroke-linejoin:round; transition:stroke .35s; }
+      .map .s { fill:#efede8; transition:fill .45s; }
+      .map .u, .map .ua { fill:#dcd9d2; transition:fill .45s; }
+      .map .uh { fill:transparent; transition:fill .45s; }
+      .map .ug { fill:none; stroke:#e2dfd8; stroke-width:1.5; transition:stroke .45s; }
+      .map .d { fill:#e4e1da; transition:fill .35s; }
+      .map .g { fill:none; stroke:#dfdcd5; stroke-width:2; stroke-linecap:round; transition:stroke .35s; }
+      .map .led { fill:#d6d3cb; transition:fill .3s; }
+      .map .beam { fill:none; stroke:transparent; stroke-width:2; stroke-linecap:round; transition:stroke .3s; }
+      .map .ln { fill:none; stroke:#d9d6ce; stroke-width:2; stroke-dasharray:3 7; stroke-linecap:round;
+                 transition:stroke .35s; }
+      .map .pk { fill:var(--hot); opacity:0; transition:opacity .25s; }
+      .map .ring { fill:none; stroke:#e7e4dd; stroke-width:1.5; stroke-dasharray:2 10; stroke-linecap:round;
+                   transform-box:view-box; transform-origin:300px 262px; transform:rotate(var(--rot));
+                   transition:stroke .35s; }
+      .map .gear { transform-box:fill-box; transform-origin:center; transform:rotate(calc(var(--rot) * 3)); }
+      .map .gear path, .map .gear circle { fill:#fff; stroke:var(--off); stroke-width:2.2; stroke-linejoin:round;
+                                            transition:stroke .35s; }
+      .map .grow { transform-box:fill-box; transform-origin:50% 100%; transform:scaleY(.3);
+                   transition:transform .6s cubic-bezier(.2,.7,.2,1), fill .45s; }
+      .map .slide { transform:translateX(-12px); opacity:0; transition:transform .5s, opacity .4s, fill .45s; }
+      .map .paper { transform:translateY(8px); transition:transform .7s cubic-bezier(.2,.7,.2,1), stroke .35s; }
+      /* sırası gelen cihaz açılır: gövde mürekkeple çizilir, ekranı yanar */
+      .map .dv.on .b, .map .dv.on .gear path, .map .dv.on .gear circle { stroke:var(--on); }
+      .map .dv.on .s { fill:#17191e; }
+      .map .dv.on .u { fill:#474d59; }
+      .map .dv.on .ua { fill:var(--hot); }
+      .map .dv.on .uh { fill:rgba(200,50,31,.5); }
+      .map .dv.on .ug { stroke:#343944; }
+      .map .dv.on .d { fill:#c9ccd3; }
+      .map .dv.on .g { stroke:#a9acb4; }
+      .map .dv.on .led { fill:var(--hot); }
+      .map .dv.on .beam { stroke:var(--hot); }
+      .map .dv.on .grow { transform:scaleY(1); }
+      .map .dv.on .slide { transform:none; opacity:1; }
+      .map .dv.on .paper { transform:translateY(-6px); }
+      .map .ln.on { stroke:var(--on); stroke-dasharray:none; }
+      .map .ln.on + .pk { opacity:1; }
+      .map .ring.on { stroke:var(--on); }
       .steps { margin-top:clamp(48px,6vw,84px); display:grid;
                grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(20px,3vw,34px); }
-      .steps li { border-top:2px solid var(--ink); padding-top:14px; }
+      /* her adımın üstünde küçük bir sahne; altındaki çizgi adım oynadıkça dolar */
+      .steps li { position:relative; }
+      .stp-fig { margin:0; background:#f4f3ef; border-radius:16px; padding:10px; }
+      .stp-fig svg { width:100%; height:auto; overflow:visible; }
+      .stp-txt { position:relative; margin-top:16px; padding-top:14px; }
+      .stp-txt::before, .stp-txt::after { content:""; position:absolute; left:0; right:0; top:0; height:2px; }
+      .stp-txt::before { background:var(--rule); }
+      .stp-txt::after { background:var(--ink); transform-origin:left; transform:scaleX(var(--f, 0)); }
       .steps b { display:block; font-size:16.5px; font-weight:600; }
       .steps b em { font-style:normal; font-family:var(--mono); font-size:13px; color:var(--ink-3);
                     margin-right:8px; }
       .steps p { margin-top:6px; color:var(--ink-2); font-size:15px; }
 
       /* ── deneyim ─────────────────────────────────────────────── */
+      /* deneyim haritası: üstte eğitim, altta iş hattı; okuma çizgisi 2017'den bugüne kayar */
+      .tl { margin-bottom:clamp(40px,6vw,76px); }
+      .tl svg { width:100%; height:auto; overflow:visible; }
+      .tl .lane-t { font-family:var(--ui); font-size:15px; font-weight:500; fill:var(--ink-3); }
+      .tl .ax, .tl .tk { stroke:#d9d6cf; stroke-width:1; }
+      .tl .tk2 { stroke:#efede8; stroke-width:1; }
+      .tl .yr { font-family:var(--mono); font-size:13px; fill:var(--ink-3); }
+      .tl .track { stroke:#efede8; stroke-width:8; stroke-linecap:round; }
+      .tl .seg0 { stroke:#7b808c; stroke-width:8; stroke-linecap:round; }
+      .tl .seg1 { stroke:var(--hot); stroke-width:8; stroke-linecap:round; }
+      .tl .st { fill:#fff; stroke:var(--ink); stroke-width:2.5; }
+      .tl .now { fill:none; stroke:var(--hot); stroke-width:2; opacity:.3; }
+      .tl .nowd, .tl .lg1 { fill:var(--hot); }
+      .tl .lg0 { fill:#7b808c; }
+      .tl .nm { font-family:var(--ui); font-size:17px; font-weight:600; fill:var(--ink); }
+      .tl .pd { font-family:var(--mono); font-size:13px; fill:var(--ink-3); }
+      .tl .ldr { fill:none; stroke:#d6d3cb; stroke-width:1; }
+      .tl .head { stroke:var(--ink); stroke-width:1.5; stroke-dasharray:3 4; }
+      .tl .hl { font-family:var(--mono); font-size:13px; fill:var(--ink); }
       .job { display:grid; grid-template-columns:minmax(0,180px) minmax(0,1fr);
              gap:clamp(12px,3vw,40px); padding:clamp(22px,2.6vw,30px) 0; border-top:1px solid var(--rule); }
       .job-p { font-family:var(--mono); font-size:13.5px; color:var(--ink-3); }
@@ -240,6 +404,12 @@
       /* ── iletişim ────────────────────────────────────────────── */
       .talk { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1fr);
               gap:clamp(30px,5vw,80px); align-items:start; }
+      .ct-fig { margin-bottom:clamp(22px,3vw,34px); }
+      .sc .clk { fill:#fff; stroke:var(--ink); stroke-width:2; }
+      .sc .hand { stroke:var(--ink); stroke-width:3; stroke-linecap:round; }
+      .sc .hand2 { stroke:var(--hot); stroke-width:2; stroke-linecap:round; }
+      .sc .tick { stroke:#bdb9b0; stroke-width:2; stroke-linecap:round; }
+      .sc .badge { fill:var(--hot); }
       .cl { padding:14px 0; border-top:1px solid var(--rule); }
       .cl:first-child { border-top:0; padding-top:0; }
       .cl span { display:block; font-size:13.5px; color:var(--ink-3); }
@@ -271,8 +441,6 @@
         .steps { grid-template-columns:repeat(3,minmax(0,1fr)); }
       }
       @media (max-width:980px) {
-        .row { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); }
-        .row-l { grid-column:1/-1; flex-direction:row; flex-wrap:wrap; gap:14px; }
         .repo { grid-template-columns:minmax(0,1fr) auto; }
         .repo p { grid-column:1/-1; }
       }
@@ -282,21 +450,31 @@
         .mark span { display:none; }
         .hero-in { grid-template-columns:minmax(0,1fr); }
         .hero h1 { max-width:18ch; }
-        .hero-ph { max-width:300px; }
+        .hero-ph { max-width:240px; justify-self:start; align-self:start; }
         .sec-h { grid-template-columns:minmax(0,1fr); gap:14px; align-items:start; }
         .talk { grid-template-columns:minmax(0,1fr); }
         .pkgs { grid-template-columns:minmax(0,1fr); }
         .steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .pj { grid-template-columns:minmax(0,1fr); gap:22px; }
+        .pj .pj-fig { order:-1; }
+        .svc-wrap { grid-template-columns:minmax(0,1fr); gap:0; }
+        .map { order:-1; top:52px; z-index:5; background:var(--paper); padding:8px 0 12px; }
+        .map::after { content:""; position:absolute; left:0; right:0; top:100%; height:20px;
+                      background:linear-gradient(var(--paper),rgba(255,255,255,0)); }
+        .map svg { max-height:34svh; }
       }
       @media (max-width:640px) {
-        .row { grid-template-columns:minmax(0,1fr); gap:10px; }
-        .steps { grid-template-columns:minmax(0,1fr); gap:0; }
-        .steps li { border-top-width:1px; padding:16px 0; }
-        .svc { grid-template-columns:minmax(0,1fr); }
+        .steps { grid-template-columns:minmax(0,1fr); gap:22px; }
+        .steps li { display:grid; grid-template-columns:132px minmax(0,1fr); gap:16px; align-items:start; }
+        .stp-fig { padding:6px; border-radius:12px; }
+        .stp-txt { margin-top:0; }
         .job { grid-template-columns:minmax(0,1fr); gap:6px; }
         .rs-track { height:260svh; }
-        .printer { width:min(300px,86vw); margin-top:6svh; }
-        .paper-in { padding:16px 16px 22px; }
+        .rs-pin { padding:64px 0 14px; }
+        .rs-desk { border-radius:18px; }
+        .prn { width:94%; }
+        .paper { width:74%; }
+        .paper-in { padding:20px 14px 22px; font-size:12px; }
       }
 
       @media (prefers-reduced-motion:reduce) {
@@ -355,12 +533,26 @@
         </div>
         <div class="rs-track" id="rsTrack">
           <div class="rs-pin">
-            <div class="printer">
-              <div class="slot" aria-hidden="true"></div>
-              <div class="paper" id="paper">
-                <div class="paper-in" id="paperIn"></div>
-                <div class="edge" id="edge" aria-hidden="true"></div>
-                <div class="tear" aria-hidden="true"></div>
+            <div class="rs-stage">
+              <div class="rs-desk" id="rsDesk">
+                <div class="prn" id="prn">
+                  <div class="paper" id="paper">
+                    <div class="paper-in" id="paperIn"></div>
+                    <div class="tear" aria-hidden="true"></div>
+                  </div>
+                  <svg viewBox="0 0 420 190" aria-hidden="true">
+                    <ellipse class="sh" cx="210" cy="180" rx="196" ry="9"/>
+                    <path class="cab" d="M404 150 C 440 150, 440 188, 490 188"/>
+                    <path class="b" d="M34 44 H386 A18 18 0 0 1 404 62 V156 A18 18 0 0 1 386 174 H34 A18 18 0 0 1 16 156 V62 A18 18 0 0 1 34 44 Z"/>
+                    <path class="l2" d="M17 98 H403"/>
+                    <rect class="b" x="46" y="30" width="328" height="26" rx="10"/>
+                    <rect class="sl" x="60" y="38" width="300" height="8" rx="4"/>
+                    <rect class="t" x="40" y="124" width="92" height="10" rx="5"/>
+                    <rect class="t" x="40" y="140" width="60" height="8" rx="4"/>
+                    <rect class="t" x="318" y="120" width="48" height="22" rx="11"/>
+                    <circle class="led" cx="296" cy="131" r="6"/>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
@@ -374,7 +566,7 @@
       <section class="sec" id="isler">
         <div class="wrap">
           <div class="sec-h"><h2 id="islerT"></h2><p id="islerL"></p></div>
-          <div class="sec-body"><div class="rows" id="work"></div></div>
+          <div class="sec-body"><div class="pjs" id="work"></div></div>
         </div>
       </section>
 
@@ -382,6 +574,10 @@
         <div class="wrap">
           <div class="sec-h"><h2 id="acikT"></h2><p id="acikL"></p></div>
           <div class="sec-body">
+            <div class="rules">
+              <figure class="pj-fig sc" id="rulesFig" data-scene="rules" aria-hidden="true"></figure>
+              <p class="rules-cap" id="rulesCap"></p>
+            </div>
             <div class="pkgs" id="pkgs"></div>
             <div id="repos"></div>
             <a class="lnk more" id="allRepos" href="https://github.com/BeratARPA" target="_blank" rel="noopener"></a>
@@ -393,7 +589,90 @@
         <div class="wrap">
           <div class="sec-h"><h2 id="hizT"></h2><p id="hizL"></p></div>
           <div class="sec-body">
-            <ul class="svc" id="svc"></ul>
+            <div class="svc-wrap">
+              <ul class="svc" id="svc"></ul>
+              <figure class="map" id="map" aria-hidden="true">
+                <svg viewBox="0 0 600 520">
+                  <ellipse class="sh" cx="122" cy="177" rx="104" ry="6"/>
+                  <ellipse class="sh" cx="486" cy="201" rx="46" ry="5"/>
+                  <ellipse class="sh" cx="132" cy="489" rx="72" ry="5"/>
+                  <ellipse class="sh" cx="300" cy="325" rx="62" ry="6"/>
+                  <ellipse class="sh" cx="426" cy="476" rx="54" ry="5"/>
+                  <ellipse class="sh" cx="536" cy="476" rx="56" ry="5"/>
+                  <circle class="ring" cx="300" cy="262" r="228"/>
+                  <path class="ln" data-to="web" d="M262 206 C262 184 226 182 206 170"/><circle class="pk" r="4.5" cx="262" cy="206"/>
+                  <path class="ln" data-to="mobile" d="M338 206 C338 168 408 150 442 150"/><circle class="pk" r="4.5" cx="338" cy="206"/>
+                  <path class="ln" data-to="desktop" d="M262 318 C262 364 250 396 228 396"/><circle class="pk" r="4.5" cx="262" cy="318"/>
+                  <path class="ln" data-to="devices" d="M338 318 C338 384 352 438 378 438"/><circle class="pk" r="4.5" cx="338" cy="318"/>
+
+                  <g class="dv" data-s="web">
+                    <rect class="b" x="40" y="44" width="164" height="106" rx="8"/>
+                    <rect class="s" x="50" y="54" width="144" height="86" rx="3"/>
+                    <circle class="d" cx="122" cy="49" r="1.6"/>
+                    <rect class="u" x="56" y="60" width="26" height="74" rx="2"/>
+                    <rect class="u" x="61" y="68" width="16" height="4" rx="2"/>
+                    <rect class="u" x="61" y="78" width="16" height="4" rx="2"/>
+                    <rect class="u" x="90" y="60" width="98" height="10" rx="2"/>
+                    <rect class="u grow" x="94" y="112" width="12" height="22" rx="1.5"/>
+                    <rect class="u grow" x="112" y="100" width="12" height="34" rx="1.5"/>
+                    <rect class="u grow" x="130" y="92" width="12" height="42" rx="1.5"/>
+                    <rect class="u grow" x="148" y="84" width="12" height="50" rx="1.5"/>
+                    <rect class="ua grow" x="166" y="76" width="12" height="58" rx="1.5"/>
+                    <path class="b" d="M24 158 H220 L210 170 H34 Z"/>
+                    <path class="g" d="M104 164 H140"/>
+                  </g>
+
+                  <g class="dv" data-s="mobile">
+                    <rect class="b" x="444" y="36" width="84" height="158" rx="14"/>
+                    <rect class="s" x="452" y="52" width="68" height="128" rx="6"/>
+                    <rect class="d" x="474" y="42" width="24" height="4" rx="2"/>
+                    <rect class="ua slide" x="458" y="58" width="56" height="16" rx="3"/>
+                    <rect class="u" x="458" y="80" width="56" height="16" rx="3"/>
+                    <rect class="u" x="458" y="102" width="56" height="16" rx="3"/>
+                    <rect class="u" x="458" y="124" width="40" height="16" rx="3"/>
+                    <circle class="ua" cx="508" cy="164" r="8"/>
+                  </g>
+
+                  <g class="dv" data-s="desktop">
+                    <rect class="b" x="36" y="336" width="192" height="122" rx="8"/>
+                    <rect class="s" x="46" y="346" width="172" height="102" rx="3"/>
+                    <rect class="u" x="52" y="352" width="160" height="10" rx="2"/>
+                    <circle class="ua" cx="58" cy="357" r="2"/>
+                    <rect class="uh" x="58" y="395" width="148" height="14" rx="2"/>
+                    <path class="ug" d="M58 378 H206 M58 394 H206 M58 410 H206 M58 426 H206 M104 370 V438 M156 370 V438"/>
+                    <path class="b" d="M124 458 V476 M140 458 V476"/>
+                    <rect class="b" x="100" y="476" width="64" height="8" rx="4"/>
+                  </g>
+
+                  <g class="dv" data-s="hub">
+                    <rect class="b" x="246" y="206" width="108" height="112" rx="10"/>
+                    <path class="g" d="M258 243 H342 M258 281 H342"/>
+                    <circle class="led" cx="265" cy="225" r="4"/>
+                    <circle class="led" cx="265" cy="262" r="4"/>
+                    <circle class="led" cx="265" cy="300" r="4"/>
+                    <path class="g" d="M280 225 H330 M280 262 H320 M280 300 H330"/>
+                  </g>
+
+                  <g class="dv" data-s="devices">
+                    <path class="b paper" d="M398 426 V386 H454 V426"/>
+                    <path class="g paper" d="M406 397 H446 M406 406 H436"/>
+                    <rect class="b" x="378" y="414" width="96" height="56" rx="9"/>
+                    <rect class="d" x="392" y="420" width="68" height="5" rx="2.5"/>
+                    <circle class="led" cx="460" cy="457" r="3.5"/>
+                    <path class="b" d="M494 370 H552 A10 10 0 0 1 562 380 V384 A10 10 0 0 1 552 394 H528 L520 420 H504 L510 394 H494 A10 10 0 0 1 484 384 V380 A10 10 0 0 1 494 370 Z"/>
+                    <path class="beam" d="M562 378 L592 368 M562 386 L592 396"/>
+                    <rect class="b" x="486" y="448" width="100" height="22" rx="6"/>
+                    <rect class="b" x="494" y="436" width="84" height="8" rx="3"/>
+                    <rect class="s" x="540" y="454" width="36" height="10" rx="2"/>
+                    <rect class="ua" x="552" y="457.5" width="20" height="3" rx="1.5"/>
+                  </g>
+
+                  <g class="dv" data-s="care">
+                    <g transform="translate(354 206)"><g class="gear"><path d="M11.5 -4.8 L16.6 -3.7 L16.6 3.7 L11.5 4.8 L14.4 9.1 L9.1 14.4 L4.8 11.5 L3.7 16.6 L-3.7 16.6 L-4.8 11.5 L-9.1 14.4 L-14.4 9.1 L-11.5 4.8 L-16.6 3.7 L-16.6 -3.7 L-11.5 -4.8 L-14.4 -9.1 L-9.1 -14.4 L-4.8 -11.5 L-3.7 -16.6 L3.7 -16.6 L4.8 -11.5 L9.1 -14.4 L14.4 -9.1 Z"/><circle r="5"/></g></g>
+                  </g>
+                </svg>
+              </figure>
+            </div>
             <h3 class="sr-h" id="calT" style="margin-top:clamp(48px,6vw,84px);font-size:clamp(1.3rem,2.2vw,1.8rem)"></h3>
             <ol class="steps" id="steps"></ol>
           </div>
@@ -404,6 +683,7 @@
         <div class="wrap">
           <div class="sec-h"><h2 id="denT"></h2><p id="denL"></p></div>
           <div class="sec-body">
+            <div class="tl" id="tl" aria-hidden="true"></div>
             <div id="jobs"></div>
             <div class="extra">
               <div><p class="sub-h" id="eduT"></p><ul id="edu"></ul></div>
@@ -418,7 +698,10 @@
         <div class="wrap">
           <div class="sec-h"><h2 id="iltT"></h2><p id="iltL"></p></div>
           <div class="sec-body talk">
-            <div id="lines"></div>
+            <div class="talk-l">
+              <figure class="pj-fig sc ct-fig" data-scene="reply" id="replyFig" aria-hidden="true"></figure>
+              <div id="lines"></div>
+            </div>
             <form id="form" novalidate>
               <div class="fd"><label for="name" id="lName"></label>
                 <input type="text" id="name" name="name" required autocomplete="name" /></div>
@@ -548,6 +831,7 @@
           $("nav").innerHTML = Object.keys(sc).filter(function (k) { return sc[k].nav; })
             .map(function (k) { return '<a href="#' + k + '">' + esc(t(sc[k].nav)) + "</a>"; }).join("");
           $("skipLink").textContent = U("skip");
+          $("nav").setAttribute("aria-label", U("navLabel"));
           var p = S.data.personal || {};
           $("mark").innerHTML = esc(p.name) + ' <span>' + esc(t(p.title)) + "</span>";
         }
@@ -618,46 +902,588 @@
           layoutReceipt();
         }
 
+        /* kâğıt yazıcının ağzından (çizimde y=42) yukarı büyür; masaya sığacak kadar ölçeklenir */
         function layoutReceipt() {
-          var pin = $("paperIn"), paper = $("paper");
-          if (!pin || !paper) return;
+          var pin = $("paperIn"), paper = $("paper"), prn = $("prn"), desk = $("rsDesk");
+          if (!pin || !paper || !prn || !desk) return;
+          var box = prn.querySelector("svg").getBoundingClientRect();
+          var mouth = box.height - 42 * (box.width / 420);
+          paper.style.bottom = mouth.toFixed(1) + "px";
           pin.style.transform = "scale(1)";
           var natural = pin.offsetHeight;
-          var printer = paper.parentNode;
-          var slotH = (printer.querySelector(".slot") || {}).offsetHeight || 26;
-          var vh = window.innerHeight, edge = vh * 0.06;
-          var sc = clamp((vh - slotH - edge * 2) / natural, 0.42, 1);
-          var full = natural * sc;
+          var base = parseFloat(getComputedStyle(prn).bottom) || 0;
+          var avail = desk.clientHeight - base - mouth - 24;
+          var sc = clamp(avail / natural, 0.42, 1);
           pin.style.transform = "scale(" + sc + ")";
-          /* basımı biten fiş dikey olarak ortalanır */
-          printer.style.marginTop = Math.max(edge, (vh - slotH - full) / 2) + "px";
-          S.rFull = full;
-          S.rLine = 13 * 1.62 * sc;
+          S.rFull = natural * sc;
+          S.rLine = parseFloat(getComputedStyle(pin).fontSize) * 1.62 * sc;
           var cv = $("bc");
           if (cv) drawBarcode(cv, ((S.data.contact || {}).website || "beratarpa.com"));
           update();
         }
 
+        /* ── iş sahneleri ──────────────────────────────────────────
+           Her projenin kendi çizimi var. svg() sahneyi kurar, upd(f, p)
+           0→1 ilerlemeye göre hikâyeyi oynatır. */
+        function seg(p, a, b) { return clamp((p - a) / (b - a), 0, 1); }
+        function ez(x) { return 1 - Math.pow(1 - x, 3); }
+        function at(path, k) { return path.getPointAtLength(path.getTotalLength() * k); }
+        function mv(el, x, y) { el.setAttribute("transform", "translate(" + x.toFixed(1) + " " + y.toFixed(1) + ")"); }
+        function qr(x, y, s) {
+          var f = s * 0.3, m = s * 0.1, out = "";
+          [[x, y], [x + s - f, y], [x, y + s - f]].forEach(function (c) {
+            out += '<rect class="qf" x="' + c[0] + '" y="' + c[1] + '" width="' + f + '" height="' + f + '" rx="' + (f * 0.14) + '"/>' +
+                   '<rect class="qi" x="' + (c[0] + f * 0.3) + '" y="' + (c[1] + f * 0.3) + '" width="' + (f * 0.4) + '" height="' + (f * 0.4) + '" rx="' + (f * 0.08) + '"/>';
+          });
+          [[4,0],[5,1],[4,2],[6,2],[0,4],[2,4],[4,4],[5,5],[7,4],[9,4],[4,6],[6,7],[8,6],[9,8],[7,9],[5,9],[4,8],[9,6]].forEach(function (d) {
+            out += '<rect class="qm" x="' + (x + d[0] * m) + '" y="' + (y + d[1] * m) + '" width="' + (m * 0.9) + '" height="' + (m * 0.9) + '" rx="' + (m * 0.15) + '"/>';
+          });
+          return out;
+        }
+
+        var SC = {
+          /* kural motoru: masaüstü, web ve mobilden gelen sipariş aynı motora girer;
+             gösterge eşiği geçince motor yanar ve karşılama e-postası çıkar */
+          rules: {
+            svg: function () {
+              var pk = D("packages"), o = '<svg viewBox="0 0 900 390">', i, y;
+              var dev = [
+                function (y) { return '<rect class="b" x="40" y="' + (y - 38) + '" width="168" height="76" rx="8"/><path class="l" d="M40 ' + (y - 22) + ' H208"/>' +
+                                      '<circle class="t" cx="52" cy="' + (y - 30) + '" r="3"/><circle class="t" cx="62" cy="' + (y - 30) + '" r="3"/><circle class="t" cx="72" cy="' + (y - 30) + '" r="3"/>' +
+                                      '<rect class="t" x="52" y="' + (y - 12) + '" width="40" height="38" rx="3"/><rect class="t" x="100" y="' + (y - 12) + '" width="96" height="8" rx="4"/><rect class="t" x="100" y="' + (y + 2) + '" width="70" height="8" rx="4"/>'; },
+                function (y) { return '<rect class="b" x="40" y="' + (y - 38) + '" width="168" height="76" rx="8"/><rect class="t" x="52" y="' + (y - 30) + '" width="144" height="12" rx="6"/>' +
+                                      '<rect class="t" x="52" y="' + (y - 10) + '" width="144" height="10" rx="3"/><rect class="t" x="52" y="' + (y + 6) + '" width="96" height="8" rx="4"/><rect class="t" x="52" y="' + (y + 20) + '" width="120" height="8" rx="4"/>'; },
+                function (y) { return '<rect class="b" x="96" y="' + (y - 52) + '" width="58" height="104" rx="12"/><rect class="t" x="116" y="' + (y - 45) + '" width="18" height="4" rx="2"/>' +
+                                      '<rect class="t" x="104" y="' + (y - 34) + '" width="42" height="12" rx="3"/><rect class="t" x="104" y="' + (y - 16) + '" width="42" height="12" rx="3"/><rect class="t" x="104" y="' + (y + 2) + '" width="42" height="12" rx="3"/>'; }
+              ];
+              for (i = 0; i < 3; i++) {
+                y = 70 + i * 125;
+                o += '<path class="lg rin" d="M214 ' + y + ' H380"/><path class="lg" d="M560 ' + y + ' H700"/>' + dev[i](y) +
+                     '<text class="pn" x="224" y="' + (y - 14) + '">' +
+                     esc(pk[i] ? t(pk[i].platform) : "") + "</text>" +
+                     '<rect class="b eng" x="380" y="' + (y - 40) + '" width="180" height="80" rx="14"/>' +
+                     '<circle class="led2" cx="400" cy="' + (y - 20) + '" r="5"/>' +
+                     '<rect class="t" x="400" y="' + (y + 4) + '" width="140" height="12" rx="6"/>' +
+                     '<rect class="mf" x="400" y="' + (y + 4) + '" width="0" height="12" rx="6"/>' +
+                     '<path class="thr" d="M477 ' + (y - 2) + ' V' + (y + 22) + '"/>' +
+                     '<rect class="t" x="416" y="' + (y - 25) + '" width="80" height="9" rx="4.5"/>' +
+                     '<g class="card"><rect class="b" x="-18" y="-13" width="36" height="26" rx="4"/><rect class="ua" x="-12" y="-7" width="14" height="4" rx="2"/><rect class="u3" x="-12" y="1" width="24" height="4" rx="2"/></g>' +
+                     '<g class="env"><rect class="b" x="-22" y="-15" width="44" height="30" rx="4"/><path class="l" d="M-20 -12 L0 3 L20 -12"/><circle class="ua" cx="20" cy="-14" r="6"/></g>' +
+                     '<path class="l2" d="M770 ' + (y - 26) + ' h70 v52 h-70 z"/><path class="l2" d="M770 ' + (y + 6) + ' h20 l6 8 h18 l6 -8 h20"/>';
+              }
+              return o + "</svg>";
+            },
+            upd: function (f, p) {
+              var cards = f.querySelectorAll(".card"), envs = f.querySelectorAll(".env"), mf = f.querySelectorAll(".mf"),
+                  engs = f.querySelectorAll(".eng"), leds = f.querySelectorAll(".led2"), i;
+              for (i = 0; i < 3; i++) {
+                var y = 70 + i * 125, q = seg(p, i * 0.26, i * 0.26 + 0.48);
+                var a = seg(q, 0, 0.35), b = seg(q, 0.35, 0.65), c = seg(q, 0.65, 1);
+                mv(cards[i], 214 + (400 - 214) * ez(a), y);
+                cards[i].style.opacity = a > 0 && b < 0.5 ? 1 : 0;
+                var w = 140 * 0.82 * ez(b);
+                mf[i].setAttribute("width", w.toFixed(1));
+                var hot = w > 77;
+                engs[i].classList.toggle("hot", hot);
+                leds[i].classList.toggle("hot", hot);
+                mv(envs[i], 560 + (805 - 560) * ez(c), y);
+                envs[i].style.opacity = c > 0 ? 1 : 0;
+              }
+            }
+          },
+
+          /* görüşme: önce müşteri anlatır (satırlar dolar), sonra not alınır, cevap balonu gelir */
+          meet: {
+            svg: function () {
+              return '<svg viewBox="0 0 200 124">' +
+                '<path class="b" d="M26 12 H122 A10 10 0 0 1 132 22 V58 A10 10 0 0 1 122 68 H54 L38 82 V68 H26 A10 10 0 0 1 16 58 V22 A10 10 0 0 1 26 12 Z"/>' +
+                '<rect class="u3 ml" x="28" y="24" width="84" height="6" rx="3"/>' +
+                '<rect class="u3 ml" x="28" y="36" width="66" height="6" rx="3"/>' +
+                '<rect class="u3 ml" x="28" y="48" width="76" height="6" rx="3"/>' +
+                '<g class="rb"><path class="ua" d="M96 72 H174 A10 10 0 0 1 184 82 V100 A10 10 0 0 1 174 110 H166 V122 L152 110 H96 A10 10 0 0 1 86 100 V82 A10 10 0 0 1 96 72 Z"/>' +
+                '<circle class="w2" cx="116" cy="91" r="4"/><circle class="w2 d2" cx="135" cy="91" r="4"/><circle class="w2 d3" cx="154" cy="91" r="4"/></g>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var ml = f.querySelectorAll(".ml"), w = [84, 66, 76], i;
+              for (i = 0; i < ml.length; i++) ml[i].setAttribute("width", (w[i] * seg(p, i * 0.16, i * 0.16 + 0.2)).toFixed(1));
+              var rb = f.querySelector(".rb"), b = seg(p, 0.55, 0.8);
+              rb.style.opacity = b.toFixed(3);
+              rb.style.transform = "translateY(" + ((1 - ez(b)) * 10).toFixed(1) + "px)";
+              f.querySelector(".d2").style.opacity = p > 0.85 ? 1 : 0.35;
+              f.querySelector(".d3").style.opacity = p > 0.95 ? 1 : 0.35;
+              f.parentNode.style.setProperty("--f", p.toFixed(3));
+            }
+          },
+
+          /* teklif: kalemler yazılır, toplam çıkar, altı imzalanır */
+          offer: {
+            svg: function () {
+              var rows = "", i;
+              for (i = 0; i < 3; i++) rows += '<rect class="t or" x="64" y="' + (40 + i * 14) + '" width="48" height="5" rx="2.5"/><rect class="u3 or" x="120" y="' + (40 + i * 14) + '" width="18" height="5" rx="2.5"/>';
+              return '<svg viewBox="0 0 200 124">' +
+                '<ellipse class="sh" cx="100" cy="119" rx="56" ry="4"/>' +
+                '<rect class="b" x="52" y="6" width="96" height="110" rx="6"/>' +
+                '<rect class="t" x="64" y="18" width="46" height="7" rx="3.5"/>' + rows +
+                '<rect class="ua tt2" x="100" y="86" width="38" height="7" rx="3.5"/>' +
+                '<path class="l sg" d="M64 106 c6 -10 10 -10 12 -2 s6 8 10 -2 s6 -8 10 0 s8 6 14 -2"/>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var or = f.querySelectorAll(".or"), i;
+              for (i = 0; i < or.length; i++) or[i].style.opacity = seg(p, Math.floor(i / 2) * 0.14, Math.floor(i / 2) * 0.14 + 0.12).toFixed(3);
+              f.querySelector(".tt2").style.opacity = p > 0.5 ? 1 : 0;
+              var sg = f.querySelector(".sg"), L = sg.getTotalLength();
+              sg.style.strokeDasharray = L.toFixed(1);
+              sg.style.strokeDashoffset = (L * (1 - seg(p, 0.6, 1))).toFixed(1);
+              f.parentNode.style.setProperty("--f", p.toFixed(3));
+            }
+          },
+
+          /* geliştirme: ekran üç sürümde oluşur; taslak, gri, bitmiş */
+          build: {
+            svg: function () {
+              var bl = [[30, 38, 60, 30], [98, 38, 72, 12], [98, 56, 52, 12], [30, 76, 140, 10], [30, 92, 96, 10], [134, 90, 36, 14]], o = "", i;
+              for (i = 0; i < bl.length; i++) o += '<rect class="blk" x="' + bl[i][0] + '" y="' + bl[i][1] + '" width="' + bl[i][2] + '" height="' + bl[i][3] + '" rx="' + (i === 5 ? 7 : 3) + '"/>';
+              return '<svg viewBox="0 0 200 124">' +
+                '<rect class="b" x="18" y="8" width="164" height="108" rx="8"/>' +
+                '<path class="l" d="M18 26 H182"/>' +
+                '<circle class="t" cx="30" cy="17" r="3"/><circle class="t" cx="40" cy="17" r="3"/><circle class="t" cx="50" cy="17" r="3"/>' +
+                '<circle class="vd" cx="150" cy="17" r="3.5"/><circle class="vd" cx="160" cy="17" r="3.5"/><circle class="vd" cx="170" cy="17" r="3.5"/>' +
+                o + "</svg>";
+            },
+            upd: function (f, p) {
+              var v = p < 0.34 ? 0 : p < 0.67 ? 1 : 2, bl = f.querySelectorAll(".blk"), vd = f.querySelectorAll(".vd"), i;
+              for (i = 0; i < bl.length; i++) {
+                var on = seg(p, i * 0.05, i * 0.05 + 0.1) > 0;
+                bl[i].setAttribute("class", "blk w" + (on ? v : "x") + (i === 5 ? " bt" : ""));
+              }
+              for (i = 0; i < vd.length; i++) vd[i].classList.toggle("hot", p >= (i + 1) * 0.3);
+              f.parentNode.style.setProperty("--f", p.toFixed(3));
+            }
+          },
+
+          /* devreye alma: sunucudan veri taşınır, dizüstü ve telefon açılır, onay gelir */
+          live: {
+            svg: function () {
+              return '<svg viewBox="0 0 200 124">' +
+                '<rect class="b" x="10" y="32" width="46" height="60" rx="6"/>' +
+                '<path class="g" d="M18 52 H48 M18 72 H48"/><circle class="led" cx="20" cy="42" r="2.5"/><circle class="led" cx="20" cy="62" r="2.5"/><circle class="led" cx="20" cy="82" r="2.5"/>' +
+                '<path class="lg dl" d="M56 50 C 88 50, 96 32, 122 32"/>' +
+                '<path class="lg dl" d="M56 76 C 92 76, 112 94, 146 94"/>' +
+                '<rect class="b" x="122" y="12" width="66" height="44" rx="4"/><rect class="scr" x="128" y="18" width="54" height="32" rx="2"/>' +
+                '<g class="ui"><rect class="u" x="133" y="23" width="14" height="22" rx="2"/><rect class="u" x="151" y="23" width="26" height="6" rx="3"/><rect class="ua" x="151" y="33" width="18" height="6" rx="3"/></g>' +
+                '<path class="b" d="M114 60 H196 L190 66 H120 Z"/>' +
+                '<rect class="b" x="146" y="72" width="32" height="48" rx="6"/><rect class="scr" x="150" y="80" width="24" height="32" rx="2"/>' +
+                '<g class="ui"><rect class="u" x="154" y="85" width="16" height="5" rx="2.5"/><rect class="u" x="154" y="94" width="16" height="5" rx="2.5"/><rect class="ua" x="154" y="103" width="10" height="5" rx="2.5"/></g>' +
+                '<circle class="pk p2" r="4"/><circle class="pk p2" r="4"/>' +
+                '<g class="ok"><circle class="ua" cx="96" cy="108" r="10"/><path class="ck2" d="M91 108 l4 4 l7 -7"/></g>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var dl = f.querySelectorAll(".dl"), pk = f.querySelectorAll(".p2"), scr = f.querySelectorAll(".scr"), ui = f.querySelectorAll(".ui"), i;
+              for (i = 0; i < 2; i++) {
+                var q = seg(p, i * 0.15, i * 0.15 + 0.45), pt = at(dl[i], ez(q));
+                mv(pk[i], pt.x, pt.y);
+                pk[i].style.opacity = q > 0 && q < 1 ? 1 : 0;
+                scr[i].classList.toggle("lit", q >= 1);
+                ui[i].style.opacity = q >= 1 ? 1 : 0;
+              }
+              var ok = f.querySelector(".ok"), c = seg(p, 0.8, 1);
+              ok.style.opacity = c.toFixed(3);
+              ok.style.transform = "scale(" + (0.6 + 0.4 * ez(c)).toFixed(3) + ")";
+              f.parentNode.style.setProperty("--f", p.toFixed(3));
+            }
+          },
+
+          /* destek: soru gelir, yazıyor… belirir, cevap gider, teşekkür döner */
+          support: {
+            svg: function () {
+              return '<svg viewBox="0 0 200 124">' +
+                '<rect class="b" x="26" y="6" width="148" height="112" rx="12"/>' +
+                '<rect class="t m1" x="38" y="20" width="86" height="18" rx="9"/>' +
+                '<g class="typ"><rect class="t" x="124" y="46" width="38" height="16" rx="8"/><circle class="u3" cx="134" cy="54" r="2.5"/><circle class="u3" cx="143" cy="54" r="2.5"/><circle class="u3" cx="152" cy="54" r="2.5"/></g>' +
+                '<rect class="ua m2" x="76" y="46" width="86" height="18" rx="9"/>' +
+                '<g class="m3"><rect class="t" x="38" y="72" width="62" height="18" rx="9"/><path class="ua" d="M112 78 c0 -4 5 -5 7 -1 c2 -4 7 -3 7 1 c0 5 -7 9 -7 9 s-7 -4 -7 -9 z"/></g>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var a = seg(p, 0, 0.25), b = seg(p, 0.25, 0.5), c = seg(p, 0.5, 0.75), d = seg(p, 0.75, 1);
+              f.querySelector(".m1").style.opacity = a.toFixed(3);
+              f.querySelector(".typ").style.opacity = b > 0 && c === 0 ? 1 : 0;
+              var m2 = f.querySelector(".m2");
+              m2.style.opacity = c.toFixed(3);
+              m2.style.transform = "translateX(" + ((1 - ez(c)) * 12).toFixed(1) + "px)";
+              f.querySelector(".m3").style.opacity = d.toFixed(3);
+              f.parentNode.style.setProperty("--f", p.toFixed(3));
+            }
+          },
+
+          /* iletişim: mesaj uçar, saat ilerler, gün bitmeden yanıt geri döner */
+          reply: {
+            svg: function () {
+              var ticks = "", i, a;
+              for (i = 0; i < 12; i++) {
+                a = i * Math.PI / 6;
+                ticks += '<path class="tick" d="M' + (240 + 30 * Math.sin(a)).toFixed(1) + " " + (66 - 30 * Math.cos(a)).toFixed(1) +
+                         " L" + (240 + 35 * Math.sin(a)).toFixed(1) + " " + (66 - 35 * Math.cos(a)).toFixed(1) + '"/>';
+              }
+              return '<svg viewBox="0 0 480 250">' +
+                '<ellipse class="sh" cx="84" cy="236" rx="52" ry="6"/><ellipse class="sh" cx="396" cy="236" rx="80" ry="6"/>' +
+                '<rect class="b" x="50" y="104" width="68" height="126" rx="14"/><rect class="s" x="57" y="120" width="54" height="94" rx="6"/>' +
+                '<rect class="u" x="63" y="128" width="42" height="8" rx="4"/><rect class="u" x="63" y="142" width="34" height="8" rx="4"/>' +
+                '<rect class="ua" x="63" y="194" width="42" height="12" rx="6"/>' +
+                '<circle class="badge bd" cx="114" cy="106" r="10"/><path class="ck2 bd" d="M109 106 l4 4 l7 -7"/>' +
+                '<path class="lg ar1" d="M118 150 C 190 90, 290 90, 330 136"/>' +
+                '<path class="lg ar2" d="M340 196 C 290 236, 180 236, 118 190"/>' +
+                '<rect class="b" x="320" y="120" width="152" height="96" rx="7"/><rect class="s" x="328" y="128" width="136" height="80" rx="3"/>' +
+                '<rect class="u" x="336" y="136" width="120" height="14" rx="3"/><rect class="u" x="336" y="156" width="120" height="14" rx="3"/>' +
+                '<rect class="u inr" x="336" y="176" width="120" height="14" rx="3"/><circle class="ua inr2" cx="344" cy="183" r="4"/>' +
+                '<path class="b" d="M306 220 H486 L478 230 H314 Z"/>' +
+                '<circle class="clk" cx="240" cy="66" r="42"/>' + ticks +
+                '<path class="hand hh" d="M240 66 L240 44"/><path class="hand2 mh" d="M240 66 L240 34"/><circle class="u" cx="240" cy="66" r="4"/>' +
+                '<g class="env e1"><rect class="b" x="-20" y="-14" width="40" height="28" rx="4"/><path class="l" d="M-18 -11 L0 3 L18 -11"/></g>' +
+                '<g class="env e2"><rect class="ua" x="-20" y="-14" width="40" height="28" rx="4"/><path class="ck2" d="M-18 -11 L0 3 L18 -11"/></g>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var a = seg(p, 0, 0.32), b = seg(p, 0.28, 0.62), c = seg(p, 0.58, 0.9), d = seg(p, 0.88, 1);
+              var e1 = f.querySelector(".e1"), e2 = f.querySelector(".e2"), pt;
+              pt = at(f.querySelector(".ar1"), ez(a)); mv(e1, pt.x, pt.y);
+              e1.style.opacity = a > 0 && a < 1 ? 1 : 0;
+              f.querySelector(".inr").classList.toggle("lit", a >= 1);
+              f.querySelector(".inr2").style.opacity = a >= 1 && c < 1 ? 1 : 0;
+              var t4 = seg(p, 0.1, 0.9);
+              f.querySelector(".hh").setAttribute("transform", "rotate(" + (270 + 120 * t4).toFixed(1) + " 240 66)");
+              f.querySelector(".mh").setAttribute("transform", "rotate(" + (1440 * t4).toFixed(1) + " 240 66)");
+              pt = at(f.querySelector(".ar2"), ez(c)); mv(e2, pt.x, pt.y);
+              e2.style.opacity = c > 0 && c < 1 ? 1 : 0;
+              var bd = f.querySelectorAll(".bd");
+              for (var i = 0; i < bd.length; i++) bd[i].style.opacity = d.toFixed(3);
+            }
+          },
+
+          /* adisyon: dokunmatik ekranda sipariş, mutfak ekranına uçan fiş, gün sonu grafiği */
+          grid: {
+            svg: function () {
+              var tiles = "", lines = "", bars = "", hs = [26, 40, 32, 52, 66], i;
+              for (i = 0; i < 9; i++) tiles += '<rect class="u tile" x="' + (52 + (i % 3) * 42) + '" y="' + (68 + Math.floor(i / 3) * 42) + '" width="36" height="36" rx="5"/>';
+              for (i = 0; i < 5; i++) lines += '<rect class="u tl" x="194" y="' + (78 + i * 15) + '" width="48" height="6" rx="3"/>';
+              for (i = 0; i < 5; i++) bars += '<rect class="t bar" x="' + (326 + i * 24) + '" y="' + (254 - hs[i]) + '" width="14" height="' + hs[i] + '" rx="2"/>';
+              return '<svg viewBox="0 0 480 320">' +
+                '<ellipse class="sh" cx="150" cy="292" rx="112" ry="8"/>' +
+                '<path class="b" d="M128 218 L114 282 H186 L172 218 Z"/>' +
+                '<rect class="b" x="28" y="44" width="244" height="176" rx="12"/>' +
+                '<rect class="s" x="40" y="56" width="220" height="152" rx="4"/>' + tiles +
+                '<rect class="u2" x="186" y="66" width="64" height="132" rx="4"/>' + lines +
+                '<rect class="ua tt" x="194" y="174" width="48" height="14" rx="3"/>' +
+                '<path class="lg rt" d="M232 150 C 292 150, 300 56, 339 60"/>' +
+                '<rect class="b" x="306" y="30" width="150" height="112" rx="8"/>' +
+                '<rect class="s" x="314" y="38" width="134" height="96" rx="3"/>' +
+                '<rect class="u2" x="320" y="46" width="38" height="80" rx="3"/>' +
+                '<rect class="u2" x="362" y="46" width="38" height="80" rx="3"/>' +
+                '<rect class="u2" x="404" y="46" width="38" height="80" rx="3"/>' +
+                '<rect class="u" x="326" y="100" width="26" height="18" rx="3"/>' +
+                '<rect class="u" x="368" y="52" width="26" height="18" rx="3"/>' +
+                '<rect class="u" x="368" y="76" width="26" height="18" rx="3"/>' +
+                '<rect class="u" x="410" y="52" width="26" height="18" rx="3"/>' +
+                '<path class="l" d="M381 142 V152 M364 154 H398"/>' +
+                '<rect class="b" x="306" y="170" width="150" height="112" rx="10"/>' + bars +
+                '<rect class="ua tot" x="322" y="264" width="64" height="6" rx="3"/>' +
+                '<g class="card"><rect class="b" x="-14" y="-10" width="28" height="20" rx="3"/>' +
+                '<rect class="ua" x="-9" y="-5" width="12" height="3" rx="1.5"/><rect class="u3" x="-9" y="1" width="18" height="3" rx="1.5"/></g>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var a = seg(p, 0, 0.38), b = seg(p, 0.38, 0.68), c = seg(p, 0.68, 1), i;
+              var tiles = f.querySelectorAll(".tile"), pick = [1, 3, 8];
+              for (i = 0; i < pick.length; i++) tiles[pick[i]].classList.toggle("hot", a > (i + 0.5) / pick.length);
+              var tl = f.querySelectorAll(".tl");
+              for (i = 0; i < tl.length; i++) tl[i].setAttribute("width", (48 * seg(a, i / tl.length, (i + 1) / tl.length)).toFixed(1));
+              f.querySelector(".tt").style.opacity = a >= 1 ? 1 : 0;
+              var card = f.querySelector(".card"), pt = at(f.querySelector(".rt"), ez(b));
+              mv(card, pt.x, pt.y);
+              card.style.opacity = b > 0 ? 1 : 0;
+              var bars = f.querySelectorAll(".bar");
+              for (i = 0; i < bars.length; i++) bars[i].style.transform = "scaleY(" + (0.08 + 0.92 * ez(seg(c, i * 0.12, i * 0.12 + 0.5))).toFixed(3) + ")";
+              f.querySelector(".tot").style.opacity = c > 0.85 ? 1 : 0;
+            }
+          },
+
+          /* QR menü: telefon kodu tarar, liste akar, sipariş onaylanır */
+          scan: {
+            svg: function () {
+              var rows = "", i, y;
+              for (i = 0; i < 4; i++) {
+                y = 66 + i * 40;
+                rows += '<g class="lr"><rect class="u2" x="308" y="' + y + '" width="88" height="32" rx="5"/>' +
+                        '<rect class="u" x="313" y="' + (y + 5) + '" width="22" height="22" rx="4"/>' +
+                        '<rect class="u" x="341" y="' + (y + 8) + '" width="44" height="5" rx="2.5"/>' +
+                        '<rect class="u" x="341" y="' + (y + 18) + '" width="28" height="5" rx="2.5"/></g>';
+              }
+              return '<svg viewBox="0 0 480 320">' +
+                '<ellipse class="sh" cx="140" cy="292" rx="84" ry="7"/>' +
+                '<ellipse class="sh" cx="352" cy="296" rx="72" ry="7"/>' +
+                '<path class="b" d="M92 104 H188 L204 286 H76 Z"/>' +
+                '<rect class="b" x="102" y="124" width="76" height="76" rx="6"/>' + qr(110, 132, 60) +
+                '<rect class="t" x="112" y="218" width="56" height="7" rx="3.5"/>' +
+                '<rect class="t" x="120" y="232" width="40" height="7" rx="3.5"/>' +
+                '<path class="beam" d="M292 128 L184 160"/>' +
+                '<rect class="b" x="290" y="36" width="124" height="244" rx="20"/>' +
+                '<rect class="s" x="300" y="54" width="104" height="208" rx="9"/>' +
+                '<rect class="t" x="334" y="43" width="36" height="5" rx="2.5"/>' +
+                '<g class="cam"><path class="cb" d="M318 96 V88 H326 M378 88 H386 V96 M386 152 V160 H378 M326 160 H318 V152"/>' +
+                qr(328, 100, 48) + '<rect class="ua sl" x="322" y="100" width="60" height="2.5" rx="1.25"/></g>' +
+                rows +
+                '<rect class="ua qbtn" x="314" y="230" width="76" height="22" rx="11"/>' +
+                '<path class="ck" d="M343 241 l5 5 l10 -10"/>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var a = seg(p, 0, 0.42), b = seg(p, 0.42, 0.78), c = seg(p, 0.78, 1), i;
+              f.querySelector(".cam").style.opacity = (1 - seg(b, 0, 0.3)).toFixed(3);
+              f.querySelector(".sl").setAttribute("y", (100 + 46 * a).toFixed(1));
+              f.querySelector(".beam").style.opacity = a > 0 && a < 1 ? 0.9 : 0;
+              var rows = f.querySelectorAll(".lr");
+              for (i = 0; i < rows.length; i++) {
+                var r = seg(b, 0.2 + i * 0.18, 0.5 + i * 0.18);
+                rows[i].style.opacity = r.toFixed(3);
+                rows[i].style.transform = "translateY(" + ((1 - ez(r)) * 12).toFixed(1) + "px)";
+              }
+              f.querySelector(".qbtn").style.opacity = c > 0 ? 1 : 0;
+              f.querySelector(".ck").style.strokeDashoffset = (24 * (1 - seg(c, 0.3, 1))).toFixed(1);
+            }
+          },
+
+          /* entegrasyon: üç ayrı biçimdeki kayıt tek merkezde birleşir, aynı biçimde çıkar */
+          merge: {
+            svg: function () {
+              var oc = "", i, y;
+              for (i = 0; i < 6; i++) {
+                y = 54 + i * 36;
+                oc += '<g class="oc"><rect class="t" x="344" y="' + y + '" width="104" height="28" rx="6"/>' +
+                      '<circle class="ua" cx="358" cy="' + (y + 14) + '" r="4.5"/>' +
+                      '<rect class="u3" x="370" y="' + (y + 8) + '" width="52" height="5" rx="2.5"/>' +
+                      '<rect class="u3" x="370" y="' + (y + 16) + '" width="34" height="5" rx="2.5"/></g>';
+              }
+              var pk = "";
+              for (i = 0; i < 2; i++) {
+                pk += '<circle class="pk" r="6.5"/>' +
+                      '<rect class="pk" x="-6" y="-6" width="12" height="12" rx="2"/>' +
+                      '<path class="pk" d="M0 -7.5 L7.5 6 H-7.5 Z"/>';
+              }
+              return '<svg viewBox="0 0 480 320">' +
+                '<path class="lg mi" d="M138 66 C 176 66, 178 146, 206 150"/>' +
+                '<path class="lg mi" d="M138 160 H206"/>' +
+                '<path class="lg mi" d="M138 254 C 176 254, 178 174, 206 170"/>' +
+                '<path class="lg" d="M290 160 H330"/>' +
+                '<rect class="b" x="22" y="30" width="116" height="72" rx="10"/>' +
+                '<path class="l" d="M50 50 q-8 0 -8 8 v4 q0 4 -4 4 q4 0 4 4 v4 q0 8 8 8 M110 50 q8 0 8 8 v4 q0 4 4 4 q-4 0 -4 4 v4 q0 8 -8 8"/>' +
+                '<rect class="t" x="60" y="54" width="40" height="5" rx="2.5"/><rect class="t" x="60" y="64" width="28" height="5" rx="2.5"/><rect class="t" x="60" y="74" width="34" height="5" rx="2.5"/>' +
+                '<rect class="b" x="22" y="124" width="116" height="72" rx="10"/>' +
+                '<path class="l" d="M50 146 l-10 14 l10 14 M110 146 l10 14 l-10 14"/>' +
+                '<rect class="t" x="60" y="148" width="40" height="5" rx="2.5"/><rect class="t" x="60" y="158" width="24" height="5" rx="2.5"/><rect class="t" x="60" y="168" width="32" height="5" rx="2.5"/>' +
+                '<rect class="b" x="22" y="218" width="116" height="72" rx="10"/>' +
+                '<path class="l2" d="M38 236 H122 M38 254 H122 M38 272 H122 M66 228 V282 M94 228 V282"/>' +
+                '<rect class="b" x="206" y="118" width="84" height="84" rx="18"/>' +
+                '<rect class="s" x="218" y="130" width="60" height="60" rx="12"/>' +
+                '<circle class="ua" cx="248" cy="160" r="11"/>' +
+                '<rect class="b" x="330" y="36" width="132" height="248" rx="14"/>' + oc + pk +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var mi = f.querySelectorAll(".mi"), pk = f.querySelectorAll(".pk"), oc = f.querySelectorAll(".oc"), got = 0, i;
+              for (i = 0; i < pk.length; i++) {
+                var k = i % 3, w = Math.floor(i / 3), o = w * 0.42 + k * 0.08, q = seg(p, o, o + 0.4), pt = at(mi[k], ez(q));
+                mv(pk[i], pt.x, pt.y);
+                pk[i].style.opacity = q > 0 && q < 1 ? 1 : 0;
+                if (q >= 1) got++;
+              }
+              for (i = 0; i < oc.length; i++) oc[i].style.opacity = i < got ? 1 : 0.22;
+            }
+          },
+
+          /* kurye: haritada rota çizilir, kurye ilerler, her durum merkez ekranına düşer */
+          phone: {
+            svg: function () {
+              return '<svg viewBox="0 0 480 320">' +
+                '<ellipse class="sh" cx="224" cy="306" rx="80" ry="6"/>' +
+                '<ellipse class="sh" cx="398" cy="198" rx="66" ry="6"/>' +
+                '<rect class="b" x="150" y="12" width="148" height="290" rx="24"/>' +
+                '<rect class="s" x="160" y="32" width="128" height="252" rx="11"/>' +
+                '<rect class="t" x="206" y="20" width="36" height="5" rx="2.5"/>' +
+                '<path class="st" d="M160 96 H288 M160 160 H288 M160 222 H288 M196 32 V244 M252 32 V244"/>' +
+                '<path class="rt2" d="M178 236 V222 H252 V160 H196 V96 H270"/>' +
+                '<circle class="u" cx="178" cy="236" r="6"/>' +
+                '<path class="ua" d="M270 96 m0 -17 a9 9 0 0 1 9 9 c0 7 -9 17 -9 17 s-9 -10 -9 -17 a9 9 0 0 1 9 -9 z"/>' +
+                '<circle class="cour" r="7" cx="178" cy="236"/>' +
+                '<rect class="u2" x="170" y="252" width="108" height="22" rx="11"/>' +
+                '<path class="sdl" d="M195 263 H219 M229 263 H253"/>' +
+                '<circle class="sd" cx="190" cy="263" r="5"/><circle class="sd" cx="224" cy="263" r="5"/><circle class="sd" cx="258" cy="263" r="5"/>' +
+                '<path class="wave" d="M306 132 q16 -6 26 -20 M306 148 q26 -10 40 -36"/>' +
+                '<rect class="b" x="338" y="90" width="120" height="86" rx="8"/>' +
+                '<rect class="s" x="346" y="98" width="104" height="70" rx="3"/>' +
+                '<rect class="u dr" x="354" y="106" width="88" height="14" rx="3"/>' +
+                '<rect class="u dr" x="354" y="126" width="88" height="14" rx="3"/>' +
+                '<rect class="ua dr" x="354" y="146" width="88" height="14" rx="3"/>' +
+                '<path class="l" d="M398 176 V186 M378 188 H418"/>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var rt = f.querySelector(".rt2"), L = rt.getTotalLength(), k = seg(p, 0.05, 0.9), i;
+              rt.style.strokeDasharray = L.toFixed(1);
+              rt.style.strokeDashoffset = (L * (1 - k)).toFixed(1);
+              var pt = rt.getPointAtLength(L * k), c = f.querySelector(".cour");
+              c.setAttribute("cx", pt.x.toFixed(1)); c.setAttribute("cy", pt.y.toFixed(1));
+              var sd = f.querySelectorAll(".sd"), dr = f.querySelectorAll(".dr");
+              for (i = 0; i < sd.length; i++) {
+                var on = k >= (i + 1) / 3 - 0.02;
+                sd[i].classList.toggle("hot", on);
+                dr[i].style.opacity = on ? 1 : 0.15;
+              }
+              f.querySelector(".wave").style.opacity = k > 0.02 && k < 1 ? 1 : 0.2;
+            }
+          },
+
+          /* İK platformu: izin takvimi dolar, ekip belirir, bordro çizilir, yapay zekâ işaretini verir */
+          panel: {
+            svg: function () {
+              var cells = "", avs = "", side = "", i, x;
+              for (i = 0; i < 28; i++) cells += '<rect class="cal" x="' + (118 + (i % 7) * 22) + '" y="' + (92 + Math.floor(i / 7) * 21) + '" width="17" height="17" rx="3"/>';
+              for (i = 0; i < 4; i++) {
+                x = 318 + i * 36;
+                avs += '<g class="av"><circle class="avc" cx="' + x + '" cy="87" r="13"/><circle class="avh" cx="' + x + '" cy="83" r="5"/><path class="avb" d="M' + (x - 8) + ' 96 q8 -8 16 0"/></g>';
+              }
+              for (i = 0; i < 4; i++) side += '<rect class="w2" x="42" y="' + (74 + i * 20) + '" width="' + (i ? 30 : 38) + '" height="8" rx="4"/>';
+              return '<svg viewBox="0 0 480 320">' +
+                '<ellipse class="sh" cx="240" cy="306" rx="200" ry="7"/>' +
+                '<rect class="b" x="20" y="18" width="440" height="280" rx="12"/>' +
+                '<path class="l" d="M20 46 H460"/>' +
+                '<circle class="t" cx="38" cy="32" r="4.5"/><circle class="t" cx="54" cy="32" r="4.5"/><circle class="t" cx="70" cy="32" r="4.5"/>' +
+                '<path class="ai" d="M438 22 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 z"/>' +
+                '<rect class="t" x="32" y="60" width="58" height="226" rx="7"/>' + side +
+                '<rect class="b2" x="104" y="60" width="180" height="120" rx="9"/>' +
+                '<rect class="t" x="118" y="72" width="60" height="7" rx="3.5"/>' + cells +
+                '<rect class="b2" x="296" y="60" width="152" height="54" rx="9"/>' + avs +
+                '<rect class="b2" x="296" y="124" width="152" height="162" rx="9"/>' +
+                '<rect class="t" x="310" y="136" width="54" height="7" rx="3.5"/>' +
+                '<path class="gl" d="M310 250 H434 M310 220 H434 M310 190 H434"/>' +
+                '<path class="pl" d="M310 262 L330 240 L350 248 L372 222 L394 228 L414 198 L434 204"/>' +
+                '<rect class="b2" x="104" y="192" width="180" height="94" rx="9"/>' +
+                '<rect class="t" x="116" y="204" width="48" height="70" rx="5"/>' +
+                '<rect class="t" x="170" y="204" width="48" height="70" rx="5"/>' +
+                '<rect class="t" x="224" y="204" width="48" height="70" rx="5"/>' +
+                '<rect class="w2" x="120" y="236" width="40" height="14" rx="3"/>' +
+                '<rect class="w2" x="174" y="212" width="40" height="14" rx="3"/>' +
+                '<rect class="kc" x="120" y="212" width="40" height="14" rx="3"/>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var a = seg(p, 0, 0.45), b = seg(p, 0.2, 0.6), c = seg(p, 0.45, 0.9), d = seg(p, 0.6, 1), i;
+              var cells = f.querySelectorAll(".cal"), leave = [3, 4, 10, 11, 12, 19, 24, 25];
+              for (i = 0; i < leave.length; i++) cells[leave[i]].classList.toggle("hot", a > (i + 0.5) / leave.length);
+              var av = f.querySelectorAll(".av");
+              for (i = 0; i < av.length; i++) {
+                var sv = ez(seg(b, i * 0.2, i * 0.2 + 0.4));
+                av[i].style.opacity = sv.toFixed(3);
+                av[i].style.transform = "scale(" + (0.6 + 0.4 * sv).toFixed(3) + ")";
+              }
+              var pl = f.querySelector(".pl"), L = pl.getTotalLength();
+              pl.style.strokeDasharray = L.toFixed(1);
+              pl.style.strokeDashoffset = (L * (1 - c)).toFixed(1);
+              mv(f.querySelector(".kc"), 108 * ez(d), 0);
+              f.querySelector(".ai").style.transform = "rotate(" + (p * 180).toFixed(1) + "deg) scale(" + (0.7 + 0.5 * d).toFixed(3) + ")";
+            }
+          },
+
+          /* yazarkasa: ödeme biter, sinyal kablodan gider, mali fiş çıkar, gün sonu raporu kesilir */
+          device: {
+            svg: function () {
+              var keys = "", i;
+              for (i = 0; i < 12; i++) keys += '<rect class="key" x="' + (272 + (i % 4) * 24) + '" y="' + (214 + Math.floor(i / 4) * 22) + '" width="19" height="16" rx="3"/>';
+              return '<svg viewBox="0 0 480 320">' +
+                '<ellipse class="sh" cx="96" cy="190" rx="70" ry="6"/>' +
+                '<ellipse class="sh" cx="352" cy="298" rx="112" ry="7"/>' +
+                '<path class="b" d="M84 168 L76 184 H120 L112 168 Z"/>' +
+                '<rect class="b" x="20" y="60" width="152" height="108" rx="9"/>' +
+                '<rect class="s" x="30" y="70" width="132" height="88" rx="3"/>' +
+                '<rect class="u" x="40" y="80" width="70" height="6" rx="3"/>' +
+                '<rect class="u" x="40" y="94" width="96" height="6" rx="3"/>' +
+                '<rect class="u" x="40" y="108" width="84" height="6" rx="3"/>' +
+                '<rect class="ua pay" x="40" y="130" width="112" height="18" rx="9"/>' +
+                '<path class="l cab" d="M172 136 C 214 136, 214 236, 252 236"/>' +
+                '<circle class="sig" r="5" cx="172" cy="136"/>' +
+                '<path class="b slip" d="M372 158 V70 H436 V158"/>' +
+                '<path class="gl slip" d="M382 84 H426 M382 94 H414 M382 104 H426 M382 114 H408 M382 128 H426"/>' +
+                '<path class="b" d="M264 150 H442 A12 12 0 0 1 454 162 V288 H252 V162 A12 12 0 0 1 264 150 Z"/>' +
+                '<rect class="u2" x="366" y="160" width="76" height="6" rx="3"/>' +
+                '<rect class="s" x="266" y="166" width="90" height="36" rx="4"/>' +
+                '<rect class="ua dg" x="282" y="180" width="58" height="8" rx="4"/>' + keys +
+                '<rect class="ua" x="374" y="214" width="66" height="60" rx="8"/>' +
+                '<g class="zr"><rect class="b" x="30" y="206" width="150" height="80" rx="9"/>' +
+                '<rect class="t" x="44" y="220" width="60" height="7" rx="3.5"/>' +
+                '<rect class="t" x="44" y="236" width="96" height="6" rx="3"/>' +
+                '<rect class="t" x="44" y="249" width="80" height="6" rx="3"/>' +
+                '<rect class="t" x="44" y="262" width="90" height="6" rx="3"/>' +
+                '<circle class="ua" cx="158" cy="228" r="11"/><path class="ck2" d="M153 228 l4 4 l7 -7"/></g>' +
+                "</svg>";
+            },
+            upd: function (f, p) {
+              var a = seg(p, 0, 0.25), b = seg(p, 0.2, 0.5), c = seg(p, 0.45, 0.8), d = seg(p, 0.8, 1), i;
+              f.querySelector(".pay").style.opacity = (0.35 + 0.65 * a).toFixed(3);
+              var sig = f.querySelector(".sig"), pt = at(f.querySelector(".cab"), ez(b));
+              sig.setAttribute("cx", pt.x.toFixed(1)); sig.setAttribute("cy", pt.y.toFixed(1));
+              sig.style.opacity = b > 0 && b < 1 ? 1 : 0;
+              f.querySelector(".dg").style.opacity = b >= 1 ? 1 : 0;
+              var sl = f.querySelectorAll(".slip"), y = (1 - ez(c)) * 88;
+              for (i = 0; i < sl.length; i++) sl[i].style.transform = "translateY(" + y.toFixed(1) + "px)";
+              var z = f.querySelector(".zr");
+              z.style.opacity = d.toFixed(3);
+              z.style.transform = "translateY(" + ((1 - ez(d)) * 10).toFixed(1) + "px)";
+            }
+          }
+        };
+
+        /* çizim ekranın altından girdiğinde başlar, üst çeyreğe vardığında hikâyesi biter */
+        function updateScenes() {
+          var figs = document.querySelectorAll(".pj-fig"), vh = window.innerHeight;
+          for (var i = 0; i < figs.length; i++) {
+            var f = figs[i], r = f.getBoundingClientRect();
+            if (!f.firstElementChild) continue;
+            var lag = +f.getAttribute("data-lag") || 0;
+            var p = clamp((vh * 0.92 - r.top - lag * vh) / (vh * 0.62), 0, 1);
+            if (f._p !== undefined && Math.abs(f._p - p) < 0.002) continue;
+            f._p = p;
+            var sc = SC[f.getAttribute("data-scene")];
+            if (sc) sc.upd(f, p);
+          }
+        }
+
         /* ── işler ─────────────────────────────────────────────── */
         function renderWork() {
           $("work").innerHTML = D("projects").map(function (p) {
-            var x = L2(p);
-            var links = [];
+            var x = L2(p), links = [], sc = SC[p.scene];
             if (p.url) links.push([p.host || U("openSite"), p.url]);
             (p.links || []).forEach(function (l) { links.push([l[0], l[1]]); });
-            return '<article class="row">' +
-              '<div><div class="row-t">' + esc(x[0]) + "</div>" +
-              '<div class="row-m">' + esc(x[1]) + " · " + esc(t(p.kind)) + "</div></div>" +
-              '<p class="row-d">' + esc(x[2]) + "</p>" +
-              '<div class="row-l">' + links.map(function (l) {
+            return '<article class="pj"><div class="pj-txt">' +
+              '<p class="pj-k">' + esc(x[1]) + " · " + esc(t(p.kind)) + "</p>" +
+              '<h3 class="pj-t">' + esc(x[0]) + "</h3>" +
+              '<p class="pj-d">' + esc(x[2]) + "</p>" +
+              (links.length ? '<div class="pj-l">' + links.map(function (l) {
                 return '<a class="lnk" href="' + esc(l[1]) + '" target="_blank" rel="noopener">' +
                        esc(String(l[0]).replace(/\n/g, " ")) + arrowOut + "</a>";
-              }).join("") + "</div></article>";
+              }).join("") + "</div>" : "") + "</div>" +
+              (sc ? '<figure class="pj-fig sc" data-scene="' + esc(p.scene) + '" aria-hidden="true">' + sc.svg() + "</figure>" : "") +
+              "</article>";
           }).join("");
+          updateScenes();
         }
 
         /* ── açık kaynak ───────────────────────────────────────── */
         function renderOpen() {
+          var rf = $("rulesFig");
+          if (rf) { rf.innerHTML = SC.rules.svg(); rf._p = undefined; }
+          $("rulesCap").textContent = U("ruleCaption");
           $("pkgs").innerHTML = D("packages").map(function (p) {
             return '<a class="pkg" href="' + esc(p.url) + '" target="_blank" rel="noopener">' +
               "<b>" + esc(p.name) + "</b><span>" + esc(p.registry) + arrowOut + "</span></a>";
@@ -690,13 +1516,48 @@
         function renderServices() {
           $("svc").innerHTML = D("services").map(function (s) {
             var x = L2(s);
-            return "<li><b>" + esc(x[0]) + "</b><p>" + esc(x[1]) + "</p></li>";
+            return '<li data-s="' + esc(s.scene || "") + '"><b>' + esc(x[0]) + "</b><p>" + esc(x[1]) + "</p></li>";
           }).join("");
           $("calT").textContent = t(SEC("calisma").title);
           $("steps").innerHTML = D("process").map(function (s, i) {
-            var x = L2(s);
-            return "<li><b><em>" + (i + 1) + "</em>" + esc(x[0]) + "</b><p>" + esc(x[1]) + "</p></li>";
+            var x = L2(s), sc = SC[s.scene];
+            return "<li>" + (sc ? '<figure class="stp-fig sc pj-fig" data-scene="' + esc(s.scene) + '" data-lag="' + (i * 0.06) +
+                   '" aria-hidden="true">' + sc.svg() + "</figure>" : "") +
+                   '<div class="stp-txt"><b><em>' + (i + 1) + "</em>" + esc(x[0]) + "</b><p>" + esc(x[1]) + "</p></div></li>";
           }).join("");
+        }
+
+        /* çizgiyi geçen son hizmet canlıdır; bağlantısı çizilir, paket hat boyunca ilerler.
+           Entegrasyon bütün hatları, bakım bütün sistemi yakar. */
+        function updateMap() {
+          var list = $("svc"), map = $("map");
+          if (!list || !map) return;
+          var items = list.children, vh = window.innerHeight, mr = map.getBoundingClientRect();
+          var stacked = getComputedStyle(map).order === "-1";
+          var line = stacked ? mr.bottom + (vh - mr.bottom) * 0.3 : vh * 0.55;
+          var on = -1, t = 0, i;
+          for (i = 0; i < items.length; i++) {
+            var r = items[i].getBoundingClientRect();
+            if (r.top <= line) { on = i; t = clamp((line - r.top) / Math.max(r.height, 1), 0, 1); }
+          }
+          var key = on >= 0 ? items[on].getAttribute("data-s") : "", all = key === "care";
+          for (i = 0; i < items.length; i++) items[i].classList.toggle("on", i === on);
+          var gs = map.querySelectorAll(".dv");
+          for (i = 0; i < gs.length; i++) {
+            gs[i].classList.toggle("on", all || gs[i].getAttribute("data-s") === key);
+          }
+          var ls = map.querySelectorAll(".ln");
+          for (i = 0; i < ls.length; i++) {
+            var lit = all || key === "hub" || ls[i].getAttribute("data-to") === key;
+            ls[i].classList.toggle("on", lit);
+            var pk = ls[i].nextElementSibling;
+            if (lit && pk) {
+              var pt = ls[i].getPointAtLength(ls[i].getTotalLength() * t);
+              pk.setAttribute("cx", pt.x.toFixed(1)); pk.setAttribute("cy", pt.y.toFixed(1));
+            }
+          }
+          map.querySelector(".ring").classList.toggle("on", all);
+          map.style.setProperty("--rot", ((window.pageYOffset || 0) * 0.12).toFixed(1) + "deg");
         }
 
         /* ── deneyim ───────────────────────────────────────────── */
@@ -722,10 +1583,161 @@
             return "<li>" + esc(t(c.name)) + "<span>" + esc(c.issuer) + " · " + esc(c.year) + "</span></li>";
           }).join("");
 
+          renderTimeline();
           $("skillT").textContent = U("skillsTitle");
           $("skills").innerHTML = D("skills").map(function (s) {
             return "<span>" + esc(s.name) + "</span>";
           }).join("");
+        }
+
+        /* ── deneyim haritası ───────────────────────────────────────
+           İki hat: eğitim ve iş. Okuma çizgisi kaydıkça hatlar ve duraklar
+           arkasından çizilir. Eğitimde yalnız yıl bilindiği için okul yılı
+           düzeni kullanılır: Eylül'de başlar, Haziran'da biter. Dar ekranda
+           harita dikey döner. */
+        function ymOf(x) {
+          var m = String(x || "").match(/(\d{1,2})\/(\d{4})/);
+          return m ? +m[2] * 12 + (+m[1] - 1) : null;
+        }
+        function tlEvents() {
+          var now = new Date(), nowM = now.getFullYear() * 12 + now.getMonth(), ev = [];
+          D("education").forEach(function (e) {
+            var y = String(e.period).match(/(\d{4})\D+(\d{4})/);
+            if (y) ev.push({ lane: 0, a: +y[1] * 12 + 8, b: Math.min(+y[2] * 12 + 5, nowM), name: t(e.degree), sub: e.period });
+          });
+          D("experience").forEach(function (e) {
+            var ps = String(t(e.period)).split(/\s+-\s+/), a = ymOf(ps[0]), b = ymOf(ps[1]);
+            if (a !== null) ev.push({ lane: 1, a: a, b: b === null ? nowM : b, cur: b === null, name: e.short || e.company, sub: t(e.period) });
+          });
+          ev.sort(function (x, y) { return x.lane - y.lane || x.a - y.a; });
+          var ends = [];
+          ev.forEach(function (e) {
+            e.k = 0;
+            if (e.lane !== 0) return;
+            while (ends[e.k] !== undefined && ends[e.k] > e.a) e.k++;
+            ends[e.k] = e.b;
+          });
+          return { ev: ev, nowM: nowM };
+        }
+        function tlHorz(ev, m0, m1) {
+          var W = 1100, H = 410, x0 = 124, x1 = 1060, Y = [112, 222], ax = 346, o, y;
+          var X = function (m) { return (x0 + (x1 - x0) * (m - m0) / Math.max(1, m1 - m0)).toFixed(1); };
+          o = '<svg viewBox="0 0 ' + W + " " + H + '">' +
+              '<text class="lane-t" x="0" y="' + (Y[0] + 5) + '">' + esc(U("educationTitle")) + "</text>" +
+              '<text class="lane-t" x="0" y="' + (Y[1] + 5) + '">' + esc(U("workLane")) + "</text>" +
+              '<line class="ax" x1="' + x0 + '" y1="' + ax + '" x2="' + x1 + '" y2="' + ax + '"/>';
+          for (y = Math.ceil(m0 / 12); y * 12 <= m1; y++) {
+            o += '<line class="tk" x1="' + X(y * 12) + '" y1="' + (ax - 5) + '" x2="' + X(y * 12) + '" y2="' + (ax + 5) + '"/>' +
+                 '<text class="yr" x="' + X(y * 12) + '" y="' + (ax + 24) + '" text-anchor="middle">' + y + "</text>";
+          }
+          o += '<line class="track" x1="' + x0 + '" y1="' + Y[0] + '" x2="' + x1 + '" y2="' + Y[0] + '"/>' +
+               '<line class="track" x1="' + x0 + '" y1="' + Y[1] + '" x2="' + x1 + '" y2="' + Y[1] + '"/>' +
+               '<clipPath id="tlc"><rect class="tlc" x="0" y="0" width="0" height="' + H + '"/></clipPath><g clip-path="url(#tlc)">';
+          ev.forEach(function (e) {
+            var yy = Y[e.lane] + e.k * 12;
+            o += '<line class="seg' + e.lane + '" x1="' + X(e.a) + '" y1="' + yy + '" x2="' + X(e.b) + '" y2="' + yy + '"/>';
+          });
+          ev.forEach(function (e) {
+            var yy = Y[e.lane] + e.k * 12;
+            o += '<circle class="st" cx="' + X(e.a) + '" cy="' + yy + '" r="6"/>';
+            if (e.cur) o += '<circle class="now" cx="' + X(e.b) + '" cy="' + yy + '" r="13"/><circle class="nowd" cx="' + X(e.b) + '" cy="' + yy + '" r="5"/>';
+            o += '<g class="lb" data-lane="' + e.lane + '" data-x="' + X(e.a) + '"><text class="nm">' + esc(e.name) + '</text><text class="pd">' + esc(e.sub) + "</text></g>";
+          });
+          o += '</g><g class="phd"><line class="head" x1="0" y1="' + (Y[0] - 84) + '" x2="0" y2="' + ax + '"/>' +
+               '<text class="hl" x="0" y="' + (ax + 50) + '" text-anchor="middle"></text></g></svg>';
+          return { svg: o, a0: x0, a1: x1, W: W, H: H, Y: Y };
+        }
+        function tlVert(ev, m0, m1) {
+          var W = 340, per = 7, top = 64, X = [60, 88], lx = 112, o, y;
+          var Yf = function (m) { return top + (m - m0) * per; }, H = Yf(m1) + 48;
+          o = '<svg viewBox="0 0 ' + W + " " + H.toFixed(0) + '">' +
+              '<circle class="lg0" cx="6" cy="14" r="5"/><text class="lane-t" x="17" y="19">' + esc(U("educationTitle")) + "</text>" +
+              '<circle class="lg1" cx="104" cy="14" r="5"/><text class="lane-t" x="115" y="19">' + esc(U("workLane")) + "</text>";
+          for (y = Math.ceil(m0 / 12); y * 12 <= m1; y++) {
+            o += '<line class="tk2" x1="44" y1="' + Yf(y * 12) + '" x2="' + W + '" y2="' + Yf(y * 12) + '"/>' +
+                 '<text class="yr" x="38" y="' + (Yf(y * 12) + 4) + '" text-anchor="end">' + y + "</text>";
+          }
+          o += '<line class="track" x1="' + X[0] + '" y1="' + top + '" x2="' + X[0] + '" y2="' + Yf(m1) + '"/>' +
+               '<line class="track" x1="' + X[1] + '" y1="' + top + '" x2="' + X[1] + '" y2="' + Yf(m1) + '"/>' +
+               '<clipPath id="tlc"><rect class="tlc" x="0" y="0" width="' + W + '" height="0"/></clipPath><g clip-path="url(#tlc)">';
+          ev.forEach(function (e) {
+            var xx = X[e.lane] - e.k * 12;
+            o += '<line class="seg' + e.lane + '" x1="' + xx + '" y1="' + Yf(e.a) + '" x2="' + xx + '" y2="' + Yf(e.b) + '"/>';
+          });
+          ev.forEach(function (e) {
+            var xx = X[e.lane] - e.k * 12;
+            o += '<circle class="st" cx="' + xx + '" cy="' + Yf(e.a) + '" r="6"/>';
+            if (e.cur) o += '<circle class="now" cx="' + xx + '" cy="' + Yf(e.b) + '" r="13"/><circle class="nowd" cx="' + xx + '" cy="' + Yf(e.b) + '" r="5"/>';
+            o += '<g class="lb" data-y="' + Yf(e.a) + '" data-sx="' + xx + '"><text class="nm" x="' + lx + '">' + esc(e.name) +
+                 '</text><text class="pd" x="' + lx + '">' + esc(e.sub) + "</text></g>";
+          });
+          o += '</g><g class="phd"><line class="head" x1="44" y1="0" x2="' + W + '" y2="0"/>' +
+               '<text class="hl" x="' + W + '" y="-6" text-anchor="end"></text></g></svg>';
+          return { svg: o, a0: top, a1: Yf(m1), W: W, H: H, lx: lx };
+        }
+        /* etiketler ölçülüp yerleştirilir: yatayda çakışan etiket bir alt/üst sıraya iner,
+           dikeyde aşağı itilir ve durağa ince bir çizgiyle bağlanır */
+        function tlPlace(svg, g) {
+          var lbs = Array.prototype.slice.call(svg.querySelectorAll(".lb"));
+          if (g.vert) {
+            lbs.sort(function (a, b) { return a.getAttribute("data-y") - b.getAttribute("data-y"); });
+            var bottom = -1e9;
+            lbs.forEach(function (lb) {
+              var want = +lb.getAttribute("data-y"), y = Math.max(want - 6, bottom + 12);
+              lb.children[0].setAttribute("y", (y + 12).toFixed(1));
+              lb.children[1].setAttribute("y", (y + 30).toFixed(1));
+              if (y - (want - 6) > 4) {
+                lb.insertAdjacentHTML("afterbegin", '<path class="ldr" d="M' + (+lb.getAttribute("data-sx") + 8) + " " + want +
+                  " H" + (g.lx - 16) + " L" + (g.lx - 6) + " " + (y + 6).toFixed(1) + '"/>');
+              }
+              bottom = y + 36;
+            });
+            return;
+          }
+          var rows = [[], []];
+          lbs.forEach(function (lb) {
+            var lane = +lb.getAttribute("data-lane"), x = +lb.getAttribute("data-x") - 4;
+            lb.children[0].setAttribute("x", x); lb.children[1].setAttribute("x", x);
+            var w = lb.getBBox().width;
+            if (x + w > g.W - 4) { x = g.W - 4 - w; lb.children[0].setAttribute("x", x); lb.children[1].setAttribute("x", x); }
+            var r = 0;
+            while (rows[lane][r] !== undefined && x < rows[lane][r] + 18) r++;
+            rows[lane][r] = x + w;
+            var ny = lane === 0 ? g.Y[0] - 40 - r * 44 : g.Y[1] + 40 + r * 44;
+            lb.children[0].setAttribute("y", ny);
+            lb.children[1].setAttribute("y", ny + 18);
+          });
+        }
+        function renderTimeline() {
+          var box = $("tl");
+          if (!box) return;
+          var d = tlEvents();
+          if (!d.ev.length) { box.innerHTML = ""; S.tl = null; return; }
+          var m0 = Math.min.apply(null, d.ev.map(function (x) { return x.a; })), vert = box.clientWidth < 700;
+          var g = vert ? tlVert(d.ev, m0, d.nowM) : tlHorz(d.ev, m0, d.nowM);
+          box.innerHTML = g.svg;
+          g.vert = vert; g.m0 = m0; g.m1 = d.nowM;
+          tlPlace(box.firstElementChild, g);
+          S.tl = g;
+          updateTimeline();
+        }
+        function updateTimeline() {
+          var g = S.tl, box = $("tl");
+          if (!g || !box || !box.firstElementChild) return;
+          var r = box.getBoundingClientRect(), vh = window.innerHeight;
+          var p = g.vert ? clamp((vh * 0.62 - r.top) / Math.max(1, r.height), 0, 1)
+                         : clamp((vh * 0.86 - r.top) / (vh * 0.56), 0, 1);
+          if (g.p !== undefined && Math.abs(g.p - p) < 0.002) return;
+          g.p = p;
+          var pos = g.a0 + (g.a1 - g.a0) * p, svg = box.firstElementChild;
+          var clip = svg.querySelector(".tlc"), head = svg.querySelector(".phd");
+          /* sona varınca kırpma kalkar: son durağın etiketi ve "bugün" halkası tam görünür */
+          var open = p >= 1 ? (g.vert ? g.H : g.W) : pos + 8;
+          if (g.vert) { clip.setAttribute("height", open.toFixed(1)); head.setAttribute("transform", "translate(0 " + pos.toFixed(1) + ")"); }
+          else { clip.setAttribute("width", open.toFixed(1)); head.setAttribute("transform", "translate(" + pos.toFixed(1) + " 0)"); }
+          var m = Math.round(g.m0 + (g.m1 - g.m0) * p), mm = m % 12 + 1;
+          svg.querySelector(".hl").textContent = (mm < 10 ? "0" : "") + mm + "/" + Math.floor(m / 12);
+          head.style.opacity = p > 0 && p < 1 ? 1 : 0;
         }
 
         /* ── iletişim, alt bilgi ───────────────────────────────── */
@@ -743,6 +1755,8 @@
               (i[2] ? '<a href="' + esc(i[2]) + '"' + (/^https/.test(i[2]) ? ' target="_blank" rel="noopener"' : "") +
                       ">" + esc(i[1]) + "</a>" : "<p>" + esc(i[1]) + "</p>") + "</div>";
           }).join("");
+          var rf = $("replyFig");
+          if (rf) { rf.innerHTML = SC.reply.svg(); rf._p = undefined; }
           $("lName").textContent = U("formName");
           $("lEmail").textContent = U("formEmail");
           $("lMsg").textContent = U("formMessage");
@@ -828,8 +1842,12 @@
             var h = k * S.rFull;
             if (S.rLine > 2) h = Math.min(S.rFull, Math.floor(h / S.rLine) * S.rLine);
             paper.style.height = h.toFixed(1) + "px";
-            $("edge").style.opacity = (k > 0.01 && k < 1) ? "1" : "0";
+            $("prn").classList.toggle("on", k > 0.01 && k < 1);
           }
+
+          updateMap();
+          updateScenes();
+          updateTimeline();
 
           var best = "", secs = document.querySelectorAll("main section[id]");
           for (var i = 0; i < secs.length; i++) {
@@ -905,7 +1923,7 @@
         var rid = 0;
         window.addEventListener("scroll", update, { passive: true });
         window.addEventListener("resize", function () {
-          clearTimeout(rid); rid = setTimeout(layoutReceipt, 120);
+          clearTimeout(rid); rid = setTimeout(function () { renderTimeline(); layoutReceipt(); }, 120);
         });
         window.addEventListener("load", function () { layoutReceipt(); });
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutReceipt);
