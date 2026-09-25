@@ -426,6 +426,7 @@
   ],
   "contact": {
     "phone": "+90 (507) 678 89 18",
+    "whatsapp": "905076788918",
     "email": "beratarpa@hotmail.com",
     "website": "beratarpa.com",
     "location": {
@@ -795,10 +796,6 @@
       "title": {
         "tr": "Kendimi tek bir fişe sığdırdım.",
         "en": "Everything about me on one slip of paper."
-      },
-      "lede": {
-        "tr": "Aşağıdaki fiş sayfayı her açtığınızda yeniden basılıyor. Üzerindeki sayılar sabit değil; GitHub hesabımdan o anda geliyor.",
-        "en": "The slip below prints again every time you open the page. The numbers are not fixed; they come from my GitHub account at that moment."
       }
     },
     "isler": {
@@ -1061,6 +1058,56 @@
     "ruleCaption": {
       "tr": "Örnek bir kural: 5.000'in üzerindeki her siparişe otomatik olarak özel bir karşılama e-postası gider. Aynı kural üç ortamda da aynı sonucu verir.",
       "en": "An example rule: every order over 5,000 automatically gets a special welcome email. The same rule gives the same result on all three platforms."
+    },
+    "waLabel": {
+      "tr": "WhatsApp",
+      "en": "WhatsApp"
+    },
+    "waButton": {
+      "tr": "WhatsApp'tan yazın",
+      "en": "Message me on WhatsApp"
+    },
+    "waText": {
+      "tr": "Merhaba Berat, bir proje hakkında konuşmak istiyorum.",
+      "en": "Hi Berat, I'd like to talk about a project."
+    }
+  },
+  "repoNotes": {
+    "HTML-Thermal-Printer": {
+      "tr": "HTML içeriğini doğrudan fiş yazıcısına basan masaüstü programı. Önizleme yapar, fişe özel biçimlendirme etiketlerini tanır. Yukarıdaki fişin arkasındaki araç.",
+      "en": "A desktop program that prints HTML straight to receipt printers, with a preview and receipt-specific formatting tags. The tool behind the slip above."
+    },
+    "ARE": {
+      "tr": "Masaüstü, web ve mobil uygulamalarda aynı kuralları çalıştıran motor; yukarıdaki çizimdeki motor bu.",
+      "en": "The engine that runs the same rules in desktop, web and mobile apps; it is the engine in the drawing above."
+    },
+    "BarcodePOS": {
+      "tr": "Barkod okuyucu, terazi ve fiş yazıcısıyla çalışan satış programı.",
+      "en": "A point-of-sale program that works with barcode scanners, scales and receipt printers."
+    },
+    "ARED-Architecture": {
+      "tr": "Kural motorunun üzerine kurduğum yazılım mimarisi: iş kuralları koddan ayrı durur, kolayca değiştirilir.",
+      "en": "The software architecture built on the rule engine: business rules live apart from the code and are easy to change."
+    },
+    "Service-Watchdog": {
+      "tr": "Windows'taki servisleri izleyen, biri durduğunda ya da başladığında SMS gönderen program.",
+      "en": "A program that watches Windows services and sends an SMS when one stops or starts."
+    },
+    "social": {
+      "tr": "Flutter ile yazdığım mobil sosyal medya uygulaması.",
+      "en": "A mobile social media app written in Flutter."
+    },
+    "ChatApp": {
+      "tr": "Firebase üzerinde çalışan anlık mesajlaşma uygulaması.",
+      "en": "An instant messaging app running on Firebase."
+    },
+    "ARPA-Programming-Language": {
+      "tr": "Sıfırdan tasarladığım kendi programlama dilim.",
+      "en": "My own programming language, designed from scratch."
+    },
+    "Employee-Shift-Automation": {
+      "tr": "Çalışanların vardiyalarını planlayan otomasyon programı.",
+      "en": "An automation program that plans employee shifts."
     }
   }
 }

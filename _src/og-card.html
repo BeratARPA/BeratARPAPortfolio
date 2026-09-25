@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Paylaşım kartı</title>
+    <!-- Bağlantı paylaşıldığında görünen 1200×630 kart. prerender.py bu sayfanın ekran görüntüsünü
+         Resources/Images/og-card.png olarak kaydeder; ad, site, başlık ve fotoğraf data.json'dan gelir. -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      * { box-sizing:border-box; margin:0; }
+      html, body { width:1200px; height:630px; overflow:hidden; background:#f4f3ef; }
+      body { font-family:"Archivo", sans-serif; color:#13141a; -webkit-font-smoothing:antialiased; }
+      .card { position:relative; width:1200px; height:630px; padding:72px 80px; }
+      .site { font-family:"IBM Plex Mono", monospace; font-size:24px; color:#c8321f; }
+      .name { margin-top:34px; font-size:92px; font-weight:700; letter-spacing:-.035em; line-height:1; }
+      .head { margin-top:26px; width:620px; font-size:40px; font-weight:500; letter-spacing:-.02em; line-height:1.18; color:#34373f; }
+      .kinds { position:absolute; left:80px; bottom:70px; font-family:"IBM Plex Mono", monospace; font-size:22px; color:#6b7079; }
+      .photo { position:absolute; right:84px; top:118px; width:396px; height:396px; border-radius:50%;
+               box-shadow:0 30px 60px -30px rgba(0,0,0,.35); }
+      .rule { position:absolute; left:80px; right:80px; bottom:120px; border-top:2px solid #13141a; width:620px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <p class="site" id="site"></p>
+      <p class="name" id="name"></p>
+      <p class="head" id="head"></p>
+      <div class="rule"></div>
+      <p class="kinds" id="kinds"></p>
+      <img class="photo" id="photo" alt="" />
+    </div>
+    <script>
+      /* önce yazı tipleri yüklenir, sonra metin yazılır; ekran görüntüsü yedek yazı tipiyle çıkmasın */
+      Promise.all([
+        document.fonts.load('700 92px "Archivo"'), document.fonts.load('500 40px "Archivo"'),
+        document.fonts.load('400 24px "IBM Plex Mono"')
+      ]).then(function () { return fetch("../data.json"); }).then(function (r) { return r.json(); }).then(function (d) {
+        var m = d.meta || {}, p = d.personal || {};
+        document.getElementById("site").textContent = (d.contact || {}).website || "";
+        document.getElementById("name").textContent = p.name || "";
+        document.getElementById("head").textContent = (m.headline && m.headline.tr || []).filter(Boolean).join(" ");
+        document.getElementById("kinds").textContent = (d.services || []).slice(0, 5).map(function (s) {
+          return { web: "Web", mobile: "Mobil", desktop: "Masaüstü", hub: "Entegrasyon", devices: "Cihazlar" }[s.scene] || "";
+        }).filter(Boolean).join(" · ");
+        document.getElementById("photo").src = "../" + (p.image || "");
+      });
+    </script>
+  </body>
+</html>
