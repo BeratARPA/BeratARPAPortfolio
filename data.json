@@ -1070,6 +1070,22 @@
     "waText": {
       "tr": "Merhaba Berat, bir proje hakkında konuşmak istiyorum.",
       "en": "Hi Berat, I'd like to talk about a project."
+    },
+    "trustTitle": {
+      "tr": "Çalıştığım şirketler",
+      "en": "Companies I have worked at"
+    },
+    "yearsLabel": {
+      "tr": "yıl deneyim",
+      "en": "years of experience"
+    },
+    "seeWork": {
+      "tr": "İşlerime bakın",
+      "en": "See my work"
+    },
+    "stepLabel": {
+      "tr": "Adım",
+      "en": "Step"
     }
   },
   "repoNotes": {
@@ -1078,8 +1094,8 @@
       "en": "A desktop program that prints HTML straight to receipt printers, with a preview and receipt-specific formatting tags. The tool behind the slip above."
     },
     "ARE": {
-      "tr": "Masaüstü, web ve mobil uygulamalarda aynı kuralları çalıştıran motor; yukarıdaki çizimdeki motor bu.",
-      "en": "The engine that runs the same rules in desktop, web and mobile apps; it is the engine in the drawing above."
+      "tr": "Masaüstü, web ve mobil uygulamalarda aynı kuralları çalıştıran motor. NuGet, npm ve pub.dev'de yayında.",
+      "en": "The engine that runs the same rules in desktop, web and mobile apps. Published on NuGet, npm and pub.dev."
     },
     "BarcodePOS": {
       "tr": "Barkod okuyucu, terazi ve fiş yazıcısıyla çalışan satış programı.",

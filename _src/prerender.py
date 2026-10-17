@@ -26,7 +26,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "_src" / "index.html"
 OUT = ROOT / "index.html"
-EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+# Edge güncellenirken başlıksız modda sessizce boş döner; o zaman Chrome denenir
+BROWSERS = [Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
+            Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")]
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -45,10 +47,15 @@ def serve():
     return srv, srv.server_address[1]
 
 
-def edge(args, profile):
-    return subprocess.run([str(EDGE), "--headless=new", "--disable-gpu", "--no-first-run",
-                           "--hide-scrollbars", f"--user-data-dir={profile}", *args],
-                          capture_output=True, timeout=120)
+def edge(args, profile, exe=None):
+    for b in ([exe] if exe else [b for b in BROWSERS if b.exists()]):
+        run = subprocess.run([str(b), "--headless=new", "--disable-gpu", "--no-first-run",
+                              "--hide-scrollbars", f"--user-data-dir={profile}/{b.stem}", *args],
+                             capture_output=True, timeout=120)
+        if run.stdout.strip() or "--screenshot" in " ".join(args):
+            run.browser = b
+            return run
+    return run
 
 
 def block(html, pattern, name):
@@ -70,6 +77,7 @@ def main():
         run = edge(["--window-size=1440,900", "--virtual-time-budget=12000",
                     "--dump-dom", f"http://127.0.0.1:{port}/?lang=tr"], profile)
         dom = run.stdout.decode("utf-8", "replace")
+        used = getattr(run, "browser", None)
         header = block(dom, r'<header class="top" id="top">.*?</header>', "header").group(0)
         body = block(dom, r'<main id="main">.*</main>', "main").group(0)
         footer = block(dom, r"<footer>.*?</footer>", "footer").group(0)
@@ -90,7 +98,7 @@ def main():
         if "--og" in sys.argv:
             card = ROOT / "Resources" / "Images" / "og-card.png"
             edge(["--window-size=1200,630", "--virtual-time-budget=12000",
-                  f"--screenshot={card}", f"http://127.0.0.1:{port}/_src/og-card.html"], profile)
+                  f"--screenshot={card}", f"http://127.0.0.1:{port}/_src/og-card.html"], profile, used)
             print(f"paylaşım kartı: {card.stat().st_size:,} bayt")
     finally:
         srv.shutdown()

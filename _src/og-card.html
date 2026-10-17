@@ -5,40 +5,48 @@
     <title>Paylaşım kartı</title>
     <!-- Bağlantı paylaşıldığında görünen 1200×630 kart. prerender.py bu sayfanın ekran görüntüsünü
          Resources/Images/og-card.png olarak kaydeder; ad, site, başlık ve fotoğraf data.json'dan gelir. -->
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Inter+Tight:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
     <style>
       * { box-sizing:border-box; margin:0; }
-      html, body { width:1200px; height:630px; overflow:hidden; background:#f4f3ef; }
-      body { font-family:"Archivo", sans-serif; color:#13141a; -webkit-font-smoothing:antialiased; }
-      .card { position:relative; width:1200px; height:630px; padding:72px 80px; }
-      .site { font-family:"IBM Plex Mono", monospace; font-size:24px; color:#c8321f; }
-      .name { margin-top:34px; font-size:92px; font-weight:700; letter-spacing:-.035em; line-height:1; }
-      .head { margin-top:26px; width:620px; font-size:40px; font-weight:500; letter-spacing:-.02em; line-height:1.18; color:#34373f; }
-      .kinds { position:absolute; left:80px; bottom:70px; font-family:"IBM Plex Mono", monospace; font-size:22px; color:#6b7079; }
-      .photo { position:absolute; right:84px; top:118px; width:396px; height:396px; border-radius:50%;
-               box-shadow:0 30px 60px -30px rgba(0,0,0,.35); }
-      .rule { position:absolute; left:80px; right:80px; bottom:120px; border-top:2px solid #13141a; width:620px; }
+      html, body { width:1200px; height:630px; overflow:hidden; background:#07080b; }
+      body { font-family:"Inter", sans-serif; color:#f3f4f6; -webkit-font-smoothing:antialiased; }
+      .card { position:relative; width:1200px; height:630px; padding:76px 80px; overflow:hidden; isolation:isolate; }
+      .glow { position:absolute; border-radius:50%; filter:blur(80px); z-index:-1; }
+      .g1 { width:620px; height:480px; right:-60px; top:-120px; background:radial-gradient(closest-side,#ff5b35,transparent); opacity:.55; }
+      .g2 { width:560px; height:520px; right:180px; top:180px; background:radial-gradient(closest-side,#b05cff,transparent); opacity:.4; }
+      .g3 { width:480px; height:420px; right:-120px; bottom:-160px; background:radial-gradient(closest-side,#4f7cff,transparent); opacity:.4; }
+      .site { font-family:"IBM Plex Mono", monospace; font-size:24px; color:#a0a6b0; display:flex; align-items:center; gap:14px; }
+      .site i { width:12px; height:12px; border-radius:50%; background:#3ddc84; box-shadow:0 0 14px #3ddc84; }
+      .name { margin-top:40px; font-family:"Inter Tight"; font-size:84px; font-weight:700; letter-spacing:-.035em; line-height:1; }
+      .head { margin-top:28px; width:640px; font-family:"Inter Tight"; font-size:42px; font-weight:600; letter-spacing:-.025em; line-height:1.15; }
+      .gt { background:linear-gradient(100deg,#ff5b35,#ff9a3c 32%,#b05cff 68%,#4f7cff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+      .kinds { position:absolute; left:80px; bottom:72px; font-family:"IBM Plex Mono", monospace; font-size:22px; color:#a0a6b0; }
+      .photo { position:absolute; right:96px; top:127px; width:376px; height:376px; border-radius:50%; object-fit:cover;
+               box-shadow:0 0 0 8px rgba(255,255,255,.06), 0 40px 80px -30px rgba(0,0,0,.8); }
     </style>
   </head>
   <body>
     <div class="card">
-      <p class="site" id="site"></p>
+      <b class="glow g1"></b><b class="glow g2"></b><b class="glow g3"></b>
+      <p class="site"><i></i><span id="site"></span></p>
       <p class="name" id="name"></p>
       <p class="head" id="head"></p>
-      <div class="rule"></div>
       <p class="kinds" id="kinds"></p>
       <img class="photo" id="photo" alt="" />
     </div>
     <script>
       /* önce yazı tipleri yüklenir, sonra metin yazılır; ekran görüntüsü yedek yazı tipiyle çıkmasın */
+      var esc = function (s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); };
       Promise.all([
-        document.fonts.load('700 92px "Archivo"'), document.fonts.load('500 40px "Archivo"'),
-        document.fonts.load('400 24px "IBM Plex Mono"')
+        document.fonts.load('700 84px "Inter Tight"'), document.fonts.load('600 42px "Inter Tight"'),
+        document.fonts.load('500 24px "IBM Plex Mono"')
       ]).then(function () { return fetch("../data.json"); }).then(function (r) { return r.json(); }).then(function (d) {
         var m = d.meta || {}, p = d.personal || {};
         document.getElementById("site").textContent = (d.contact || {}).website || "";
         document.getElementById("name").textContent = p.name || "";
-        document.getElementById("head").textContent = (m.headline && m.headline.tr || []).filter(Boolean).join(" ");
+        /* giriş başlığındaki gibi: üç parçalıysa ortadaki renkli */
+        var parts = (m.headline && m.headline.tr || []).filter(Boolean), hi = parts.length > 2 ? 1 : 0;
+        document.getElementById("head").innerHTML = parts.map(function (x, i) { return i === hi ? '<span class="gt">' + esc(x) + "</span>" : esc(x); }).join(" ");
         document.getElementById("kinds").textContent = (d.services || []).slice(0, 5).map(function (s) {
           return { web: "Web", mobile: "Mobil", desktop: "Masaüstü", hub: "Entegrasyon", devices: "Cihazlar" }[s.scene] || "";
         }).filter(Boolean).join(" · ");
