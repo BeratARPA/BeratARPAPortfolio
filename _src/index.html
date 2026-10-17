@@ -1136,7 +1136,8 @@
                      author: { "@id": site + "#me" } });
           });
           /* serbest çalışan olarak verdiği hizmet: yerel aramalarda (Ankara, yazılım) görünmesi için */
-          g.push({ "@type": "ProfessionalService", "@id": site + "#biz", name: fill(t(m.title)).split(" | ")[0],
+          /* ad, Google İşletme Profili'ndeki adla birebir aynı: yerel aramada kayıtlar birbirini doğrular */
+          g.push({ "@type": "ProfessionalService", "@id": site + "#biz", name: p.name,
                    description: fill(t(m.description)), url: site, image: site + "Resources/Images/og-card.png",
                    email: "mailto:" + c.email, telephone: c.phone,
                    address: { "@type": "PostalAddress", addressLocality: t(m.baseCity), addressCountry: "TR" },
