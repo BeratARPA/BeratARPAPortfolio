@@ -734,7 +734,8 @@
               var d = "M" + cx + " " + cy + " L" + x.toFixed(1) + " " + y.toFixed(1), r = "M" + x.toFixed(1) + " " + y.toFixed(1) + " L" + cx + " " + cy;
               s += '<path class="s-ln" d="' + d + '"/><path class="s-gl d" pathLength="1" style="--i:' + i + ';stroke-width:1.6" d="' + d + '"/>' +
                    '<circle class="s-dot" r="3.2"><animateMotion dur="' + (2.2 + i * .25) + 's" begin="' + (i * .4) + 's" repeatCount="indefinite" path="' + (i % 2 ? r : d) + '"/></circle>';
-              g += '<g class="f" style="--i:' + (i + 2) + '" transform="translate(' + x.toFixed(1) + " " + y.toFixed(1) + ')"><rect class="s-fr" x="-30" y="-30" width="60" height="60" rx="16"/>' + gl[i] + "</g>";
+              /* konum dış grupta: içteki .f'nin CSS transform'u SVG transform özelliğini ezip kutuyu köşeye atmasın */
+              g += '<g transform="translate(' + x.toFixed(1) + " " + y.toFixed(1) + ')"><g class="f" style="--i:' + (i + 2) + '"><rect class="s-fr" x="-30" y="-30" width="60" height="60" rx="16"/>' + gl[i] + "</g></g>";
             }
             return s + g + '<circle cx="' + cx + '" cy="' + cy + '" r="90" fill="url(#gGlow)"/><circle class="s-hl" cx="' + cx + '" cy="' + cy + '" r="44"/><circle fill="#0e1016" cx="' + cx + '" cy="' + cy + '" r="31"/>' +
                    '<path class="s-wh" d="M248 182h24M248 190h24M248 198h14"/>';
